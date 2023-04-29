@@ -1,0 +1,11 @@
+Actor:
+  types:
+    - character
+  templates: {}
+  character:
+    templates: []
+
+Item:
+  types:
+    - generic
+  templates: {}

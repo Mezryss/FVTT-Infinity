@@ -1,0 +1,10 @@
+ACTOR:
+  TypeCharacter: Character
+
+# ITEM:
+
+# Genesys
+Infinity:
+  # System Strings
+  System:
+    Name: Infinity

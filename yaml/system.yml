@@ -1,0 +1,28 @@
+id: infinity
+title: Infinity
+description: Unofficial implementation of Modiphius's Infinity 2D20 System.
+version: 1.0
+compatibility:
+  minimum: 10
+  verified: 10
+  maximum: 11
+templateVersion: 1
+authors:
+  - name: Mezryss
+scripts:
+  - scripts/container-query-polyfill/container-query-polyfill.modern.js
+esmodules:
+  - Infinity.js
+styles:
+  - Infinity.css
+languages:
+  - lang: en
+    name: English
+    path: lang/en.json
+socket: true
+url: https://github.com/Mezryss/FVTT-Infinity
+bugs: https://github.com/Mezryss/FVTT-Infinity/issues
+# changelog: https://github.com/Mezryss/FVTT-Infinity/blob/release/CHANGELOG.md
+license: https://github.com/Mezryss/FVTT-Infinity/blob/main/LICENSE
+# manifest: https://github.com/Mezryss/FVTT-Infinity/releases/latest/download/manifest.json
+# download: https://github.com/Mezryss/FVTT-Infinity/releases/latest/download/genesys.zip
