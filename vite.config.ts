@@ -1,6 +1,15 @@
 import { AliasOptions, defineConfig } from 'vite';
+import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
 import pluginVue from '@vitejs/plugin-vue';
 import path from 'path';
+import process from 'process';
+
+const env = dotenv.config();
+dotenvExpand.expand(env);
+
+const PROXY_HOST = process.env.VITE_PROXY_HOST ?? 'localhost';
+const PROXY_PORT = process.env.VITE_PROXY_PORT ?? 30000;
 
 /**
  * A list of aliases to be applied only in production.
@@ -10,7 +19,12 @@ let releaseOnlyAliases: AliasOptions = [];
 let devOnlyAliases: AliasOptions = [];
 
 if (process.env.NODE_ENV === 'production') {
-	releaseOnlyAliases = [{ find: 'vue', replacement: path.resolve(__dirname, 'external/vue.esm-browser.prod.js') }];
+	releaseOnlyAliases = [
+		{
+			find: 'vue',
+			replacement: path.resolve(__dirname, 'external/vue.esm-browser.prod.js')
+		}
+	];
 } else {
 	devOnlyAliases = [];
 }
@@ -21,12 +35,12 @@ export default defineConfig({
 	base: '/systems/infinity',
 	server: {
 		port: 30001,
-		open: true,
+		open: false,
 		proxy: {
-			'^/assets': 'http://localhost:30000/systems/infinity/',
-			'^(?!/systems/infinity)': 'http://localhost:30000/',
+			'^/assets': `http://${ PROXY_HOST }:${ PROXY_PORT }/systems/infinity/`,
+			'^(?!/systems/infinity)': `http://${ PROXY_HOST }:${ PROXY_PORT }/`,
 			'/socket.io': {
-				target: 'ws://localhost:30000',
+				target: `ws://${ PROXY_HOST }:${ PROXY_PORT }`,
 				ws: true,
 			},
 		},
@@ -52,6 +66,17 @@ export default defineConfig({
 	},
 	plugins: [pluginVue()],
 	resolve: {
-		alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }, { find: '@scss', replacement: path.resolve(__dirname, 'src/scss') }, ...devOnlyAliases, ...releaseOnlyAliases],
+		alias: [
+			{
+				find: '@',
+				replacement: path.resolve(__dirname, 'src')
+			},
+			{
+				find: '@scss',
+				replacement: path.resolve(__dirname, 'src/scss')
+			},
+			...devOnlyAliases,
+			...releaseOnlyAliases,
+		],
 	},
 });

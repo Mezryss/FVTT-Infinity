@@ -138,9 +138,7 @@ declare global {
 
 	interface ClientSettingsMap extends Map<string, SettingConfig> {
 		get(key: 'core.chatBubblesPan'): SettingConfig & { default: boolean };
-		get(
-			key: 'core.defaultToken',
-		): SettingConfig & {
+		get(key: 'core.defaultToken'): SettingConfig & {
 			default: PreCreate<foundry.data.PrototypeTokenSource>;
 		};
 		get(key: 'core.notesDisplayToggle'): SettingConfig & { default: boolean };
