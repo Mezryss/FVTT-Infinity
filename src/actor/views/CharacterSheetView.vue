@@ -1,3 +1,8 @@
 <template>
-	<h1 class="text-sky-500">Infinity Character Sheet!</h1>
+	<div class="@container/main">
+		<div class="@lg/main:underline">
+			Test Text
+			<input type="text" />
+		</div>
+	</div>
 </template>
