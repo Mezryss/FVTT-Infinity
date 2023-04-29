@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**
+ * Remove Foundry's default padding on sheet windows, so our sheets can take their whole window.
+ */
+.sheet .window-content {
+	padding: 0;
+}
+
+/**
+ * Minimum Sheet Sizes
+ */
+.window-app.actor {
+	min-width: 600px;
+	min-height: 400px;
+}

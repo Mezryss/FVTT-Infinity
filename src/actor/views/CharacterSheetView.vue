@@ -1,8 +1,13 @@
+<!--
+	Player Character sheet
+-->
+
+<script lang="ts" setup>
+import InfinitySheet from '@/components/InfinitySheet.vue';
+</script>
+
 <template>
-	<div class="@container/main">
-		<div class="@lg/main:underline">
-			Test Text
-			<input type="text" />
-		</div>
-	</div>
+	<InfinitySheet>
+		Actor Sheet
+	</InfinitySheet>
 </template>
