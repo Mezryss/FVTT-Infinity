@@ -7,7 +7,5 @@ import InfinitySheet from '@/components/InfinitySheet.vue';
 </script>
 
 <template>
-	<InfinitySheet>
-		Actor Sheet
-	</InfinitySheet>
+	<InfinitySheet>Character Sheet</InfinitySheet>
 </template>
