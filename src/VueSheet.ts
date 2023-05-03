@@ -14,9 +14,7 @@ type Constructor = new (...args: any[]) => {
 };
 
 /**
- *
- * @param baseClass
- * @returns
+ * Mixin adding support for Vue sheet definitions for Foundry app.
  */
 export function VueSheet<
 	BaseClass extends Constructor,

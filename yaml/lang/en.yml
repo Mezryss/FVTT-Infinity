@@ -8,3 +8,22 @@ Infinity:
   # System Strings
   System:
     Name: Infinity
+
+  # Character Attributes
+  Attributes:
+    Agility: Agility
+    Awareness: Awareness
+    Brawn: Brawn
+    Coordination: Coordination
+    Intelligence: Intelligence
+    Personality: Personality
+    Willpower: Willpower
+
+    Abbreviations:
+      Agility: Ag
+      Awareness: Awa
+      Brawn: Br
+      Coordination: Co
+      Intelligence: Int
+      Personality: Per
+      Willpower: Will

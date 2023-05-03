@@ -1,11 +1,17 @@
 Actor:
   types:
     - character
+
   templates: {}
+
   character:
     templates: []
 
 Item:
   types:
-    - generic
-  templates: {}
+    - basic
+
+  templates:
+    basicItemData:
+      description: ''
+      source: 'Core Rulebook'
