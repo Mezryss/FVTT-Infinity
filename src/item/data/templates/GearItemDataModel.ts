@@ -182,10 +182,8 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 				}),
 			}),
 
-			maintenance: new fields.NumberField({
-				initial: 0,
-				integer: true,
-				min: 0,
+			maintenance: new fields.StringField({
+				initial: '',
 				nullable: false,
 			}),
 

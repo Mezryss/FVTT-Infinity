@@ -34,7 +34,7 @@ Item:
       cost:
         static: 0
         rolled: 0
-      maintenance: 0
+      maintenance: ''
       tariff:
         value: 0
         notes: ''
