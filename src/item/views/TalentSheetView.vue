@@ -5,6 +5,7 @@ import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
+import Localized from '@/components/Localized.vue';
 import Skill from '@/data/Skill';
 import { TalentPrerequisite } from '../data/TalentDataModel';
 import { TalentSheetContext } from '../sheets/TalentSheet';
@@ -72,7 +73,9 @@ async function updatePrereqValue(index: number, event: Event) {
 		<div class="flex items-center gap-2">
 			<strong>Skill:</strong>
 			<select :value="system.skill" name="system.skill" class="w-full">
-				<option v-for="skill in Skill.all" :key="skill">{{ skill }}</option>
+				<option v-for="skill in Skill.all" :key="skill">
+					<Localized :label="`Infinity.Skill.${skill}`" />
+				</option>
 			</select>
 		</div>
 
@@ -125,16 +128,20 @@ async function updatePrereqValue(index: number, event: Event) {
 					:value="prereq.type"
 					:disabled="prereq.type === TalentPrerequisite.Type.Talent"
 				>
-					<option :value="TalentPrerequisite.Type.Talent" disabled>
-						Talent
-					</option>
 					<option :value="TalentPrerequisite.Type.SkillExpertise">
-						Skill Expertise
+						<Localized :label="`Infinity.Skill.${system.skill}`" /> Expertise
 					</option>
 					<option :value="TalentPrerequisite.Type.SkillFocus">
-						Skill Focus
+						<Localized :label="`Infinity.Skill.${system.skill}`" /> Focus
 					</option>
 					<option :value="TalentPrerequisite.Type.Other">Other</option>
+					<option
+						:value="TalentPrerequisite.Type.Talent"
+						class="hidden"
+						disabled
+					>
+						Talent
+					</option>
 				</select>
 
 				<!-- Another Talent -->

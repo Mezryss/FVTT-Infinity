@@ -7,11 +7,9 @@ ITEM:
 
 # Genesys
 Infinity:
-  # System Strings
   System:
     Name: Infinity
 
-  # Character Attributes
   Attributes:
     Agility: Agility
     Awareness: Awareness
@@ -29,3 +27,29 @@ Infinity:
       Intelligence: Int
       Personality: Per
       Willpower: Will
+
+  Skill:
+    Acrobatics: Acrobatics
+    Analysis: Analysis
+    AnimalHandling: Animal Handling
+    Athletics: Athletics
+    Ballistics: Ballistics
+    CloseCombat: Close Combat
+    Command: Command
+    Discipline: Discipline
+    Education: Education
+    Extraplanetary: Extraplanetary
+    Hacking: Hacking
+    Lifestyle: Lifestyle
+    Medicine: Medicine
+    Observation: Observation
+    Persuade: Persuade
+    Pilot: Pilot
+    Psychology: Psychology
+    Resistance: Resistance
+    Science: Science
+    Spacecraft: Spacecraft
+    Stealth: Stealth
+    Survival: Survival
+    Tech: Tech
+    Thievery: Thievery
