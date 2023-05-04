@@ -51,10 +51,7 @@ export namespace TalentPrerequisite {
 		/**
 		 * Convenience accessor for the numeric Talent types.
 		 */
-		export const numeric: TalentPrerequisite.Type[] = [
-			TalentPrerequisite.Type.SkillExpertise,
-			TalentPrerequisite.Type.SkillFocus,
-		];
+		export const numeric: TalentPrerequisite.Type[] = [TalentPrerequisite.Type.SkillExpertise, TalentPrerequisite.Type.SkillFocus];
 	}
 }
 

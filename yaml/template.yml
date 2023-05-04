@@ -16,6 +16,24 @@ Item:
       description: ''
       source: 'Core Rulebook'
 
+    gearItemData:
+      size: 'Insignificant'
+      structure:
+        value: 1
+        max: 1
+      faults: []
+      # TODO: Item Qualities
+      restriction:
+        value: 0
+        concilium: false
+      cost:
+        static: 0
+        rolled: 0
+      maintenance: 0
+      tariff:
+        value: 0
+        notes: ''
+
   talent:
     templates: [basicItemData]
     skill: 'Acrobatics'

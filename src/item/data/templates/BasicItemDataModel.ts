@@ -1,8 +1,7 @@
 /**
  * Basic data shared by all Item types.
  */
-export default abstract class BasicItemDataModel extends foundry.abstract
-	.DataModel {
+export default abstract class BasicItemDataModel extends foundry.abstract.DataModel {
 	/**
 	 * HTML description for the item.
 	 */
