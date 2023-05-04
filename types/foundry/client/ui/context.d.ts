@@ -18,12 +18,7 @@ declare global {
 	 * @param menuItem.callback  A callback function to trigger when the entry of the menu is clicked
 	 */
 	class ContextMenu {
-		constructor(
-			element: JQuery,
-			selector: string,
-			menuItems: ContextMenuEntry[],
-			{ eventName }?: { eventName?: string },
-		);
+		constructor(element: JQuery, selector: string, menuItems: ContextMenuEntry[], { eventName }?: { eventName?: string });
 
 		/** The target HTMLElement being selected */
 		element: HTMLElement;
@@ -51,13 +46,7 @@ declare global {
 		 * @param menuItems The array of menu items being rendered.
 		 * @param [hookName="EntryContext"]  The name of the hook to call.
 		 */
-		static create(
-			app: Application,
-			html: JQuery,
-			selector: string,
-			menuItems: ContextMenuEntry[],
-			hookName?: string,
-		): ContextMenu | void;
+		static create(app: Application, html: JQuery, selector: string, menuItems: ContextMenuEntry[], hookName?: string): ContextMenu | void;
 
 		/** Attach a ContextMenu instance to an HTML selector */
 		bind(): void;

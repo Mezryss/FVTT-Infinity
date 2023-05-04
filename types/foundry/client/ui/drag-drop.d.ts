@@ -28,12 +28,7 @@ declare global {
 		/** A set of callback functions for each action of the Drag and Drop workflow */
 		callbacks: Record<DragDropAction, (event: ElementDragEvent) => unknown>;
 
-		constructor({
-			dragSelector,
-			dropSelector,
-			permissions,
-			callbacks,
-		}?: DragDropConfiguration);
+		constructor({ dragSelector, dropSelector, permissions, callbacks }?: DragDropConfiguration);
 
 		/**
 		 * Bind the DragDrop controller to an HTML application
@@ -46,10 +41,7 @@ declare global {
 		 * @param event  The drag event being handled
 		 * @param action The action being attempted
 		 */
-		callback(
-			event: ElementDragEvent,
-			action: DragDropAction,
-		): (event: ElementDragEvent) => unknown;
+		callback(event: ElementDragEvent, action: DragDropAction): (event: ElementDragEvent) => unknown;
 
 		/**
 		 * Test whether the current user has permission to perform a step of the workflow
@@ -77,11 +69,7 @@ declare global {
 		 */
 		protected _handleDrop(event: ElementDragEvent): unknown;
 
-		static createDragImage(
-			img: ImageFilePath,
-			width: number,
-			height: number,
-		): HTMLDivElement;
+		static createDragImage(img: ImageFilePath, width: number, height: number): HTMLDivElement;
 	}
 
 	interface DragDropConfiguration {
@@ -95,9 +83,7 @@ declare global {
 		permissions?: Record<string, DocumentOwnershipLevel>;
 
 		/** A set of callback functions for each action of the Drag and Drop workflow */
-		callbacks?: Partial<
-			Record<DragDropAction, (event: ElementDragEvent) => unknown>
-		>;
+		callbacks?: Partial<Record<DragDropAction, (event: ElementDragEvent) => unknown>>;
 	}
 }
 

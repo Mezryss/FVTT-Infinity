@@ -2,9 +2,7 @@ export {};
 
 declare global {
 	/** Render the Sidebar container, and after rendering insert Sidebar tabs. */
-	abstract class SidebarTab<
-		TOptions extends ApplicationOptions = ApplicationOptions,
-	> extends Application<TOptions> {
+	abstract class SidebarTab<TOptions extends ApplicationOptions = ApplicationOptions> extends Application<TOptions> {
 		constructor(options?: DeepPartial<TOptions>);
 
 		/** The base name of this sidebar tab */

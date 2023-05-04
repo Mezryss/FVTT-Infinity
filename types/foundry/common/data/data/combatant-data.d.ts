@@ -22,9 +22,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class CombatantData<
-			TDocument extends documents.BaseCombatant = documents.BaseCombatant,
-		> extends abstract.DocumentData<TDocument> {
+		class CombatantData<TDocument extends documents.BaseCombatant = documents.BaseCombatant> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 		}
 

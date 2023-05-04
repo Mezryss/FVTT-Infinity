@@ -3,24 +3,8 @@ export {};
 declare global {
 	/** A type of RollTerm used to enclose a parenthetical expression to be recursively evaluated. */
 	class ParentheticalTerm extends RollTerm<ParentheticalTermData> {
-		constructor({
-			term,
-			roll,
-			options,
-		}: {
-			term: string;
-			roll?: Roll;
-			options?: Record<string, unknown>;
-		});
-		constructor({
-			term,
-			roll,
-			options,
-		}: {
-			term?: string;
-			roll: Roll;
-			options?: Record<string, unknown>;
-		});
+		constructor({ term, roll, options }: { term: string; roll?: Roll; options?: Record<string, unknown> });
+		constructor({ term, roll, options }: { term?: string; roll: Roll; options?: Record<string, unknown> });
 
 		/** The original provided string term used to construct the parenthetical */
 		term: string;
@@ -61,22 +45,10 @@ declare global {
 		/* -------------------------------------------- */
 
 		/** @override */
-		protected _evaluateSync({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): Evaluated<this>;
+		protected _evaluateSync({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): Evaluated<this>;
 
 		/** @override */
-		protected _evaluate({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): Promise<Evaluated<this>>;
+		protected _evaluate({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): Promise<Evaluated<this>>;
 
 		/**
 		 * Construct a ParentheticalTerm from an Array of component terms which should be wrapped inside the parentheses.
@@ -91,10 +63,7 @@ declare global {
 		 * t = ParentheticalTerm.fromTerms([d6, plus, bonus]);
 		 * t.formula; // (4d6 + 4)
 		 */
-		static fromTerms(
-			terms: RollTerm[],
-			options?: Record<string, unknown>,
-		): ParentheticalTerm;
+		static fromTerms(terms: RollTerm[], options?: Record<string, unknown>): ParentheticalTerm;
 	}
 
 	interface ParentheticalTermData extends RollTermData {

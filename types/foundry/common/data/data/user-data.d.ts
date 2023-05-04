@@ -20,9 +20,7 @@ declare module foundry {
 			flags: Record<string, Record<string, unknown>>;
 		}
 
-		class UserData<
-			TDocument extends documents.BaseUser = documents.BaseUser,
-		> extends abstract.DocumentData<TDocument> {
+		class UserData<TDocument extends documents.BaseUser = documents.BaseUser> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 
 			character: documents.BaseActor | null;

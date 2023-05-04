@@ -34,24 +34,12 @@ declare global {
 		 * Execute the command as a chat macro.
 		 * Chat macros simulate the process of the command being entered into the Chat Log input textarea.
 		 */
-		protected _executeChat({
-			actor,
-			token,
-		}?: {
-			actor?: Actor;
-			token?: Token;
-		}): void;
+		protected _executeChat({ actor, token }?: { actor?: Actor; token?: Token }): void;
 
 		/**
 		 * Execute the command as a script macro.
 		 * Script Macros are wrapped in an async IIFE to allow the use of asynchronous commands and await statements.
 		 */
-		protected _executeScript({
-			actor,
-			token,
-		}?: {
-			actor?: Actor;
-			token?: Token;
-		}): void;
+		protected _executeScript({ actor, token }?: { actor?: Actor; token?: Token }): void;
 	}
 }

@@ -1,12 +1,7 @@
 export {};
 declare global {
-	type HookCallback<P extends unknown[]> = (
-		...args: P
-	) => boolean | void | Promise<boolean | void>;
-	type HookParameters<H extends string, C extends unknown[]> = [
-		hook: H,
-		callback: HookCallback<C>,
-	];
+	type HookCallback<P extends unknown[]> = (...args: P) => boolean | void | Promise<boolean | void>;
+	type HookParameters<H extends string, C extends unknown[]> = [hook: H, callback: HookCallback<C>];
 
 	// Sequence of hooks called on world load
 	type HookParamsInit = HookParameters<'init', never>;
@@ -15,80 +10,21 @@ declare global {
 	type HookParamsCanvasReady = HookParameters<'canvasReady', [DrawnCanvas]>;
 	type HookParamsReady = HookParameters<'ready', never>;
 
-	type HookParamsClose<
-		T extends Application,
-		N extends string,
-	> = HookParameters<`close${N}`, [T, JQuery]>;
-	type HookParamsDeleteCombat = HookParameters<
-		'deleteCombat',
-		[Combat, { [key: string]: unknown }, string]
-	>;
-	type HookParamsDropCanvasData = HookParameters<
-		'dropCanvasData',
-		[Canvas, DropCanvasData]
-	>;
-	type HookParamsGetChatLogEntryContext = HookParameters<
-		'getChatLogEntryContext',
-		[JQuery, EntryContextOption[]]
-	>;
-	type HookParamsGetSceneControlButtons = HookParameters<
-		'getSceneControlButtons',
-		[SceneControl[]]
-	>;
-	type HookParamsHotbarDrop = HookParameters<
-		'hotbarDrop',
-		[Hotbar, unknown, string]
-	>;
-	type HookParamsLightingRefresh = HookParameters<
-		'lightingRefresh',
-		[LightingLayer]
-	>;
-	type HookParamsPreCreateItem = HookParameters<
-		'preCreateItem',
-		[PreCreate<foundry.data.ItemSource>, DocumentModificationContext, string]
-	>;
-	type HooksParamsPreUpdateCombat = HookParameters<
-		'preUpdateCombat',
-		[
-			Combat,
-			object,
-			{ diff: boolean; advanceTime: number; [key: string]: unknown },
-			string,
-		]
-	>;
-	type HookParamsPreUpdateToken = HookParameters<
-		'preUpdateToken',
-		[
-			Scene,
-			foundry.data.TokenData,
-			Partial<foundry.data.TokenData>,
-			{ diff: boolean; [key: string]: unknown },
-			string,
-		]
-	>;
-	type HookParamsRender<
-		T extends Application,
-		N extends string,
-	> = HookParameters<`render${N}`, [T, JQuery, ReturnType<T['getData']>]>;
-	type HookParamsRenderChatMessage = HookParameters<
-		'renderChatMessage',
-		[ChatMessage, JQuery, foundry.data.ChatMessageSource]
-	>;
-	type HookParamsTargetToken = HookParameters<
-		'targetToken',
-		[User, Token, boolean]
-	>;
-	type HookParamsUpdate<
-		T extends ClientDocument,
-		N extends string,
-	> = HookParameters<
-		`update${N}`,
-		[T, DocumentUpdateData<T>, DocumentModificationContext]
-	>;
-	type HookParamsUpdateWorldTime = HookParameters<
-		'updateWorldTime',
-		[number, number]
-	>;
+	type HookParamsClose<T extends Application, N extends string> = HookParameters<`close${N}`, [T, JQuery]>;
+	type HookParamsDeleteCombat = HookParameters<'deleteCombat', [Combat, { [key: string]: unknown }, string]>;
+	type HookParamsDropCanvasData = HookParameters<'dropCanvasData', [Canvas, DropCanvasData]>;
+	type HookParamsGetChatLogEntryContext = HookParameters<'getChatLogEntryContext', [JQuery, EntryContextOption[]]>;
+	type HookParamsGetSceneControlButtons = HookParameters<'getSceneControlButtons', [SceneControl[]]>;
+	type HookParamsHotbarDrop = HookParameters<'hotbarDrop', [Hotbar, unknown, string]>;
+	type HookParamsLightingRefresh = HookParameters<'lightingRefresh', [LightingLayer]>;
+	type HookParamsPreCreateItem = HookParameters<'preCreateItem', [PreCreate<foundry.data.ItemSource>, DocumentModificationContext, string]>;
+	type HooksParamsPreUpdateCombat = HookParameters<'preUpdateCombat', [Combat, object, { diff: boolean; advanceTime: number; [key: string]: unknown }, string]>;
+	type HookParamsPreUpdateToken = HookParameters<'preUpdateToken', [Scene, foundry.data.TokenData, Partial<foundry.data.TokenData>, { diff: boolean; [key: string]: unknown }, string]>;
+	type HookParamsRender<T extends Application, N extends string> = HookParameters<`render${N}`, [T, JQuery, ReturnType<T['getData']>]>;
+	type HookParamsRenderChatMessage = HookParameters<'renderChatMessage', [ChatMessage, JQuery, foundry.data.ChatMessageSource]>;
+	type HookParamsTargetToken = HookParameters<'targetToken', [User, Token, boolean]>;
+	type HookParamsUpdate<T extends ClientDocument, N extends string> = HookParameters<`update${N}`, [T, DocumentUpdateData<T>, DocumentModificationContext]>;
+	type HookParamsUpdateWorldTime = HookParameters<'updateWorldTime', [number, number]>;
 
 	class Hooks {
 		/**
@@ -102,9 +38,7 @@ declare global {
 		static on(...args: HookParamsReady): number;
 		static on(...args: HookParamsCanvasInit): number;
 		static on(...args: HookParamsCanvasReady): number;
-		static on(
-			...args: HookParamsClose<CombatTrackerConfig, 'CombatTrackerConfig'>
-		): number;
+		static on(...args: HookParamsClose<CombatTrackerConfig, 'CombatTrackerConfig'>): number;
 		static on(...args: HookParamsDropCanvasData): number;
 		static on(...args: HookParamsGetChatLogEntryContext): number;
 		static on(...args: HookParamsGetSceneControlButtons): number;
@@ -116,30 +50,16 @@ declare global {
 		static on(...args: HookParamsRenderChatMessage): number;
 		static on(...args: HookParamsRender<ChatLog, 'ChatLog'>): number;
 		static on(...args: HookParamsRender<ChatPopout, 'ChatPopout'>): number;
-		static on(
-			...args: HookParamsRender<CombatTrackerConfig, 'CombatTrackerConfig'>
-		): number;
-		static on(
-			...args: HookParamsRender<CompendiumDirectory, 'CompendiumDirectory'>
-		): number;
+		static on(...args: HookParamsRender<CombatTrackerConfig, 'CombatTrackerConfig'>): number;
+		static on(...args: HookParamsRender<CompendiumDirectory, 'CompendiumDirectory'>): number;
 		static on(...args: HookParamsRender<Dialog, 'Dialog'>): number;
-		static on(
-			...args: HookParamsRender<ActorDirectory<Actor>, 'ActorDirectory'>
-		): number;
-		static on(
-			...args: HookParamsRender<ItemDirectory<Item>, 'ItemDirectory'>
-		): number;
-		static on(
-			...args: HookParamsRender<SceneControls, 'SceneControls'>
-		): number;
+		static on(...args: HookParamsRender<ActorDirectory<Actor>, 'ActorDirectory'>): number;
+		static on(...args: HookParamsRender<ItemDirectory<Item>, 'ItemDirectory'>): number;
+		static on(...args: HookParamsRender<SceneControls, 'SceneControls'>): number;
 		static on(...args: HookParamsRender<Settings, 'Settings'>): number;
 		static on(...args: HookParamsRender<TokenHUD, 'TokenHUD'>): number;
-		static on(
-			...args: HookParamsRender<JournalPageSheet, 'JournalPageSheet'>
-		): number;
-		static on(
-			...args: HookParamsRender<JournalTextPageSheet, 'JournalTextPageSheet'>
-		): number;
+		static on(...args: HookParamsRender<JournalPageSheet, 'JournalPageSheet'>): number;
+		static on(...args: HookParamsRender<JournalTextPageSheet, 'JournalTextPageSheet'>): number;
 		static on(...args: HookParamsTargetToken): number;
 		static on(...args: HookParamsUpdate<Combat, 'Combat'>): number;
 		static on(...args: HookParamsUpdate<Scene, 'Scene'>): number;
@@ -158,9 +78,7 @@ declare global {
 		static once(...args: HookParamsReady): number;
 		static once(...args: HookParamsCanvasInit): number;
 		static once(...args: HookParamsCanvasReady): number;
-		static once(
-			...args: HookParamsClose<CombatTrackerConfig, 'CombatTrackerConfig'>
-		): number;
+		static once(...args: HookParamsClose<CombatTrackerConfig, 'CombatTrackerConfig'>): number;
 		static once(...args: HookParamsDropCanvasData): number;
 		static once(...args: HookParamsGetChatLogEntryContext): number;
 		static once(...args: HookParamsGetSceneControlButtons): number;
@@ -169,30 +87,16 @@ declare global {
 		static once(...args: HookParamsPreCreateItem): number;
 		static once(...args: HookParamsPreUpdateToken): number;
 		static once(...args: HookParamsRenderChatMessage): number;
-		static once(
-			...args: HookParamsRender<ActorDirectory<Actor>, 'ActorDirectory'>
-		): number;
+		static once(...args: HookParamsRender<ActorDirectory<Actor>, 'ActorDirectory'>): number;
 		static once(...args: HookParamsRender<ChatLog, 'ChatLog'>): number;
 		static once(...args: HookParamsRender<ChatPopout, 'ChatPopout'>): number;
-		static once(
-			...args: HookParamsRender<CombatTrackerConfig, 'CombatTrackerConfig'>
-		): number;
-		static once(
-			...args: HookParamsRender<CompendiumDirectory, 'CompendiumDirectory'>
-		): number;
+		static once(...args: HookParamsRender<CombatTrackerConfig, 'CombatTrackerConfig'>): number;
+		static once(...args: HookParamsRender<CompendiumDirectory, 'CompendiumDirectory'>): number;
 		static once(...args: HookParamsRender<Dialog, 'Dialog'>): number;
-		static once(
-			...args: HookParamsRender<ItemDirectory<Item>, 'ItemDirectory'>
-		): number;
-		static once(
-			...args: HookParamsRender<JournalPageSheet, 'JournalPageSheet'>
-		): number;
-		static once(
-			...args: HookParamsRender<JournalTextPageSheet, 'JournalTextPageSheet'>
-		): number;
-		static once(
-			...args: HookParamsRender<SceneControls, 'SceneControls'>
-		): number;
+		static once(...args: HookParamsRender<ItemDirectory<Item>, 'ItemDirectory'>): number;
+		static once(...args: HookParamsRender<JournalPageSheet, 'JournalPageSheet'>): number;
+		static once(...args: HookParamsRender<JournalTextPageSheet, 'JournalTextPageSheet'>): number;
+		static once(...args: HookParamsRender<SceneControls, 'SceneControls'>): number;
 		static once(...args: HookParamsRender<Settings, 'Settings'>): number;
 		static once(...args: HookParamsRender<TokenHUD, 'TokenHUD'>): number;
 		static once(...args: HookParamsTargetToken): number;
@@ -235,10 +139,7 @@ declare global {
 		static call(hook: string, ...args: unknown[]): boolean;
 	}
 
-	interface DropCanvasData<
-		T extends string = string,
-		D extends object = object,
-	> {
+	interface DropCanvasData<T extends string = string, D extends object = object> {
 		type?: T;
 		data?: D extends foundry.abstract.Document ? D['_source'] : D;
 		uuid?: string;

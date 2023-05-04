@@ -23,9 +23,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class ActiveEffectData<
-			TDocument extends documents.BaseActiveEffect = documents.BaseActiveEffect,
-		> extends abstract.DocumentData<TDocument> {
+		class ActiveEffectData<TDocument extends documents.BaseActiveEffect = documents.BaseActiveEffect> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 
 			/** @property duration The duration of the effect */
@@ -35,8 +33,7 @@ declare module foundry {
 			changes: EffectChangeData<TDocument>[];
 		}
 
-		interface ActiveEffectData
-			extends Omit<ActiveEffectSource, 'duration' | 'changes'> {
+		interface ActiveEffectData extends Omit<ActiveEffectSource, 'duration' | 'changes'> {
 			readonly _source: ActiveEffectSource;
 		}
 	}

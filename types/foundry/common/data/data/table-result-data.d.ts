@@ -28,9 +28,7 @@ declare module foundry {
 			drawn: boolean;
 		}
 
-		class TableResultData<
-			TDocument extends documents.BaseTableResult = documents.BaseTableResult,
-		> extends abstract.DocumentData<TDocument> {
+		class TableResultData<TDocument extends documents.BaseTableResult = documents.BaseTableResult> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 		}
 

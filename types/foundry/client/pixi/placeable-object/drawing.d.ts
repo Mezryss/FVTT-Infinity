@@ -2,9 +2,7 @@
  * The Drawing object is an implementation of the PlaceableObject container.
  * Each Drawing is a placeable object in the DrawingsLayer.
  */
-declare class Drawing<
-	TDocument extends DrawingDocument = DrawingDocument,
-> extends PlaceableObject<TDocument> {
+declare class Drawing<TDocument extends DrawingDocument = DrawingDocument> extends PlaceableObject<TDocument> {
 	constructor(document: TDocument);
 
 	/** The inner drawing container */
@@ -79,25 +77,10 @@ declare class Drawing<
 	 * @param point    The current point
 	 * @param next     The next point
 	 */
-	protected _getBezierControlPoints(
-		factor: number,
-		previous: [number, number],
-		point: [number, number],
-		next: [number, number],
-	): void;
+	protected _getBezierControlPoints(factor: number, previous: [number, number], point: [number, number], next: [number, number]): void;
 
 	/** Refresh the boundary frame which outlines the Drawing shape */
-	protected _refreshFrame({
-		x,
-		y,
-		width,
-		height,
-	}: {
-		x: number;
-		y: number;
-		width: number;
-		height: number;
-	}): void;
+	protected _refreshFrame({ x, y, width, height }: { x: number; y: number; width: number; height: number }): void;
 
 	/** Add a new polygon point to the drawing, ensuring it differs from the last one */
 	protected _addPoint(position: number, temporary?: boolean): void;
@@ -109,10 +92,7 @@ declare class Drawing<
 
 	protected override _onRelease(options?: object): void;
 
-	override _onDelete(
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
 	/** Handle text entry in an active text tool */
 	protected _onDrawingTextKeydown(event: KeyboardEvent): void;

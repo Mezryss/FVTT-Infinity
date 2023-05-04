@@ -30,12 +30,7 @@ declare global {
 		 * Draw the grid
 		 * @param preview Override settings used in place of those saved to the Scene data
 		 */
-		draw({
-			type,
-			dimensions,
-			gridColor,
-			gridAlpha,
-		}?: GridDrawOptions): Promise<this>;
+		draw({ type, dimensions, gridColor, gridAlpha }?: GridDrawOptions): Promise<this>;
 
 		/**
 		 * Given a pair of coordinates (x1,y1), return the grid coordinates (x2,y2) which represent the snapped position
@@ -73,10 +68,7 @@ declare global {
 		 * @param segments An array of measured segments
 		 * @param options  Additional options which modify the measurement
 		 */
-		measureDistances(
-			segments: Segment[],
-			options?: Record<string, unknown>,
-		): number[];
+		measureDistances(segments: Segment[], options?: Record<string, unknown>): number[];
 
 		/* -------------------------------------------- */
 		/*  Grid Highlighting Methods                   */

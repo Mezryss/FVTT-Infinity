@@ -12,7 +12,5 @@ declare global {
 	export type PointArray = [number, number];
 
 	/** A standard rectangle interface. */
-	export type Rectangle =
-		| PIXI.Rectangle
-		| { x: number; y: number; width: number; height: number };
+	export type Rectangle = PIXI.Rectangle | { x: number; y: number; width: number; height: number };
 }

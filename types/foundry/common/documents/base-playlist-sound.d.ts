@@ -6,11 +6,7 @@ declare module foundry {
 
 			static override get metadata(): PlaylistSoundMetadata;
 
-			testUserPermission(
-				user: documents.BaseUser,
-				permission: DocumentOwnershipString | DocumentOwnershipLevel,
-				{ exact }?: { exact?: boolean },
-			): boolean;
+			testUserPermission(user: documents.BaseUser, permission: DocumentOwnershipString | DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 		}
 
 		interface BasePlaylistSound {

@@ -46,19 +46,7 @@ declare global {
 		 * @param [options.rollMode]         The chat roll mode to use when displaying the result
 		 * @returns A Promise which resolves to an object containing the executed roll and the produced results
 		 */
-		draw({
-			roll,
-			recursive,
-			results,
-			displayChat,
-			rollMode,
-		}?: {
-			roll?: Roll | null;
-			recursive?: boolean;
-			results?: TableResult[];
-			displayChat?: boolean;
-			rollMode?: RollMode | null;
-		}): Promise<RollTableDraw>;
+		draw({ roll, recursive, results, displayChat, rollMode }?: { roll?: Roll | null; recursive?: boolean; results?: TableResult[]; displayChat?: boolean; rollMode?: RollMode | null }): Promise<RollTableDraw>;
 
 		/**
 		 * Draw multiple results from a RollTable, constructing a final synthetic Roll as a dice pool of inner rolls.
@@ -110,15 +98,7 @@ declare global {
 		 * const roll = new Roll("1d20 + @abilities.wis.mod", actor.getRollData());
 		 * const customResults = await table.roll({roll});
 		 */
-		roll({
-			roll,
-			recursive,
-			_depth,
-		}?: {
-			roll?: Roll;
-			recursive?: boolean;
-			_depth?: number;
-		}): Promise<RollTableDraw>;
+		roll({ roll, recursive, _depth }?: { roll?: Roll; recursive?: boolean; _depth?: number }): Promise<RollTableDraw>;
 
 		/**
 		 * Get an Array of valid results for a given rolled total
@@ -131,39 +111,22 @@ declare global {
 		/*  Event Handlers                              */
 		/* -------------------------------------------- */
 
-		protected override _onCreateEmbeddedDocuments(
-			embeddedName: 'TableResult',
-			documents: TableResult[],
-			result: foundry.data.TableResultSource[],
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onCreateEmbeddedDocuments(embeddedName: 'TableResult', documents: TableResult[], result: foundry.data.TableResultSource[], options: DocumentModificationContext, userId: string): void;
 
-		protected override _onDeleteEmbeddedDocuments(
-			embeddedName: 'TableResult',
-			documents: TableResult[],
-			result: foundry.data.TableResultSource[],
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onDeleteEmbeddedDocuments(embeddedName: 'TableResult', documents: TableResult[], result: foundry.data.TableResultSource[], options: DocumentModificationContext, userId: string): void;
 
 		/* -------------------------------------------- */
 		/*  Importing and Exporting                     */
 		/* -------------------------------------------- */
 
-		override toCompendium(
-			pack: CompendiumCollection<this>,
-		): foundry.data.RollTableSource;
+		override toCompendium(pack: CompendiumCollection<this>): foundry.data.RollTableSource;
 
 		/**
 		 * Create a new RollTable entity using all of the Entities from a specific Folder as new results.
 		 * @param folder  The Folder entity from which to create a roll table
 		 * @param options Additional options passed to the RollTable.create method
 		 */
-		static fromFolder(
-			folder: Folder,
-			options?: DocumentModificationContext,
-		): Promise<RollTable | undefined>;
+		static fromFolder(folder: Folder, options?: DocumentModificationContext): Promise<RollTable | undefined>;
 	}
 
 	/**

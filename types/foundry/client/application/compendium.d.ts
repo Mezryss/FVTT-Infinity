@@ -1,11 +1,6 @@
 /** An interface for displaying the content of a CompendiumCollection. */
-declare class Compendium<
-	TDocument extends CompendiumDocument,
-> extends Application {
-	constructor(
-		collection: CompendiumCollection<TDocument>,
-		options: ApplicationOptions,
-	);
+declare class Compendium<TDocument extends CompendiumDocument> extends Application {
+	constructor(collection: CompendiumCollection<TDocument>, options: ApplicationOptions);
 
 	/** The CompendiumCollection instance which is represented in this Compendium interface. */
 	collection: CompendiumCollection<TDocument>;
@@ -37,12 +32,7 @@ declare class Compendium<
 	 */
 	protected _onClickEntry(event: MouseEvent): void;
 
-	protected _onSearchFilter(
-		event: KeyboardEvent,
-		query: string,
-		rgx: RegExp,
-		html: HTMLElement,
-	): void;
+	protected _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;
 
 	protected _canDragStart(selector: string): boolean;
 

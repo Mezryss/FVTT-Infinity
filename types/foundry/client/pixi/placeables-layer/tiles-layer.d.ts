@@ -1,3 +1,1 @@
-declare class TilesLayer<
-	TTile extends Tile = Tile,
-> extends PlaceablesLayer<TTile> {}
+declare class TilesLayer<TTile extends Tile = Tile> extends PlaceablesLayer<TTile> {}

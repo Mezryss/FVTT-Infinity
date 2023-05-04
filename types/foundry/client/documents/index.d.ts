@@ -29,20 +29,7 @@ import './user';
 import './wall-document';
 
 declare global {
-	type WorldDocument =
-		| Actor
-		| Cards
-		| ChatMessage
-		| Combat
-		| Folder
-		| Item
-		| JournalEntry
-		| Macro
-		| Playlist
-		| RollTable
-		| Scene
-		| User;
+	type WorldDocument = Actor | Cards | ChatMessage | Combat | Folder | Item | JournalEntry | Macro | Playlist | RollTable | Scene | User;
 
-	type WorldDocumentUUID<T extends WorldDocument = WorldDocument> =
-		`${T['documentName']}.${string}`;
+	type WorldDocumentUUID<T extends WorldDocument = WorldDocument> = `${T['documentName']}.${string}`;
 }

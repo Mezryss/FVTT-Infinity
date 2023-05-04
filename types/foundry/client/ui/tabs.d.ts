@@ -75,10 +75,7 @@ declare class Tabs {
 	 * @param tabName
 	 * @param triggerCallback
 	 */
-	activate(
-		tabName: string,
-		{ triggerCallback }?: { triggerCallback?: boolean },
-	): void;
+	activate(tabName: string, { triggerCallback }?: { triggerCallback?: boolean }): void;
 
 	/**
 	 * Handle click events on the tab navigation entries

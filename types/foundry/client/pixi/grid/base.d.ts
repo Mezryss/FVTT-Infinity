@@ -25,10 +25,7 @@ declare global {
 		 * @param [preview.gridColor=null] The grid color.
 		 * @param [preview.gridAlpha=null] The grid transparency.
 		 */
-		draw(preview?: {
-			gridColor?: string | null;
-			gridAlpha?: string | null;
-		}): this;
+		draw(preview?: { gridColor?: string | null; gridAlpha?: string | null }): this;
 
 		/**
 		 * Highlight a grid position for a certain coordinates
@@ -80,11 +77,7 @@ declare global {
 		 *
 		 * @return  An object containing the coordinates of the snapped location
 		 */
-		getSnappedPosition(
-			x: number,
-			y: number,
-			interval: number,
-		): { x: number; y: number };
+		getSnappedPosition(x: number, y: number, interval: number): { x: number; y: number };
 
 		/* -------------------------------------------- */
 
@@ -127,10 +120,7 @@ declare global {
 		 * @param options   Additional options which modify the measurement
 		 * @return  An Array of distance measurements for each segment
 		 */
-		measureDistances(
-			segments: Segment[],
-			options: MeasureDistancesOptions,
-		): number[];
+		measureDistances(segments: Segment[], options: MeasureDistancesOptions): number[];
 
 		/* -------------------------------------------- */
 

@@ -3,11 +3,7 @@
  * At default resolution Text often looks blurry or fuzzy.
  */
 declare class PreciseText extends PIXI.Text {
-	constructor(
-		text: string,
-		style?: Partial<PIXI.ITextStyle> | PIXI.TextStyle,
-		canvas?: HTMLCanvasElement,
-	);
+	constructor(text: string, style?: Partial<PIXI.ITextStyle> | PIXI.TextStyle, canvas?: HTMLCanvasElement);
 
 	/**
 	 * Prepare a TextStyle object which merges the canvas defaults with user-provided options
@@ -15,11 +11,5 @@ declare class PreciseText extends PIXI.Text {
 	 * @param [options={}] Additional options merged with the default TextStyle
 	 * @returns The prepared TextStyle
 	 */
-	static getTextStyle({
-		anchor,
-		...options
-	}: {
-		anchor?: number;
-		options?: Partial<PIXI.ITextStyle>;
-	}): PIXI.TextStyle;
+	static getTextStyle({ anchor, ...options }: { anchor?: number; options?: Partial<PIXI.ITextStyle> }): PIXI.TextStyle;
 }

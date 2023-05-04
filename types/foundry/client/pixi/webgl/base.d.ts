@@ -92,10 +92,7 @@ declare global {
 		static defaultUniforms: object;
 
 		/** A factory method for creating the shader using its defined default values */
-		static create<T extends AbstractBaseShader>(
-			this: ConstructorOf<T>,
-			defaultUniforms: object,
-		): T;
+		static create<T extends AbstractBaseShader>(this: ConstructorOf<T>, defaultUniforms: object): T;
 
 		/**
 		 * Reset the shader uniforms back to their provided default values
@@ -121,10 +118,7 @@ declare global {
 		 * @param [uniforms] Initial uniform values which override filter defaults
 		 * @returns The constructed AbstractFilter instance.
 		 */
-		static create<T extends AbstractBaseFilter>(
-			this: ConstructorOf<T>,
-			uniforms?: object,
-		): T;
+		static create<T extends AbstractBaseFilter>(this: ConstructorOf<T>, uniforms?: object): T;
 
 		/** Always target the resolution of the render texture or renderer */
 		get resolution(): number;

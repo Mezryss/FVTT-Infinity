@@ -6,13 +6,8 @@ declare global {
 	 * The client-side FogExploration document which extends the common BaseFogExploration abstraction.
 	 * Each FogExploration document contains FogExplorationData which defines its data schema.
 	 */
-	class FogExploration<
-		TToken extends Token = Token,
-	> extends FogExplorationConstructor {
-		constructor(
-			data?: PreCreate<foundry.data.FogExplorationSource>,
-			context?: DocumentConstructionContext<FogExploration>,
-		);
+	class FogExploration<TToken extends Token = Token> extends FogExplorationConstructor {
+		constructor(data?: PreCreate<foundry.data.FogExplorationSource>, context?: DocumentConstructionContext<FogExploration>);
 
 		/**
 		 * Explore fog of war for a new point source position.
@@ -23,11 +18,7 @@ declare global {
 		explore(source: PointSource<TToken>, force?: boolean): boolean;
 
 		/** Obtain the fog of war exploration progress for a specific Scene and User. */
-		static get<T extends FogExploration>(
-			this: ConstructorOf<T>,
-			{ scene, user }?: { scene?: Scene; user?: User },
-			options?: Record<string, unknown>,
-		): Promise<T | null>;
+		static get<T extends FogExploration>(this: ConstructorOf<T>, { scene, user }?: { scene?: Scene; user?: User }, options?: Record<string, unknown>): Promise<T | null>;
 
 		/** Transform the explored base64 data into a PIXI.Texture object */
 		getTexture(): PIXI.Texture | null;

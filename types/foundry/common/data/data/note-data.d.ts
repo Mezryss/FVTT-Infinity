@@ -38,9 +38,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class NoteData<
-			TDocument extends documents.BaseNote = documents.BaseNote,
-		> extends abstract.DocumentData<TDocument> {
+		class NoteData<TDocument extends documents.BaseNote = documents.BaseNote> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 		}
 

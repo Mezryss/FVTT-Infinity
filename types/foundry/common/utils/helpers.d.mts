@@ -8,10 +8,7 @@ import { RawObject } from '../abstract/data.mjs';
  * @param delay An amount of time in milliseconds to delay
  * @return A wrapped function which can be called to debounce execution
  */
-export function debounce<T extends (...args: any[]) => unknown>(
-	callback: T,
-	delay: number,
-): (...args: Parameters<T>) => void;
+export function debounce<T extends (...args: any[]) => unknown>(callback: T, delay: number): (...args: Parameters<T>) => void;
 
 /**
  * Quickly clone a simple piece of data, returning a copy which can be mutated safely.
@@ -62,18 +59,7 @@ export function duplicate<T>(original: T): T;
  * @example <caption>Deleting an existing object key</caption>
  * mergeObject({k1: "v1", k2: "v2"}, {"-=k1": null});   // {k2: "v2"}
  */
-export function mergeObject<T extends object, U extends object = T>(
-	original: T,
-	other?: U,
-	{
-		insertKeys,
-		insertValues,
-		overwrite,
-		inplace,
-		enforceTypes,
-	}?: MergeObjectOptions,
-	_d?: number,
-): T & U;
+export function mergeObject<T extends object, U extends object = T>(original: T, other?: U, { insertKeys, insertValues, overwrite, inplace, enforceTypes }?: MergeObjectOptions, _d?: number): T & U;
 
 /**
  * Learn the named type of a token - extending the functionality of typeof to recognize some core Object types
@@ -104,12 +90,7 @@ export function invertObject(obj: object): object;
  * filterObject(source, template); // {foo: {number: 1, name: "Tim"}};
  * filterObject(source, template, {templateValues: true}); // {foo: {number: 0, name: "Mit"}};
  */
-export function filterObject(
-	source: object,
-	template: object,
-	keepSpecial?: boolean,
-	templateValues?: boolean,
-): object;
+export function filterObject(source: object, template: object, keepSpecial?: boolean, templateValues?: boolean): object;
 
 /**
  * Flatten a possibly multi-dimensional object to a one-dimensional one by converting all nested keys to dot notation
@@ -142,9 +123,7 @@ export function isObjectEmpty(obj: object): boolean;
  * @param other
  * @return
  */
-export function diffObject<
-	T extends Record<string, unknown> = Record<string, unknown>,
->(original: object, other: object): T;
+export function diffObject<T extends Record<string, unknown> = Record<string, unknown>>(original: object, other: object): T;
 
 /**
  * A helper function which tests whether an object has a property or nested property given a string key.
@@ -176,11 +155,7 @@ export function getProperty(object: object, key: string): any;
  *
  * @return A flag for whether or not the object was updated
  */
-export function setProperty(
-	object: object,
-	key: string,
-	value: unknown,
-): boolean;
+export function setProperty(object: object, key: string, value: unknown): boolean;
 
 /**
  * Encode a url-like string by replacing any characters which need encoding
@@ -220,11 +195,7 @@ export function rgbToHsv(r: number, g: number, b: number): Array<number>;
  * @param  v       The value
  * @return         The RGB representation
  */
-export function hsvToRgb(
-	h: number,
-	s: number,
-	v: number,
-): [number, number, number];
+export function hsvToRgb(h: number, s: number, v: number): [number, number, number];
 
 /**
  * Converts a color as an [R, G, B] array of normalized floats to a hexadecimal number.
@@ -262,10 +233,7 @@ export function colorStringToHex(color: string): number;
  * @param v1
  * @return
  */
-export function isNewerVersion(
-	v1: number | string | null,
-	v0: number | string,
-): boolean;
+export function isNewerVersion(v1: number | string | null, v0: number | string): boolean;
 
 /**
  * Generate a random ID
@@ -307,9 +275,6 @@ declare global {
 		 * @param src       The requested texture source
 		 * @param fallback  A fallback texture to use if the requested source is unavailable or invalid
 		 */
-		function loadTexture(
-			src: string,
-			{ fallback }?: { fallback?: ImageFilePath },
-		): Promise<PIXI.Texture>;
+		function loadTexture(src: string, { fallback }?: { fallback?: ImageFilePath }): Promise<PIXI.Texture>;
 	}
 }

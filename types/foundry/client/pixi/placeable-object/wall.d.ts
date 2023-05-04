@@ -3,9 +3,7 @@
  * Walls are used to restrict Token movement or visibility as well as to define the areas of effect for ambient lights
  * and sounds.
  */
-declare class Wall<
-	TDocument extends WallDocument = WallDocument,
-> extends PlaceableObject<TDocument> {
+declare class Wall<TDocument extends WallDocument = WallDocument> extends PlaceableObject<TDocument> {
 	constructor(document?: TDocument);
 
 	/** An reference the Door Control icon associated with this Wall, if any */
@@ -66,18 +64,12 @@ declare class Wall<
 	 * @param pad    The amount of padding to apply
 	 * @return A constructed Polygon for the line
 	 */
-	protected _getWallHitPolygon(
-		coords: [number, number],
-		pad: number,
-	): PIXI.Polygon;
+	protected _getWallHitPolygon(coords: [number, number], pad: number): PIXI.Polygon;
 
 	/** Given the properties of the wall - decide upon a color to render the wall for display on the WallsLayer */
 	protected _getWallColor(): number;
 
-	protected _onControl(options?: {
-		releaseOthers?: boolean;
-		chain?: number;
-	}): void;
+	protected _onControl(options?: { releaseOthers?: boolean; chain?: number }): void;
 
 	protected _onRelease(options: Record<string, unknown>): void;
 
@@ -112,22 +104,11 @@ declare class Wall<
 	/*  Socket Listeners and Handlers               */
 	/* -------------------------------------------- */
 
-	override _onCreate(
-		data: foundry.data.WallSource,
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onCreate(data: foundry.data.WallSource, options: DocumentModificationContext<TDocument>, userId: string): void;
 
-	override _onUpdate(
-		changed: DocumentUpdateData,
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onUpdate(changed: DocumentUpdateData, options: DocumentModificationContext<TDocument>, userId: string): void;
 
-	override _onDelete(
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
 	/**
 	 * Callback actions when a wall that contains a door is moved or its state is changed
@@ -139,15 +120,9 @@ declare class Wall<
 	/*  Interaction Event Callbacks                 */
 	/* -------------------------------------------- */
 
-	protected override _canControl(
-		user: User,
-		event?: PIXI.InteractionEvent,
-	): boolean;
+	protected override _canControl(user: User, event?: PIXI.InteractionEvent): boolean;
 
-	protected _onHoverIn(
-		event: PIXI.InteractionEvent,
-		options?: { hoverOutOthers?: boolean },
-	): boolean;
+	protected _onHoverIn(event: PIXI.InteractionEvent, options?: { hoverOutOthers?: boolean }): boolean;
 
 	protected _onHoverOut(event: PIXI.InteractionEvent): boolean;
 

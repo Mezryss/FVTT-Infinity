@@ -21,9 +21,7 @@ declare global {
 	 * // Share the image with other connected players
 	 * ip.share();
 	 */
-	class ImagePopout<
-		TDocument extends ClientDocument = ClientDocument,
-	> extends FormApplication<ClientDocument, ImagePopoutOptions> {
+	class ImagePopout<TDocument extends ClientDocument = ClientDocument> extends FormApplication<ClientDocument, ImagePopoutOptions> {
 		constructor(src: string, options?: Partial<ImagePopoutOptions>);
 
 		static override get defaultOptions(): ImagePopoutOptions;
@@ -40,10 +38,7 @@ declare global {
 		/** Provide a reference to the Document referenced by this popout, if one exists */
 		getRelatedObject(): Promise<TDocument | null>;
 
-		protected override _updateObject(
-			event: Event,
-			formData: Record<string, unknown>,
-		): Promise<void>;
+		protected override _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 	}
 
 	interface ImagePopoutOptions extends FormApplicationOptions {

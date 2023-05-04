@@ -61,57 +61,21 @@ declare global {
 		 *                                 This will become the default behavior in version 10.x
 		 * @returns The evaluated RollTerm
 		 */
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-			async?: false;
-		}): Evaluated<this>;
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}: {
-			minimize?: boolean;
-			maximize?: boolean;
-			async: true;
-		}): Promise<Evaluated<this>>;
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-			async?: boolean;
-		}): Evaluated<this> | Promise<Evaluated<this>>;
+		evaluate({ minimize, maximize, async }?: { minimize?: boolean; maximize?: boolean; async?: false }): Evaluated<this>;
+		evaluate({ minimize, maximize, async }: { minimize?: boolean; maximize?: boolean; async: true }): Promise<Evaluated<this>>;
+		evaluate({ minimize, maximize, async }?: { minimize?: boolean; maximize?: boolean; async?: boolean }): Evaluated<this> | Promise<Evaluated<this>>;
 
 		/**
 		 * Evaluate the term.
 		 * @param [options={}] Options which modify how the RollTerm is evaluated, see RollTerm#evaluate
 		 */
-		protected _evaluate({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): Promise<Evaluated<this>>;
+		protected _evaluate({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): Promise<Evaluated<this>>;
 
 		/**
 		 * This method is temporarily factored out in order to provide different behaviors synchronous evaluation.
 		 * This will be removed in 0.10.x
 		 */
-		protected _evaluateSync({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): Evaluated<this>;
+		protected _evaluateSync({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): Evaluated<this>;
 
 		/* -------------------------------------------- */
 		/*  Serialization and Loading                   */
@@ -122,30 +86,21 @@ declare global {
 		 * @param data Provided data from an un-serialized term
 		 * @return The constructed RollTerm
 		 */
-		static fromData<TTerm extends RollTerm>(
-			this: AbstractConstructorOf<TTerm>,
-			data: TermDataOf<TTerm>,
-		): TTerm;
+		static fromData<TTerm extends RollTerm>(this: AbstractConstructorOf<TTerm>, data: TermDataOf<TTerm>): TTerm;
 
 		/**
 		 * Define term-specific logic for how a de-serialized data object is restored as a functional RollTerm
 		 * @param data The de-serialized term data
 		 * @returns The re-constructed RollTerm object
 		 */
-		protected static _fromData<D extends RollTermData, T extends RollTerm<D>>(
-			this: ConstructorOf<T>,
-			data: D,
-		): T;
+		protected static _fromData<D extends RollTermData, T extends RollTerm<D>>(this: ConstructorOf<T>, data: D): T;
 
 		/**
 		 * Reconstruct a RollTerm instance from a provided JSON string
 		 * @param json A serialized JSON representation of a DiceTerm
 		 * @return A reconstructed RollTerm from the provided JSON
 		 */
-		static fromJSON<D extends RollTermData, T extends RollTerm<D>>(
-			this: ConstructorOf<T>,
-			json: string,
-		): T;
+		static fromJSON<D extends RollTermData, T extends RollTerm<D>>(this: ConstructorOf<T>, json: string): T;
 
 		/**
 		 * Serialize the RollTerm to a JSON string which allows it to be saved in the database or embedded in text.
@@ -165,7 +120,5 @@ declare global {
 		total: NonNullable<T['total']>;
 	};
 
-	type TermDataOf<TTerm extends RollTerm> = TTerm extends RollTerm<infer TData>
-		? TData
-		: never;
+	type TermDataOf<TTerm extends RollTerm> = TTerm extends RollTerm<infer TData> ? TData : never;
 }

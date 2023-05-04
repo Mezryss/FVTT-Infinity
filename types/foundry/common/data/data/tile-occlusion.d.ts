@@ -13,9 +13,7 @@ declare module foundry {
 		}
 
 		/** An inner-object which defines the schema for how Tile occlusion settings are defined */
-		class TileOcclusion<
-			TDocument extends documents.BaseTile = documents.BaseTile,
-		> extends abstract.DocumentData<TDocument> {
+		class TileOcclusion<TDocument extends documents.BaseTile = documents.BaseTile> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 		}
 

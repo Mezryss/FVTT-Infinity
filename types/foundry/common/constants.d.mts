@@ -83,33 +83,10 @@ export const COMPATIBILITY_MODES: {
 export const DEFAULT_TOKEN: 'icons/svg/mystery-man.svg';
 
 /** Define the allowed Document class types. */
-export const DOCUMENT_TYPES: [
-	'Actor',
-	'Cards',
-	'ChatMessage',
-	'Combat',
-	'Item',
-	'Folder',
-	'JournalEntry',
-	'Macro',
-	'Playlist',
-	'RollTable',
-	'Scene',
-	'User',
-];
+export const DOCUMENT_TYPES: ['Actor', 'Cards', 'ChatMessage', 'Combat', 'Item', 'Folder', 'JournalEntry', 'Macro', 'Playlist', 'RollTable', 'Scene', 'User'];
 
 /** The allowed Document types which may exist within a Compendium pack. */
-export const COMPENDIUM_DOCUMENT_TYPES: [
-	'Actor',
-	'Cards',
-	'Item',
-	'JournalEntry',
-	'Macro',
-	'Playlist',
-	'RollTable',
-	'Scene',
-	'Adventure',
-];
+export const COMPENDIUM_DOCUMENT_TYPES: ['Actor', 'Cards', 'Item', 'JournalEntry', 'Macro', 'Playlist', 'RollTable', 'Scene', 'Adventure'];
 
 /**
  * Define the allowed ownership levels for a Document.
@@ -131,16 +108,7 @@ export const DOCUMENT_META_OWNERSHIP_LEVELS: {
 };
 
 /** Define the allowed Document types which may be dynamically linked in chat */
-export const DOCUMENT_LINK_TYPES: [
-	'Actor',
-	'Cards',
-	'Item',
-	'Scene',
-	'JournalEntry',
-	'Macro',
-	'RollTable',
-	'PlaylistSound',
-];
+export const DOCUMENT_LINK_TYPES: ['Actor', 'Cards', 'Item', 'Scene', 'JournalEntry', 'Macro', 'RollTable', 'PlaylistSound'];
 
 /** The supported dice roll visibility modes */
 export const DICE_ROLL_MODES: {
@@ -165,16 +133,7 @@ export const DRAWING_FILL_TYPES: {
 /**
  * Define the allowed Document types which Folders may contain
  */
-export const FOLDER_DOCUMENT_TYPES: [
-	'Actor',
-	'Item',
-	'Scene',
-	'JournalEntry',
-	'Playlist',
-	'RollTable',
-	'Cards',
-	'Macro',
-];
+export const FOLDER_DOCUMENT_TYPES: ['Actor', 'Item', 'Scene', 'JournalEntry', 'Playlist', 'RollTable', 'Cards', 'Macro'];
 
 /** The maximum allowed level of depth for Folder nesting */
 export const FOLDER_MAX_DEPTH: 3;
@@ -658,44 +617,30 @@ declare global {
 	}
 
 	type AudioFileExtension = keyof typeof AUDIO_FILE_EXTENSIONS;
-	type CanvasPerformanceMode =
-		(typeof CANVAS_PERFORMANCE_MODES)[keyof typeof CANVAS_PERFORMANCE_MODES];
-	type ChatMessageType =
-		(typeof CONST.CHAT_MESSAGE_TYPES)[keyof typeof CONST.CHAT_MESSAGE_TYPES];
-	type CompatibilityMode =
-		(typeof CONST.COMPATIBILITY_MODES)[keyof typeof CONST.COMPATIBILITY_MODES];
-	type DocumentOwnershipLevel =
-		(typeof DOCUMENT_OWNERSHIP_LEVELS)[DocumentOwnershipString];
+	type CanvasPerformanceMode = (typeof CANVAS_PERFORMANCE_MODES)[keyof typeof CANVAS_PERFORMANCE_MODES];
+	type ChatMessageType = (typeof CONST.CHAT_MESSAGE_TYPES)[keyof typeof CONST.CHAT_MESSAGE_TYPES];
+	type CompatibilityMode = (typeof CONST.COMPATIBILITY_MODES)[keyof typeof CONST.COMPATIBILITY_MODES];
+	type DocumentOwnershipLevel = (typeof DOCUMENT_OWNERSHIP_LEVELS)[DocumentOwnershipString];
 	type DocumentOwnershipString = keyof typeof DOCUMENT_OWNERSHIP_LEVELS;
-	type DrawingFillType =
-		(typeof DRAWING_FILL_TYPES)[keyof typeof DRAWING_FILL_TYPES];
+	type DrawingFillType = (typeof DRAWING_FILL_TYPES)[keyof typeof DRAWING_FILL_TYPES];
 	type FileCategory = keyof typeof FILE_CATEGORIES;
 	type FileExtension = keyof typeof UPLOADABLE_FILE_EXTENSIONS;
 	type FolderDocumentType = (typeof FOLDER_DOCUMENT_TYPES)[number];
 	type GridType = (typeof GRID_TYPES)[keyof typeof GRID_TYPES];
 	type ImageFileExtension = keyof typeof IMAGE_FILE_EXTENSIONS;
-	type JournalEntryPageFormat =
-		(typeof JOURNAL_ENTRY_PAGE_FORMATS)[keyof typeof JOURNAL_ENTRY_PAGE_FORMATS];
+	type JournalEntryPageFormat = (typeof JOURNAL_ENTRY_PAGE_FORMATS)[keyof typeof JOURNAL_ENTRY_PAGE_FORMATS];
 	type MacroScope = (typeof MACRO_SCOPES)[number];
 	type MacroType = (typeof MACRO_TYPES)[keyof typeof MACRO_TYPES];
-	type MeasuredTemplateType =
-		(typeof MEASURED_TEMPLATE_TYPES)[keyof typeof MEASURED_TEMPLATE_TYPES];
+	type MeasuredTemplateType = (typeof MEASURED_TEMPLATE_TYPES)[keyof typeof MEASURED_TEMPLATE_TYPES];
 	type PackageType = (typeof PACKAGE_TYPES)[number];
 	type PlaylistMode = (typeof PLAYLIST_MODES)[keyof typeof PLAYLIST_MODES];
-	type PlaylistSortMode =
-		(typeof PLAYLIST_SORT_MODES)[keyof typeof PLAYLIST_SORT_MODES];
-	type RollMode =
-		(typeof CONST.DICE_ROLL_MODES)[keyof typeof CONST.DICE_ROLL_MODES];
-	type TableResultType =
-		(typeof TABLE_RESULT_TYPES)[keyof typeof TABLE_RESULT_TYPES];
-	type TextAnchorPoint =
-		(typeof TEXT_ANCHOR_POINTS)[keyof typeof TEXT_ANCHOR_POINTS];
-	type TileOcclusionMode =
-		(typeof TILE_OCCLUSION_MODES)[keyof typeof TILE_OCCLUSION_MODES];
-	type TokenDisplayMode =
-		(typeof TOKEN_DISPLAY_MODES)[keyof typeof TOKEN_DISPLAY_MODES];
-	type TokenDisposition =
-		(typeof TOKEN_DISPOSITIONS)[keyof typeof TOKEN_DISPOSITIONS];
+	type PlaylistSortMode = (typeof PLAYLIST_SORT_MODES)[keyof typeof PLAYLIST_SORT_MODES];
+	type RollMode = (typeof CONST.DICE_ROLL_MODES)[keyof typeof CONST.DICE_ROLL_MODES];
+	type TableResultType = (typeof TABLE_RESULT_TYPES)[keyof typeof TABLE_RESULT_TYPES];
+	type TextAnchorPoint = (typeof TEXT_ANCHOR_POINTS)[keyof typeof TEXT_ANCHOR_POINTS];
+	type TileOcclusionMode = (typeof TILE_OCCLUSION_MODES)[keyof typeof TILE_OCCLUSION_MODES];
+	type TokenDisplayMode = (typeof TOKEN_DISPLAY_MODES)[keyof typeof TOKEN_DISPLAY_MODES];
+	type TokenDisposition = (typeof TOKEN_DISPOSITIONS)[keyof typeof TOKEN_DISPOSITIONS];
 	type UserAction = 'create' | 'update' | 'delete';
 	type UserPermissionString = keyof typeof USER_PERMISSIONS;
 	type UserRole = keyof typeof USER_ROLE_NAMES;
@@ -704,8 +649,7 @@ declare global {
 	type WallDirection = (typeof WALL_DIRECTIONS)[keyof typeof WALL_DIRECTIONS];
 	type WallDoorState = (typeof WALL_DOOR_STATES)[keyof typeof WALL_DOOR_STATES];
 	type WallDoorType = (typeof WALL_DOOR_TYPES)[keyof typeof WALL_DOOR_TYPES];
-	type WallMovementType =
-		(typeof WALL_MOVEMENT_TYPES)[keyof typeof WALL_MOVEMENT_TYPES];
+	type WallMovementType = (typeof WALL_MOVEMENT_TYPES)[keyof typeof WALL_MOVEMENT_TYPES];
 	type WallRestrictionType = (typeof WALL_RESTRICTION_TYPES)[number];
 	type WallSenseType = (typeof WALL_SENSE_TYPES)[keyof typeof WALL_SENSE_TYPES];
 	type DrawingShapeType = 'r' | 'e' | 't' | 'p' | 'f';

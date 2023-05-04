@@ -10,9 +10,7 @@ declare global {
 	 * @see {@link TileSheet}
 	 * @see {@link TileHUD}
 	 */
-	class Tile<
-		TDocument extends TileDocument = TileDocument,
-	> extends PlaceableObject<TDocument> {
+	class Tile<TDocument extends TileDocument = TileDocument> extends PlaceableObject<TDocument> {
 		/* -------------------------------------------- */
 		/*  Attributes                                  */
 		/* -------------------------------------------- */
@@ -77,11 +75,7 @@ declare global {
 		/**
 		 * @param [refreshPerception=false]  Also refresh the perception layer.
 		 */
-		override refresh({
-			refreshPerception,
-		}?: {
-			refreshPerception?: boolean;
-		}): this;
+		override refresh({ refreshPerception }?: { refreshPerception?: boolean }): this;
 
 		/** Refresh the display of the Tile border */
 		protected _refreshBorder(b: PIXI.Rectangle): void;
@@ -93,16 +87,9 @@ declare global {
 		/*  Event Handlers                              */
 		/* -------------------------------------------- */
 
-		override _onUpdate(
-			changed: DeepPartial<TDocument['_source']>,
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		override _onUpdate(changed: DeepPartial<TDocument['_source']>, options: DocumentModificationContext<TDocument>, userId: string): void;
 
-		override _onDelete(
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
 		/**
 		 * Update wall states and refresh lighting and vision when a tile becomes a roof, or when an existing roof tile's
@@ -116,10 +103,7 @@ declare global {
 
 		override activateListeners(): void;
 
-		protected override _canConfigure(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canConfigure(user: User, event?: PIXI.InteractionEvent): boolean;
 
 		protected override _onClickLeft2(event: PIXI.InteractionEvent): void;
 
@@ -127,9 +111,7 @@ declare global {
 
 		protected override _onDragLeftMove(event: PIXI.InteractionEvent): void;
 
-		protected override _onDragLeftDrop(
-			event: PIXI.InteractionEvent,
-		): Promise<this['document'][]>;
+		protected override _onDragLeftDrop(event: PIXI.InteractionEvent): Promise<this['document'][]>;
 
 		protected override _onDragLeftCancel(event: PIXI.InteractionEvent): void;
 
@@ -174,11 +156,7 @@ declare global {
 		protected _onHandleDragDrop(event: PIXI.InteractionEvent): void;
 
 		/** Get resized Tile dimensions */
-		protected _getResizedDimensions(
-			event: PIXI.InteractionEvent,
-			origin: Point,
-			destination: Point,
-		): Rectangle;
+		protected _getResizedDimensions(event: PIXI.InteractionEvent, origin: Point, destination: Point): Rectangle;
 
 		/** Handle cancellation of a drag event for one of the resizing handles */
 		protected _onHandleDragCancel(): void;
@@ -190,8 +168,7 @@ declare global {
 		static createPreview(data: DeepPartial<foundry.data.TileSource>): Tile;
 	}
 
-	interface Tile<TDocument extends TileDocument = TileDocument>
-		extends PlaceableObject<TDocument> {
+	interface Tile<TDocument extends TileDocument = TileDocument> extends PlaceableObject<TDocument> {
 		get layer(): TilesLayer<this>;
 	}
 }

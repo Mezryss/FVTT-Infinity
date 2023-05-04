@@ -28,11 +28,7 @@ declare global {
 		/** The maximum restriction type of this vertex */
 		type: WallSenseType | null;
 
-		constructor(
-			x: number,
-			y: number,
-			{ distance, index }?: { distance?: number; index?: number },
-		);
+		constructor(x: number, y: number, { distance, index }?: { distance?: number; index?: number });
 
 		/** Is this vertex an endpoint of one or more edges? */
 		isEndpoint: boolean;

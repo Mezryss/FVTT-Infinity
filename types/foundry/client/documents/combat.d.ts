@@ -7,10 +7,7 @@ declare global {
 	 * @param [data={}] Initial data provided to construct the Combat document
 	 */
 	class Combat extends CombatConstructor {
-		constructor(
-			data: PreCreate<foundry.data.CombatSource>,
-			context?: DocumentConstructionContext<Combat>,
-		);
+		constructor(data: PreCreate<foundry.data.CombatSource>, context?: DocumentConstructionContext<Combat>);
 
 		active: boolean;
 
@@ -117,10 +114,7 @@ declare global {
 		 * @param [options.messageOptions={}] Additional options with which to customize created Chat Messages
 		 * @return A promise which resolves to the updated Combat entity once updates are complete.
 		 */
-		rollInitiative(
-			ids: string | string[],
-			{ formula, updateTurn, messageOptions }?: RollInitiativeOptions,
-		): Promise<this>;
+		rollInitiative(ids: string | string[], { formula, updateTurn, messageOptions }?: RollInitiativeOptions): Promise<this>;
 
 		/**
 		 * Roll initiative for all combatants which have not already rolled
@@ -159,46 +153,17 @@ declare global {
 		/*  Event Handlers                              */
 		/* -------------------------------------------- */
 
-		protected override _onCreate(
-			data: this['_source'],
-			options: DocumentModificationContext<this>,
-			userId: string,
-		): void;
+		protected override _onCreate(data: this['_source'], options: DocumentModificationContext<this>, userId: string): void;
 
-		protected override _onUpdate(
-			changed: DeepPartial<this['_source']>,
-			options: DocumentModificationContext<this>,
-			userId: string,
-		): void;
+		protected override _onUpdate(changed: DeepPartial<this['_source']>, options: DocumentModificationContext<this>, userId: string): void;
 
-		protected override _onDelete(
-			options: DocumentModificationContext<this>,
-			userId: string,
-		): void;
+		protected override _onDelete(options: DocumentModificationContext<this>, userId: string): void;
 
-		protected override _onCreateEmbeddedDocuments(
-			type: 'Combatant',
-			documents: Combatant[],
-			result: Combatant['_source'][],
-			options: DocumentModificationContext<Combatant>,
-			userId: string,
-		): void;
+		protected override _onCreateEmbeddedDocuments(type: 'Combatant', documents: Combatant[], result: Combatant['_source'][], options: DocumentModificationContext<Combatant>, userId: string): void;
 
-		protected override _onUpdateEmbeddedDocuments(
-			embeddedName: 'Combatant',
-			documents: Combatant[],
-			result: Combatant['_source'][],
-			options: DocumentModificationContext<Combatant>,
-			userId: string,
-		): void;
+		protected override _onUpdateEmbeddedDocuments(embeddedName: 'Combatant', documents: Combatant[], result: Combatant['_source'][], options: DocumentModificationContext<Combatant>, userId: string): void;
 
-		protected override _onDeleteEmbeddedDocuments(
-			embeddedName: 'Combatant',
-			documents: Combatant[],
-			result: Combatant['_source'][],
-			options: DocumentModificationContext<Combatant>,
-			userId: string,
-		): void;
+		protected override _onDeleteEmbeddedDocuments(embeddedName: 'Combatant', documents: Combatant[], result: Combatant['_source'][], options: DocumentModificationContext<Combatant>, userId: string): void;
 	}
 
 	interface Combat {
@@ -207,11 +172,7 @@ declare global {
 		// V10 shim
 		readonly flags: this['data']['flags'];
 
-		createEmbeddedDocuments(
-			embeddedName: 'Combatant',
-			data: PreCreate<Combatant['_source']>[],
-			context?: DocumentModificationContext<Combatant>,
-		): Promise<Combatant<this>[]>;
+		createEmbeddedDocuments(embeddedName: 'Combatant', data: PreCreate<Combatant['_source']>[], context?: DocumentModificationContext<Combatant>): Promise<Combatant<this>[]>;
 	}
 
 	interface RollInitiativeOptions {

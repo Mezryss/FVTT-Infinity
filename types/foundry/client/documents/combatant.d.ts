@@ -9,14 +9,8 @@ declare global {
 	 * @see {@link data.CombatantData} The Combatant data schema
 	 * @see {@link documents.Combat}   The Combat document which contains Combatant embedded documents
 	 */
-	class Combatant<
-		TParent extends Combat | null = Combat | null,
-		TActor extends Actor | null = Actor | null,
-	> extends CombatantConstructor {
-		constructor(
-			data: PreCreate<foundry.data.CombatantSource>,
-			context?: DocumentConstructionContext<Combatant>,
-		);
+	class Combatant<TParent extends Combat | null = Combat | null, TActor extends Actor | null = Actor | null> extends CombatantConstructor {
+		constructor(data: PreCreate<foundry.data.CombatantSource>, context?: DocumentConstructionContext<Combatant>);
 
 		/** A cached reference to the Token which this Combatant represents, if any */
 		protected _token: NonNullable<TActor>['parent'];
@@ -67,11 +61,7 @@ declare global {
 		/*  Methods                                     */
 		/* -------------------------------------------- */
 
-		override testUserPermission(
-			user: foundry.documents.BaseUser,
-			permission: DocumentOwnershipString | DocumentOwnershipLevel,
-			{ exact }?: { exact?: boolean },
-		): boolean;
+		override testUserPermission(user: foundry.documents.BaseUser, permission: DocumentOwnershipString | DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 
 		/**
 		 * Get a Roll object which represents the initiative roll for this Combatant.
@@ -100,10 +90,7 @@ declare global {
 		_getInitiativeFormula(): string;
 	}
 
-	interface Combatant<
-		TParent extends Combat | null = Combat | null,
-		TActor extends Actor | null = Actor | null,
-	> {
+	interface Combatant<TParent extends Combat | null = Combat | null, TActor extends Actor | null = Actor | null> {
 		readonly data: foundry.data.CombatantData<this>;
 
 		readonly parent: TParent;

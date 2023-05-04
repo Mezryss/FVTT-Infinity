@@ -5,9 +5,7 @@ declare global {
 	 * An abstract base class for displaying a heads-up-display interface bound to a Placeable Object on the canvas
 	 * @todo Fill in
 	 */
-	abstract class BasePlaceableHUD<
-		TPlaceableObject extends PlaceableObject,
-	> extends Application {
+	abstract class BasePlaceableHUD<TPlaceableObject extends PlaceableObject> extends Application {
 		/**
 		 * Reference a PlaceableObject this HUD is currently bound to
 		 */
@@ -29,12 +27,11 @@ declare global {
 		clear(): void;
 	}
 
-	type BasePlaceableHUDData<T extends PlaceableObject> =
-		T['document']['_source'] & {
-			id: string;
-			classes: string;
-			appId: number;
-			isGM: boolean;
-			icons: Config['controlIcons'];
-		};
+	type BasePlaceableHUDData<T extends PlaceableObject> = T['document']['_source'] & {
+		id: string;
+		classes: string;
+		appId: number;
+		isGM: boolean;
+		icons: Config['controlIcons'];
+	};
 }

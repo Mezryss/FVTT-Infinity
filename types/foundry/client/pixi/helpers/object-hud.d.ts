@@ -29,16 +29,7 @@ declare global {
 		 * @param [textStyle={}]  Additional parameters of PIXI.TextStyle which are applied to the text
 		 * @returns The created PreciseText object which is scrolling
 		 */
-		createScrollingText(
-			content: string,
-			{
-				anchor,
-				direction,
-				duration,
-				jitter,
-				...textStyle
-			}?: ScrollingTextOptions,
-		): Promise<PreciseText | null>;
+		createScrollingText(content: string, { anchor, direction, duration, jitter, ...textStyle }?: ScrollingTextOptions): Promise<PreciseText | null>;
 
 		/**
 		 * Orchestrate the animation of the scrolling text in this HUD
@@ -47,12 +38,7 @@ declare global {
 		 * @param dx       A horizontal distance to animate the text
 		 * @param dy       A vertical distance to animate the text
 		 */
-		protected _animateScrollText(
-			text: PreciseText,
-			duration: number,
-			dx?: number,
-			dy?: number,
-		): Promise<void>;
+		protected _animateScrollText(text: PreciseText, duration: number, dx?: number, dy?: number): Promise<void>;
 	}
 }
 

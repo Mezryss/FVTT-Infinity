@@ -2,9 +2,7 @@ export {};
 
 declare global {
 	/** The Walls canvas layer which provides a container for Wall objects within the rendered Scen */
-	class WallsLayer<
-		TWall extends Wall<WallDocument> = Wall<WallDocument>,
-	> extends PlaceablesLayer<TWall> {
+	class WallsLayer<TWall extends Wall<WallDocument> = Wall<WallDocument>> extends PlaceablesLayer<TWall> {
 		constructor();
 
 		/** A graphics layer used to display chained Wall selection */
@@ -77,10 +75,7 @@ declare global {
 		 * @param [options.type=movement] The type of polygon being computed: "movement", "sight", or "sound"
 		 * @return An array of endpoints
 		 */
-		static getUniqueEndpoints(
-			walls: Wall[] | Set<Wall>,
-			{ bounds, type }?: { bounds?: PIXI.Rectangle; type?: WallType },
-		): PointArray[];
+		static getUniqueEndpoints(walls: Wall[] | Set<Wall>, { bounds, type }?: { bounds?: PIXI.Rectangle; type?: WallType }): PointArray[];
 
 		/**
 		 * Test whether movement along a given Ray collides with a Wall.
@@ -90,26 +85,11 @@ declare global {
 		 * @param [options.mode=any]             Which type of collisions are returned: any, closest, all
 		 * @returns Does a collision occur along the tested Ray?
 		 */
-		checkCollision(
-			ray: Ray,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'closest' },
-		): PolygonVertex;
-		checkCollision(
-			ray: Ray,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'any' },
-		): boolean;
-		checkCollision(
-			ray: Ray,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'all' },
-		): PolygonVertex[];
-		checkCollision(
-			ray: Ray,
-			{ type, mode }?: { type?: WallRestrictionType; mode?: undefined },
-		): PolygonVertex[];
-		checkCollision(
-			ray: Ray,
-			{ type, mode }?: { type?: WallRestrictionType; mode?: WallMode },
-		): boolean | PolygonVertex | PolygonVertex[];
+		checkCollision(ray: Ray, { type, mode }: { type?: WallRestrictionType; mode: 'closest' }): PolygonVertex;
+		checkCollision(ray: Ray, { type, mode }: { type?: WallRestrictionType; mode: 'any' }): boolean;
+		checkCollision(ray: Ray, { type, mode }: { type?: WallRestrictionType; mode: 'all' }): PolygonVertex[];
+		checkCollision(ray: Ray, { type, mode }?: { type?: WallRestrictionType; mode?: undefined }): PolygonVertex[];
+		checkCollision(ray: Ray, { type, mode }?: { type?: WallRestrictionType; mode?: WallMode }): boolean | PolygonVertex | PolygonVertex[];
 
 		/**
 		 * Highlight the endpoints of Wall segments which are currently group-controlled on the Walls layer
@@ -118,10 +98,7 @@ declare global {
 
 		override releaseAll(options: Record<string, unknown>): number;
 
-		pasteObjects(
-			position: { x: number; y: number },
-			{ hidden }?: { hidden?: boolean },
-		): Promise<TWall['document'][]>;
+		pasteObjects(position: { x: number; y: number }, { hidden }?: { hidden?: boolean }): Promise<TWall['document'][]>;
 
 		/**
 		 * Pan the canvas view when the cursor position gets close to the edge of the frame
@@ -138,19 +115,14 @@ declare global {
 		 * @param [snap=true] Whether to snap to grid
 		 * @return The endpoint coordinates [x,y]
 		 */
-		protected _getWallEndpointCoordinates(
-			point: [number, number],
-			{ snap }?: { snap?: boolean },
-		): [number, number];
+		protected _getWallEndpointCoordinates(point: [number, number], { snap }?: { snap?: boolean }): [number, number];
 
 		/**
 		 * The Scene Controls tools provide several different types of prototypical Walls to choose from
 		 * This method helps to translate each tool into a default wall data configuration for that type
 		 * @param tool The active canvas tool
 		 */
-		protected _getWallDataFromActiveTool(
-			tool: string,
-		): Partial<foundry.data.WallSource>;
+		protected _getWallDataFromActiveTool(tool: string): Partial<foundry.data.WallSource>;
 
 		/* -------------------------------------------- */
 		/*  Event Listeners and Handlers                */
@@ -158,13 +130,9 @@ declare global {
 
 		protected override _onClickLeft(event: PIXI.InteractionEvent): void;
 
-		protected override _onDragLeftStart(
-			event: PIXI.InteractionEvent,
-		): Promise<void>;
+		protected override _onDragLeftStart(event: PIXI.InteractionEvent): Promise<void>;
 
-		protected override _onDragLeftMove(
-			event: PIXI.InteractionEvent,
-		): Promise<void>;
+		protected override _onDragLeftMove(event: PIXI.InteractionEvent): Promise<void>;
 
 		protected override _onDragLeftCancel(event: PIXI.InteractionEvent): void;
 
@@ -220,14 +188,7 @@ declare global {
 		 *         The closest collision, if mode is "closest"
 		 *         Whether any collision occurred if mode is "any"
 		 */
-		getRayCollisions(
-			ray: Ray,
-			{
-				type,
-				mode,
-				_performance,
-			}?: { type?: WallType; mode?: WallMode; _performance?: unknown },
-		): Record<string, unknown> | Record<string, unknown> | boolean;
+		getRayCollisions(ray: Ray, { type, mode, _performance }?: { type?: WallType; mode?: WallMode; _performance?: unknown }): Record<string, unknown> | Record<string, unknown> | boolean;
 
 		/* -------------------------------------------- */
 		/*  Helper Methods                              */
@@ -280,9 +241,7 @@ declare global {
 		 * @param collisions  An array of intersection points
 		 * @return The closest blocking intersection or null if no collision occurred
 		 */
-		static getClosestCollision(
-			collisions: RayIntersection[],
-		): RayIntersection | null;
+		static getClosestCollision(collisions: RayIntersection[]): RayIntersection | null;
 
 		/**
 		 * Normalize an angle to ensure it is baselined to be the smallest angle that is greater than a minimum.

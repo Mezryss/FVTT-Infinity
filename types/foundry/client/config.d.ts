@@ -9,10 +9,7 @@ declare global {
 		TChatLog extends ChatLog = ChatLog,
 		TChatMessage extends ChatMessage = ChatMessage,
 		TCombat extends Combat = Combat,
-		TCombatant extends Combatant<TCombat | null, TActor | null> = Combatant<
-			TCombat | null,
-			TActor | null
-		>,
+		TCombatant extends Combatant<TCombat | null, TActor | null> = Combatant<TCombat | null, TActor | null>,
 		TCombatTracker extends CombatTracker<TCombat | null> = CombatTracker<TCombat | null>,
 		TCompendiumDirectory extends CompendiumDirectory = CompendiumDirectory,
 		THotbar extends Hotbar = Hotbar,
@@ -46,10 +43,7 @@ declare global {
 		/** Configuration for the Actor document */
 		Actor: {
 			documentClass: {
-				new (
-					data: PreCreate<TActor['_source']>,
-					context?: DocumentConstructionContext<TActor>,
-				): TActor;
+				new (data: PreCreate<TActor['_source']>, context?: DocumentConstructionContext<TActor>): TActor;
 			};
 			collection: ConstructorOf<Actors<TActor>>;
 			sheetClasses: Record<
@@ -92,10 +86,7 @@ declare global {
 			batchSize: number;
 			collection: typeof Messages;
 			documentClass: {
-				new (
-					data: PreCreate<TChatMessage['_source']>,
-					context?: DocumentConstructionContext<TChatMessage>,
-				): TChatMessage;
+				new (data: PreCreate<TChatMessage['_source']>, context?: DocumentConstructionContext<TChatMessage>): TChatMessage;
 			};
 			sidebarIcon: string;
 			template: string;
@@ -104,10 +95,7 @@ declare global {
 		/** Configuration for Item document */
 		Item: {
 			documentClass: {
-				new (
-					data: PreCreate<TItem['_source']>,
-					context?: DocumentConstructionContext<TItem>,
-				): TItem;
+				new (data: PreCreate<TItem['_source']>, context?: DocumentConstructionContext<TItem>): TItem;
 			};
 			collection: typeof Items;
 			sheetClasses: Record<
@@ -128,10 +116,7 @@ declare global {
 		/** Configuration for the Combat document */
 		Combat: {
 			documentClass: {
-				new (
-					data: PreCreate<TCombat['_source']>,
-					context?: DocumentConstructionContext<TCombat>,
-				): TCombat;
+				new (data: PreCreate<TCombat['_source']>, context?: DocumentConstructionContext<TCombat>): TCombat;
 			};
 			collection: typeof CombatEncounters;
 			defeatedStatusId: string;
@@ -200,19 +185,13 @@ declare global {
 		/** Configuration for the ActiveEffect embedded document type */
 		ActiveEffect: {
 			documentClass: {
-				new (
-					data: PreCreate<TActiveEffect['_source']>,
-					context?: DocumentConstructionContext<TActiveEffect>,
-				): TActiveEffect;
+				new (data: PreCreate<TActiveEffect['_source']>, context?: DocumentConstructionContext<TActiveEffect>): TActiveEffect;
 			};
 		};
 
 		/** Configuration for the Combatant document */
 		Combatant: {
-			documentClass: new (
-				data: PreCreate<TCombatant['_source']>,
-				context?: DocumentConstructionContext<TCombatant>,
-			) => TCombatant;
+			documentClass: new (data: PreCreate<TCombatant['_source']>, context?: DocumentConstructionContext<TCombatant>) => TCombatant;
 		};
 
 		/** Configuration for the MeasuredTemplate embedded document type and its representation on the game Canvas */
@@ -227,10 +206,7 @@ declare global {
 				rect: string;
 				ray: string;
 			};
-			documentClass: new (
-				data: PreCreate<foundry.data.MeasuredTemplateSource>,
-				context?: DocumentConstructionContext<TMeasuredTemplateDocument>,
-			) => TMeasuredTemplateDocument;
+			documentClass: new (data: PreCreate<foundry.data.MeasuredTemplateSource>, context?: DocumentConstructionContext<TMeasuredTemplateDocument>) => TMeasuredTemplateDocument;
 			objectClass: ConstructorOf<TMeasuredTemplateDocument['object']>;
 			layerClass: ConstructorOf<TMeasuredTemplateDocument['object']['layer']>;
 		};
@@ -315,9 +291,7 @@ declare global {
 				};
 				templates: {
 					group: 'primary';
-					layerClass: ConstructorOf<
-						TMeasuredTemplateDocument['object']['layer']
-					>;
+					layerClass: ConstructorOf<TMeasuredTemplateDocument['object']['layer']>;
 				};
 				notes: {
 					group: 'interface';
@@ -359,98 +333,72 @@ declare global {
 			lightAnimations: {
 				torch: {
 					label: 'LIGHT.AnimationTorch';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTorch'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTorch'];
 					illuminationShader: typeof PIXI.Shader;
 					colorationShader: typeof PIXI.Shader;
 				};
 				pulse: {
 					label: 'LIGHT.AnimationPulse';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animatePulse'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animatePulse'];
 					illuminationShader: typeof PIXI.Shader;
 					colorationShader: typeof PIXI.Shader;
 				};
 				chroma: {
 					label: 'LIGHT.AnimationChroma';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				wave: {
 					label: 'LIGHT.AnimationWave';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					illuminationShader: typeof PIXI.Shader;
 					colorationShader: typeof PIXI.Shader;
 				};
 				fog: {
 					label: 'LIGHT.AnimationFog';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				sunburst: {
 					label: 'LIGHT.AnimationSunburst';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					illuminationShader: typeof PIXI.Shader;
 					colorationShader: typeof PIXI.Shader;
 				};
 				dome: {
 					label: 'LIGHT.AnimationLightDome';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				emanation: {
 					label: 'LIGHT.AnimationEmanation';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				hexa: {
 					label: 'LIGHT.AnimationHexaDome';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				ghost: {
 					label: 'LIGHT.AnimationGhostLight';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					illuminationShader: typeof PIXI.Shader;
 					colorationShader: typeof PIXI.Shader;
 				};
 				energy: {
 					label: 'LIGHT.AnimationEnergyField';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					colorationShader: typeof PIXI.Shader;
 				};
 				roiling: {
 					label: 'LIGHT.AnimationRoilingMass';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					illuminationShader: typeof PIXI.Shader;
 				};
 				hole: {
 					label: 'LIGHT.AnimationBlackHole';
-					animation: LightSource<
-						TAmbientLightDocument['object'] | TTokenDocument['object']
-					>['animateTime'];
+					animation: LightSource<TAmbientLightDocument['object'] | TTokenDocument['object']>['animateTime'];
 					illuminationShader: typeof PIXI.Shader;
 				};
 			};
@@ -502,10 +450,7 @@ declare global {
 			types: (typeof Die | typeof DiceTerm)[];
 			rollModes: Record<RollMode, string>;
 			rolls: ConstructorOf<Roll>[];
-			termTypes: Record<
-				string,
-				ConstructorOf<RollTerm> & { fromData(data: object): RollTerm }
-			>;
+			termTypes: Record<string, ConstructorOf<RollTerm> & { fromData(data: object): RollTerm }>;
 			terms: {
 				c: typeof Coin;
 				d: typeof Die;
@@ -568,10 +513,7 @@ declare global {
 		TextEditor: {
 			enrichers: {
 				pattern: RegExp;
-				enricher: (
-					match: RegExpMatchArray,
-					options: EnrichHTMLOptions,
-				) => Promise<HTMLElement | null>;
+				enricher: (match: RegExpMatchArray, options: EnrichHTMLOptions) => Promise<HTMLElement | null>;
 			}[];
 		};
 

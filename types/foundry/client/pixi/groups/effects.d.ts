@@ -65,11 +65,7 @@ declare global {
 		 * @param [postProcessingModes=[]] The post-processing modes to apply to this filter.
 		 * @param [uniforms={}]            The uniforms to update.
 		 */
-		activatePostProcessingFilters(
-			filterMode: string,
-			postProcessingModes?: string[],
-			uniforms?: object,
-		): void;
+		activatePostProcessingFilters(filterMode: string, postProcessingModes?: string[], uniforms?: object): void;
 
 		/** Reset post-processing modes on all Visual Effects masking filters. */
 		resetPostProcessingFilters(): void;
@@ -91,9 +87,6 @@ declare global {
 		 * @param duration The desired animation time in milliseconds. Default is 10 seconds
 		 * @returns A Promise which resolves once the animation is complete
 		 */
-		animateDarkness(
-			target?: number,
-			{ duration }?: { duration?: number },
-		): Promise<void>;
+		animateDarkness(target?: number, { duration }?: { duration?: number }): Promise<void>;
 	}
 }

@@ -29,15 +29,7 @@ declare global {
 		};
 
 		/** Key codes which are "protected" and should not be used because they are reserved for browser-level actions. */
-		static PROTECTED_KEYS: [
-			'F5',
-			'F11',
-			'F12',
-			'PrintScreen',
-			'ScrollLock',
-			'NumLock',
-			'CapsLock',
-		];
+		static PROTECTED_KEYS: ['F5', 'F11', 'F12', 'PrintScreen', 'ScrollLock', 'NumLock', 'CapsLock'];
 
 		/** The OS-specific string display for what their Command key is */
 		static CONTROL_KEY_STRING: '⌘' | 'Control';
@@ -115,10 +107,7 @@ declare global {
 		 * @param up    A flag for whether the key is down or up
 		 * @return The standardized context of the event
 		 */
-		static getKeyboardEventContext(
-			event: KeyboardEvent,
-			up?: boolean,
-		): KeyboardEventContext;
+		static getKeyboardEventContext(event: KeyboardEvent, up?: boolean): KeyboardEventContext;
 
 		/**
 		 * Report whether a modifier in KeyboardManager.MODIFIER_KEYS is currently actively depressed.
@@ -132,19 +121,14 @@ declare global {
 		 * @param context          The standardized context of the event
 		 * @param includeModifiers If True, includes modifiers in the string representation
 		 */
-		protected static _getContextDisplayString(
-			context: KeyboardEventContext,
-			includeModifiers?: boolean,
-		): string;
+		protected static _getContextDisplayString(context: KeyboardEventContext, includeModifiers?: boolean): string;
 
 		/**
 		 * Given a standardized pressed key, find all matching registered Keybind Actions.
 		 * @param context A standardized keyboard event context
 		 * @return The matched Keybind Actions. May be empty.
 		 */
-		protected static _getMatchingActions(
-			context: KeyboardEventContext,
-		): KeybindingAction[];
+		protected static _getMatchingActions(context: KeyboardEventContext): KeybindingAction[];
 
 		/**
 		 * Test whether a keypress context matches the registration for a keybinding action
@@ -152,10 +136,7 @@ declare global {
 		 * @param context The keyboard event context
 		 * @returns Does the context match the action requirements?
 		 */
-		protected static _testContext(
-			action: KeybindingAction,
-			context: KeyboardEventContext,
-		): boolean;
+		protected static _testContext(action: KeybindingAction, context: KeyboardEventContext): boolean;
 
 		/**
 		 * Given a registered Keybinding Action, executes the action with a given event and context
@@ -163,10 +144,7 @@ declare global {
 		 * @param context The gathered context of the event
 		 * @return Returns true if the keybind was consumed
 		 */
-		protected static _executeKeybind(
-			keybind: KeybindingAction,
-			context: KeyboardEventContext,
-		): boolean;
+		protected static _executeKeybind(keybind: KeybindingAction, context: KeyboardEventContext): boolean;
 
 		/**
 		 * Processes a keyboard event context, checking it against registered keybinding actions
@@ -195,8 +173,7 @@ declare global {
 		protected _onCompositionEnd(event: CompositionEvent): void;
 	}
 
-	type ModifierKey =
-		(typeof KeyboardManager)['MODIFIER_KEYS'][keyof (typeof KeyboardManager)['MODIFIER_KEYS']];
+	type ModifierKey = (typeof KeyboardManager)['MODIFIER_KEYS'][keyof (typeof KeyboardManager)['MODIFIER_KEYS']];
 
 	interface KeyboardEventContext {
 		event: KeyboardEvent;

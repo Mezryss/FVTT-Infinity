@@ -7,17 +7,9 @@ declare module foundry {
 			static override get metadata(): TableResultMetadata;
 
 			/** Is a user able to update an existing TableResult? */
-			protected static _canUpdate(
-				user: BaseUser,
-				doc: BaseTableResult,
-				data: data.TableResultData,
-			): boolean;
+			protected static _canUpdate(user: BaseUser, doc: BaseTableResult, data: data.TableResultData): boolean;
 
-			override testUserPermission(
-				user: BaseUser,
-				permission: DocumentOwnershipString | DocumentOwnershipLevel,
-				{ exact }?: { exact?: boolean },
-			): boolean;
+			override testUserPermission(user: BaseUser, permission: DocumentOwnershipString | DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 		}
 
 		interface BaseTableResult {
@@ -31,10 +23,7 @@ declare module foundry {
 			collection: 'results';
 			label: 'DOCUMENT.TableResult';
 			types: typeof CONST.TABLE_RESULT_TYPES;
-			permissions: Omit<
-				foundry.abstract.DocumentMetadata['permissions'],
-				'update'
-			> & {
+			permissions: Omit<foundry.abstract.DocumentMetadata['permissions'], 'update'> & {
 				update: (typeof BaseTableResult)['_canUpdate'];
 			};
 		}

@@ -8,10 +8,7 @@ declare global {
 		 * @param [object]  The default settings for new font definition creation.
 		 * @param [options] Additional options to configure behaviour.
 		 */
-		constructor(
-			object?: NewFontDefinition,
-			options?: Partial<FormApplicationOptions>,
-		);
+		constructor(object?: NewFontDefinition, options?: Partial<FormApplicationOptions>);
 
 		static override get defaultOptions(): FormApplicationOptions;
 
@@ -21,26 +18,18 @@ declare global {
 			SYSTEM: 'system';
 		};
 
-		override getData(
-			options?: Partial<FormApplicationOptions>,
-		): FormApplicationData;
+		override getData(options?: Partial<FormApplicationOptions>): FormApplicationData;
 
 		/**
 		 * Template data for a given font definition.
 		 * @param family     The font family.
 		 * @param definition The font family definition.
 		 */
-		protected _getDataForDefinition(
-			family: string,
-			definition: FontFamilyDefinition,
-		): { family: string; index: number; selected?: true; font: unknown }[];
+		protected _getDataForDefinition(family: string, definition: FontFamilyDefinition): { family: string; index: number; selected?: true; font: unknown }[];
 
 		override activateListeners(html: JQuery): void;
 
-		protected override _updateObject(
-			event: Event,
-			formData: Record<string, unknown>,
-		): Promise<void>;
+		protected override _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 
 		/**
 		 * Handle application controls.
@@ -89,10 +78,7 @@ declare global {
 		 * @param definition The font family definition.
 		 * @returns Returns true if the font was successfully loaded.
 		 */
-		static loadFont(
-			family: string,
-			definition: FontFamilyDefinition,
-		): Promise<boolean>;
+		static loadFont(family: string, definition: FontFamilyDefinition): Promise<boolean>;
 
 		/**
 		 * Ensure that fonts have loaded and are ready for use.
@@ -108,10 +94,7 @@ declare global {
 		 * @param font   The font definition.
 		 * @protected
 		 */
-		protected static _createFontFace(
-			family: string,
-			font: FontDefinition,
-		): FontFace;
+		protected static _createFontFace(family: string, font: FontDefinition): FontFace;
 
 		/**
 		 * Format a font definition for display.
@@ -119,10 +102,7 @@ declare global {
 		 * @param definition The font definition.
 		 * @returns The formatted definition.
 		 */
-		protected static _formatFont(
-			family: string,
-			definition: FontDefinition,
-		): string;
+		protected static _formatFont(family: string, definition: FontDefinition): string;
 	}
 
 	interface NewFontDefinition {

@@ -8,10 +8,7 @@ declare global {
 		 * @param request Data provided to the Socket event
 		 * @return A Promise which resolves to the SocketResponse
 		 */
-		static dispatch(
-			eventName: string,
-			request: SocketRequest,
-		): Promise<SocketResponse>;
+		static dispatch(eventName: string, request: SocketRequest): Promise<SocketResponse>;
 
 		/**
 		 * Handle an error returned from the database, displaying it on screen and in the console

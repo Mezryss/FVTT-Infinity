@@ -32,16 +32,11 @@ declare interface CombatTrackerData {
 }
 
 /** The combat and turn order tracker tab */
-declare class CombatTracker<
-	TCombat extends Combat | null,
-	TOptions extends CombatTrackerOptions = CombatTrackerOptions,
-> extends SidebarTab<TOptions> {
+declare class CombatTracker<TCombat extends Combat | null, TOptions extends CombatTrackerOptions = CombatTrackerOptions> extends SidebarTab<TOptions> {
 	static override get defaultOptions(): CombatTrackerOptions;
 
 	/** Record a reference to the currently highlighted Token */
-	protected _highlighted: CollectionValue<
-		NonNullable<TCombat>['combatants']
-	>['token'];
+	protected _highlighted: CollectionValue<NonNullable<TCombat>['combatants']>['token'];
 
 	/** Record the currently tracked Combat encounter */
 	viewed: TCombat;
@@ -63,13 +58,7 @@ declare class CombatTracker<
 	 * @param combat The combat encounter to initialize
 	 * @param render Whether to re-render the sidebar after initialization
 	 */
-	initialize({
-		combat,
-		render,
-	}?: {
-		combat?: Combat | null;
-		render?: boolean;
-	}): void;
+	initialize({ combat, render }?: { combat?: Combat | null; render?: boolean }): void;
 
 	/** Scroll the combat log container to ensure the current Combatant turn is centered vertically */
 	scrollToTurn(): void;
@@ -100,17 +89,13 @@ declare class CombatTracker<
 	 * Handle click events on Combat control buttons
 	 * @param event The originating mousedown event
 	 */
-	protected _onCombatControl(
-		event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>,
-	): Promise<void>;
+	protected _onCombatControl(event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>): Promise<void>;
 
 	/**
 	 * Handle a Combatant control toggle
 	 * @param event The originating mousedown event
 	 */
-	protected _onCombatantControl(
-		event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>,
-	): Promise<void>;
+	protected _onCombatantControl(event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>): Promise<void>;
 
 	/**
 	 * Handle toggling the defeated status effect on a combatant Token

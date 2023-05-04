@@ -1,6 +1,4 @@
-declare type TranslationDictionaryValue =
-	| string
-	| { [key: string]: TranslationDictionaryValue };
+declare type TranslationDictionaryValue = string | { [key: string]: TranslationDictionaryValue };
 
 /**
  * A helper class which assists with localization and string translation
@@ -38,17 +36,13 @@ declare class Localization {
 	 * Prepare the dictionary of translation strings for the requested language
 	 * @param lang  The language for which to load translations
 	 */
-	protected _getTranslations(
-		lang: string,
-	): Promise<Record<string, TranslationDictionaryValue>>;
+	protected _getTranslations(lang: string): Promise<Record<string, TranslationDictionaryValue>>;
 
 	/**
 	 * Load a single translation file and return its contents as processed JSON
 	 * @param src   The translation file path to load
 	 */
-	protected _loadTranslationFile(
-		src: string,
-	): Promise<Record<string, TranslationDictionaryValue>>;
+	protected _loadTranslationFile(src: string): Promise<Record<string, TranslationDictionaryValue>>;
 
 	/**
 	 * Set a language as the active translation source for the session
@@ -78,8 +72,5 @@ declare class Localization {
 	 * const stringId = "MY_TEST_STRING"; // "Your name is {name}"
 	 * game.i18n.format("MY_TEST_STRING", {name: "Andrew"}); // Produces "Your name is Andrew"
 	 */
-	format(
-		stringId: string,
-		data?: { [key: string]: string | number | boolean | null },
-	): string;
+	format(stringId: string, data?: { [key: string]: string | number | boolean | null }): string;
 }

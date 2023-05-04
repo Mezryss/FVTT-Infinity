@@ -5,9 +5,7 @@
  * @see {@link Combat} The Combat entity
  * @see {@link CombatTracker} The CombatTracker sidebar directory
  */
-declare class CombatEncounters<
-	TCombat extends Combat,
-> extends WorldCollection<TCombat> {
+declare class CombatEncounters<TCombat extends Combat> extends WorldCollection<TCombat> {
 	/** @override */
 	static documentName: 'Combat';
 

@@ -6,18 +6,10 @@ declare module foundry {
 
 			static override get metadata(): MeasuredTemplateMetadata;
 
-			override testUserPermission(
-				user: documents.BaseUser,
-				permission: DocumentOwnershipString | DocumentOwnershipLevel,
-				{ exact }?: { exact?: boolean },
-			): boolean;
+			override testUserPermission(user: documents.BaseUser, permission: DocumentOwnershipString | DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 
 			/** Is a user able to update or delete an existing MeasuredTemplate? */
-			protected static _canModify(
-				user: BaseUser,
-				doc: BaseMeasuredTemplate,
-				data: data.MeasuredTemplateData,
-			): boolean;
+			protected static _canModify(user: BaseUser, doc: BaseMeasuredTemplate, data: data.MeasuredTemplateData): boolean;
 		}
 
 		interface BaseMeasuredTemplate {

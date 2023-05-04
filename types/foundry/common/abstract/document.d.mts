@@ -5,10 +5,7 @@ import { BaseUser } from '../documents/user.mjs';
 import { DatabaseBackend, DataModel, EmbeddedCollection } from './module.mjs';
 
 /** The abstract base interface for all Document types. */
-export abstract class Document<
-	TParent extends Document | null = _Document | null,
-	TSchema extends fields.DataSchema = fields.DataSchema,
-> extends DataModel<TParent, TSchema> {
+export abstract class Document<TParent extends Document | null = _Document | null, TSchema extends fields.DataSchema = fields.DataSchema> extends DataModel<TParent, TSchema> {
 	/** An immutable reference to a containing Compendium collection to which this Document belongs. */
 	readonly pack: string | null;
 
@@ -68,11 +65,7 @@ export abstract class Document<
 	 * @param [options.exact=false] Require the exact permission level requested?
 	 * @return Does the user have this permission level over the Document?
 	 */
-	testUserPermission(
-		user: BaseUser,
-		ownership: DocumentOwnershipString | DocumentOwnershipLevel,
-		{ exact }?: { exact?: boolean },
-	): boolean;
+	testUserPermission(user: BaseUser, ownership: DocumentOwnershipString | DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 
 	/**
 	 * Test whether a given User has permission to perform some action on this Document
@@ -81,11 +74,7 @@ export abstract class Document<
 	 * @param [data] Data involved in the attempted action
 	 * @return Does the User have permission?
 	 */
-	canUserModify(
-		user: BaseUser,
-		action: UserAction,
-		data?: Record<string, unknown>,
-	): boolean;
+	canUserModify(user: BaseUser, action: UserAction, data?: Record<string, unknown>): boolean;
 
 	/* ---------------------------------------- */
 	/*  Model Methods                           */
@@ -100,27 +89,16 @@ export abstract class Document<
 	 * @param [options.keepId=false]  Keep the original Document ID? Otherwise the ID will become undefined
 	 * @returns The cloned Document instance
 	 */
-	clone<T extends this>(
-		data: DocumentUpdateData<this> | undefined,
-		options: { save: true; keepId?: boolean },
-	): Promise<T>;
-	clone<T extends this>(
-		data?: DocumentUpdateData<this>,
-		options?: { save?: false; keepId?: boolean },
-	): T;
-	clone<T extends this>(
-		data?: DocumentUpdateData<this>,
-		options?: { save?: boolean; keepId?: boolean },
-	): T | Promise<T>;
+	clone<T extends this>(data: DocumentUpdateData<this> | undefined, options: { save: true; keepId?: boolean }): Promise<T>;
+	clone<T extends this>(data?: DocumentUpdateData<this>, options?: { save?: false; keepId?: boolean }): T;
+	clone<T extends this>(data?: DocumentUpdateData<this>, options?: { save?: boolean; keepId?: boolean }): T | Promise<T>;
 
 	/**
 	 * For Documents which include game system data, migrate the system data object to conform to its latest data model.
 	 * The data model is defined by the template.json specification included by the game system.
 	 * @returns The migrated system data object
 	 */
-	migrateSystemData<T extends { _source: { system: object } }>(
-		this: T,
-	): T['_source']['system'];
+	migrateSystemData<T extends { _source: { system: object } }>(this: T): T['_source']['system'];
 
 	/* -------------------------------------------- */
 	/*  Database Operations                         */
@@ -152,11 +130,7 @@ export abstract class Document<
 	 * const created = await Actor.createDocuments(data, {pack: "mymodule.mypack"});
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	static createDocuments<T extends Document>(
-		this: ConstructorOf<T>,
-		data?: PreCreate<T['_source']>[],
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T[]>;
+	static createDocuments<T extends Document>(this: ConstructorOf<T>, data?: PreCreate<T['_source']>[], context?: DocumentModificationContext<ParentOf<T>>): Promise<T[]>;
 
 	/**
 	 * Update multiple Document instances using provided differential data.
@@ -184,11 +158,7 @@ export abstract class Document<
 	 * const updated = await Actor.updateDocuments([{_id: actor.id, name: "New Name"}], {pack: "mymodule.mypack"});
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	static updateDocuments<T extends Document>(
-		this: ConstructorOf<T>,
-		updates?: DocumentUpdateData<T>[],
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T[]>;
+	static updateDocuments<T extends Document>(this: ConstructorOf<T>, updates?: DocumentUpdateData<T>[], context?: DocumentModificationContext<ParentOf<T>>): Promise<T[]>;
 
 	/**
 	 * Delete one or multiple existing Documents using an array of provided ids.
@@ -218,11 +188,7 @@ export abstract class Document<
 	 * const deleted = await Actor.deleteDocuments([actor.id], {pack: "mymodule.mypack"});
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	static deleteDocuments<T extends Document>(
-		this: ConstructorOf<T>,
-		ids?: string[],
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T[]>;
+	static deleteDocuments<T extends Document>(this: ConstructorOf<T>, ids?: string[], context?: DocumentModificationContext<ParentOf<T>>): Promise<T[]>;
 
 	/**
 	 * Create a new Document using provided input data, saving it to the database.
@@ -244,21 +210,9 @@ export abstract class Document<
 	 * const data = [{name: "Special Sword", type: "weapon"}];
 	 * const created = await Item.create(data, {pack: "mymodule.mypack"});
 	 */
-	static create<T extends Document>(
-		this: ConstructorOf<T>,
-		data: PreCreate<T['_source']>,
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T | undefined>;
-	static create<T extends Document>(
-		this: ConstructorOf<T>,
-		data: PreCreate<T['_source']>[],
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T[]>;
-	static create<T extends Document>(
-		this: ConstructorOf<T>,
-		data: PreCreate<T['_source']> | PreCreate<T['_source']>[],
-		context?: DocumentModificationContext<ParentOf<T>>,
-	): Promise<T[] | T | undefined>;
+	static create<T extends Document>(this: ConstructorOf<T>, data: PreCreate<T['_source']>, context?: DocumentModificationContext<ParentOf<T>>): Promise<T | undefined>;
+	static create<T extends Document>(this: ConstructorOf<T>, data: PreCreate<T['_source']>[], context?: DocumentModificationContext<ParentOf<T>>): Promise<T[]>;
+	static create<T extends Document>(this: ConstructorOf<T>, data: PreCreate<T['_source']> | PreCreate<T['_source']>[], context?: DocumentModificationContext<ParentOf<T>>): Promise<T[] | T | undefined>;
 
 	/**
 	 * Update one or multiple existing entities using provided input data.
@@ -280,10 +234,7 @@ export abstract class Document<
 	 * const data = [{_id: "12ekjf43kj2312ds", name: "New Name 1"}, {_id: "kj549dk48k34jk34", name: "New Name 2"}]};
 	 * const updated = await Document.update(data); // Returns an Array of Entities, updated in the database
 	 */
-	update(
-		data: DocumentUpdateData<this>,
-		options?: DocumentModificationContext<TParent>,
-	): Promise<this>;
+	update(data: DocumentUpdateData<this>, options?: DocumentModificationContext<TParent>): Promise<this>;
 
 	/**
                  * Delete the current Document.
@@ -299,10 +250,7 @@ export abstract class Document<
 	 * @param documentId The Document ID
 	 * @returns The retrieved Document, or null
 	 */
-	static get<T extends Document>(
-		this: ConstructorOf<T>,
-		documentId: string,
-	): T | null;
+	static get<T extends Document>(this: ConstructorOf<T>, documentId: string): T | null;
 
 	/* -------------------------------------------- */
 	/*  Embedded Operations                         */
@@ -313,9 +261,7 @@ export abstract class Document<
 	 * @param embeddedName The name of the embedded Document type
 	 * @return The Collection instance of embedded Documents of the requested type
 	 */
-	getEmbeddedCollection(
-		embeddedName: string,
-	): EmbeddedCollection<Document<this, any>>;
+	getEmbeddedCollection(embeddedName: string): EmbeddedCollection<Document<this, any>>;
 
 	/**
 	 * Get an embedded document by it's id from a named collection in the parent document.
@@ -325,21 +271,9 @@ export abstract class Document<
 	 * @param [options.strict=false] Throw an Error if the requested id does not exist. See Collection#get
 	 * @return The retrieved embedded Document instance, or undefined
 	 */
-	getEmbeddedDocument(
-		embeddedName: string,
-		id: string,
-		{ strict }: { strict: true },
-	): Document<this, any>;
-	getEmbeddedDocument(
-		embeddedName: string,
-		id: string,
-		{ strict }: { strict: false },
-	): Document<this, any> | undefined;
-	getEmbeddedDocument(
-		embeddedName: string,
-		id: string,
-		{ strict }?: { strict?: boolean },
-	): Document | undefined;
+	getEmbeddedDocument(embeddedName: string, id: string, { strict }: { strict: true }): Document<this, any>;
+	getEmbeddedDocument(embeddedName: string, id: string, { strict }: { strict: false }): Document<this, any> | undefined;
+	getEmbeddedDocument(embeddedName: string, id: string, { strict }?: { strict?: boolean }): Document | undefined;
 
 	/**
 	 * Create multiple embedded Document instances within this parent Document using provided input data.
@@ -349,11 +283,7 @@ export abstract class Document<
 	 * @param [context={}] Additional context which customizes the creation workflow
 	 * @return An array of created Document instances
 	 */
-	createEmbeddedDocuments(
-		embeddedName: string,
-		data: PreCreate<object>[],
-		context?: DocumentModificationContext<this>,
-	): Promise<Document[]>;
+	createEmbeddedDocuments(embeddedName: string, data: PreCreate<object>[], context?: DocumentModificationContext<this>): Promise<Document[]>;
 
 	/**
 	 * Update multiple embedded Document instances within a parent Document using provided differential data.
@@ -362,11 +292,7 @@ export abstract class Document<
 	 * @param [context={}] Additional context which customizes the update workflow
 	 * @return An array of updated Document instances
 	 */
-	updateEmbeddedDocuments(
-		embeddedName: string,
-		updates: EmbeddedDocumentUpdateData<Document>[],
-		context?: DocumentModificationContext<this>,
-	): Promise<Document[]>;
+	updateEmbeddedDocuments(embeddedName: string, updates: EmbeddedDocumentUpdateData<Document>[], context?: DocumentModificationContext<this>): Promise<Document[]>;
 
 	/**
 	 * Delete multiple embedded Document instances within a parent Document using provided string ids.
@@ -376,11 +302,7 @@ export abstract class Document<
 	 * @param [context={}] Additional context which customizes the deletion workflow
 	 * @return An array of deleted Document instances
 	 */
-	deleteEmbeddedDocuments(
-		embeddedName: string,
-		ids: string[],
-		context?: DocumentModificationContext<this>,
-	): Promise<Document[]>;
+	deleteEmbeddedDocuments(embeddedName: string, ids: string[], context?: DocumentModificationContext<this>): Promise<Document[]>;
 
 	/* -------------------------------------------- */
 	/*  Flag Operations                             */
@@ -435,11 +357,7 @@ export abstract class Document<
 	 * @param options Additional options which modify the creation request
 	 * @param user    The User requesting the document creation
 	 */
-	protected _preCreate(
-		data: PreDocumentId<this['_source']>,
-		options: DocumentModificationContext<TParent>,
-		user: BaseUser,
-	): Promise<void>;
+	protected _preCreate(data: PreDocumentId<this['_source']>, options: DocumentModificationContext<TParent>, user: BaseUser): Promise<void>;
 
 	/**
 	 * Perform preliminary operations before a Document of this type is updated.
@@ -448,11 +366,7 @@ export abstract class Document<
 	 * @param options Additional options which modify the update request
 	 * @param user    The User requesting the document update
 	 */
-	protected _preUpdate(
-		changed: DeepPartial<this['_source']>,
-		options: DocumentUpdateContext<TParent>,
-		user: BaseUser,
-	): Promise<void>;
+	protected _preUpdate(changed: DeepPartial<this['_source']>, options: DocumentUpdateContext<TParent>, user: BaseUser): Promise<void>;
 
 	/**
 	 * Perform preliminary operations before a Document of this type is deleted.
@@ -460,10 +374,7 @@ export abstract class Document<
 	 * @param options Additional options which modify the deletion request
 	 * @param user    The User requesting the document deletion
 	 */
-	protected _preDelete(
-		options: DocumentModificationContext<TParent>,
-		user: BaseUser,
-	): Promise<void>;
+	protected _preDelete(options: DocumentModificationContext<TParent>, user: BaseUser): Promise<void>;
 
 	/**
 	 * Perform follow-up operations after a Document of this type is created.
@@ -471,11 +382,7 @@ export abstract class Document<
 	 * @param data    The initial data object provided to the document creation request
 	 * @param options Additional options which modify the creation request
 	 */
-	protected _onCreate(
-		data: this['_source'],
-		options: DocumentModificationContext<TParent>,
-		userId: string,
-	): void;
+	protected _onCreate(data: this['_source'], options: DocumentModificationContext<TParent>, userId: string): void;
 
 	/**
 	 * Perform follow-up operations after a Document of this type is updated.
@@ -484,11 +391,7 @@ export abstract class Document<
 	 * @param options Additional options which modify the update request
 	 * @param userId  The ID of the User requesting the document update
 	 */
-	protected _onUpdate(
-		changed: DeepPartial<this['_source']>,
-		options: DocumentUpdateContext<TParent>,
-		userId: string,
-	): void;
+	protected _onUpdate(changed: DeepPartial<this['_source']>, options: DocumentUpdateContext<TParent>, userId: string): void;
 
 	/**
 	 * Perform follow-up operations after a Document of this type is deleted.
@@ -496,10 +399,7 @@ export abstract class Document<
 	 * @param options Additional options which modify the deletion request
 	 * @param userId The ID of the User requesting the document deletion
 	 */
-	protected _onDelete(
-		options: DocumentModificationContext<TParent>,
-		userId: string,
-	): void;
+	protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 
 	/**
 	 * Perform follow-up operations when a set of Documents of this type are created.
@@ -508,10 +408,7 @@ export abstract class Document<
 	 * @param documents The Document instances which were created
 	 * @param context   The context for the modification operation
 	 */
-	protected static _onCreateDocuments(
-		documents: Document[],
-		context: DocumentModificationContext<Document | null>,
-	): void;
+	protected static _onCreateDocuments(documents: Document[], context: DocumentModificationContext<Document | null>): void;
 
 	/**
 	 * Perform follow-up operations when a set of Documents of this type are updated.
@@ -520,10 +417,7 @@ export abstract class Document<
 	 * @param documents The Document instances which were updated
 	 * @param context   The context for the modification operation
 	 */
-	protected static _onUpdateDocuments(
-		documents: Document[],
-		context: DocumentModificationContext<Document | null>,
-	): void;
+	protected static _onUpdateDocuments(documents: Document[], context: DocumentModificationContext<Document | null>): void;
 
 	/**
 	 * Perform follow-up operations when a set of Documents of this type are deleted.
@@ -532,16 +426,10 @@ export abstract class Document<
 	 * @param documents The Document instances which were deleted
 	 * @param context   The context for the modification operation
 	 */
-	protected static _onDeleteDocuments(
-		documents: Document[],
-		context: DocumentModificationContext<Document | null>,
-	): void;
+	protected static _onDeleteDocuments(documents: Document[], context: DocumentModificationContext<Document | null>): void;
 }
 
-type MetadataPermission =
-	| keyof typeof CONST.USER_ROLES
-	| keyof typeof CONST.USER_PERMISSIONS
-	| ((...args: any[]) => boolean);
+type MetadataPermission = keyof typeof CONST.USER_ROLES | keyof typeof CONST.USER_PERMISSIONS | ((...args: any[]) => boolean);
 
 export interface DocumentMetadata {
 	name: string;
@@ -560,18 +448,13 @@ export interface DocumentMetadata {
 }
 
 declare global {
-	type PreCreate<T extends object> = T extends { name: string; type: string }
-		? Omit<DeepPartial<T>, 'name' | 'type'> & { name: string; type: T['type'] }
-		: DeepPartial<T>;
+	type PreCreate<T extends object> = T extends { name: string; type: string } ? Omit<DeepPartial<T>, 'name' | 'type'> & { name: string; type: T['type'] } : DeepPartial<T>;
 
 	type PreDocumentId<T extends object> = Omit<T, '_id'> & { _id: null };
 
-	type DocumentUpdateData<T extends Document = Document> =
-		| Partial<T['_source']>
-		| Record<string, unknown>;
+	type DocumentUpdateData<T extends Document = Document> = Partial<T['_source']> | Record<string, unknown>;
 
-	type EmbeddedDocumentUpdateData<T extends Document> =
-		DocumentUpdateData<T> & { _id: string };
+	type EmbeddedDocumentUpdateData<T extends Document> = DocumentUpdateData<T> & { _id: string };
 
 	interface DocumentRenderOptions extends RenderOptions {
 		data?: {

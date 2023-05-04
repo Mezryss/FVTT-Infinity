@@ -29,21 +29,11 @@ declare global {
 		/** Prepare a data object which defines the data schema used by dice roll commands against this Item */
 		getRollData(): object;
 
-		protected override _getSheetClass(): ConstructorOf<
-			NonNullable<this['_sheet']>
-		>;
+		protected override _getSheetClass(): ConstructorOf<NonNullable<this['_sheet']>>;
 
-		protected static override _onCreateDocuments<T extends Item>(
-			this: ConstructorOf<T>,
-			items: T[],
-			context: DocumentModificationContext<T>,
-		): void;
+		protected static override _onCreateDocuments<T extends Item>(this: ConstructorOf<T>, items: T[], context: DocumentModificationContext<T>): void;
 
-		protected static override _onDeleteDocuments<T extends Item>(
-			this: ConstructorOf<T>,
-			items: T[],
-			context: DocumentModificationContext<T>,
-		): void;
+		protected static override _onDeleteDocuments<T extends Item>(this: ConstructorOf<T>, items: T[], context: DocumentModificationContext<T>): void;
 	}
 
 	interface Item<TParent extends Actor = Actor> {

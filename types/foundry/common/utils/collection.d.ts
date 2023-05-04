@@ -4,11 +4,7 @@ declare module foundry {
 		 * A reusable storage concept which blends the functionality of an Array with the efficient key-based lookup of a Map.
 		 * This concept is reused throughout Foundry VTT where a collection of uniquely identified elements is required.
 		 */
-		interface Collection<V>
-			extends Omit<
-				Map<string, V>,
-				'forEach' | 'delete' | 'set' | SymbolConstructor['iterator']
-			> {
+		interface Collection<V> extends Omit<Map<string, V>, 'forEach' | 'delete' | 'set' | SymbolConstructor['iterator']> {
 			set(key: string, value: V): this;
 
 			delete(key: string): boolean;
@@ -68,14 +64,8 @@ declare module foundry {
 			 * c.get("d"); // null
 			 * c.get("d", {strict: true}); // throws Error
 			 */
-			get<T extends V = V>(
-				key: string | null | undefined,
-				{ strict }: { strict: true },
-			): T;
-			get<T extends V = V>(
-				key: string,
-				{ strict }?: { strict?: boolean },
-			): T | undefined;
+			get<T extends V = V>(key: string | null | undefined, { strict }: { strict: true }): T;
+			get<T extends V = V>(key: string, { strict }?: { strict?: boolean }): T | undefined;
 
 			/**
 			 * Get an entry from the Collection by name.
@@ -119,9 +109,7 @@ declare module foundry {
 
 		interface CollectionConstructor {
 			new (): Collection<any>;
-			new <V>(
-				entries?: readonly (readonly [string, V])[] | null,
-			): Collection<V>;
+			new <V>(entries?: readonly (readonly [string, V])[] | null): Collection<V>;
 			readonly prototype: Collection<any>;
 		}
 

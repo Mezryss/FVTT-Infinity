@@ -3,9 +3,7 @@
  * Each Note links to a JournalEntry document and represents its location on the map.
  * @todo fill in ... some day
  */
-declare class Note<
-	TDocument extends NoteDocument = NoteDocument,
-> extends PlaceableObject<TDocument> {
+declare class Note<TDocument extends NoteDocument = NoteDocument> extends PlaceableObject<TDocument> {
 	static override embeddedName: 'Note';
 
 	override get bounds(): PIXI.Rectangle;
@@ -47,16 +45,11 @@ declare class Note<
 	/*  Event Handlers                              */
 	/* -------------------------------------------- */
 
-	override _onUpdate(
-		changed: DeepPartial<TDocument['_source']>,
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onUpdate(changed: DeepPartial<TDocument['_source']>, options: DocumentModificationContext<TDocument>, userId: string): void;
 
 	protected override _canHover(user: User): boolean;
 }
 
-declare interface Note<TDocument extends NoteDocument = NoteDocument>
-	extends PlaceableObject<TDocument> {
+declare interface Note<TDocument extends NoteDocument = NoteDocument> extends PlaceableObject<TDocument> {
 	get layer(): NotesLayer<this>;
 }

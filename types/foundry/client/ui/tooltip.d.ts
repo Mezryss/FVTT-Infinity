@@ -70,10 +70,7 @@ declare global {
 		 *                           element or one of its parents.
 		 * @param options.cssClass   An optional CSS class to apply to the activated tooltip.
 		 */
-		activate(
-			element: HTMLElement,
-			{ text, direction, cssClass }: TooltipActivationOptions,
-		): void;
+		activate(element: HTMLElement, { text, direction, cssClass }: TooltipActivationOptions): void;
 
 		/**
 		 * Deactivate the tooltip from a previously hovered HTML element.

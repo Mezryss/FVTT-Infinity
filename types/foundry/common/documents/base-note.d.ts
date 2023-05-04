@@ -7,11 +7,7 @@ declare module foundry {
 			static override get metadata(): NoteMetadata;
 
 			/** Is a user able to update an existing Note? */
-			protected static _canUpdate(
-				user: BaseUser,
-				doc: BaseNote,
-				data: data.NoteData,
-			): boolean;
+			protected static _canUpdate(user: BaseUser, doc: BaseNote, data: data.NoteData): boolean;
 		}
 
 		interface BaseNote {

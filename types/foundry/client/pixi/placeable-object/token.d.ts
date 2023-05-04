@@ -2,9 +2,7 @@ export {};
 
 declare global {
 	/** A Token is an implementation of PlaceableObject that represents an Actor within a viewed Scene on the game canvas. */
-	class Token<
-		TDocument extends TokenDocument = TokenDocument,
-	> extends PlaceableObject<TDocument> {
+	class Token<TDocument extends TokenDocument = TokenDocument> extends PlaceableObject<TDocument> {
 		constructor(document: TDocument);
 
 		/** A reference to an animation that is currently in progress for this Token, if any */
@@ -161,13 +159,7 @@ declare global {
 		 * @param [defer]   Defer refreshing the LightingLayer to manually call that refresh later.
 		 * @param [deleted] Indicate that this light source has been deleted.
 		 */
-		updateLightSource({
-			defer,
-			deleted,
-		}?: {
-			defer?: boolean;
-			deleted?: boolean;
-		}): void;
+		updateLightSource({ defer, deleted }?: { defer?: boolean; deleted?: boolean }): void;
 
 		/**
 		 * Update an Token vision source associated for this token.
@@ -175,15 +167,7 @@ declare global {
 		 * @param [deleted]       Indicate that this vision source has been deleted.
 		 * @param [skipUpdateFog] Never update the Fog exploration progress for this update.
 		 */
-		updateVisionSource({
-			defer,
-			deleted,
-			skipUpdateFog,
-		}?: {
-			defer?: boolean;
-			deleted?: boolean;
-			skipUpdateFog?: boolean;
-		}): void;
+		updateVisionSource({ defer, deleted, skipUpdateFog }?: { defer?: boolean; deleted?: boolean; skipUpdateFog?: boolean }): void;
 
 		/** Test whether this Token is a viable vision source for the current User */
 		protected _isVisionSource(): boolean;
@@ -218,14 +202,7 @@ declare global {
 		 * @param [options.offset] A specific timestamp between 0 and the video duration to begin playback
 		 * @param [options.volume] Desired volume level of the video's audio channel (if any)
 		 */
-		play(
-			playing?: boolean,
-			{
-				loop,
-				offset,
-				volume,
-			}?: { loop?: boolean; offset?: number; volume?: number },
-		): void;
+		play(playing?: boolean, { loop, offset, volume }?: { loop?: boolean; offset?: number; volume?: number }): void;
 
 		/**
 		 * Unlink the playback of this video token from the playback of other tokens which are using the same base texture.
@@ -266,11 +243,7 @@ declare global {
 		 * @param bar The Bar container
 		 * @param data Resource data for this bar
 		 */
-		protected _drawBar(
-			number: number,
-			bar: PIXI.Graphics,
-			data: TokenResourceData,
-		): void;
+		protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
 
 		/**
 		 * Draw the token's nameplate as a text object
@@ -290,22 +263,10 @@ declare global {
 		drawEffects(): Promise<void>;
 
 		/** Draw the overlay effect icon */
-		protected _drawOverlay({
-			src,
-			tint,
-		}?: {
-			src?: string;
-			tint?: number;
-		}): Promise<void>;
+		protected _drawOverlay({ src, tint }?: { src?: string; tint?: number }): Promise<void>;
 
 		/** Draw a status effect icon */
-		protected _drawEffect(
-			src: ImageFilePath,
-			i: number,
-			bg: PIXI.Container,
-			w: number,
-			tint: number,
-		): Promise<void>;
+		protected _drawEffect(src: ImageFilePath, i: number, bg: PIXI.Container, w: number, tint: number): Promise<void>;
 
 		/**
 		 * Helper method to determine whether a token attribute is viewable under a certain mode
@@ -321,28 +282,13 @@ declare global {
 		 * @param [options] Options which configure the animation behavior
 		 * @returns A promise which resolves once the animation is complete
 		 */
-		animate(
-			updateData: Record<string, unknown>,
-			options?: TokenAnimationOptions<this>,
-		): Promise<void>;
+		animate(updateData: Record<string, unknown>, options?: TokenAnimationOptions<this>): Promise<void>;
 
 		/** Animate the continual revealing of Token vision during a movement animation */
-		protected _onMovementFrame(
-			dt: number,
-			anim: TokenAnimationAttribute<this>[],
-			config: TokenAnimationConfig,
-		): void;
+		protected _onMovementFrame(dt: number, anim: TokenAnimationAttribute<this>[], config: TokenAnimationConfig): void;
 
 		/** Update perception each frame depending on the animation configuration */
-		protected _animatePerceptionFrame({
-			source,
-			sound,
-			fog,
-		}?: {
-			source?: boolean;
-			sound?: boolean;
-			fog?: boolean;
-		}): void;
+		protected _animatePerceptionFrame({ source, sound, fog }?: { source?: boolean; sound?: boolean; fog?: boolean }): void;
 
 		/** Terminate animation of this particular Token */
 		stopAnimation(): void;
@@ -353,26 +299,11 @@ declare global {
 		 * @param [options={}] Additional options forwarded to WallsLayer#checkCollision
 		 * @returns The result of the WallsLayer#checkCollision test
 		 */
-		checkCollision(
-			destination: Point,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'closest' },
-		): PolygonVertex;
-		checkCollision(
-			destination: Point,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'any' },
-		): boolean;
-		checkCollision(
-			destination: Point,
-			{ type, mode }: { type?: WallRestrictionType; mode: 'all' },
-		): PolygonVertex[];
-		checkCollision(
-			destination: Point,
-			{ type, mode }?: { type?: WallRestrictionType; mode?: undefined },
-		): PolygonVertex[];
-		checkCollision(
-			destination: Point,
-			{ type, mode }?: { type?: WallRestrictionType; mode?: WallMode },
-		): boolean | PolygonVertex | PolygonVertex[];
+		checkCollision(destination: Point, { type, mode }: { type?: WallRestrictionType; mode: 'closest' }): PolygonVertex;
+		checkCollision(destination: Point, { type, mode }: { type?: WallRestrictionType; mode: 'any' }): boolean;
+		checkCollision(destination: Point, { type, mode }: { type?: WallRestrictionType; mode: 'all' }): PolygonVertex[];
+		checkCollision(destination: Point, { type, mode }?: { type?: WallRestrictionType; mode?: undefined }): PolygonVertex[];
+		checkCollision(destination: Point, { type, mode }?: { type?: WallRestrictionType; mode?: WallMode }): boolean | PolygonVertex | PolygonVertex[];
 
 		/**
 		 * Handle changes to Token behavior when a significant status effect is applied
@@ -381,10 +312,7 @@ declare global {
 		 */
 		_onApplyStatusEffect(statusId: string, active: boolean): void;
 
-		protected override _onControl(options?: {
-			releaseOthers?: boolean;
-			pan?: boolean;
-		}): void;
+		protected override _onControl(options?: { releaseOthers?: boolean; pan?: boolean }): void;
 
 		protected override _onRelease(options?: Record<string, unknown>): void;
 
@@ -405,11 +333,7 @@ declare global {
 		 * @param [options.animate=true] Animate the movement path
 		 * @return The Token after animation has completed
 		 */
-		setPosition(
-			x: number,
-			y: number,
-			{ animate }?: { animate?: boolean },
-		): Promise<this>;
+		setPosition(x: number, y: number, { animate }?: { animate?: boolean }): Promise<this>;
 
 		/**
 		 * Update the Token velocity auto-regressively, shifting increasing weight towards more recent movement
@@ -455,16 +379,10 @@ declare global {
 		 * @param [options.overlay]   Whether to set the effect as the overlay effect?
 		 * @return Was the texture applied (true) or removed (false)
 		 */
-		toggleEffect(
-			effect: StatusEffect | ImageFilePath,
-			{ active, overlay }?: { active?: boolean; overlay?: boolean },
-		): Promise<boolean>;
+		toggleEffect(effect: StatusEffect | ImageFilePath, { active, overlay }?: { active?: boolean; overlay?: boolean }): Promise<boolean>;
 
 		/** A helper function to toggle the overlay status icon on the Token */
-		protected _toggleOverlayEffect(
-			texture: ImageFilePath,
-			{ active }: { active: boolean },
-		): Promise<this>;
+		protected _toggleOverlayEffect(texture: ImageFilePath, { active }: { active: boolean }): Promise<this>;
 
 		/**
 		 * Toggle the visibility state of any Tokens in the currently selected set
@@ -492,69 +410,31 @@ declare global {
 		/*  Event Listeners and Handlers                */
 		/* -------------------------------------------- */
 
-		override _onCreate(
-			data: TDocument['_source'],
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		override _onCreate(data: TDocument['_source'], options: DocumentModificationContext<TDocument>, userId: string): void;
 
-		override _onUpdate(
-			changed: DeepPartial<TDocument['_source']>,
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		override _onUpdate(changed: DeepPartial<TDocument['_source']>, options: DocumentModificationContext, userId: string): void;
 
 		/** Control updates to the appearance of the Token and its linked TokenMesh when a data update occurs. */
-		protected _onUpdateAppearance(
-			data: DeepPartial<foundry.data.TokenSource>,
-			changed: Set<string>,
-			options: DocumentModificationContext,
-		): Promise<void>;
+		protected _onUpdateAppearance(data: DeepPartial<foundry.data.TokenSource>, changed: Set<string>, options: DocumentModificationContext): Promise<void>;
 
 		/** Define additional steps taken when an existing placeable object of this type is deleted */
-		override _onDelete(
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
-		protected override _canControl(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canControl(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _canHUD(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canHUD(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _canConfigure(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canConfigure(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _canHover(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canHover(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _canView(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canView(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _canDrag(
-			user: User,
-			event?: PIXI.InteractionEvent,
-		): boolean;
+		protected override _canDrag(user: User, event?: PIXI.InteractionEvent): boolean;
 
-		protected override _onHoverIn(
-			event: PIXI.InteractionEvent,
-			{ hoverOutOthers }?: { hoverOutOthers?: boolean },
-		): boolean | void;
+		protected override _onHoverIn(event: PIXI.InteractionEvent, { hoverOutOthers }?: { hoverOutOthers?: boolean }): boolean | void;
 
-		protected override _onHoverOut(
-			event: PIXI.InteractionEvent,
-		): boolean | void;
+		protected override _onHoverOut(event: PIXI.InteractionEvent): boolean | void;
 
 		protected override _onClickLeft(event: PIXI.InteractionEvent): void;
 
@@ -562,17 +442,11 @@ declare global {
 
 		protected override _onClickRight2(event: PIXI.InteractionEvent): void;
 
-		protected override _onDragLeftDrop(
-			event: TokenInteractionEvent<this>,
-		): Promise<TDocument[]>;
+		protected override _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<TDocument[]>;
 
-		protected override _onDragLeftMove(
-			event: TokenInteractionEvent<this>,
-		): void;
+		protected override _onDragLeftMove(event: TokenInteractionEvent<this>): void;
 
-		protected override _onDragLeftCancel(
-			event: TokenInteractionEvent<this>,
-		): void;
+		protected override _onDragLeftCancel(event: TokenInteractionEvent<this>): void;
 
 		protected override _onDragStart(): void;
 
@@ -620,15 +494,13 @@ declare global {
 		editable: boolean;
 	}
 
-	interface TokenInteractionEvent<T extends Token>
-		extends PIXI.InteractionEvent {
+	interface TokenInteractionEvent<T extends Token> extends PIXI.InteractionEvent {
 		data: PIXI.InteractionData & {
 			clones?: T[];
 		};
 	}
 
-	interface TokenAnimationOptions<TObject extends Token>
-		extends CanvasAnimationOptions<TObject> {
+	interface TokenAnimationOptions<TObject extends Token> extends CanvasAnimationOptions<TObject> {
 		/** A desired token movement speed in grid spaces per second */
 		movementSpeed?: number;
 	}

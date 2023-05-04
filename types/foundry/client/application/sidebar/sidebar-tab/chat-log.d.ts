@@ -2,9 +2,7 @@
  * The Chat Log application displayed in the Sidebar
  * @see {Sidebar}
  */
-declare class ChatLog<
-	TChatMessage extends ChatMessage = ChatMessage,
-> extends SidebarTab<ChatLogOptions> {
+declare class ChatLog<TChatMessage extends ChatMessage = ChatMessage> extends SidebarTab<ChatLogOptions> {
 	/** Track whether the user currently has pending text in the chat box */
 	protected _pendingText: string;
 
@@ -73,10 +71,7 @@ declare class ChatLog<
 	 * @param messageId The ChatMessage entity to remove from the log
 	 * @param [deleteAll] Is this part of a flush operation to delete all messages?
 	 */
-	deleteMessage(
-		messageId: string,
-		{ deleteAll }?: { deleteAll?: boolean },
-	): void;
+	deleteMessage(messageId: string, { deleteAll }?: { deleteAll?: boolean }): void;
 
 	/**
 	 * Trigger a notification that alerts the user visually and audibly that a new chat log message has been posted
@@ -127,9 +122,7 @@ declare class ChatLog<
 	 * @param message The original string of the message content
 	 * @return A Promise resolving to the prepared chat data object
 	 */
-	protected processMessage(
-		message: string,
-	): Promise<foundry.data.ChatMessageData>;
+	protected processMessage(message: string): Promise<foundry.data.ChatMessageData>;
 
 	/**
 	 * Process messages which are posted using a dice-roll command
@@ -138,12 +131,7 @@ declare class ChatLog<
 	 * @param chatData      The initial chat data
 	 * @param createOptions Options used to create the message
 	 */
-	protected _processDiceCommand(
-		command: string,
-		matches: RegExpMatchArray[],
-		chatData: DeepPartial<foundry.data.ChatMessageSource>,
-		createOptions: ChatMessageModificationContext,
-	): Promise<void>;
+	protected _processDiceCommand(command: string, matches: RegExpMatchArray[], chatData: DeepPartial<foundry.data.ChatMessageSource>, createOptions: ChatMessageModificationContext): Promise<void>;
 
 	/**
 	 * Get the ChatLog entry context options

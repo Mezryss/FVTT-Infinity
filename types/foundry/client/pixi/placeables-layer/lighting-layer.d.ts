@@ -15,9 +15,7 @@ declare global {
 	 * @example <caption>The lightingRefresh hook</caption>
 	 * Hooks.on("lightingRefresh", layer => {});
 	 */
-	class LightingLayer<
-		TAmbientLight extends AmbientLight = AmbientLight,
-	> extends PlaceablesLayer<TAmbientLight> {
+	class LightingLayer<TAmbientLight extends AmbientLight = AmbientLight> extends PlaceablesLayer<TAmbientLight> {
 		constructor();
 
 		/** A mapping of light sources which are active within the rendered Scene */
@@ -60,10 +58,7 @@ declare global {
 		 * @param [options.darkness]        Darkness level override.
 		 * @param [options.backgroundColor] Canvas background color override.
 		 */
-		protected _configureChannels(options?: {
-			darkness?: number;
-			backgroundColor?: number;
-		}): LightChannels;
+		protected _configureChannels(options?: { darkness?: number; backgroundColor?: number }): LightChannels;
 
 		/* -------------------------------------------- */
 		/*  Rendering                                   */
@@ -95,10 +90,7 @@ declare global {
 		 * @param [options.darkness]        An override darkness level to which the layer should be temporarily rendered.
 		 * @param [options.backgroundColor] An override canvas background color.
 		 */
-		refresh(options?: {
-			darkness?: number | null;
-			backgroundColor?: string;
-		}): void;
+		refresh(options?: { darkness?: number | null; backgroundColor?: string }): void;
 
 		override tearDown(): Promise<void>;
 
@@ -125,13 +117,9 @@ declare global {
 		 */
 		protected _onDarknessChange(darkness: number, prior: number): void;
 
-		protected override _onDragLeftStart(
-			event: PIXI.InteractionEvent,
-		): Promise<void>;
+		protected override _onDragLeftStart(event: PIXI.InteractionEvent): Promise<void>;
 
-		protected override _onDragLeftMove(
-			event: PIXI.InteractionEvent,
-		): Promise<void>;
+		protected override _onDragLeftMove(event: PIXI.InteractionEvent): Promise<void>;
 
 		protected override _onDragLeftCancel(event: PIXI.InteractionEvent): void;
 
@@ -141,9 +129,7 @@ declare global {
 	interface IlluminationContainer extends PIXI.Container {
 		primary: PIXI.Container;
 		background: PIXI.Graphics;
-		filter:
-			| InstanceType<typeof PIXI.filters.AlphaFilter>
-			| InstanceType<typeof PIXI.filters.BlurFilter>;
+		filter: InstanceType<typeof PIXI.filters.AlphaFilter> | InstanceType<typeof PIXI.filters.BlurFilter>;
 		lights: PIXI.Container;
 	}
 

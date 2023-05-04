@@ -1,6 +1,4 @@
-declare class AmbientLight<
-	TDocument extends AmbientLightDocument = AmbientLightDocument,
-> extends PlaceableObject<TDocument> {
+declare class AmbientLight<TDocument extends AmbientLightDocument = AmbientLightDocument> extends PlaceableObject<TDocument> {
 	constructor(document: TDocument);
 
 	/** A reference to the PointSource object which defines this light source area of effect */
@@ -51,34 +49,17 @@ declare class AmbientLight<
 	 * @param defer   Defer refreshing the LightingLayer to manually call that refresh later.
 	 * @param deleted Indicate that this light source has been deleted.
 	 */
-	updateSource({
-		defer,
-		deleted,
-	}?: {
-		defer?: boolean;
-		deleted?: boolean;
-	}): void;
+	updateSource({ defer, deleted }?: { defer?: boolean; deleted?: boolean }): void;
 
 	/* -------------------------------------------- */
 	/*  Socket Listeners and Handlers               */
 	/* -------------------------------------------- */
 
-	override _onCreate(
-		data: TDocument['_source'],
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onCreate(data: TDocument['_source'], options: DocumentModificationContext<TDocument>, userId: string): void;
 
-	override _onUpdate(
-		changed: DocumentUpdateData<TDocument>,
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onUpdate(changed: DocumentUpdateData<TDocument>, options: DocumentModificationContext<TDocument>, userId: string): void;
 
-	override _onDelete(
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
 	/* -------------------------------------------- */
 	/*  Mouse Interaction Handlers                  */
@@ -86,10 +67,7 @@ declare class AmbientLight<
 
 	protected override _canHUD(user: User, event: PIXI.InteractionEvent): boolean;
 
-	protected override _canConfigure(
-		user: User,
-		event: PIXI.InteractionEvent,
-	): boolean;
+	protected override _canConfigure(user: User, event: PIXI.InteractionEvent): boolean;
 
 	protected override _onClickRight(event: PIXI.InteractionEvent): void;
 

@@ -10,9 +10,7 @@ declare module foundry {
 			max: number;
 		}
 
-		class DarknessActivation extends abstract.DocumentData<
-			documents.BaseAmbientLight | documents.BaseAmbientSound
-		> {}
+		class DarknessActivation extends abstract.DocumentData<documents.BaseAmbientLight | documents.BaseAmbientSound> {}
 
 		interface DarknessActivation extends DarknessActivationSource {
 			readonly _source: DarknessActivationSource;

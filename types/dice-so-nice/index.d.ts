@@ -99,14 +99,7 @@ type ColorSet = {
 	/**
 	 * ID of the material to use if "Auto (Theme)" is selected in settings.
 	 */
-	material?:
-		| 'plastic'
-		| 'metal'
-		| 'glass'
-		| 'wood'
-		| 'pristine'
-		| 'iridescent'
-		| 'chrome';
+	material?: 'plastic' | 'metal' | 'glass' | 'wood' | 'pristine' | 'iridescent' | 'chrome';
 
 	/**
 	 * Name of the font family. This can be a Webfont too (ex: Arial, monospace, etc)
@@ -136,10 +129,7 @@ declare class Dice3d {
 	 *
 	 * @see {@link https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/wikis/API/Customization#adding-a-custom-model-system-aka-dice-face-preset}
 	 */
-	addSystem(
-		system: { id: string; name: string },
-		mode: 'preferred' | 'default',
-	): void;
+	addSystem(system: { id: string; name: string }, mode: 'preferred' | 'default'): void;
 
 	/**
 	 * A custom DicePreset will override a default dice type when its system is selected in the "Dice So Nice" settings.
@@ -161,10 +151,7 @@ declare class Dice3d {
 	 *
 	 * @see {@link https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/wikis/API/Customization#adding-a-custom-texture}
 	 */
-	addTexture(
-		textureID: string,
-		data: { name: string; composite: string; source: string; bump?: string },
-	): Promise<unknown>;
+	addTexture(textureID: string, data: { name: string; composite: string; source: string; bump?: string }): Promise<unknown>;
 
 	/**
 	 * Add a colorset (theme)

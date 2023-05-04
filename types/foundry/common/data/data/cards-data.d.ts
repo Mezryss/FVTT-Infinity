@@ -37,16 +37,12 @@ declare module foundry {
 			flags: Record<string, Record<string, unknown>>;
 		}
 
-		interface CardsData<
-			TDocument extends documents.BaseCards = documents.BaseCards,
-		> extends abstract.DocumentData<TDocument> {
+		interface CardsData<TDocument extends documents.BaseCards = documents.BaseCards> extends abstract.DocumentData<TDocument> {
 			/** The default icon used for a cards stack that does not have a custom image set */
 			DEFAULT_ICON: ImageFilePath;
 		}
 
-		interface CardsData<
-			TDocument extends documents.BaseCards = documents.BaseCards,
-		> extends CardsSource {
+		interface CardsData<TDocument extends documents.BaseCards = documents.BaseCards> extends CardsSource {
 			readonly _source: CardsSource;
 		}
 	}

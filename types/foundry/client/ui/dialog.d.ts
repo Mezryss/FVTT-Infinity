@@ -95,14 +95,5 @@ declare class Dialog extends Application {
 	 *  defaultYes: false
 	 * });
 	 */
-	static confirm<Y = true, N = false>({
-		title,
-		content,
-		yes,
-		no,
-		render,
-		defaultYes,
-		rejectClose,
-		options,
-	}?: ConfirmDialogParameters<Y, N>): Promise<Y | N>;
+	static confirm<Y = true, N = false>({ title, content, yes, no, render, defaultYes, rejectClose, options }?: ConfirmDialogParameters<Y, N>): Promise<Y | N>;
 }

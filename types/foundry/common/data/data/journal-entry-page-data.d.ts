@@ -77,17 +77,11 @@ declare module foundry {
 			flags: object; // will be filled out later
 		}
 
-		class JournalEntryPageData<
-			TDocument extends documents.BaseJournalEntryPage,
-		> extends abstract.DocumentData<TDocument> {
-			protected override _initializeSource(
-				data: this['_source'],
-			): this['_source'];
+		class JournalEntryPageData<TDocument extends documents.BaseJournalEntryPage> extends abstract.DocumentData<TDocument> {
+			protected override _initializeSource(data: this['_source']): this['_source'];
 		}
 
-		interface JournalEntryPageData<
-			TDocument extends documents.BaseJournalEntryPage,
-		> {
+		interface JournalEntryPageData<TDocument extends documents.BaseJournalEntryPage> {
 			readonly _source: JournalEntryPageSource;
 		}
 	}

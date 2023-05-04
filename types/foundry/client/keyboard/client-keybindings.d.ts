@@ -69,11 +69,7 @@ declare global {
 		 *   precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
 		 * }
 		 */
-		register(
-			namespace: string,
-			action: string,
-			data: KeybindingActionConfig,
-		): void;
+		register(namespace: string, action: string, data: KeybindingActionConfig): void;
 
 		/**
 		 * Get the current Bindings of a given namespace's Keybinding Action
@@ -101,11 +97,7 @@ declare global {
 		 *     }
 		 * ]);
 		 */
-		set(
-			namespace: string,
-			action: string,
-			bindings: KeybindingActionBinding[],
-		): Promise<void>;
+		set(namespace: string, action: string, bindings: KeybindingActionBinding[]): Promise<void>;
 
 		/** Reset all client keybindings back to their default configuration. */
 		resetDefaults(): Promise<void>;
@@ -115,9 +107,7 @@ declare global {
 		 * @param values An array of keybinding assignments to be validated
 		 * @return An array of keybinding assignments confirmed as valid
 		 */
-		private static _validateBindings(
-			values: KeybindingActionBinding[],
-		): KeybindingActionBinding[];
+		private static _validateBindings(values: KeybindingActionBinding[]): KeybindingActionBinding[];
 
 		/**
 		 * Validate that assigned modifiers are allowed
@@ -131,10 +121,7 @@ declare global {
 		 * @param a The first Keybinding Action
 		 * @param b the second Keybinding Action
 		 */
-		private static _compareActions(
-			a: KeybindingAction,
-			b: KeybindingAction,
-		): number;
+		private static _compareActions(a: KeybindingAction, b: KeybindingAction): number;
 
 		/* ---------------------------------------- */
 		/*  Core Keybinding Actions                 */
@@ -148,10 +135,7 @@ declare global {
 		 * @param event   The originating keyboard event
 		 * @param context The context data of the event
 		 */
-		private static _onSelectAllObjects(
-			event: KeyboardEvent,
-			context: KeyboardEventContext,
-		): boolean;
+		private static _onSelectAllObjects(event: KeyboardEvent, context: KeyboardEventContext): boolean;
 
 		/**
 		 * Handle Cycle View actions
@@ -170,10 +154,7 @@ declare global {
 		 * @param {} context    The context data of the event
 		 * @private
 		 */
-		private static _onToggleCharacterSheet(
-			event: KeyboardEvent,
-			context: KeyboardEventContext,
-		): ActorSheet | Promise<ActorSheet>;
+		private static _onToggleCharacterSheet(event: KeyboardEvent, context: KeyboardEventContext): ActorSheet | Promise<ActorSheet>;
 
 		/**
 		 * Handle action to target the currently hovered token.
@@ -186,20 +167,14 @@ declare global {
 		 * @param event   The originating keyboard event
 		 * @param context The context data of the event
 		 */
-		private static _onDelete(
-			event: KeyboardEvent,
-			context: KeyboardEventContext,
-		): boolean;
+		private static _onDelete(event: KeyboardEvent, context: KeyboardEventContext): boolean;
 
 		/**
 		 * Handle keyboard movement once a small delay has elapsed to allow for multiple simultaneous key-presses.
 		 * @param context The context data of the event
 		 * @param layer   The Placeables layer
 		 */
-		private _handleMovement(
-			context: KeyboardEventContext,
-			layer: TokenLayer | BackgroundLayer,
-		): void;
+		private _handleMovement(context: KeyboardEventContext, layer: TokenLayer | BackgroundLayer): void;
 
 		/** Handle panning the canvas using CTRL + directional keys */
 		private _handleCanvasPan(): Promise<void>;
@@ -208,9 +183,7 @@ declare global {
 		 * Handle Measured Ruler Movement Action
 		 * @param context The context data of the event
 		 */
-		private static _onMeasuredRulerMovement(
-			context: KeyboardEventContext,
-		): boolean;
+		private static _onMeasuredRulerMovement(context: KeyboardEventContext): boolean;
 
 		/**
 		 * Handle Pause Action
@@ -229,25 +202,16 @@ declare global {
 		 * @param context            The context data of the event
 		 * @param movementDirections The Directions being panned in
 		 */
-		private _onPan(
-			context: KeyboardEventContext,
-			movementDirections: MovementDirection[],
-		): boolean;
+		private _onPan(context: KeyboardEventContext, movementDirections: MovementDirection[]): boolean;
 
 		/**
 		 * Handle Macro executions
 		 * @param context The context data of the event
 		 */
-		private static _onMacroExecute(
-			context: KeyboardEventContext,
-			number: number,
-		): boolean;
+		private static _onMacroExecute(context: KeyboardEventContext, number: number): boolean;
 
 		/** Handle Macro page swaps */
-		private static _onMacroPageSwap(
-			context: KeyboardEventContext,
-			page: number,
-		): boolean;
+		private static _onMacroPageSwap(context: KeyboardEventContext, page: number): boolean;
 
 		/**
 		 * Handle action to copy data to clipboard
@@ -272,10 +236,7 @@ declare global {
 		 * @param context The context data of the event
 		 * @param zoomDirection The direction to zoom
 		 */
-		private static _onZoom(
-			context: KeyboardEventContext,
-			zoomDirection: 'in' | 'out',
-		): boolean;
+		private static _onZoom(context: KeyboardEventContext, zoomDirection: 'in' | 'out'): boolean;
 	}
 
 	type MovementDirection = 'up' | 'right' | 'down' | 'left';

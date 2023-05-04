@@ -22,9 +22,7 @@ declare interface PackSummary {
 declare class CompendiumDirectory extends SidebarTab {
 	static override get defaultOptions(): ApplicationOptions;
 
-	override getData(
-		options?: Partial<ApplicationOptions>,
-	): Promise<CompendiumDirectoryData>;
+	override getData(options?: Partial<ApplicationOptions>): Promise<CompendiumDirectoryData>;
 
 	/** Compendium sidebar Context Menu creation */
 	protected _contextMenu(html: JQuery): void;
@@ -47,10 +45,5 @@ declare class CompendiumDirectory extends SidebarTab {
 	 */
 	protected _onDeleteCompendium(pack: CompendiumCollection): Promise<boolean>;
 
-	protected override _onSearchFilter(
-		event: KeyboardEvent,
-		query: string,
-		rgx: RegExp,
-		html: HTMLElement,
-	): void;
+	protected override _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;
 }

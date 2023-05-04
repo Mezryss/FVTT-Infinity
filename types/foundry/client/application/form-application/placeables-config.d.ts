@@ -35,8 +35,5 @@ declare class LightConfig extends FormApplication {
  */
 declare class AmbientSoundConfig extends FormApplication {
 	/** @override */
-	protected _updateObject(
-		event: Event,
-		formData: Record<string, unknown>,
-	): Promise<void>;
+	protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

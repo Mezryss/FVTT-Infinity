@@ -25,11 +25,7 @@ declare global {
 	 * console.log(r.total);    // 22
 	 */
 	class Roll {
-		constructor(
-			formula: string,
-			data?: Record<string, unknown>,
-			options?: RollOptions,
-		);
+		constructor(formula: string, data?: Record<string, unknown>, options?: RollOptions);
 
 		/** The original provided data object which substitutes into attributes of the roll formula */
 		data: Record<string, unknown>;
@@ -67,9 +63,7 @@ declare global {
 		 * @param data Provided roll data
 		 * @returns The prepared data object
 		 */
-		protected _prepareData(
-			data: Record<string, unknown>,
-		): Record<string, unknown>;
+		protected _prepareData(data: Record<string, unknown>): Record<string, unknown>;
 
 		/* -------------------------------------------- */
 		/*  Roll Attributes                             */
@@ -101,11 +95,7 @@ declare global {
 		 * @param [multiplyNumeric]  Apply multiplication factor to numeric scalar terms
 		 * @return The altered Roll expression
 		 */
-		alter(
-			multiply: number,
-			add: number,
-			{ multiplyNumeric }?: { multiplyNumeric?: boolean },
-		): this;
+		alter(multiply: number, add: number, { multiplyNumeric }?: { multiplyNumeric?: boolean }): this;
 
 		/** Clone the Roll instance, returning a new Roll instance that has not yet been evaluated. */
 		clone(): this;
@@ -125,39 +115,21 @@ declare global {
 		 * console.log(r.result); // 5 + 4 + 2
 		 * console.log(r.total);  // 11
 		 */
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async?: false }): Rolled<this>;
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
-		evaluate({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
+		evaluate({ minimize, maximize, async }: EvaluateRollParams & { async?: false }): Rolled<this>;
+		evaluate({ minimize, maximize, async }: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
+		evaluate({ minimize, maximize, async }: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
 
 		/**
 		 * Evaluate the roll asynchronously.
 		 * A temporary helper method used to migrate behavior from 0.7.x (sync by default) to 0.9.x (async by default).
 		 */
-		protected _evaluate({
-			minimize,
-			maximize,
-		}?: Omit<EvaluateRollParams, 'async'>): Promise<Rolled<this>>;
+		protected _evaluate({ minimize, maximize }?: Omit<EvaluateRollParams, 'async'>): Promise<Rolled<this>>;
 
 		/**
 		 * Evaluate the roll synchronously.
 		 * A temporary helper method used to migrate behavior from 0.7.x (sync by default) to 0.9.x (async by default).
 		 */
-		protected _evaluateSync({
-			minimize,
-			maximize,
-		}?: Omit<EvaluateRollParams, 'async'>): Rolled<this>;
+		protected _evaluateSync({ minimize, maximize }?: Omit<EvaluateRollParams, 'async'>): Rolled<this>;
 
 		/**
 		 * Safely evaluate the final total result for the Roll using its component terms.
@@ -169,21 +141,9 @@ declare global {
 		 * Alias for evaluate.
 		 * @see {Roll#evaluate}
 		 */
-		roll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async?: false }): Rolled<this>;
-		roll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
-		roll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
+		roll({ minimize, maximize, async }: EvaluateRollParams & { async?: false }): Rolled<this>;
+		roll({ minimize, maximize, async }: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
+		roll({ minimize, maximize, async }: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
 
 		/**
 		 * Create a new Roll object using the original provided formula and data.
@@ -191,21 +151,9 @@ declare global {
 		 * @param [options={}] Evaluation options passed to Roll#evaluate
 		 * @return A new Roll object, rolled using the same formula and data
 		 */
-		reroll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async?: false }): Rolled<this>;
-		reroll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
-		reroll({
-			minimize,
-			maximize,
-			async,
-		}: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
+		reroll({ minimize, maximize, async }: EvaluateRollParams & { async?: false }): Rolled<this>;
+		reroll({ minimize, maximize, async }: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
+		reroll({ minimize, maximize, async }: EvaluateRollParams): Rolled<this> | Promise<Rolled<this>>;
 
 		/* -------------------------------------------- */
 		/*  Static Class Methods                        */
@@ -218,11 +166,7 @@ declare global {
 		 * @param [options={}] Additional options which modify or describe this Roll
 		 * @return The constructed Roll instance
 		 */
-		static create(
-			formula: string,
-			data?: Record<string, unknown>,
-			options?: RollOptions,
-		): Roll;
+		static create(formula: string, data?: Record<string, unknown>, options?: RollOptions): Roll;
 
 		/**
 		 * Transform an array of RollTerm objects into a cleaned string formula representation.
@@ -282,11 +226,7 @@ declare global {
 		 *                  left as-is.
 		 * @param [warn] Display a warning notification when encountering an un-matched key.
 		 */
-		static replaceFormulaData(
-			formula: string,
-			data: Record<string, unknown>,
-			{ missing, warn }?: { missing?: string; warn?: boolean },
-		): string;
+		static replaceFormulaData(formula: string, data: Record<string, unknown>, { missing, warn }?: { missing?: string; warn?: boolean }): string;
 
 		/**
 		 * Validate that a provided roll formula can represent a valid
@@ -340,9 +280,7 @@ declare global {
 		 * @param _formula The raw formula to split
 		 * @returns An array of terms, split on arithmetic operators
 		 */
-		protected static _splitOperators(
-			_formula: string,
-		): (string | OperatorTerm)[];
+		protected static _splitOperators(_formula: string): (string | OperatorTerm)[];
 
 		/**
 		 * Temporarily remove flavor text from a string formula allowing it to be accurately parsed.
@@ -360,10 +298,7 @@ declare global {
 		 * @param flavors The extracted flavors object
 		 * @returns The restored term containing flavor text
 		 */
-		protected static _restoreFlavor(
-			term: string,
-			flavors: Record<string, string>,
-		): RollTerm;
+		protected static _restoreFlavor(term: string, flavors: Record<string, string>): RollTerm;
 
 		/**
 		 * Classify a remaining string term into a recognized RollTerm class
@@ -419,18 +354,9 @@ declare global {
 		 * @return A promise which resolves to the created ChatMessage entity, if create is true
 		 *         or the Object of prepared chatData otherwise.
 		 */
-		toMessage(
-			messageData: PreCreate<foundry.data.ChatMessageSource> | undefined,
-			{ rollMode, create }: { rollMode?: RollMode | 'roll'; create: false },
-		): Promise<foundry.data.ChatMessageSource>;
-		toMessage(
-			messageData?: PreCreate<foundry.data.ChatMessageSource>,
-			{ rollMode, create }?: { rollMode?: RollMode | 'roll'; create?: true },
-		): Promise<ChatMessage>;
-		toMessage(
-			messageData?: PreCreate<foundry.data.ChatMessageSource>,
-			{ rollMode, create }?: { rollMode?: RollMode | 'roll'; create?: boolean },
-		): Promise<ChatMessage | foundry.data.ChatMessageSource>;
+		toMessage(messageData: PreCreate<foundry.data.ChatMessageSource> | undefined, { rollMode, create }: { rollMode?: RollMode | 'roll'; create: false }): Promise<foundry.data.ChatMessageSource>;
+		toMessage(messageData?: PreCreate<foundry.data.ChatMessageSource>, { rollMode, create }?: { rollMode?: RollMode | 'roll'; create?: true }): Promise<ChatMessage>;
+		toMessage(messageData?: PreCreate<foundry.data.ChatMessageSource>, { rollMode, create }?: { rollMode?: RollMode | 'roll'; create?: boolean }): Promise<ChatMessage | foundry.data.ChatMessageSource>;
 
 		/* -------------------------------------------- */
 		/*  Interface Helpers                           */
@@ -463,10 +389,7 @@ declare global {
 		 * @param data   Unpacked data representing the Roll
 		 * @return A reconstructed Roll instance
 		 */
-		static fromData<T extends Roll>(
-			this: AbstractConstructorOf<T>,
-			data: RollJSON,
-		): T;
+		static fromData<T extends Roll>(this: AbstractConstructorOf<T>, data: RollJSON): T;
 
 		/**
 		 * Recreate a Roll instance using a provided JSON string
@@ -488,11 +411,7 @@ declare global {
 		 * const roll = Roll.fromTerms([t1, plus, t2]);
 		 * roll.formula; // 4d8 + 8
 		 */
-		static fromTerms<T extends Roll>(
-			this: ConstructorOf<T>,
-			terms: RollTerm[],
-			options?: RollOptions,
-		): T;
+		static fromTerms<T extends Roll>(this: ConstructorOf<T>, terms: RollTerm[], options?: RollOptions): T;
 	}
 
 	type RollOptions = {

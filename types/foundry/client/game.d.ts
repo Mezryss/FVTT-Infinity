@@ -137,11 +137,7 @@ declare global {
 		/* -------------------------------------------- */
 
 		actors: TActors;
-		collections: Collection<
-			WorldCollection<
-				TActor | TItem | JournalEntry | TMacro | Playlist | RollTable | TScene
-			>
-		>;
+		collections: Collection<WorldCollection<TActor | TItem | JournalEntry | TMacro | Playlist | RollTable | TScene>>;
 
 		combats: CombatEncounters<TCombat>;
 		folders: Folders<Folder>;
@@ -149,22 +145,13 @@ declare global {
 		journal: Journal;
 		macros: Macros<TMacro>;
 		messages: Messages<TChatMessage>;
-		packs: Collection<
-			CompendiumCollection<
-				TActor | TItem | JournalEntry | TMacro | Playlist | RollTable | TScene
-			>
-		>;
+		packs: Collection<CompendiumCollection<TActor | TItem | JournalEntry | TMacro | Playlist | RollTable | TScene>>;
 		playlists: Playlists;
 		scenes: Scenes<TScene>;
 		tables: RollTables;
 		users: Users<TUser>;
 
-		constructor(
-			view: string,
-			worldData: {},
-			sessionId: string,
-			socket: io.Socket,
-		);
+		constructor(view: string, worldData: {}, sessionId: string, socket: io.Socket);
 
 		/** Returns the current version of the Release, usable for comparisons using isNewerVersion */
 		get version(): string;

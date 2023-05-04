@@ -5,9 +5,7 @@ declare global {
 	 * An Abstract Base Class which defines a Placeable Object which represents an Entity placed on the Canvas
 	 * @param document The Document instance which is represented by this object
 	 */
-	abstract class PlaceableObject<
-		TDocument extends CanvasDocument = CanvasDocument,
-	> extends PIXI.Container {
+	abstract class PlaceableObject<TDocument extends CanvasDocument = CanvasDocument> extends PIXI.Container {
 		constructor(document: TDocument);
 
 		/** Retain a reference to the Scene within which this Placeable Object resides */
@@ -159,24 +157,13 @@ declare global {
 		refresh(): this;
 
 		/** Register pending canvas operations which should occur after a new PlaceableObject of this type is created */
-		_onCreate(
-			data: TDocument['_source'],
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		_onCreate(data: TDocument['_source'], options: DocumentModificationContext<TDocument>, userId: string): void;
 
 		/** Define additional steps taken when an existing placeable object of this type is updated with new data */
-		_onUpdate(
-			changed: DocumentUpdateData<TDocument>,
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		_onUpdate(changed: DocumentUpdateData<TDocument>, options: DocumentModificationContext<TDocument>, userId: string): void;
 
 		/** Define additional steps taken when an existing placeable object of this type is deleted */
-		_onDelete(
-			options: DocumentModificationContext<TDocument>,
-			userId: string,
-		): void;
+		_onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
 		/* -------------------------------------------- */
 		/*  Methods                                     */
@@ -223,15 +210,7 @@ declare global {
 		 * @param snap  A precision (in degrees) to which the resulting angle should snap. Default is 0.
 		 * @return      The new rotation angle for the object
 		 */
-		protected _updateRotation({
-			angle,
-			delta,
-			snap,
-		}?: {
-			angle?: number;
-			delta?: number;
-			snap?: number;
-		}): number;
+		protected _updateRotation({ angle, delta, snap }?: { angle?: number; delta?: number; snap?: number }): number;
 
 		/**
 		 * Obtain the shifted position for the Object
@@ -239,10 +218,7 @@ declare global {
 		 * @param dy    The number of grid units to shift along the Y-axis
 		 * @return      The target movement coordinates subject to some offset
 		 */
-		protected _getShiftedPosition(
-			dx: number,
-			dy: number,
-		): { x: number; y: number };
+		protected _getShiftedPosition(dx: number, dy: number): { x: number; y: number };
 
 		/* -------------------------------------------- */
 		/*  Interactivity                               */
@@ -255,10 +231,7 @@ declare global {
 		protected _createInteractionManager(): MouseInteractionManager;
 
 		/** Actions that should be taken for this Placeable Object when a mouseover event occurs */
-		protected _onHoverIn(
-			event: PIXI.InteractionEvent,
-			{ hoverOutOthers }?: { hoverOutOthers?: boolean },
-		): boolean | void;
+		protected _onHoverIn(event: PIXI.InteractionEvent, { hoverOutOthers }?: { hoverOutOthers?: boolean }): boolean | void;
 
 		/** Actions that should be taken for this Placeable Object when a mouseout event occurs */
 		protected _onHoverOut(event: PIXI.InteractionEvent): boolean | void;
@@ -301,16 +274,13 @@ declare global {
 		protected _onDragLeftMove(event: PIXI.InteractionEvent): void;
 
 		/** Callback actions which occur on a mouse-move operation. */
-		protected _onDragLeftDrop(
-			event: PIXI.InteractionEvent,
-		): Promise<this['document'][]>;
+		protected _onDragLeftDrop(event: PIXI.InteractionEvent): Promise<this['document'][]>;
 
 		/** Callback actions which occur on a mouse-move operation. */
 		protected _onDragLeftCancel(event: PIXI.InteractionEvent): void;
 	}
 
-	interface PlaceableObject<TDocument extends CanvasDocument = CanvasDocument>
-		extends PIXI.Container {
+	interface PlaceableObject<TDocument extends CanvasDocument = CanvasDocument> extends PIXI.Container {
 		hitArea: PIXI.Rectangle;
 	}
 }

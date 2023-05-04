@@ -9,8 +9,7 @@ declare class MacroConfig<TMacro extends Macro> extends DocumentSheet<TMacro> {
 	override activateListeners(html: JQuery): void;
 }
 
-declare interface MacroConfigData<TMacro extends Macro>
-	extends DocumentSheetData<TMacro> {
+declare interface MacroConfigData<TMacro extends Macro> extends DocumentSheetData<TMacro> {
 	macroTypes: Game['system']['documentTypes']['Macro'] | ['chat'];
 	macroScopes: (typeof CONST)['MACRO_SCOPES'];
 }

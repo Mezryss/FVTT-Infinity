@@ -17,10 +17,7 @@ import { DataModel, EmbeddedCollection } from '../abstract/module.mjs';
  * @property [validationError] A custom validation error string. When displayed will be prepended with the
  *                             document name, field name, and candidate value.
  */
-export interface DataFieldOptions<
-	TSourceProp extends unknown,
-	TNullable extends boolean,
-> {
+export interface DataFieldOptions<TSourceProp extends unknown, TNullable extends boolean> {
 	required?: boolean;
 	nullable?: TNullable;
 	initial?: unknown;
@@ -31,12 +28,7 @@ export interface DataFieldOptions<
 	validationError?: string;
 }
 
-export abstract class DataField<
-	TSourceProp extends unknown = unknown,
-	TModelProp = TSourceProp,
-	TNullable extends boolean = boolean,
-> implements DataFieldOptions<TSourceProp, TNullable>
-{
+export abstract class DataField<TSourceProp extends unknown = unknown, TModelProp = TSourceProp, TNullable extends boolean = boolean> implements DataFieldOptions<TSourceProp, TNullable> {
 	/** @param options Options which configure the behavior of the field */
 	constructor(options?: DataFieldOptions<TSourceProp, TNullable>);
 
@@ -70,17 +62,7 @@ export abstract class DataField<
 	 * @param [options={}] Additional options passed to the applied function
 	 * @returns The results object
 	 */
-	apply(
-		fn:
-			| string
-			| ((
-					field: this,
-					value?: unknown,
-					options?: Record<string, unknown>,
-			  ) => unknown),
-		value?: unknown,
-		options?: Record<string, unknown>,
-	): TSourceProp;
+	apply(fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown), value?: unknown, options?: Record<string, unknown>): TSourceProp;
 
 	/* -------------------------------------------- */
 	/*  Field Cleaning                              */
@@ -96,10 +78,7 @@ export abstract class DataField<
 	 * @param [options.source]  The root data model being cleaned
 	 * @returns The cast value
 	 */
-	clean(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	clean(value: unknown, options?: CleanFieldOptions): TNullable extends true ? TSourceProp | null : TSourceProp;
 
 	/**
 	 * Apply any cleaning logic specific to this DataField type.
@@ -107,10 +86,7 @@ export abstract class DataField<
 	 * @param [options] Additional options for how the field is cleaned.
 	 * @returns The cleaned value.
 	 */
-	protected _cleanType(
-		value?: unknown,
-		options?: CleanFieldOptions,
-	): Maybe<TSourceProp>;
+	protected _cleanType(value?: unknown, options?: CleanFieldOptions): Maybe<TSourceProp>;
 
 	/**
 	 * Cast a non-default value to ensure it is the correct type for the field
@@ -139,10 +115,7 @@ export abstract class DataField<
 	 * @param [options={}] Options which affect validation behavior
 	 * @returns Returns a `ModelValidationError` if a validation failure occurred
 	 */
-	validate(
-		value: unknown,
-		options?: Record<string, unknown>,
-	): ModelValidationError | void;
+	validate(value: unknown, options?: Record<string, unknown>): ModelValidationError | void;
 
 	/**
 	 * Special validation rules which supersede regular field validation.
@@ -161,10 +134,7 @@ export abstract class DataField<
 	 * @returns A boolean to indicate with certainty whether the value is valid. Otherwise, return void.
 	 * @throws May throw a specific error if the value is not valid
 	 */
-	protected _validateType(
-		value: unknown,
-		options?: Record<string, unknown>,
-	): boolean | void;
+	protected _validateType(value: unknown, options?: Record<string, unknown>): boolean | void;
 
 	/* -------------------------------------------- */
 	/*  Initialization and Serialization            */
@@ -176,20 +146,14 @@ export abstract class DataField<
 	 * @param model     The DataModel instance that this field belongs to
 	 * @param [options] Initialization options
 	 */
-	initialize(
-		value: unknown,
-		model?: ConstructorOf<DataModel>,
-		options?: object,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	initialize(value: unknown, model?: ConstructorOf<DataModel>, options?: object): TNullable extends true ? TModelProp | null : TModelProp;
 
 	/**
 	 * Export the current value of the field into a serializable object.
 	 * @param value The initialized value of the field
 	 * @returns An exported representation of the field
 	 */
-	toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 }
 
 /* -------------------------------------------- */
@@ -199,24 +163,14 @@ export abstract class DataField<
 export type DataSchema = Record<string, DataField<unknown, unknown, boolean>>;
 
 /** A special class of {@link DataField} which defines a data schema. */
-export class SchemaField<
-	TSourceProp extends DataSchema = DataSchema,
-	TModelProp = TSourceProp,
-	TNullable extends boolean = false,
-> extends DataField<TSourceProp, TModelProp, TNullable> {
+export class SchemaField<TSourceProp extends DataSchema = DataSchema, TModelProp = TSourceProp, TNullable extends boolean = false> extends DataField<TSourceProp, TModelProp, TNullable> {
 	/**
 	 * @param fields  The contained field definitions
 	 * @param options Options which configure the behavior of the field
 	 */
-	constructor(
-		fields: DataSchema,
-		options?: DataFieldOptions<TSourceProp, TNullable>,
-	);
+	constructor(fields: DataSchema, options?: DataFieldOptions<TSourceProp, TNullable>);
 
-	protected static override get _defaults(): DataFieldOptions<
-		DataSchema,
-		boolean
-	>;
+	protected static override get _defaults(): DataFieldOptions<DataSchema, boolean>;
 
 	/** The contained field definitions. */
 	fields: DataSchema;
@@ -264,36 +218,15 @@ export class SchemaField<
 
 	protected override _cast(value: unknown): TSourceProp;
 
-	protected override _cleanType(
-		data: object,
-		options?: CleanFieldOptions,
-	): Maybe<TSourceProp>;
+	protected override _cleanType(data: object, options?: CleanFieldOptions): Maybe<TSourceProp>;
 
-	override initialize(
-		value: TSourceProp,
-		model: ConstructorOf<DataModel>,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: TSourceProp, model: ConstructorOf<DataModel>): TNullable extends true ? TModelProp | null : TModelProp;
 
-	protected override _validateType(
-		data: object,
-		options?: Record<string, unknown>,
-	): void;
+	protected override _validateType(data: object, options?: Record<string, unknown>): void;
 
-	override toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 
-	override apply(
-		fn:
-			| string
-			| ((
-					field: this,
-					value?: unknown,
-					options?: Record<string, unknown>,
-			  ) => unknown),
-		data?: object,
-		options?: Record<string, unknown>,
-	): TSourceProp;
+	override apply(fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown), data?: object, options?: Record<string, unknown>): TSourceProp;
 }
 
 export interface CleanFieldOptions {
@@ -305,25 +238,13 @@ export interface CleanFieldOptions {
 /*  Basic Field Types                           */
 /* -------------------------------------------- */
 
-type BooleanFieldOptions<
-	TSourceProp extends boolean,
-	TNullable extends boolean,
-> = Omit<DataFieldOptions<TSourceProp, TNullable>, 'choices'>;
+type BooleanFieldOptions<TSourceProp extends boolean, TNullable extends boolean> = Omit<DataFieldOptions<TSourceProp, TNullable>, 'choices'>;
 
 /** A subclass of [DataField]{@link DataField} which deals with boolean-typed data. */
-export class BooleanField<
-	TSourceProp extends boolean = boolean,
-	TModelProp = TSourceProp,
-	TNullable extends boolean = false,
-> extends DataField<TSourceProp, TModelProp, TNullable> {
-	protected static override get _defaults(): BooleanFieldOptions<
-		boolean,
-		boolean
-	>;
+export class BooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TNullable extends boolean = false> extends DataField<TSourceProp, TModelProp, TNullable> {
+	protected static override get _defaults(): BooleanFieldOptions<boolean, boolean>;
 
-	protected override _cast(
-		value: unknown,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	protected override _cast(value: unknown): TNullable extends true ? TSourceProp | null : TSourceProp;
 
 	protected override _validateType(value: unknown): value is boolean;
 }
@@ -336,10 +257,7 @@ export class BooleanField<
  * @property [integer=false]  Must the number be an integer?
  * @property [positive=false] Must the number be positive?
  */
-interface NumberFieldOptions<
-	TSourceProp extends number = number,
-	TNullable extends boolean = boolean,
-> extends DataFieldOptions<TSourceProp, TNullable> {
+interface NumberFieldOptions<TSourceProp extends number = number, TNullable extends boolean = boolean> extends DataFieldOptions<TSourceProp, TNullable> {
 	min?: number;
 	max?: number;
 	step?: number;
@@ -347,14 +265,7 @@ interface NumberFieldOptions<
 }
 
 /** A subclass of [DataField]{@link DataField} which deals with number-typed data. */
-export class NumberField<
-		TSourceProp extends number = number,
-		TModelProp = TSourceProp,
-		TNullable extends boolean = true,
-	>
-	extends DataField<TSourceProp, TModelProp, TNullable>
-	implements NumberFieldOptions<TSourceProp, TNullable>
-{
+export class NumberField<TSourceProp extends number = number, TModelProp = TSourceProp, TNullable extends boolean = true> extends DataField<TSourceProp, TModelProp, TNullable> implements NumberFieldOptions<TSourceProp, TNullable> {
 	/** @param options  Options which configure the behavior of the field */
 	constructor(options?: NumberFieldOptions<TSourceProp>);
 
@@ -362,10 +273,7 @@ export class NumberField<
 
 	protected override _cast(value: unknown): TSourceProp;
 
-	protected override _cleanType(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): Maybe<TSourceProp>;
+	protected override _cleanType(value: unknown, options?: CleanFieldOptions): Maybe<TSourceProp>;
 
 	protected override _validateType(value: unknown): void;
 }
@@ -375,36 +283,20 @@ export class NumberField<
  * @property [blank=true]       Is the string allowed to be blank (empty)?
  * @property [trim=true]        Should any provided string be trimmed as part of cleaning?
  */
-interface StringFieldOptions<
-	TSourceProp extends string = string,
-	TNullable extends boolean = boolean,
-> extends DataFieldOptions<TSourceProp, TNullable> {
+interface StringFieldOptions<TSourceProp extends string = string, TNullable extends boolean = boolean> extends DataFieldOptions<TSourceProp, TNullable> {
 	choices?: readonly TSourceProp[] | Record<TSourceProp, string> | Function;
 	blank?: boolean;
 	trim?: boolean;
 }
 
 /** A subclass of `DataField` which deals with string-typed data. */
-export class StringField<
-		TSourceProp extends string = string,
-		TModelProp = TSourceProp,
-		TNullable extends boolean = false,
-	>
-	extends DataField<TSourceProp, TModelProp, TNullable>
-	implements StringFieldOptions<TSourceProp, TNullable>
-{
+export class StringField<TSourceProp extends string = string, TModelProp = TSourceProp, TNullable extends boolean = false> extends DataField<TSourceProp, TModelProp, TNullable> implements StringFieldOptions<TSourceProp, TNullable> {
 	/** @param options  Options which configure the behavior of the field */
 	constructor(options?: StringFieldOptions<TSourceProp, TNullable>);
 
-	protected static override get _defaults(): StringFieldOptions<
-		string,
-		boolean
-	>;
+	protected static override get _defaults(): StringFieldOptions<string, boolean>;
 
-	override clean(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override clean(value: unknown, options?: CleanFieldOptions): TNullable extends true ? TSourceProp | null : TSourceProp;
 
 	protected override _cast(value: unknown): TSourceProp;
 
@@ -413,34 +305,19 @@ export class StringField<
 	protected _validateType(value: unknown): boolean | void;
 }
 
-interface ObjectFieldOptions<
-	TSourceProp extends object,
-	TNullable extends boolean = false,
-> extends DataFieldOptions<TSourceProp, TNullable> {
+interface ObjectFieldOptions<TSourceProp extends object, TNullable extends boolean = false> extends DataFieldOptions<TSourceProp, TNullable> {
 	initial: () => Record<string, never>;
 }
 
 /** A subclass of `DataField` which deals with object-typed data. */
-export class ObjectField<
-		TSourceProp extends object,
-		TModelProp = TSourceProp,
-		TNullable extends boolean = false,
-	>
-	extends DataField<TSourceProp, TModelProp, TNullable>
-	implements Omit<ObjectFieldOptions<TSourceProp, TNullable>, 'initial'>
-{
-	protected static override get _defaults(): ObjectFieldOptions<
-		object,
-		boolean
-	>;
+export class ObjectField<TSourceProp extends object, TModelProp = TSourceProp, TNullable extends boolean = false> extends DataField<TSourceProp, TModelProp, TNullable> implements Omit<ObjectFieldOptions<TSourceProp, TNullable>, 'initial'> {
+	protected static override get _defaults(): ObjectFieldOptions<object, boolean>;
 
 	protected override _cast(value: unknown): TSourceProp;
 
 	override initialize(value: unknown): TModelProp;
 
-	override toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 
 	protected override _validateType(value: unknown): boolean | void;
 }
@@ -453,52 +330,30 @@ export type FlagField<
 	TNullable extends boolean = false,
 > = ObjectField<TSourceProp, TModelProp, TNullable>;
 
-export type SourcePropFromDataField<TDataField extends DataField> =
-	TDataField extends SchemaField<
-		infer TSchemaSourceProp,
-		infer _TSchemaModelProp,
-		infer TSchemaNullable
-	>
-		? TSchemaNullable extends true
-			? SourceFromSchema<TSchemaSourceProp> | null
-			: SourceFromSchema<TSchemaSourceProp>
-		: TDataField extends DataField<
-				infer TSourceProp,
-				infer _TModelProp,
-				infer TNullable
-		  >
-		? TNullable extends true
-			? TSourceProp | null
-			: TSourceProp
-		: never;
+export type SourcePropFromDataField<TDataField extends DataField> = TDataField extends SchemaField<infer TSchemaSourceProp, infer _TSchemaModelProp, infer TSchemaNullable>
+	? TSchemaNullable extends true
+		? SourceFromSchema<TSchemaSourceProp> | null
+		: SourceFromSchema<TSchemaSourceProp>
+	: TDataField extends DataField<infer TSourceProp, infer _TModelProp, infer TNullable>
+	? TNullable extends true
+		? TSourceProp | null
+		: TSourceProp
+	: never;
 
-export type ModelPropFromDataField<TDataField extends DataField> =
-	TDataField extends SchemaField<
-		infer TSchemaSourceProp,
-		infer _TSchemaModelProp,
-		infer TSchemaNullable
-	>
-		? TSchemaNullable extends true
-			? ModelPropsFromSchema<TSchemaSourceProp> | null
-			: ModelPropsFromSchema<TSchemaSourceProp>
-		: ReturnType<TDataField['initialize']>;
+export type ModelPropFromDataField<TDataField extends DataField> = TDataField extends SchemaField<infer TSchemaSourceProp, infer _TSchemaModelProp, infer TSchemaNullable>
+	? TSchemaNullable extends true
+		? ModelPropsFromSchema<TSchemaSourceProp> | null
+		: ModelPropsFromSchema<TSchemaSourceProp>
+	: ReturnType<TDataField['initialize']>;
 
 type ModelPropsFromSchema<TDataSchema extends DataSchema> = {
 	[K in keyof TDataSchema]: ModelPropFromDataField<TDataSchema[K]>;
 };
 
-type ArrayFieldOptions<
-	TElementField extends DataField,
-	TNullable extends boolean,
-> = DataFieldOptions<TElementField, TNullable>;
+type ArrayFieldOptions<TElementField extends DataField, TNullable extends boolean> = DataFieldOptions<TElementField, TNullable>;
 
 /** A subclass of `DataField` which deals with array-typed data. */
-export class ArrayField<
-		TElementField extends DataField,
-		TSourceProp extends SourcePropFromDataField<TElementField>[] = SourcePropFromDataField<TElementField>[],
-		TModelProp extends object = TSourceProp,
-		TNullable extends boolean = false,
-	>
+export class ArrayField<TElementField extends DataField, TSourceProp extends SourcePropFromDataField<TElementField>[] = SourcePropFromDataField<TElementField>[], TModelProp extends object = TSourceProp, TNullable extends boolean = false>
 	extends DataField<TSourceProp, TModelProp, TNullable>
 	implements ArrayFieldOptions<TElementField, TNullable>
 {
@@ -506,10 +361,7 @@ export class ArrayField<
 	 * @param element A DataField instance which defines the type of element contained in the Array.
 	 * @param options Options which configure the behavior of the field
 	 */
-	constructor(
-		element: DataField,
-		options?: ArrayFieldOptions<TElementField, TNullable>,
-	);
+	constructor(element: DataField, options?: ArrayFieldOptions<TElementField, TNullable>);
 
 	/** The data type of each element in this array */
 	element: TElementField;
@@ -522,22 +374,13 @@ export class ArrayField<
 	 */
 	protected static _validateElementType(element: unknown): unknown;
 
-	protected static override get _defaults(): ArrayFieldOptions<
-		DataField,
-		boolean
-	>;
+	protected static override get _defaults(): ArrayFieldOptions<DataField, boolean>;
 
 	protected override _cast(value: unknown): TSourceProp;
 
-	protected _cleanType(
-		value: Array<unknown> | Set<unknown>,
-		options?: CleanFieldOptions,
-	): TSourceProp;
+	protected _cleanType(value: Array<unknown> | Set<unknown>, options?: CleanFieldOptions): TSourceProp;
 
-	protected override _validateType(
-		value: unknown,
-		options?: Record<string, unknown>,
-	): void;
+	protected override _validateType(value: unknown, options?: Record<string, unknown>): void;
 
 	/**
 	 * Validate every element of the ArrayField
@@ -545,32 +388,13 @@ export class ArrayField<
 	 * @param options Validation options
 	 * @returns An array of element-specific errors
 	 */
-	protected _validateElements(
-		value: unknown[],
-		options?: Record<string, unknown>,
-	): ModelValidationError[];
+	protected _validateElements(value: unknown[], options?: Record<string, unknown>): ModelValidationError[];
 
-	override initialize(
-		value: TSourceProp,
-		model: ConstructorOf<DataModel>,
-		options: ArrayFieldOptions<TElementField, TNullable>,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: TSourceProp, model: ConstructorOf<DataModel>, options: ArrayFieldOptions<TElementField, TNullable>): TNullable extends true ? TModelProp | null : TModelProp;
 
-	override toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 
-	override apply(
-		fn:
-			| string
-			| ((
-					field: this,
-					value?: unknown,
-					options?: Record<string, unknown>,
-			  ) => unknown),
-		data?: object,
-		options?: Record<string, unknown>,
-	): TSourceProp;
+	override apply(fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown), data?: object, options?: Record<string, unknown>): TSourceProp;
 }
 
 /**
@@ -580,54 +404,32 @@ export class ArrayField<
 export class SetField<
 	TElementField extends DataField,
 	TSourceProp extends SourcePropFromDataField<TElementField>[] = SourcePropFromDataField<TElementField>[],
-	TModelProp extends Set<SourcePropFromDataField<TElementField>> = Set<
-		SourcePropFromDataField<TElementField>
-	>,
+	TModelProp extends Set<SourcePropFromDataField<TElementField>> = Set<SourcePropFromDataField<TElementField>>,
 	TNullable extends boolean = false,
 > extends ArrayField<TElementField, TSourceProp, TModelProp, TNullable> {
-	protected override _validateElements(
-		value: unknown[],
-		options?: Record<string, unknown>,
-	): ModelValidationError[];
+	protected override _validateElements(value: unknown[], options?: Record<string, unknown>): ModelValidationError[];
 
-	override initialize(
-		value: TSourceProp,
-		model: ConstructorOf<DataModel>,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: TSourceProp, model: ConstructorOf<DataModel>): TNullable extends true ? TModelProp | null : TModelProp;
 
-	override toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 }
 
 /** A subclass of `SchemaField` which embeds some other DataModel definition as an inner object. */
-export class EmbeddedDataField<
-	TSourceProp extends DataSchema = DataSchema,
-	TModelProp extends DataModel<any> = DataModel<any>,
-	TNullable extends boolean = false,
-> extends SchemaField<TSourceProp, TModelProp, TNullable> {
+export class EmbeddedDataField<TSourceProp extends DataSchema = DataSchema, TModelProp extends DataModel<any> = DataModel<any>, TNullable extends boolean = false> extends SchemaField<TSourceProp, TModelProp, TNullable> {
 	/**
 	 * @param model   The class of DataModel which should be embedded in this field
 	 * @param options Options which configure the behavior of the field
 	 */
-	constructor(
-		model: TModelProp,
-		options: ObjectFieldOptions<TSourceProp, TNullable>,
-	);
+	constructor(model: TModelProp, options: ObjectFieldOptions<TSourceProp, TNullable>);
 
 	/** The embedded DataModel definition which is contained in this field. */
 	model: ConstructorOf<TModelProp>;
 
 	protected override _initialize(fields: DataSchema): DataSchema;
 
-	override initialize(
-		value: TSourceProp,
-		model: ConstructorOf<DataModel>,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: TSourceProp, model: ConstructorOf<DataModel>): TNullable extends true ? TModelProp | null : TModelProp;
 
-	override toObject(
-		value: TModelProp,
-	): TNullable extends true ? TSourceProp | null : TSourceProp;
+	override toObject(value: TModelProp): TNullable extends true ? TSourceProp | null : TSourceProp;
 }
 
 /**
@@ -635,19 +437,12 @@ export class EmbeddedDataField<
  * Invalid elements will be dropped from the collection during validation rather than failing for the field entirely.
  */
 
-export class EmbeddedCollectionField extends ArrayField<
-	SchemaField,
-	SourceFromSchema<DataSchema>[],
-	EmbeddedCollection<DataModel<any>>
-> {
+export class EmbeddedCollectionField extends ArrayField<SchemaField, SourceFromSchema<DataSchema>[], EmbeddedCollection<DataModel<any>>> {
 	/**
 	 * @param element The type of Document which belongs to this embedded collection
 	 * @param options Options which configure the behavior of the field
 	 */
-	constructor(
-		element: ConstructorOf<Document>,
-		options?: ArrayFieldOptions<SchemaField, false>,
-	);
+	constructor(element: ConstructorOf<Document>, options?: ArrayFieldOptions<SchemaField, false>);
 
 	static override _validateElementType(element: unknown): Document;
 
@@ -657,36 +452,15 @@ export class EmbeddedCollectionField extends ArrayField<
 	/** The DataSchema of the contained Document model. */
 	get schema(): DataModel['schema'];
 
-	protected override _cleanType(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): SourcePropFromDataField<SchemaField>[];
+	protected override _cleanType(value: unknown, options?: CleanFieldOptions): SourcePropFromDataField<SchemaField>[];
 
-	protected override _validateElements(
-		value: unknown[],
-		options?: Record<string, unknown>,
-	): ModelValidationError[];
+	protected override _validateElements(value: unknown[], options?: Record<string, unknown>): ModelValidationError[];
 
-	override initialize(
-		_value: unknown,
-		model: ConstructorOf<DataModel>,
-	): EmbeddedCollection<DataModel>;
+	override initialize(_value: unknown, model: ConstructorOf<DataModel>): EmbeddedCollection<DataModel>;
 
-	override toObject(
-		value: EmbeddedCollection<DataModel>,
-	): SourcePropFromDataField<SchemaField>[];
+	override toObject(value: EmbeddedCollection<DataModel>): SourcePropFromDataField<SchemaField>[];
 
-	override apply(
-		fn:
-			| string
-			| ((
-					field: this,
-					value?: unknown,
-					options?: Record<string, unknown>,
-			  ) => unknown),
-		data?: object,
-		options?: Record<string, unknown>,
-	): SourcePropFromDataField<SchemaField>[];
+	override apply(fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown), data?: object, options?: Record<string, unknown>): SourcePropFromDataField<SchemaField>[];
 }
 
 /* -------------------------------------------- */
@@ -697,10 +471,7 @@ export class EmbeddedCollectionField extends ArrayField<
  * A subclass of [StringField]{@link StringField} which provides the primary _id for a Document.
  * The field may be initially null, but it must be non-null when it is saved to the database.
  */
-export class DocumentIdField<
-	TModelProp extends string | DataModel = string,
-	TNullable extends boolean = true,
-> extends StringField<string, TModelProp, TNullable> {
+export class DocumentIdField<TModelProp extends string | DataModel = string, TNullable extends boolean = true> extends StringField<string, TModelProp, TNullable> {
 	protected static override get _defaults(): StringFieldOptions;
 
 	protected override _cast(value: unknown): string;
@@ -712,10 +483,7 @@ export class DocumentIdField<
  * A special class of [StringField]{@link StringField} field which references another DataModel by its id.
  * This field may also be null to indicate that no foreign model is linked.
  */
-export class ForeignDocumentField<
-	TModelProp extends string | DataModel = DataModel<any>,
-	TNullable extends boolean = true,
-> extends DocumentIdField<TModelProp, TNullable> {
+export class ForeignDocumentField<TModelProp extends string | DataModel = DataModel<any>, TNullable extends boolean = true> extends DocumentIdField<TModelProp, TNullable> {
 	/**
 	 * @param model   The foreign DataModel class definition which this field should link to.
 	 * @param options Options which configure the behavior of the field
@@ -729,27 +497,18 @@ export class ForeignDocumentField<
 
 	_cast(value: unknown): string;
 
-	override initialize(
-		value: string,
-		model: ConstructorOf<DataModel>,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: string, model: ConstructorOf<DataModel>): TNullable extends true ? TModelProp | null : TModelProp;
 
 	toObject(value: TModelProp): TNullable extends true ? string | null : string;
 }
 
 /** A subclass of `ObjectField` which supports a system-level data object. */
-export class SystemDataField<
-	TSourceProp extends object = object,
-	TModelProp = TSourceProp,
-> extends ObjectField<TSourceProp, TModelProp> {
+export class SystemDataField<TSourceProp extends object = object, TModelProp = TSourceProp> extends ObjectField<TSourceProp, TModelProp> {
 	/**
 	 * @param document The base document class which belongs in this field
 	 * @param options  Options which configure the behavior of the field
 	 */
-	constructor(
-		document: ConstructorOf<DataModel>,
-		options?: ObjectFieldOptions<TSourceProp>,
-	);
+	constructor(document: ConstructorOf<DataModel>, options?: ObjectFieldOptions<TSourceProp>);
 
 	/** The canonical document name of the document type which belongs in this field */
 	document: ConstructorOf<DataModel>;
@@ -768,29 +527,16 @@ export class SystemDataField<
 
 	getInitialValue(data: unknown): TSourceProp;
 
-	protected override _cleanType(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): TSourceProp;
+	protected override _cleanType(value: unknown, options?: CleanFieldOptions): TSourceProp;
 
-	override initialize(
-		value: string,
-		model?: ConstructorOf<DataModel>,
-	): TModelProp;
+	override initialize(value: string, model?: ConstructorOf<DataModel>): TModelProp;
 
 	toObject(value: TModelProp): TSourceProp;
 }
 
 /** A special `StringField` which records a standardized CSS color string. */
-export class ColorField<TNullable extends boolean = true> extends StringField<
-	HexColorString,
-	HexColorString,
-	TNullable
-> {
-	protected static override get _defaults(): StringFieldOptions<
-		HexColorString,
-		boolean
-	>;
+export class ColorField<TNullable extends boolean = true> extends StringField<HexColorString, HexColorString, TNullable> {
+	protected static override get _defaults(): StringFieldOptions<HexColorString, boolean>;
 
 	protected override _validateType(value: unknown): boolean;
 }
@@ -800,20 +546,13 @@ export class ColorField<TNullable extends boolean = true> extends StringField<
  * @property [categories]   A set of categories in CONST.FILE_CATEGORIES which this field supports
  * @property [base64=false] Is embedded base64 data supported in lieu of a file path?
  */
-interface FilePathFieldOptions<
-	TSourceProp extends string = string,
-	TNullable extends boolean = true,
-> extends StringFieldOptions<TSourceProp, TNullable> {
+interface FilePathFieldOptions<TSourceProp extends string = string, TNullable extends boolean = true> extends StringFieldOptions<TSourceProp, TNullable> {
 	categories?: FileCategory[];
 	base64?: boolean;
 }
 
 /** A special `StringField` which records a file path or inline base64 data. */
-export class FilePathField<
-	TSourceProp extends FilePath = FilePath,
-	TModelProp = TSourceProp,
-	TNullable extends boolean = true,
-> extends StringField<TSourceProp, TModelProp, TNullable> {
+export class FilePathField<TSourceProp extends FilePath = FilePath, TModelProp = TSourceProp, TNullable extends boolean = true> extends StringField<TSourceProp, TModelProp, TNullable> {
 	/** @param options  Options which configure the behavior of the field */
 	constructor(options?: FilePathFieldOptions);
 
@@ -826,11 +565,7 @@ export class FilePathField<
  * A special `NumberField` which represents an angle of rotation in degrees between 0 and 360.
  * @property base Whether the base angle should be treated as 360 or as 0
  */
-export class AngleField<TNullable extends boolean = false> extends NumberField<
-	number,
-	number,
-	TNullable
-> {
+export class AngleField<TNullable extends boolean = false> extends NumberField<number, number, TNullable> {
 	protected static override get _defaults(): NumberFieldOptions & {
 		base: 360 | 0;
 	};
@@ -839,21 +574,13 @@ export class AngleField<TNullable extends boolean = false> extends NumberField<
 }
 
 /** A special `NumberField` represents a number between 0 and 1. */
-export class AlphaField<TNullable extends boolean = false> extends NumberField<
-	number,
-	number,
-	TNullable
-> {
+export class AlphaField<TNullable extends boolean = false> extends NumberField<number, number, TNullable> {
 	protected static get _defaults(): NumberFieldOptions;
 }
 
 /** A special `ObjectField` which captures a mapping of User IDs to Document permission levels. */
-export class DocumentOwnershipField extends ObjectField<
-	Record<string, DocumentOwnershipLevel>
-> {
-	protected static override get _defaults(): ObjectFieldOptions<
-		Record<string, DocumentOwnershipLevel>
-	>;
+export class DocumentOwnershipField extends ObjectField<Record<string, DocumentOwnershipLevel>> {
+	protected static override get _defaults(): ObjectFieldOptions<Record<string, DocumentOwnershipLevel>>;
 
 	protected override _validateType(value: object): boolean | void;
 }
@@ -861,22 +588,14 @@ export class DocumentOwnershipField extends ObjectField<
 /**
  * A special [StringField]{@link StringField} which contains serialized JSON data.
  */
-export class JSONField<
-	TModelProp = object,
-	TNullable extends boolean = false,
-> extends StringField<string, TModelProp, TNullable> {
+export class JSONField<TModelProp = object, TNullable extends boolean = false> extends StringField<string, TModelProp, TNullable> {
 	protected static override get _defaults(): StringFieldOptions;
 
-	override clean(
-		value: unknown,
-		options?: CleanFieldOptions,
-	): TNullable extends true ? string | null : string;
+	override clean(value: unknown, options?: CleanFieldOptions): TNullable extends true ? string | null : string;
 
 	protected override _validateType(value: unknown): boolean;
 
-	override initialize(
-		value: string,
-	): TNullable extends true ? TModelProp | null : TModelProp;
+	override initialize(value: string): TNullable extends true ? TModelProp | null : TModelProp;
 
 	toObject(value: TModelProp): TNullable extends true ? string | null : string;
 }
@@ -886,18 +605,12 @@ export class JSONField<
  * This class does not override any StringField behaviors, but is used by the server-side to identify fields which
  * require sanitization of user input.
  */
-export class HTMLField<
-	TSourceProp extends string = string,
-	TModelProp = TSourceProp,
-	TNullable extends boolean = false,
-> extends StringField<TSourceProp, TModelProp, TNullable> {
+export class HTMLField<TSourceProp extends string = string, TModelProp = TSourceProp, TNullable extends boolean = false> extends StringField<TSourceProp, TModelProp, TNullable> {
 	protected static override get _defaults(): StringFieldOptions;
 }
 
 /** A subclass of `NumberField` which is used for storing integer sort keys. */
-export class IntegerSortField<
-	TNullable extends boolean = true,
-> extends NumberField<number, number, TNullable> {
+export class IntegerSortField<TNullable extends boolean = true> extends NumberField<number, number, TNullable> {
 	protected static override get _defaults(): NumberFieldOptions;
 }
 

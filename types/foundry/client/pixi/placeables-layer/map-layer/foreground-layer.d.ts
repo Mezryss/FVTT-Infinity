@@ -47,8 +47,5 @@ declare class ForegroundLayer extends MapLayer {
 	 */
 	protected _drawOcclusionShapes(tokens: Token[]): void;
 
-	protected override _getDropData(
-		event: PIXI.InteractionEvent,
-		data: foundry.data.TileSource,
-	): Promise<foundry.data.TileSource>;
+	protected override _getDropData(event: PIXI.InteractionEvent, data: foundry.data.TileSource): Promise<foundry.data.TileSource>;
 }

@@ -10,11 +10,7 @@ declare module foundry {
 			readonly combatants: this['data']['combatants'];
 
 			/** Is a user able to update an existing Combat? */
-			protected static _canUpdate(
-				user: documents.BaseUser,
-				doc: BaseCombat,
-				data: data.CombatData,
-			): boolean;
+			protected static _canUpdate(user: documents.BaseUser, doc: BaseCombat, data: data.CombatData): boolean;
 		}
 
 		interface BaseCombat {

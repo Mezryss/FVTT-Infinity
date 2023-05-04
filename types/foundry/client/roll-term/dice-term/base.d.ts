@@ -10,9 +10,7 @@ declare global {
 	 * @param [termData.results]   An optional array of pre-cast results for the term
 	 * @param [termData.options]   Additional options that modify the term
 	 */
-	abstract class DiceTerm<
-		TData extends DiceTermData = DiceTermData,
-	> extends RollTerm<TData> {
+	abstract class DiceTerm<TData extends DiceTermData = DiceTermData> extends RollTerm<TData> {
 		constructor({ number, faces, modifiers, results, options }?: TData);
 
 		/** The number of dice of this term to roll, before modifiers are applied */
@@ -72,13 +70,7 @@ declare global {
 		 */
 		alter(multiply: number, add: number): this;
 
-		protected override _evaluateSync({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): Evaluated<this>;
+		protected override _evaluateSync({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): Evaluated<this>;
 
 		/**
 		 * Roll the DiceTerm by mapping a random uniform draw against the faces of the dice term.
@@ -87,13 +79,7 @@ declare global {
 		 * @param [options.maximize=false] Maximize the result, obtaining the largest possible value.
 		 * @return The produced result
 		 */
-		roll({
-			minimize,
-			maximize,
-		}?: {
-			minimize?: boolean;
-			maximize?: boolean;
-		}): DiceTermResult;
+		roll({ minimize, maximize }?: { minimize?: boolean; maximize?: boolean }): DiceTermResult;
 
 		/**
 		 * Return a string used as the label for each rolled result
@@ -140,11 +126,7 @@ declare global {
 		 * @param target     The target value
 		 * @return Is the comparison true?
 		 */
-		static compareResult(
-			result: number,
-			comparison: ComparisonOperator,
-			target?: number,
-		): boolean;
+		static compareResult(result: number, comparison: ComparisonOperator, target?: number): boolean;
 
 		/**
 		 * A helper method to modify the results array of a dice term by flagging certain results are kept or dropped.
@@ -154,35 +136,15 @@ declare global {
 		 * @param [highest] Keep the highest?
 		 * @return The modified results array
 		 */
-		protected static _keepOrDrop<T extends DiceTermResult>(
-			results: T[],
-			number: number,
-			{ keep, highest }?: { keep?: boolean; highest?: boolean },
-		): T[];
+		protected static _keepOrDrop<T extends DiceTermResult>(results: T[], number: number, { keep, highest }?: { keep?: boolean; highest?: boolean }): T[];
 
 		/**
 		 * A reusable helper function to handle the identification and deduction of failures
 		 */
-		protected static _applyCount<T extends DiceTermResult>(
-			results: T,
-			comparison: ComparisonOperator,
-			target: number,
-			{
-				flagSuccess,
-				flagFailure,
-			}?: { flagSuccess?: boolean; flagFailure?: boolean },
-		): void;
+		protected static _applyCount<T extends DiceTermResult>(results: T, comparison: ComparisonOperator, target: number, { flagSuccess, flagFailure }?: { flagSuccess?: boolean; flagFailure?: boolean }): void;
 
 		/** A reusable helper function to handle the identification and deduction of failures */
-		protected static _applyDeduct<T extends DiceTermResult>(
-			results: T[],
-			comparison: ComparisonOperator,
-			target: number,
-			{
-				deductFailure,
-				invertFailure,
-			}?: { deductFailure?: boolean; invertFailure?: boolean },
-		): void;
+		protected static _applyDeduct<T extends DiceTermResult>(results: T[], comparison: ComparisonOperator, target: number, { deductFailure, invertFailure }?: { deductFailure?: boolean; invertFailure?: boolean }): void;
 
 		/* -------------------------------------------- */
 		/*  Factory Methods                             */
@@ -194,20 +156,14 @@ declare global {
 		 * @param [options={}] Additional options which customize the match
 		 * @param [options.imputeNumber=true] Allow the number of dice to be optional, i.e. "d6"
 		 */
-		static matchTerm(
-			expression: string,
-			{ imputeNumber }?: { imputeNumber: boolean },
-		): RegExpMatchArray | null;
+		static matchTerm(expression: string, { imputeNumber }?: { imputeNumber: boolean }): RegExpMatchArray | null;
 
 		/**
 		 * Construct a term of this type given a matched regular expression array.
 		 * @param match The matched regular expression array
 		 * @return The constructed term
 		 */
-		static fromMatch<T extends DiceTerm>(
-			this: ConstructorOf<T>,
-			match: RegExpMatchArray,
-		): T;
+		static fromMatch<T extends DiceTerm>(this: ConstructorOf<T>, match: RegExpMatchArray): T;
 	}
 
 	/**

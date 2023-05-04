@@ -25,9 +25,5 @@ declare class ChatBubbles {
 	 * @param emote     Whether to style the speech bubble as an emote
 	 * @return          A Promise which resolves once the chat bubble has been created
 	 */
-	say(
-		token: Token,
-		message: string,
-		{ emote }: { emote: boolean },
-	): Promise<void>;
+	say(token: Token, message: string, { emote }: { emote: boolean }): Promise<void>;
 }

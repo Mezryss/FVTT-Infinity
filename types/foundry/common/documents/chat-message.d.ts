@@ -22,29 +22,15 @@ declare module foundry {
 			static override get metadata(): ChatMessageMetadata;
 
 			/** Is a user able to create a new chat message? */
-			protected static _canCreate(
-				user: documents.BaseUser,
-				doc: documents.BaseChatMessage,
-			): boolean;
+			protected static _canCreate(user: documents.BaseUser, doc: documents.BaseChatMessage): boolean;
 
 			/** Is a user able to update an existing chat message? */
-			protected static _canUpdate(
-				user: documents.BaseUser,
-				doc: documents.BaseChatMessage,
-				data: data.ChatMessageData,
-			): boolean;
+			protected static _canUpdate(user: documents.BaseUser, doc: documents.BaseChatMessage, data: data.ChatMessageData): boolean;
 
 			/** Is a user able to delete an existing chat message? */
-			protected static _canDelete(
-				user: documents.BaseUser,
-				doc: documents.BaseChatMessage,
-			): boolean;
+			protected static _canDelete(user: documents.BaseUser, doc: documents.BaseChatMessage): boolean;
 
-			static createDocuments<T extends abstract.Document>(
-				this: ConstructorOf<T>,
-				data?: PreCreate<T['_source']>[],
-				context?: ChatMessageModificationContext,
-			): Promise<T[]>;
+			static createDocuments<T extends abstract.Document>(this: ConstructorOf<T>, data?: PreCreate<T['_source']>[], context?: ChatMessageModificationContext): Promise<T[]>;
 		}
 
 		interface BaseChatMessage {
@@ -53,8 +39,7 @@ declare module foundry {
 			get documentName(): 'ChatMessage';
 		}
 
-		interface ChatMessageModificationContext
-			extends DocumentModificationContext<ChatMessage> {
+		interface ChatMessageModificationContext extends DocumentModificationContext<ChatMessage> {
 			rollMode: RollMode;
 		}
 

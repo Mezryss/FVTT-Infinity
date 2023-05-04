@@ -19,13 +19,7 @@ declare global {
 			refreshVisionSources: { propagate: []; reset: [] };
 			refreshPrimary: { propagate: []; reset: [] };
 			initializeVision: {
-				propagate: [
-					'refreshVision',
-					'refreshTiles',
-					'refreshLighting',
-					'refreshLightSources',
-					'refreshPrimary',
-				];
+				propagate: ['refreshVision', 'refreshTiles', 'refreshLighting', 'refreshLightSources', 'refreshPrimary'];
 				reset: [];
 			};
 			refreshVision: { propagate: ['refreshVisionSources']; reset: [] };
@@ -58,10 +52,7 @@ declare global {
 		 * @param flags      Flag values (true) to assign where the keys belong to PerceptionManager.FLAGS
 		 * @param [v2=false] Opt-in to passing v2 flags, otherwise a backwards compatibility shim will be applied
 		 */
-		update(
-			flags: { [K in keyof typeof PerceptionManager.FLAGS]?: true },
-			v2?: boolean,
-		): void;
+		update(flags: { [K in keyof typeof PerceptionManager.FLAGS]?: true }, v2?: boolean): void;
 
 		/**
 		 * A helper function to perform an immediate initialization plus incremental refresh.

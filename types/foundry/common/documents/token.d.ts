@@ -49,11 +49,7 @@ declare module foundry {
 			static override get metadata(): TokenMetadata;
 
 			/** Is a user able to update an existing Token? */
-			protected static _canUpdate(
-				user: BaseUser,
-				doc: BaseToken,
-				data: data.TokenData,
-			): boolean;
+			protected static _canUpdate(user: BaseUser, doc: BaseToken, data: data.TokenData): boolean;
 		}
 
 		interface BaseToken extends abstract.Document {

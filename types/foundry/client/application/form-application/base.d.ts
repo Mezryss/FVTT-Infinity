@@ -13,10 +13,7 @@ declare global {
 	 *
 	 * @param options   Additional options which modify the rendering of the sheet.
 	 */
-	abstract class FormApplication<
-		TObject extends object = object,
-		TOptions extends FormApplicationOptions = FormApplicationOptions,
-	> extends Application<TOptions> {
+	abstract class FormApplication<TObject extends object = object, TOptions extends FormApplicationOptions = FormApplicationOptions> extends Application<TOptions> {
 		constructor(object?: TObject, options?: Partial<TOptions>);
 
 		override options: TOptions;
@@ -47,19 +44,11 @@ declare global {
 		/** Is the Form Application currently editable? */
 		get isEditable(): boolean;
 
-		getData(
-			options?: Partial<TOptions>,
-		): FormApplicationData<TObject> | Promise<FormApplicationData<TObject>>;
+		getData(options?: Partial<TOptions>): FormApplicationData<TObject> | Promise<FormApplicationData<TObject>>;
 
-		protected override _render(
-			force?: boolean,
-			options?: RenderOptions,
-		): Promise<void>;
+		protected override _render(force?: boolean, options?: RenderOptions): Promise<void>;
 
-		protected override _renderInner(
-			data: FormApplicationData<TObject>,
-			options: RenderOptions,
-		): Promise<JQuery>;
+		protected override _renderInner(data: FormApplicationData<TObject>, options: RenderOptions): Promise<JQuery>;
 
 		/* -------------------------------------------- */
 		/*  Event Listeners and Handlers                */
@@ -89,19 +78,14 @@ declare global {
 		 * @param [preventRender] Prevent the application from re-rendering as a result of form submission
 		 * @returns A promise which resolves to the validated update data
 		 */
-		protected _onSubmit(
-			event: Event,
-			options?: OnSubmitFormOptions,
-		): Promise<Record<string, unknown>>;
+		protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
 
 		/**
 		 * Get an object of update data used to update the form's target object
 		 * @param updateData Additional data that should be merged with the form data
 		 * @return The prepared update data
 		 */
-		protected _getSubmitData(
-			updateData?: Record<string, unknown>,
-		): Record<string, unknown>;
+		protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
 
 		/**
 		 * Handle changes to an input element, submitting the form if options.submitOnChange is true.
@@ -122,10 +106,7 @@ declare global {
 		 * @param formData  The object of validated form data with which to update the object
 		 * @returns         A Promise which resolves once the update operation has completed
 		 */
-		protected abstract _updateObject(
-			event: Event,
-			formData: Record<string, unknown>,
-		): Promise<unknown>;
+		protected abstract _updateObject(event: Event, formData: Record<string, unknown>): Promise<unknown>;
 
 		/* -------------------------------------------- */
 		/*  TinyMCE Editor                              */
@@ -137,11 +118,7 @@ declare global {
 		 * @param options        TinyMCE initialization options passed to TextEditor.create
 		 * @param initialContent Initial text content for the editor area.
 		 */
-		activateEditor(
-			name: string,
-			options?: Partial<TinyMCE.EditorOptions>,
-			initialContent?: string,
-		): Promise<TinyMCE.Editor>;
+		activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
 
 		/**
 		 * Handle saving the content of a specific editor by name

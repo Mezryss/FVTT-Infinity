@@ -6,9 +6,7 @@ declare global {
 	 * Each primary Document type has an associated subclass of WorldCollection which contains them.
 	 * @param data An array of data objects from which to create Document instances
 	 */
-	abstract class WorldCollection<
-		TDocument extends WorldDocument,
-	> extends DocumentCollection<TDocument> {
+	abstract class WorldCollection<TDocument extends WorldDocument> extends DocumentCollection<TDocument> {
 		constructor(data?: TDocument['_source'][]);
 
 		/** The source data is, itself, a mapping of IDs to data objects */
@@ -57,12 +55,7 @@ declare global {
 		 * @param [options]    Optional arguments passed to the Document.create method
 		 * @return The imported Document instance
 		 */
-		importFromCompendium(
-			pack: CompendiumCollection,
-			id: string,
-			updateData?: DocumentUpdateData<TDocument>,
-			options?: DocumentModificationContext<TDocument>,
-		): Promise<TDocument | null>;
+		importFromCompendium(pack: CompendiumCollection, id: string, updateData?: DocumentUpdateData<TDocument>, options?: DocumentModificationContext<TDocument>): Promise<TDocument | null>;
 
 		/**
 		 * Apply data transformations when importing a Document from a Compendium pack
@@ -74,10 +67,7 @@ declare global {
 		 * @param [options.keepId=false]          Retain the Document id from the source Compendium
 		 * @return The processed data ready for world Document creation
 		 */
-		fromCompendium(
-			document: TDocument | TDocument['_source'],
-			options?: FromCompendiumOptions,
-		): TDocument['_source'];
+		fromCompendium(document: TDocument | TDocument['_source'], options?: FromCompendiumOptions): TDocument['_source'];
 	}
 
 	interface FromCompendiumOptions {

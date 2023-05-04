@@ -9,10 +9,7 @@ declare global {
 		 * @param content   Initial HTML or text content to populate the editor with
 		 * @return          The editor instance.
 		 */
-		static create(
-			options?: Partial<TinyMCE.EditorOptions>,
-			content?: string,
-		): Promise<TinyMCE.Editor>;
+		static create(options?: Partial<TinyMCE.EditorOptions>, content?: string): Promise<TinyMCE.Editor>;
 
 		/** A list of elements that are retained when truncating HTML. */
 		protected static _PARAGRAPH_ELEMENTS: Set<string>;
@@ -41,18 +38,9 @@ declare global {
 		 * @param [options.rollData]       The data object providing context for inline rolls
 		 * @return The enriched HTML content
 		 */
-		static enrichHTML(
-			content: string | null,
-			options?: EnrichHTMLOptions & { async?: false },
-		): string;
-		static enrichHTML(
-			content: string | null,
-			options?: EnrichHTMLOptions & { async: true },
-		): Promise<string>;
-		static enrichHTML(
-			content: string | null,
-			options?: EnrichHTMLOptions,
-		): string | Promise<string>;
+		static enrichHTML(content: string | null, options?: EnrichHTMLOptions & { async?: false }): string;
+		static enrichHTML(content: string | null, options?: EnrichHTMLOptions & { async: true }): Promise<string>;
+		static enrichHTML(content: string | null, options?: EnrichHTMLOptions): string | Promise<string>;
 
 		/**
 		 * Preview an HTML fragment by constructing a substring of a given length from its inner text.
@@ -75,14 +63,7 @@ declare global {
 		 * @param [splitWords] Whether to truncate by splitting on white space (if true) or breaking words.
 		 * @param [suffix]     A suffix string to append to denote that the text was truncated.
 		 */
-		static truncateText(
-			text: string,
-			{
-				maxLength,
-				splitWords,
-				suffix,
-			}: { maxLength?: number; splitWords?: boolean; suffix?: string | null },
-		): string;
+		static truncateText(text: string, { maxLength, splitWords, suffix }: { maxLength?: number; splitWords?: boolean; suffix?: string | null }): string;
 
 		/* -------------------------------------------- */
 		/*  Text Node Manipulation                      */
@@ -98,18 +79,10 @@ declare global {
 		/**
 		 * Facilitate the replacement of text node content using a matching regex rule and a provided replacement function.
 		 */
-		protected static _replaceTextContent(
-			text: Text[],
-			rgx: RegExp,
-			func: (param: string) => string,
-		): boolean;
+		protected static _replaceTextContent(text: Text[], rgx: RegExp, func: (param: string) => string): boolean;
 
 		/** Replace a matched portion of a Text node with a replacement Node */
-		protected static _replaceTextNode(
-			text: string,
-			match: RegExpMatchArray,
-			replacement: Node,
-		): void;
+		protected static _replaceTextNode(text: string, match: RegExpMatchArray, replacement: Node): void;
 
 		/* -------------------------------------------- */
 		/*  Text Replacement Functions                  */
@@ -123,12 +96,7 @@ declare global {
 		 * @param name   A customized or over-ridden display name for the link
 		 * @return An HTML element for the document link
 		 */
-		protected static _createContentLink(
-			match: string,
-			type: string,
-			target: string,
-			name: string,
-		): HTMLAnchorElement;
+		protected static _createContentLink(match: string, type: string, target: string, name: string): HTMLAnchorElement;
 
 		/**
 		 * Replace a hyperlink-like string with an actual HTML &lt;a> tag
@@ -145,11 +113,7 @@ declare global {
 		 * @returns The replaced match, returned as a Promise if async was true and the message contained an
 		 *          immediate inline roll.
 		 */
-		static _createInlineRoll(
-			match: RegExpMatchArray,
-			rollData: Record<string, unknown>,
-			options?: EvaluateRollParams,
-		): HTMLAnchorElement | null | Promise<HTMLAnchorElement | null>;
+		static _createInlineRoll(match: RegExpMatchArray, rollData: Record<string, unknown>, options?: EvaluateRollParams): HTMLAnchorElement | null | Promise<HTMLAnchorElement | null>;
 
 		/* -------------------------------------------- */
 		/*  Event Listeners and Handlers                */
@@ -173,9 +137,7 @@ declare global {
 		protected static _onPlaySound(doc: PlaylistSound): void;
 
 		/** Find all content links belonging to a given PlaylistSound. */
-		protected static _getSoundContentLinks(
-			doc: PlaylistSound,
-		): NodeListOf<HTMLAnchorElement>;
+		protected static _getSoundContentLinks(doc: PlaylistSound): NodeListOf<HTMLAnchorElement>;
 
 		/**
 		 * Begin a Drag+Drop workflow for a dynamic content link
@@ -188,10 +150,7 @@ declare global {
 		 * @param event  The originating drop event which triggered the data transfer
 		 * @param editor The TinyMCE editor instance being dropped on
 		 */
-		protected static _onDropEditorData(
-			event: ElementDragEvent,
-			editor: TinyMCE.Editor,
-		): Promise<void>;
+		protected static _onDropEditorData(event: ElementDragEvent, editor: TinyMCE.Editor): Promise<void>;
 
 		/**
 		 * Extract JSON data from a drag/drop event.

@@ -38,9 +38,7 @@ declare global {
 			 * @param [data={}]  Initial data used to construct the data object
 			 * @param [document] The document to which this data object belongs
 			 */
-			abstract class DocumentData<
-				TDocument extends abstract.Document | null = abstract.Document | null,
-			> {
+			abstract class DocumentData<TDocument extends abstract.Document | null = abstract.Document | null> {
 				constructor(data?: DocumentSource, document?: TDocument | null);
 
 				/** An immutable reverse-reference to the Document to which this data belongs, possibly null. */
@@ -85,10 +83,7 @@ declare global {
 				 * @param data The provided data object
 				 * @returns The default value for the field
 				 */
-				protected static _getFieldDefaultValue(
-					field: DocumentField,
-					data: unknown,
-				): unknown;
+				protected static _getFieldDefaultValue(field: DocumentField, data: unknown): unknown;
 
 				/** Initialize the instance by copying data from the source object to instance attributes. */
 				protected _initialize(): void;
@@ -113,19 +108,7 @@ declare global {
 				 * @param [options.strict]   If strict, will throw errors for any invalid data. Default is false.
 				 * @return An indicator for whether or not the document contains valid data
 				 */
-				validate({
-					changes,
-					children,
-					clean,
-					replace,
-					strict,
-				}?: {
-					changes?: boolean;
-					children?: boolean;
-					clean?: boolean;
-					replace?: boolean;
-					strict?: boolean;
-				}): boolean;
+				validate({ changes, children, clean, replace, strict }?: { changes?: boolean; children?: boolean; clean?: boolean; replace?: boolean; strict?: boolean }): boolean;
 
 				/**
 				 * Jointly validate the overall document after each field has been individually validated.
@@ -145,10 +128,7 @@ declare global {
 				 * @param options Options which determine how the new data is merged
 				 * @returns The changed keys and values which are different than the previous data
 				 */
-				update(
-					data?: DocumentUpdateData,
-					options?: DocumentModificationContext,
-				): DeepPartial<this['_source']>;
+				update(data?: DocumentUpdateData, options?: DocumentModificationContext): DeepPartial<this['_source']>;
 
 				/**
 				 * Copy and transform the DocumentData into a plain object.
@@ -158,9 +138,7 @@ declare global {
 				 */
 				toObject<D extends DocumentData>(this: D, source?: true): D['_source'];
 				toObject<D extends DocumentData>(this: D, source: false): RawObject<D>;
-				toObject<D extends DocumentData>(
-					source?: boolean,
-				): D['_source'] | RawObject<D>;
+				toObject<D extends DocumentData>(source?: boolean): D['_source'] | RawObject<D>;
 
 				/**
 				 * Extract the source data for the DocumentData into a simple object format that can be serialized.
@@ -173,18 +151,13 @@ declare global {
 				 * @param json Serialized document data in string format
 				 * @returns A constructed data instance
 				 */
-				static fromJSON<T extends DocumentData>(
-					this: ConstructorOf<T>,
-					json: string,
-				): T;
+				static fromJSON<T extends DocumentData>(this: ConstructorOf<T>, json: string): T;
 			}
 		}
 	}
 
 	type RawObject<T extends foundry.abstract.DocumentData> = {
-		[P in keyof T['_source']]: T[P] extends foundry.abstract.EmbeddedCollection<
-			infer U
-		>
+		[P in keyof T['_source']]: T[P] extends foundry.abstract.EmbeddedCollection<infer U>
 			? RawObject<U['data']>[]
 			: T[P] extends foundry.abstract.DocumentData
 			? RawObject<T[P]>

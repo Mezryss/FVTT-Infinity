@@ -19,16 +19,10 @@ declare global {
 		 * @param categories The current Map of Categories to add to
 		 * @returns The number of Actions added
 		 */
-		protected _addMouseControlsReference(
-			categories: Map<string, object>,
-		): number;
+		protected _addMouseControlsReference(categories: Map<string, object>): number;
 
 		/** Given an Binding and its parent Action, detects other Actions that might conflict with that binding */
-		_detectConflictingActions(
-			actionId: string,
-			action: KeybindingActionConfig,
-			binding: KeybindingAction,
-		): KeybindingAction[];
+		_detectConflictingActions(actionId: string, action: KeybindingActionConfig, binding: KeybindingAction): KeybindingAction[];
 
 		/** Transforms a Binding into a human-readable string representation */
 		static _humanizeBinding(binding: KeybindingActionBinding): string;
@@ -51,12 +45,7 @@ declare global {
 		protected _onClickDelete(event: MouseEvent): Promise<void>;
 
 		/** Inserts a Binding into the Pending Edits object, creating a new Map entry as needed */
-		protected _addPendingEdit(
-			namespace: string,
-			action: string,
-			bindingIndex: number,
-			binding: KeybindingActionBinding,
-		): void;
+		protected _addPendingEdit(namespace: string, action: string, bindingIndex: number, binding: KeybindingActionBinding): void;
 
 		/** Toggle visibility of the Edit / Save UI */
 		protected _onClickEditableBinding(event: MouseEvent): void;
@@ -83,9 +72,6 @@ declare global {
 		protected _onKeydownBindingInput(event: KeyboardEvent): void;
 
 		// Not actually implemented but requires by `FormApplication`
-		protected override _updateObject(
-			event: Event,
-			formData: Record<string, unknown>,
-		): Promise<unknown>;
+		protected override _updateObject(event: Event, formData: Record<string, unknown>): Promise<unknown>;
 	}
 }

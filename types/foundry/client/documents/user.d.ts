@@ -9,10 +9,7 @@ declare global {
 	 * @see {@link applications.UserConfig}     The User configuration application
 	 */
 	class User<TActor extends Actor = Actor> extends UserConstructor {
-		constructor(
-			data: PreCreate<foundry.data.UserSource>,
-			context?: DocumentConstructionContext<User>,
-		);
+		constructor(data: PreCreate<foundry.data.UserSource>, context?: DocumentConstructionContext<User>);
 
 		/** Track whether the user is currently active in the game */
 		active: boolean;
@@ -54,11 +51,7 @@ declare global {
 		 * @param [fromSlot] An optional origin slot from which the Macro is being shifted
 		 * @return A Promise which resolves once the User update is complete
 		 */
-		assignHotbarMacro(
-			macro: Macro | null,
-			slot?: number | string,
-			{ fromSlot }?: { fromSlot?: number | undefined },
-		): Promise<this>;
+		assignHotbarMacro(macro: Macro | null, slot?: number | string, { fromSlot }?: { fromSlot?: number | undefined }): Promise<this>;
 
 		/**
 		 * Assign a specific boolean permission to this user.
@@ -67,10 +60,7 @@ declare global {
 		 * @param permission The permission name from USER_PERMISSIONS
 		 * @param allowed    Whether to allow or restrict the permission
 		 */
-		assignPermission(
-			permission: UserPermission,
-			allowed: boolean,
-		): Promise<this | undefined>;
+		assignPermission(permission: UserPermission, allowed: boolean): Promise<this | undefined>;
 
 		/**
 		 * Submit User activity data to the server for broadcast to other players.
@@ -98,16 +88,9 @@ declare global {
 		 */
 		updateTokenTargets(targetIds?: string[]): void;
 
-		protected override _onUpdate(
-			changed: DeepPartial<this['_source']>,
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onUpdate(changed: DeepPartial<this['_source']>, options: DocumentModificationContext, userId: string): void;
 
-		protected override _onDelete(
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onDelete(options: DocumentModificationContext, userId: string): void;
 	}
 
 	interface UserActivity {

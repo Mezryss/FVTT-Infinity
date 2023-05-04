@@ -8,13 +8,7 @@ import './tooltip';
 import './tour';
 
 declare global {
-	interface FoundryUI<
-		TActor extends Actor,
-		TActorDirectory extends ActorDirectory<TActor>,
-		TItem extends Item,
-		TChatLog extends ChatLog,
-		TCompendiumDirectory extends CompendiumDirectory,
-	> {
+	interface FoundryUI<TActor extends Actor, TActorDirectory extends ActorDirectory<TActor>, TItem extends Item, TChatLog extends ChatLog, TCompendiumDirectory extends CompendiumDirectory> {
 		actors: TActorDirectory;
 		chat: TChatLog;
 		combat: CombatTracker<Combat>;

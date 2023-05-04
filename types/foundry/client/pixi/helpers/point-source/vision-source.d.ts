@@ -38,16 +38,10 @@ declare global {
 		fov: PointSourcePolygon;
 
 		/** Track which uniforms need to be reset */
-		protected _resetUniforms: Record<
-			'background' | 'illumination' | 'coloration',
-			boolean
-		>;
+		protected _resetUniforms: Record<'background' | 'illumination' | 'coloration', boolean>;
 
 		/** To track if a source is temporarily shutdown to avoid glitches */
-		protected _shutdown: Record<
-			'background' | 'illumination' | 'coloration',
-			boolean
-		>;
+		protected _shutdown: Record<'background' | 'illumination' | 'coloration', boolean>;
 
 		/* -------------------------------------------- */
 		/*  Vision Source Initialization                */
@@ -94,20 +88,14 @@ declare global {
 		/*  Vision Source Rendering                     */
 		/* -------------------------------------------- */
 
-		protected _createMeshes(): Record<
-			'background' | 'illumination' | 'coloration',
-			PIXI.Mesh
-		>;
+		protected _createMeshes(): Record<'background' | 'illumination' | 'coloration', PIXI.Mesh>;
 
 		override destroy(): void;
 
 		override refreshSource(): void;
 
 		/** Render the containers used to represent this light source within the LightingLayer. */
-		drawMeshes(): Record<
-			'background' | 'illumination' | 'coloration',
-			PIXI.Mesh
-		>;
+		drawMeshes(): Record<'background' | 'illumination' | 'coloration', PIXI.Mesh>;
 
 		/**
 		 * Draw the background mesh which provide special vision.

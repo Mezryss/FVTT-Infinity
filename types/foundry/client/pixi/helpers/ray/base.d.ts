@@ -42,12 +42,7 @@ declare global {
 		 */
 		readonly normAngle: number;
 
-		static fromAngle(
-			x: number,
-			y: number,
-			radians: number,
-			distance: number,
-		): Ray;
+		static fromAngle(x: number, y: number, radians: number, distance: number): Ray;
 
 		static fromArrays(A: [], B: []): Ray;
 
@@ -67,15 +62,6 @@ declare global {
 		 */
 		intersectSegment(coords: [number]): Vector2;
 
-		static _getIntersection(
-			x1: number,
-			y1: number,
-			x2: number,
-			y2: number,
-			x3: number,
-			y3: number,
-			x4: number,
-			y4: number,
-		): Vector2;
+		static _getIntersection(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): Vector2;
 	}
 }

@@ -32,9 +32,6 @@ declare global {
 		 * @param userId       The User id who generated the activity data
 		 * @param activityData The object of activity data
 		 */
-		protected static _handleUserActivity(
-			userId: string,
-			activityData?: UserActivity,
-		): void;
+		protected static _handleUserActivity(userId: string, activityData?: UserActivity): void;
 	}
 }

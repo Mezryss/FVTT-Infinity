@@ -1,9 +1,7 @@
 export {};
 
 declare global {
-	class TemplateLayer<
-		TTemplate extends MeasuredTemplate = MeasuredTemplate,
-	> extends PlaceablesLayer<TTemplate> {
+	class TemplateLayer<TTemplate extends MeasuredTemplate = MeasuredTemplate> extends PlaceablesLayer<TTemplate> {
 		static override get layerOptions(): TemplateLayerOptions;
 
 		static documentName: 'MeasuredTemplate';
@@ -23,17 +21,11 @@ declare global {
 		/*  Event Listeners and Handlers                */
 		/* -------------------------------------------- */
 
-		protected override _onDragLeftStart(
-			event: PlaceablesLayerEvent<TTemplate>,
-		): Promise<TTemplate | void>;
+		protected override _onDragLeftStart(event: PlaceablesLayerEvent<TTemplate>): Promise<TTemplate | void>;
 
-		protected override _onDragLeftMove(
-			event: PlaceablesLayerEvent<TTemplate>,
-		): void;
+		protected override _onDragLeftMove(event: PlaceablesLayerEvent<TTemplate>): void;
 
-		protected override _onMouseWheel(
-			event: WheelEvent,
-		): Promise<TTemplate['document'] | undefined> | void;
+		protected override _onMouseWheel(event: WheelEvent): Promise<TTemplate['document'] | undefined> | void;
 	}
 
 	/**

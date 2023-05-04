@@ -7,14 +7,8 @@ import { EmbeddedCollection } from './embedded-collection.mjs';
  * @param [data={}]    Initial data used to construct the data object
  * @param [options={}] Options which affect DataModel construction
  */
-export abstract class DataModel<
-	TParent extends DataModel | null = _DataModel | null,
-	TSchema extends fields.DataSchema = fields.DataSchema,
-> {
-	constructor(
-		data?: DeepPartial<SourceFromSchema<fields.DataSchema>>,
-		options?: DataModelConstructionOptions<TParent>,
-	);
+export abstract class DataModel<TParent extends DataModel | null = _DataModel | null, TSchema extends fields.DataSchema = fields.DataSchema> {
+	constructor(data?: DeepPartial<SourceFromSchema<fields.DataSchema>>, options?: DataModelConstructionOptions<TParent>);
 
 	/**
 	 * The source data object for this DataModel instance.
@@ -62,10 +56,7 @@ export abstract class DataModel<
 	 * @param [options] Options provided to the model constructor
 	 * @returns Migrated and cleaned source data which will be stored to the model instance
 	 */
-	protected _initializeSource(
-		data?: object,
-		options?: Record<string, unknown>,
-	): this['_source'];
+	protected _initializeSource(data?: object, options?: Record<string, unknown>): this['_source'];
 
 	/**
 	 * Clean a data source object to conform to a specific provided schema.
@@ -73,10 +64,7 @@ export abstract class DataModel<
 	 * @param [options={}] Additional options which are passed to field cleaning methods
 	 * @returns The cleaned source data
 	 */
-	static cleanData(
-		source?: object,
-		options?: Record<string, unknown>,
-	): SourceFromSchema<fields.DataSchema>;
+	static cleanData(source?: object, options?: Record<string, unknown>): SourceFromSchema<fields.DataSchema>;
 
 	/* ---------------------------------------- */
 	/*  Data Initialization                     */
@@ -115,14 +103,7 @@ export abstract class DataModel<
 	 *                                 example testing a complete data model) by explicitly passing true.
 	 * @return An indicator for whether the document contains valid data
 	 */
-	validate(options?: {
-		changes?: DeepPartial<SourceFromSchema<TSchema>>;
-		clean?: boolean;
-		fallback?: boolean;
-		strict?: boolean;
-		fields?: boolean;
-		joint?: boolean;
-	}): boolean;
+	validate(options?: { changes?: DeepPartial<SourceFromSchema<TSchema>>; clean?: boolean; fallback?: boolean; strict?: boolean; fields?: boolean; joint?: boolean }): boolean;
 
 	/**
 	 * Get an array of validation errors from the provided error structure
@@ -131,10 +112,7 @@ export abstract class DataModel<
 	 * @param [options.label]     A prefix label that should prepend any error messages
 	 * @param [options.namespace] A field namespace that should prepend key names with dot-notation
 	 */
-	static formatValidationErrors(
-		errors: Record<string, string>,
-		options?: { label?: string; namespace?: string },
-	): string;
+	static formatValidationErrors(errors: Record<string, string>, options?: { label?: string; namespace?: string }): string;
 
 	/**
 	 * Jointly validate the overall data model after each field has been individually validated.
@@ -157,10 +135,7 @@ export abstract class DataModel<
 	 * @param [options={}] Options which determine how the new data is merged
 	 * @returns An object containing the changed keys and values
 	 */
-	updateSource(
-		changes?: DeepPartial<this['_source']> | undefined,
-		options?: MergeObjectOptions,
-	): DeepPartial<this['_source']>;
+	updateSource(changes?: DeepPartial<this['_source']> | undefined, options?: MergeObjectOptions): DeepPartial<this['_source']>;
 
 	/* ---------------------------------------- */
 	/*  Serialization and Storage               */
@@ -189,10 +164,7 @@ export abstract class DataModel<
 	 * @param [context]    Model construction context
 	 * @param [context.strict=false]  Models created from trusted source data are validated non-strictly
 	 */
-	static fromSource(
-		source: object,
-		context?: { strict?: boolean; [key: string]: unknown },
-	): DataModel;
+	static fromSource(source: object, context?: { strict?: boolean; [key: string]: unknown }): DataModel;
 
 	/**
 	 * Create a DataModel instance using a provided serialized JSON string.
@@ -203,13 +175,7 @@ export abstract class DataModel<
 }
 
 export type RawObject<TModel extends DataModel<DataModel | null>> = {
-	[P in keyof TModel]: TModel[P] extends EmbeddedCollection<infer U>
-		? RawObject<U>[]
-		: TModel[P] extends DataModel
-		? RawObject<TModel[P]>
-		: TModel[P] extends DataModel[]
-		? RawObject<TModel[P][number]>[]
-		: TModel[P];
+	[P in keyof TModel]: TModel[P] extends EmbeddedCollection<infer U> ? RawObject<U>[] : TModel[P] extends DataModel ? RawObject<TModel[P]> : TModel[P] extends DataModel[] ? RawObject<TModel[P][number]>[] : TModel[P];
 };
 
 declare global {

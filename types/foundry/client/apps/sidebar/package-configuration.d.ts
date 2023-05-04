@@ -31,25 +31,13 @@ declare global {
 		/** Reusable logic for how categories are sorted in relation to each other. */
 		protected _sortCategories(a: object, b: object): number;
 
-		protected override _render(
-			force?: boolean,
-			options?: RenderOptions,
-		): Promise<void>;
+		protected override _render(force?: boolean, options?: RenderOptions): Promise<void>;
 
 		override activateListeners(html: JQuery): void;
 
-		protected override _onChangeTab(
-			event: MouseEvent | null,
-			tabs: Tabs,
-			active: string,
-		): void;
+		protected override _onChangeTab(event: MouseEvent | null, tabs: Tabs, active: string): void;
 
-		protected override _onSearchFilter(
-			event: KeyboardEvent,
-			query: string,
-			rgx: RegExp,
-			html: HTMLElement,
-		): void;
+		protected override _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;
 
 		/**
 		 * Handle button click to reset default settings

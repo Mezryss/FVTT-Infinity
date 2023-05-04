@@ -5,9 +5,7 @@ declare global {
 	 * A specialized subclass of the PointSource abstraction which is used to control the rendering of light sources.
 	 * @param object The light-emitting object that generates this light source
 	 */
-	class LightSource<
-		TObject extends AmbientLight | Token | undefined,
-	> extends PointSource<TObject> {
+	class LightSource<TObject extends AmbientLight | Token | undefined> extends PointSource<TObject> {
 		constructor(object: TObject);
 
 		/** The light or darkness container for this source */
@@ -175,10 +173,7 @@ declare global {
 		 * @param speed     The animation speed, from 1 to 10
 		 * @param intensity The animation intensity, from 1 to 10
 		 */
-		animateTorch(
-			dt: number,
-			{ speed, intensity }?: { speed?: number; intensity?: number },
-		): void;
+		animateTorch(dt: number, { speed, intensity }?: { speed?: number; intensity?: number }): void;
 
 		/**
 		 * A basic "pulse" animation which expands and contracts.
@@ -187,14 +182,7 @@ declare global {
 		 * @param intensity The animation intensity, from 1 to 10
 		 * @param reverse   Is the animation reversed?
 		 */
-		animatePulse(
-			dt: number,
-			{
-				speed,
-				intensity,
-				reverse,
-			}?: { speed?: number; intensity?: number; reverse?: number },
-		): void;
+		animatePulse(dt: number, { speed, intensity, reverse }?: { speed?: number; intensity?: number; reverse?: number }): void;
 
 		/**
 		 * Emanate waves of light from the source origin point
@@ -203,14 +191,7 @@ declare global {
 		 * @param intensity The animation intensity, from 1 to 10
 		 * @param reverse   Is the animation reversed?
 		 */
-		animateTime(
-			dt: number,
-			{
-				speed,
-				intensity,
-				reverse,
-			}?: { speed?: number; intensity?: number; reverse?: number },
-		): void;
+		animateTime(dt: number, { speed, intensity, reverse }?: { speed?: number; intensity?: number; reverse?: number }): void;
 
 		/**
 		 * Evolve a value using a stochastic AR(1) process
@@ -222,10 +203,7 @@ declare global {
 		 * @param min    The minimum allowed outcome, or null
 		 * @return The new value of the process
 		 */
-		protected _ar1(
-			y: number,
-			{ phi, center, sigma, max, min }?: ARParameters,
-		): number;
+		protected _ar1(y: number, { phi, center, sigma, max, min }?: ARParameters): number;
 	}
 
 	interface LightSourceData {

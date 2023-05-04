@@ -11,19 +11,14 @@ declare global {
      *
      ent
     */
-	class Folder<
-		TDocument extends EnfolderableDocument = EnfolderableDocument,
-	> extends FolderConstructor {
+	class Folder<TDocument extends EnfolderableDocument = EnfolderableDocument> extends FolderConstructor {
 		/**
 		 * Create a new Folder by rendering a dialog window to provide basic creation details
 		 * @param data Initial data with which to populate the creation form
 		 * @param options Initial positioning and sizing options for the dialog form
 		 * @return An active FolderConfig instance for creating the new Folder entity
 		 */
-		static override createDialog(
-			data?: { folder?: string },
-			options?: FormApplicationOptions,
-		): Promise<Folder | undefined>;
+		static override createDialog(data?: { folder?: string }, options?: FormApplicationOptions): Promise<Folder | undefined>;
 
 		/** The depth of this folder in its sidebar tree */
 		depth: number;
@@ -56,10 +51,7 @@ declare global {
 		 * @param updateByName Update existing entries in the Compendium pack, matching by name
 		 * @return The updated Compendium Collection instance
 		 */
-		exportToCompendium(
-			pack: CompendiumCollection<TDocument>,
-			{ updateByName }?: { updateByName?: boolean },
-		): Promise<CompendiumCollection<TDocument>>;
+		exportToCompendium(pack: CompendiumCollection<TDocument>, { updateByName }?: { updateByName?: boolean }): Promise<CompendiumCollection<TDocument>>;
 
 		/**
 		 * Provide a dialog form that allows for exporting the contents of a Folder into an eligible Compendium pack.
@@ -67,10 +59,7 @@ declare global {
 		 * @param options Additional options passed to the Dialog.prompt method
 		 * @return A Promise which resolves or rejects once the dialog has been submitted or closed
 		 */
-		exportDialog(
-			pack: string,
-			options?: Record<string, unknown>,
-		): Promise<void>;
+		exportDialog(pack: string, options?: Record<string, unknown>): Promise<void>;
 
 		/**
 		 * Get the Folder documents which are sub-folders of the current folder, either direct children or recursively.
@@ -79,17 +68,8 @@ declare global {
 		 */
 		getSubfolders(recursive?: boolean): this[];
 
-		protected override _onDelete(
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onDelete(options: DocumentModificationContext, userId: string): void;
 	}
 
-	type EnfolderableDocument =
-		| Actor
-		| Item
-		| Macro
-		| Scene
-		| JournalEntry
-		| RollTable;
+	type EnfolderableDocument = Actor | Item | Macro | Scene | JournalEntry | RollTable;
 }

@@ -16,16 +16,9 @@
  *   texture: "tiles/fire.jpg"
  * });
  */
-declare class MeasuredTemplate<
-	TDocument extends MeasuredTemplateDocument = MeasuredTemplateDocument,
-> extends PlaceableObject<TDocument> {
+declare class MeasuredTemplate<TDocument extends MeasuredTemplateDocument = MeasuredTemplateDocument> extends PlaceableObject<TDocument> {
 	/** The template shape used for testing point intersection */
-	shape:
-		| PIXI.Circle
-		| PIXI.Ellipse
-		| PIXI.Polygon
-		| PIXI.Rectangle
-		| PIXI.RoundedRectangle;
+	shape: PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.Rectangle | PIXI.RoundedRectangle;
 
 	/** The tiling texture used for this template, if any */
 	texture: PIXI.Texture | undefined;
@@ -85,21 +78,13 @@ declare class MeasuredTemplate<
 	protected _getCircleShape(distance: number): PIXI.Circle;
 
 	/** Get a Conical area of effect given a direction, angle, and distance */
-	protected _getConeShape(
-		direction: number,
-		angle: number,
-		distance: number,
-	): PIXI.Polygon;
+	protected _getConeShape(direction: number, angle: number, distance: number): PIXI.Polygon;
 
 	/** Get a Rectangular area of effect given a width and height */
 	protected _getRectShape(direction: number, distance: number): PIXI.Rectangle;
 
 	/** Get a rotated Rectangular area of effect given a width, height, and direction */
-	protected _getRayShape(
-		direction: number,
-		distance: number,
-		width: number,
-	): PIXI.Polygon;
+	protected _getRayShape(direction: number, distance: number, width: number): PIXI.Polygon;
 
 	/** Draw the rotation control handle and assign event listeners */
 	protected _drawRotationHandle(radius: number): void;
@@ -120,39 +105,21 @@ declare class MeasuredTemplate<
 	/*  Interactivity                               */
 	/* -------------------------------------------- */
 
-	protected override _canControl(
-		user: User,
-		event?: PIXI.InteractionEvent,
-	): boolean;
+	protected override _canControl(user: User, event?: PIXI.InteractionEvent): boolean;
 
-	protected override _canConfigure(
-		user: User,
-		event?: PIXI.InteractionEvent,
-	): boolean;
+	protected override _canConfigure(user: User, event?: PIXI.InteractionEvent): boolean;
 
-	protected override _canView(
-		user: User,
-		event?: PIXI.InteractionEvent,
-	): boolean;
+	protected override _canView(user: User, event?: PIXI.InteractionEvent): boolean;
 
 	/* -------------------------------------------- */
 	/*  Socket Listeners and Handlers               */
 	/* -------------------------------------------- */
 
-	override _onUpdate(
-		changed: DeepPartial<TDocument['_source']>,
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onUpdate(changed: DeepPartial<TDocument['_source']>, options: DocumentModificationContext<TDocument>, userId: string): void;
 
-	override _onDelete(
-		options: DocumentModificationContext<TDocument>,
-		userId: string,
-	): void;
+	override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 }
 
-declare interface MeasuredTemplate<
-	TDocument extends MeasuredTemplateDocument = MeasuredTemplateDocument,
-> extends PlaceableObject<TDocument> {
+declare interface MeasuredTemplate<TDocument extends MeasuredTemplateDocument = MeasuredTemplateDocument> extends PlaceableObject<TDocument> {
 	get layer(): TemplateLayer<this>;
 }

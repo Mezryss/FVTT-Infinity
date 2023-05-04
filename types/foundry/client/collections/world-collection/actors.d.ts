@@ -16,10 +16,7 @@ declare class Actors<TActor extends Actor> extends WorldCollection<TActor> {
 	 */
 	get tokens(): Record<string, TActor | undefined>;
 
-	override fromCompendium(
-		document: TActor | TActor['_source'],
-		options?: FromCompendiumOptions,
-	): TActor['_source'];
+	override fromCompendium(document: TActor | TActor['_source'], options?: FromCompendiumOptions): TActor['_source'];
 
 	/* -------------------------------------------- */
 	/*  Sheet Registration Methods                  */
@@ -29,20 +26,13 @@ declare class Actors<TActor extends Actor> extends WorldCollection<TActor> {
 	 * Register an Actor sheet class as a candidate which can be used to display Actors of a given type
 	 * See DocumentSheetConfig.registerSheet for details
 	 */
-	static registerSheet(
-		scope: string,
-		sheetClass: ConstructorOf<ActorSheet>,
-		options?: RegisterSheetOptions,
-	): void;
+	static registerSheet(scope: string, sheetClass: ConstructorOf<ActorSheet>, options?: RegisterSheetOptions): void;
 
 	/**
 	 * Unregister an Actor sheet class, removing it from the list of avaliable sheet Applications to use
 	 * See DocumentSheetConfig.unregisterSheet for details
 	 */
-	static unregisterSheet(
-		scope: string,
-		sheetClass: ConstructorOf<ActorSheet>,
-	): void;
+	static unregisterSheet(scope: string, sheetClass: ConstructorOf<ActorSheet>): void;
 
 	/** Return an Array of currently registered sheet classes for this Entity type */
 	static get registeredSheets(): (typeof ActorSheet)[];

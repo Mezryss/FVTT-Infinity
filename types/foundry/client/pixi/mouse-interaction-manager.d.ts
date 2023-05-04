@@ -73,13 +73,7 @@ declare class MouseInteractionManager {
 	 */
 	protected _dragRight: boolean;
 
-	constructor(
-		object: PlaceableObject,
-		layer: PlaceablesLayer,
-		permissions?: object,
-		callbacks?: object,
-		options?: object,
-	);
+	constructor(object: PlaceableObject, layer: PlaceablesLayer, permissions?: object, callbacks?: object, options?: object);
 
 	/** Get the target */
 	get target(): PlaceableObject;

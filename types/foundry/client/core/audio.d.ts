@@ -79,19 +79,7 @@ declare global {
 		/**
 		 * Create a Howl instance
 		 */
-		create({
-			src,
-			preload,
-			autoplay,
-			volume,
-			loop,
-		}: {
-			src: string;
-			preload: boolean;
-			autoplay: boolean;
-			volume: number;
-			loop: boolean;
-		}): void;
+		create({ src, preload, autoplay, volume, loop }: { src: string; preload: boolean; autoplay: boolean; volume: number; loop: boolean }): void;
 
 		/**
 		 * Play a single audio effect by it's source path and Howl ID
@@ -126,10 +114,7 @@ declare global {
 		 * // Play the sound of a locked door for all players
 		 * Audio.play({src: "sounds/lock.wav", volume: 0.8, autoplay: true, loop: false}, true);
 		 */
-		static play(
-			data: { src: string; autoplay: boolean; volume: number; loop: boolean },
-			push: boolean,
-		): void;
+		static play(data: { src: string; autoplay: boolean; volume: number; loop: boolean }, push: boolean): void;
 
 		/**
 		 * Returns the volume value based on a range input volume control's position.

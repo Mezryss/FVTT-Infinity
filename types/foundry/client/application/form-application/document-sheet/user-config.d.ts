@@ -13,9 +13,7 @@ declare global {
 
 		override get title(): string;
 
-		override getData(
-			options: DocumentSheetOptions,
-		): Promise<UserConfigData<TUser>>;
+		override getData(options: DocumentSheetOptions): Promise<UserConfigData<TUser>>;
 
 		override activateListeners(html: JQuery): void;
 
@@ -23,8 +21,7 @@ declare global {
 		protected _onEditAvatar(event: JQuery.TriggeredEvent): void;
 	}
 
-	interface UserConfigData<TUser extends User>
-		extends DocumentSheetData<TUser> {
+	interface UserConfigData<TUser extends User> extends DocumentSheetData<TUser> {
 		user: User;
 		actors: Actor[];
 	}

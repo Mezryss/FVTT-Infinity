@@ -121,9 +121,7 @@ declare global {
 				 * @param color A color input
 				 * @returns The hex color instance or NaN
 				 */
-				static from(
-					color: null | string | number | [number, number, number],
-				): Color | number;
+				static from(color: null | string | number | [number, number, number]): Color | number;
 
 				/**
 				 * Create a Color instance from a color string which either includes or does not include a leading #.

@@ -44,10 +44,7 @@ declare global {
 		/**
 		 * @param user The User for whom to construct the Ruler instance
 		 */
-		constructor(
-			user: User | undefined | null,
-			{ color }?: { color?: HexColorString | null },
-		);
+		constructor(user: User | undefined | null, { color }?: { color?: HexColorString | null });
 
 		/** Is the Ruler being actively used to measure distance? */
 		get active(): boolean;
@@ -68,10 +65,7 @@ declare global {
 		 * @param [gridSpaces] Restrict measurement only to grid spaces
 		 * @returns The array of measured segments
 		 */
-		measure(
-			destination: PIXI.Point,
-			{ gridSpaces }?: { gridSpaces?: boolean },
-		): RulerMeasurementSegment[] | void;
+		measure(destination: PIXI.Point, { gridSpaces }?: { gridSpaces?: boolean }): RulerMeasurementSegment[] | void;
 
 		/**
 		 * While measurement is in progress, update the destination to be the central point of the target grid space.
@@ -93,18 +87,13 @@ declare global {
 		protected _computeDistance(gridSpaces: boolean): void;
 
 		/** Get the text label for a segment of the measured path */
-		protected _getSegmentLabel(
-			segment: RulerMeasurementSegment,
-			totalDistance: number,
-		): string;
+		protected _getSegmentLabel(segment: RulerMeasurementSegment, totalDistance: number): string;
 
 		/** Draw each segment of the measured path. */
 		protected _drawMeasuredPath(): void;
 
 		/** Highlight the measurement required to complete the move in the minimum number of discrete spaces */
-		protected _highlightMeasurementSegment(
-			segment: RulerMeasurementSegment,
-		): void;
+		protected _highlightMeasurementSegment(segment: RulerMeasurementSegment): void;
 
 		/* -------------------------------------------- */
 		/*  Token Movement Execution                    */
@@ -135,11 +124,7 @@ declare global {
 		 * @param destination The adjusted destination coordinate
 		 * @returns A Promise which resolves once the animation for this segment is done
 		 */
-		protected _animateSegment(
-			token: Token,
-			segment: RulerMeasurementSegment,
-			destination: Point,
-		): Promise<unknown>;
+		protected _animateSegment(token: Token, segment: RulerMeasurementSegment, destination: Point): Promise<unknown>;
 
 		/* -------------------------------------------- */
 		/*  Event Listeners and Handlers                */
@@ -188,10 +173,7 @@ declare global {
 		 * @param point  The current cursor position to snap to
 		 * @param [snap] Snap exactly to grid spaces?
 		 */
-		protected _removeWaypoint(
-			point: PIXI.Point,
-			{ snap }?: { snap?: boolean },
-		): void;
+		protected _removeWaypoint(point: PIXI.Point, { snap }?: { snap?: boolean }): void;
 
 		/** Handle the conclusion of a Ruler measurement workflow */
 		protected _endMeasurement(): void;

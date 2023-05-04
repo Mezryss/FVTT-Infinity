@@ -2,11 +2,7 @@
  * A reusable storage concept which blends the functionality of an Array with the efficient key-based lookup of a Map.
  * This concept is reused throughout Foundry VTT where a collection of uniquely identified elements is required.
  */
-export interface Collection<TValue>
-	extends Omit<
-		Map<string, TValue>,
-		'forEach' | 'delete' | 'set' | SymbolConstructor['iterator']
-	> {
+export interface Collection<TValue> extends Omit<Map<string, TValue>, 'forEach' | 'delete' | 'set' | SymbolConstructor['iterator']> {
 	set(key: string, value: TValue): this;
 
 	delete(key: string): boolean;
@@ -28,9 +24,7 @@ export interface Collection<TValue>
 	 * let c = new Collection([["a", "A"], ["b", "B"], ["c", "C"]]);
 	 * let a = c.find(entry => entry === "A");
 	 */
-	find<T extends TValue = TValue>(
-		condition: (value: TValue) => boolean,
-	): T | undefined;
+	find<T extends TValue = TValue>(condition: (value: TValue) => boolean): T | undefined;
 
 	/**
 	 * Filter the Collection, returning an Array of entries which match a functional condition.
@@ -42,9 +36,7 @@ export interface Collection<TValue>
 	 * let c = new Collection([["a", "AA"], ["b", "AB"], ["c", "CC"]]);
 	 * let hasA = c.filters(entry => entry.slice(0) === "A");
 	 */
-	filter<T extends TValue = TValue>(
-		condition: (value: TValue) => value is T,
-	): T[];
+	filter<T extends TValue = TValue>(condition: (value: TValue) => value is T): T[];
 	filter<T extends TValue = TValue>(condition: (value: TValue) => boolean): T[];
 
 	/**
@@ -71,10 +63,7 @@ export interface Collection<TValue>
 	 * c.get("d", {strict: true}); // throws Error
 	 */
 	get<T extends TValue = TValue>(key: string, { strict }: { strict: true }): T;
-	get<T extends TValue = TValue>(
-		key: string,
-		{ strict }?: { strict?: boolean },
-	): T | undefined;
+	get<T extends TValue = TValue>(key: string, { strict }?: { strict?: boolean }): T | undefined;
 
 	/**
 	 * Get an entry from the Collection by name.

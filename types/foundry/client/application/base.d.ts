@@ -134,18 +134,12 @@ declare global {
 		/**
 		 * Persist the scroll positions of containers within the app before re-rendering the content
 		 */
-		protected _saveScrollPositions(
-			html: HTMLElement | JQuery,
-			selectors: string[],
-		): void;
+		protected _saveScrollPositions(html: HTMLElement | JQuery, selectors: string[]): void;
 
 		/**
 		 * Restore the scroll positions of containers within the app after re-rendering the content
 		 */
-		protected _restoreScrollPositions(
-			html: HTMLElement | JQuery,
-			selectors: string[],
-		): void;
+		protected _restoreScrollPositions(html: HTMLElement | JQuery, selectors: string[]): void;
 
 		/**
 		 * Render the outer application wrapper
@@ -158,21 +152,14 @@ declare global {
 		 * @param data  The data used to render the inner template
 		 * @return      A promise resolving to the constructed jQuery object
 		 */
-		protected _renderInner(
-			data: object,
-			options: RenderOptions,
-		): Promise<JQuery>;
+		protected _renderInner(data: object, options: RenderOptions): Promise<JQuery>;
 
 		/**
 		 * Customize how inner HTML is replaced when the application is refreshed
 		 * @param element   The original HTML element
 		 * @param html      New updated HTML
 		 */
-		protected _replaceHTML(
-			element: JQuery,
-			html: JQuery | HTMLElement,
-			options: Record<string, unknown>,
-		): void;
+		protected _replaceHTML(element: JQuery, html: JQuery | HTMLElement, options: Record<string, unknown>): void;
 
 		/**
 		 * Customize how a new HTML Application is added and first appears in the DOC
@@ -218,12 +205,7 @@ declare global {
 		 * @param rgx   The regular expression to test against
 		 * @param html  The HTML element which should be filtered
 		 */
-		protected _onSearchFilter(
-			event: KeyboardEvent,
-			query: string,
-			rgx: RegExp,
-			html: HTMLElement,
-		): void;
+		protected _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;
 
 		/**
 		 * Define whether a user is able to begin a dragstart workflow for a given drag selector
@@ -266,9 +248,7 @@ declare global {
 		 * This function returns a Promise which resolves once the window closing animation concludes
 		 * @return A Promise which resolves once the application is closed
 		 */
-		close(
-			options?: { force?: boolean } & Record<string, unknown>,
-		): Promise<void>;
+		close(options?: { force?: boolean } & Record<string, unknown>): Promise<void>;
 
 		/**
 		 * Minimize the pop-out window, collapsing it to a small tab
@@ -287,13 +267,7 @@ declare global {
 		/**
 		 * Set the application position and store it's new location
 		 */
-		setPosition({
-			left,
-			top,
-			width,
-			height,
-			scale,
-		}?: ApplicationPosition): ApplicationPosition | undefined;
+		setPosition({ left, top, width, height, scale }?: ApplicationPosition): ApplicationPosition | undefined;
 
 		/**
 		 * Handle application minimization behavior - collapsing content and reducing the size of the header
@@ -405,6 +379,5 @@ declare global {
 		scale?: number;
 	}
 
-	type ApplicationRenderState =
-		(typeof Application)['RENDER_STATES'][keyof (typeof Application)['RENDER_STATES']];
+	type ApplicationRenderState = (typeof Application)['RENDER_STATES'][keyof (typeof Application)['RENDER_STATES']];
 }

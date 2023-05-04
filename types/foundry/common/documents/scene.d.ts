@@ -56,15 +56,7 @@ declare global {
 				 * Apply padding to enlarge the playable space and round to the nearest 2x grid size to ensure symmetry.
 				 * @returns An object describing the configured dimensions
 				 */
-				static getDimensions({
-					width,
-					height,
-					size,
-					gridDistance,
-					padding,
-					shiftX,
-					shiftY,
-				}: GetDimensionsParams): SceneDimensions;
+				static getDimensions({ width, height, size, gridDistance, padding, shiftX, shiftY }: GetDimensionsParams): SceneDimensions;
 			}
 
 			interface BaseScene {
@@ -97,8 +89,7 @@ declare global {
 	/**
 	 * @property [isUndo] Is the operation undoing a previous operation, only used by embedded Documents within a Scene
 	 */
-	interface SceneEmbeddedModificationContext
-		extends DocumentModificationContext {
+	interface SceneEmbeddedModificationContext extends DocumentModificationContext {
 		isUndo?: boolean;
 	}
 

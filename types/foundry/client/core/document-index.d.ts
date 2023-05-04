@@ -68,12 +68,7 @@ declare global {
 		 * @param [options] Additional options for the search.
 		 * @param [options.limit=10] The maximum number of entries to retrieve before stopping.
 		 */
-		protected _breadthFirstSearch(
-			node: WordTreeNode,
-			entries: WordTreeEntry[],
-			queue: WordTreeNode[],
-			options?: { limit?: number },
-		): void;
+		protected _breadthFirstSearch(node: WordTreeNode, entries: WordTreeEntry[], queue: WordTreeNode[], options?: { limit?: number }): void;
 	}
 
 	/**
@@ -105,10 +100,7 @@ declare global {
 		 *                                large numbers of entries.
 		 * @returns A number of entries that have the given prefix, grouped by document type.
 		 */
-		lookup(
-			prefix: string,
-			options?: { limit?: number; documentTypes?: string[] },
-		): Record<string, WordTreeEntry[]>;
+		lookup(prefix: string, options?: { limit?: number; documentTypes?: string[] }): Record<string, WordTreeEntry[]>;
 
 		/**
 		 * Add an entry to the index.
@@ -134,10 +126,7 @@ declare global {
 		 * @param [options]      Additional information for indexing.
 		 * @param [options.pack] The compendium that the index belongs to.
 		 */
-		protected _addLeaf(
-			doc: WorldDocument | object,
-			options?: { pack?: CompendiumCollection },
-		): void;
+		protected _addLeaf(doc: WorldDocument | object, options?: { pack?: CompendiumCollection }): void;
 
 		/**
 		 * Aggregate the compendium index and add it to the word tree index.
@@ -155,8 +144,6 @@ declare global {
 		 * Aggregate all documents and embedded documents in a world collection and add them to the index.
 		 * @param documentName  The name of the documents to index.
 		 */
-		protected _indexWorldCollection(
-			documentName: WorldDocument['documentName'],
-		): void;
+		protected _indexWorldCollection(documentName: WorldDocument['documentName']): void;
 	}
 }

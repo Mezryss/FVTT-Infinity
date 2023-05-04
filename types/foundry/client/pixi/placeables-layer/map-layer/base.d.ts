@@ -57,17 +57,11 @@ declare abstract class MapLayer extends PlaceablesLayer<Tile> {
 	/*  Event Handlers                              */
 	/* -------------------------------------------- */
 
-	protected override _onDragLeftStart(
-		event: PIXI.InteractionEvent,
-	): Promise<void>;
+	protected override _onDragLeftStart(event: PIXI.InteractionEvent): Promise<void>;
 
-	protected override _onDragLeftMove(
-		event: PIXI.InteractionEvent,
-	): Promise<void>;
+	protected override _onDragLeftMove(event: PIXI.InteractionEvent): Promise<void>;
 
-	protected override _onDragLeftDrop(
-		event: PIXI.InteractionEvent,
-	): Promise<void>;
+	protected override _onDragLeftDrop(event: PIXI.InteractionEvent): Promise<void>;
 
 	protected override _onDragLeftCancel(event: PIXI.InteractionEvent): void;
 
@@ -76,10 +70,7 @@ declare abstract class MapLayer extends PlaceablesLayer<Tile> {
 	 * @param event The concluding drag event
 	 * @param data  The extracted Tile data
 	 */
-	protected _onDropData(
-		event: PIXI.InteractionEvent,
-		data: Record<string, Tile>,
-	): Promise<TileDocument>;
+	protected _onDropData(event: PIXI.InteractionEvent, data: Record<string, Tile>): Promise<TileDocument>;
 
 	/**
 	 * Prepare the data object when a new Tile is dropped onto the canvas
@@ -87,10 +78,7 @@ declare abstract class MapLayer extends PlaceablesLayer<Tile> {
 	 * @param data  The extracted Tile data
 	 * @returns The prepared data to create
 	 */
-	protected _getDropData(
-		event: PIXI.InteractionEvent,
-		data: foundry.data.TileSource,
-	): Promise<foundry.data.TileSource>;
+	protected _getDropData(event: PIXI.InteractionEvent, data: foundry.data.TileSource): Promise<foundry.data.TileSource>;
 }
 
 declare interface MapLayerOptions extends PlaceablesLayerOptions {

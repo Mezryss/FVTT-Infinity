@@ -2,9 +2,7 @@ export {};
 
 declare global {
 	/** A shared pattern for the sidebar directory which Actors, Items, and Scenes all use */
-	class SidebarDirectory<
-		TDocument extends WorldDocument,
-	> extends SidebarTab<SidebarDirectoryOptions> {
+	class SidebarDirectory<TDocument extends WorldDocument> extends SidebarTab<SidebarDirectoryOptions> {
 		/** References to the set of Documents that are displayed in the Sidebar */
 		documents: TDocument[];
 
@@ -34,21 +32,13 @@ declare global {
 		 * @param documents The Array of Document objects to organize
 		 * @return A tree structure containing the folders and documents
 		 */
-		static setupFolders(
-			folders: Folder[],
-			documents: WorldDocument[],
-		): { root: boolean; content: WorldDocument[]; children: Folder[] };
+		static setupFolders(folders: Folder[], documents: WorldDocument[]): { root: boolean; content: WorldDocument[]; children: Folder[] };
 
 		/**
 		 * Populate a single folder with child folders and content
 		 * This method is called recursively when building the folder tree
 		 */
-		protected static _populate(
-			folder: Folder,
-			folders: Folder[],
-			documents: WorldDocument[],
-			{ allowChildren }?: { allowChildren?: boolean },
-		): [Folder[], WorldDocument[]];
+		protected static _populate(folder: Folder, folders: Folder[], documents: WorldDocument[], { allowChildren }?: { allowChildren?: boolean }): [Folder[], WorldDocument[]];
 
 		/**
 		 * Sort two Documents by name, alphabetically.
@@ -56,24 +46,13 @@ declare global {
 		 *         A value < 0 if a should be sorted before b.
 		 *         0 if the position of a and b should not change.
 		 */
-		protected static _sortAlphabetical(
-			a: WorldDocument,
-			b: WorldDocument,
-		): number;
+		protected static _sortAlphabetical(a: WorldDocument, b: WorldDocument): number;
 
-		protected override _render(
-			force?: boolean,
-			context?: SidebarDirectoryRenderOptions,
-		): Promise<void>;
+		protected override _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
 
 		protected override _renderInner(data: object): Promise<JQuery>;
 
-		protected override _onSearchFilter(
-			event: KeyboardEvent,
-			query: string,
-			rgx: RegExp,
-			html: HTMLElement,
-		): void;
+		protected override _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;
 
 		/** Collapse all subfolders in this directory */
 		collapseAll(): void;

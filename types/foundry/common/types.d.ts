@@ -12,20 +12,14 @@ declare global {
 	type PointArray = [number, number];
 
 	/** A standard rectangle interface. */
-	type Rectangle =
-		| PIXI.Rectangle
-		| { x: number; y: number; width: number; height: number };
+	type Rectangle = PIXI.Rectangle | { x: number; y: number; width: number; height: number };
 
 	/* ----------------------------------------- */
 	/*  Settings Type Definitions                */
 	/* ----------------------------------------- */
 
 	/** A Client Setting */
-	interface SettingConfig<
-		TChoices extends Record<string, unknown> | undefined =
-			| Record<string, unknown>
-			| undefined,
-	> {
+	interface SettingConfig<TChoices extends Record<string, unknown> | undefined = Record<string, unknown> | undefined> {
 		/** A unique machine-readable id for the setting */
 		key: string;
 		/** The namespace the setting belongs to */
@@ -41,27 +35,15 @@ declare global {
 		/** This will prompt the user to reload the application for the setting to take effect. */
 		requiresReload?: boolean;
 		/** The JS Type that the Setting is storing */
-		type:
-			| NumberConstructor
-			| StringConstructor
-			| BooleanConstructor
-			| ObjectConstructor
-			| ArrayConstructor
-			| FunctionConstructor;
+		type: NumberConstructor | StringConstructor | BooleanConstructor | ObjectConstructor | ArrayConstructor | FunctionConstructor;
 		/** For string Types, defines the allowable values */
 		choices?: TChoices;
 		/** For numeric Types, defines the allowable range */
-		range?: this['type'] extends NumberConstructor
-			? { min: number; max: number; step: number }
-			: never;
+		range?: this['type'] extends NumberConstructor ? { min: number; max: number; step: number } : never;
 		/** The default value */
 		default: number | string | boolean | object | Function;
 		/** Executes when the value of this Setting changes */
-		onChange?: (
-			choice: TChoices extends Record<string, unknown>
-				? keyof TChoices
-				: undefined,
-		) => void | Promise<void>;
+		onChange?: (choice: TChoices extends Record<string, unknown> ? keyof TChoices : undefined) => void | Promise<void>;
 	}
 
 	interface SettingSubmenuConfig {

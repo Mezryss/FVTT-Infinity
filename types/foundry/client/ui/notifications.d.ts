@@ -32,11 +32,7 @@ declare global {
 		 * @param [options.permanent=false]   Whether the notification should be permanently displayed unless otherwise dismissed
 		 * @param [options.localize=false]    Whether to localize the message content before displaying it
 		 */
-		notify(
-			message: string,
-			type?: 'info' | 'warning' | 'error',
-			{ localize, permanent }?: NotificationOptions,
-		): void;
+		notify(message: string, type?: 'info' | 'warning' | 'error', { localize, permanent }?: NotificationOptions): void;
 
 		/**
 		 * Display a notification with the "info" type

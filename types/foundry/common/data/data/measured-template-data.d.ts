@@ -36,9 +36,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class MeasuredTemplateData<
-			TDocument extends documents.BaseMeasuredTemplate = documents.BaseMeasuredTemplate,
-		> extends abstract.DocumentData<TDocument> {
+		class MeasuredTemplateData<TDocument extends documents.BaseMeasuredTemplate = documents.BaseMeasuredTemplate> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 
 			protected override _initialize(): void;

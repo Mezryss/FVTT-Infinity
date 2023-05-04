@@ -27,9 +27,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class PlaylistData<
-			TDocument extends documents.BasePlaylist = documents.BasePlaylist,
-		> extends abstract.DocumentData<TDocument> {
+		class PlaylistData<TDocument extends documents.BasePlaylist = documents.BasePlaylist> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 
 			sounds: abstract.EmbeddedCollection<documents.BasePlaylistSound>;

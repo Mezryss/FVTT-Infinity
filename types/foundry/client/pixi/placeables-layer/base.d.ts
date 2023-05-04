@@ -2,9 +2,7 @@ export {};
 
 declare global {
 	/** The base PlaceablesLayer subclass of CanvasLayer */
-	abstract class PlaceablesLayer<
-		TObject extends PlaceableObject = PlaceableObject,
-	> extends CanvasLayer {
+	abstract class PlaceablesLayer<TObject extends PlaceableObject = PlaceableObject> extends CanvasLayer {
 		constructor();
 
 		objects: PIXI.Application;
@@ -124,17 +122,7 @@ declare global {
 
          * @return      The resulting Promise from the Scene.update operation
          */
-		rotateMany({
-			angle,
-			delta,
-			snap,
-			ids,
-		}?: {
-			angle?: number;
-			delta?: number;
-			snap?: number;
-			ids?: number[] | Set<number>;
-		}): Promise<any>;
+		rotateMany({ angle, delta, snap, ids }?: { angle?: number; delta?: number; snap?: number; ids?: number[] | Set<number> }): Promise<any>;
 
 		/**
 		 * Simultaneously move multiple PlaceableObjects via keyboard movement offsets.
@@ -148,17 +136,7 @@ declare global {
 		 *
 		 * @return          The resulting Promise from the Scene.update operation
 		 */
-		moveMany({
-			dx,
-			dy,
-			rotate,
-			ids,
-		}?: {
-			dx?: number;
-			dy?: number;
-			rotate?: boolean;
-			ids?: number[] | Set<number>;
-		}): Promise<any>;
+		moveMany({ dx, dy, rotate, ids }?: { dx?: number; dy?: number; rotate?: boolean; ids?: number[] | Set<number> }): Promise<any>;
 
 		/**
 		 * Undo a change to the objects in this layer
@@ -211,10 +189,7 @@ declare global {
 		 * Paste currently copied PlaceableObjects back to the layer by creating new copies
 		 * @return  An Array of created Objects
 		 */
-		pasteObjects(
-			position: { x: number; y: number },
-			{ hidden }?: { hidden?: boolean },
-		): Promise<TObject['document'][]>;
+		pasteObjects(position: { x: number; y: number }, { hidden }?: { hidden?: boolean }): Promise<TObject['document'][]>;
 
 		/**
 		 * Select all PlaceableObject instances which fall within a coordinate rectangle.
@@ -227,21 +202,7 @@ declare global {
 		 * @param controlOptions Optional arguments provided to any called control() method
 		 * @return The number of PlaceableObject instances which were controlled.
 		 */
-		selectObjects({
-			x,
-			y,
-			width,
-			height,
-			releaseOptions,
-			controlOptions,
-		}: {
-			x: number;
-			y: number;
-			width: number;
-			height: number;
-			releaseOptions?: object;
-			controlOptions?: object;
-		}): number;
+		selectObjects({ x, y, width, height, releaseOptions, controlOptions }: { x: number; y: number; width: number; height: number; releaseOptions?: object; controlOptions?: object }): number;
 
 		/**
 		 * Update all objects in this layer with a provided transformation.
@@ -251,15 +212,7 @@ declare global {
 		 * @param [options]      Additional options passed to Entity.update
 		 * @return An array of updated data once the operation is complete
 		 */
-		updateAll(
-			transformation: (
-				document: TObject,
-			) =>
-				| DocumentUpdateData<TObject['document']>
-				| DocumentUpdateData<TObject['document']>,
-			condition?: Function | null,
-			options?: DocumentModificationContext,
-		): Promise<TObject['document'][]>;
+		updateAll(transformation: (document: TObject) => DocumentUpdateData<TObject['document']> | DocumentUpdateData<TObject['document']>, condition?: Function | null, options?: DocumentModificationContext): Promise<TObject['document'][]>;
 
 		/* -------------------------------------------- */
 		/*  Event Listeners and Handlers                */
@@ -281,9 +234,7 @@ declare global {
 		 * Start a left-click drag workflow originating from the Canvas stage.
 		 * @see {Canvas#_onDragLeftStart}
 		 */
-		protected _onDragLeftStart(
-			event: PlaceablesLayerEvent<TObject>,
-		): Promise<TObject | void>;
+		protected _onDragLeftStart(event: PlaceablesLayerEvent<TObject>): Promise<TObject | void>;
 
 		/**
 		 * Continue a left-click drag workflow originating from the Canvas stage.
@@ -333,8 +284,7 @@ declare global {
 		sheetClass: ConstructorOf<FormApplication>;
 	}
 
-	interface PlaceablesLayerEvent<TObject extends PlaceableObject>
-		extends PIXI.InteractionEvent {
+	interface PlaceablesLayerEvent<TObject extends PlaceableObject> extends PIXI.InteractionEvent {
 		data: PlaceableInteractionData<TObject>;
 	}
 
@@ -346,8 +296,7 @@ declare global {
 	}
 }
 
-interface PlaceableInteractionData<TObject extends PlaceableObject>
-	extends PIXI.InteractionData {
+interface PlaceableInteractionData<TObject extends PlaceableObject> extends PIXI.InteractionData {
 	originalEvent: PlaceablesPointerEvent;
 	preview?: TObject | null;
 	createState?: number;

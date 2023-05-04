@@ -3,9 +3,7 @@
  * @param object    The JournalEntryPage instance which is being edited.
  * @param [options] Application options.
  */
-declare class JournalPageSheet<
-	TJournalEntryPage extends JournalEntryPage = JournalEntryPage,
-> extends DocumentSheet<TJournalEntryPage> {
+declare class JournalPageSheet<TJournalEntryPage extends JournalEntryPage = JournalEntryPage> extends DocumentSheet<TJournalEntryPage> {
 	constructor(object: TJournalEntryPage, options?: DocumentSheetOptions);
 }
 

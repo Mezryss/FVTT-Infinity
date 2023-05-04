@@ -12,10 +12,7 @@ declare global {
 		walls: boolean;
 		type: DetectionType;
 
-		constructor(
-			params: DetectionModeConstructionParams,
-			context?: DocumentConstructionContext,
-		);
+		constructor(params: DetectionModeConstructionParams, context?: DocumentConstructionContext);
 
 		/** Get the detection filter pertaining to this mode. */
 		static getDetectionFilter(): PIXI.Filter | undefined;
@@ -49,11 +46,7 @@ declare global {
 		 * @param config       The visibility test configuration
 		 * @returns Is the test target visible?
 		 */
-		testVisibility(
-			visionSource: VisionSource<Token>,
-			mode: TokenDetectionMode,
-			config?: CanvasVisibilityTestConfig,
-		): boolean;
+		testVisibility(visionSource: VisionSource<Token>, mode: TokenDetectionMode, config?: CanvasVisibilityTestConfig): boolean;
 
 		/**
 		 * Can this VisionSource theoretically detect a certain object based on its properties?
@@ -62,10 +55,7 @@ declare global {
 		 * @param target       The target object being tested
 		 * @returns Can the target object theoretically be detected by this vision source?
 		 */
-		protected _canDetect(
-			visionSource: VisionSource<Token>,
-			target: PlaceableObject,
-		): boolean;
+		protected _canDetect(visionSource: VisionSource<Token>, target: PlaceableObject): boolean;
 
 		/**
 		 * Evaluate a single test point to confirm whether it is visible.
@@ -75,12 +65,7 @@ declare global {
 		 * @param target       The target object being tested
 		 * @param test         The test case being evaluated
 		 */
-		protected _testPoint(
-			visionSource: VisionSource<Token>,
-			mode: TokenDetectionMode,
-			target: PlaceableObject,
-			test: CanvasVisibilityTest,
-		): boolean;
+		protected _testPoint(visionSource: VisionSource<Token>, mode: TokenDetectionMode, target: PlaceableObject, test: CanvasVisibilityTest): boolean;
 
 		/**
 		 * Test whether the line-of-sight requirement for detection is satisfied.
@@ -92,12 +77,7 @@ declare global {
 		 * @param test         The test case being evaluated
 		 * @returns Is the LOS requirement satisfied for this test?
 		 */
-		protected _testLOS(
-			visionSource: VisionSource<Token>,
-			mode: TokenDetectionMode,
-			target: PlaceableObject,
-			test: CanvasVisibilityTest,
-		): boolean;
+		protected _testLOS(visionSource: VisionSource<Token>, mode: TokenDetectionMode, target: PlaceableObject, test: CanvasVisibilityTest): boolean;
 
 		/**
 		 * Verify that a target is in range of a source.
@@ -107,12 +87,7 @@ declare global {
 		 * @param test         The test case being evaluated
 		 * @returns Is the target within range?
 		 */
-		protected _testRange(
-			visionSource: VisionSource<Token>,
-			mode: TokenDetectionMode,
-			target: PlaceableObject,
-			test: CanvasVisibilityTest,
-		): boolean;
+		protected _testRange(visionSource: VisionSource<Token>, mode: TokenDetectionMode, target: PlaceableObject, test: CanvasVisibilityTest): boolean;
 	}
 
 	/**
@@ -123,12 +98,7 @@ declare global {
 	class DetectionModeBasicSight extends DetectionMode {
 		static override BASIC_MODE_ID: 'basicSight';
 
-		protected override _testPoint(
-			visionSource: VisionSource<Token>,
-			mode: TokenDetectionMode,
-			target: PlaceableObject,
-			test: CanvasVisibilityTest,
-		): boolean;
+		protected override _testPoint(visionSource: VisionSource<Token>, mode: TokenDetectionMode, target: PlaceableObject, test: CanvasVisibilityTest): boolean;
 	}
 
 	/**
@@ -140,10 +110,7 @@ declare global {
 	class DetectionModeInvisibility extends DetectionMode {
 		static override getDetectionFilter(): PIXI.Filter;
 
-		protected override _canDetect(
-			visionSource: VisionSource<Token>,
-			target: PlaceableObject,
-		): boolean;
+		protected override _canDetect(visionSource: VisionSource<Token>, target: PlaceableObject): boolean;
 	}
 
 	/**
@@ -152,10 +119,7 @@ declare global {
 	class DetectionModeTremor extends DetectionMode {
 		static override getDetectionFilter(): OutlineOverlayFilter;
 
-		protected override _canDetect(
-			visionSource: VisionSource<Token>,
-			target: PlaceableObject,
-		): boolean;
+		protected override _canDetect(visionSource: VisionSource<Token>, target: PlaceableObject): boolean;
 	}
 
 	/**
@@ -165,10 +129,7 @@ declare global {
 	class DetectionModeAll extends DetectionMode {
 		static override getDetectionFilter(): PIXI.Filter;
 
-		protected override _canDetect(
-			visionSource: VisionSource<Token>,
-			target: PlaceableObject,
-		): boolean;
+		protected override _canDetect(visionSource: VisionSource<Token>, target: PlaceableObject): boolean;
 	}
 
 	interface TokenDetectionMode {
@@ -180,8 +141,7 @@ declare global {
 		range: number | null;
 	}
 
-	type DetectionType =
-		(typeof DetectionMode.DETECTION_TYPES)[keyof typeof DetectionMode.DETECTION_TYPES];
+	type DetectionType = (typeof DetectionMode.DETECTION_TYPES)[keyof typeof DetectionMode.DETECTION_TYPES];
 }
 
 interface DetectionModeConstructionParams {

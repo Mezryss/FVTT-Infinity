@@ -9,9 +9,6 @@ declare global {
 	class ClockwiseSweepPolygon extends PointSourcePolygon {
 		protected _compute(): void;
 
-		protected _testCollision(
-			ray: Ray,
-			mode: string,
-		): boolean | PolygonVertex | PolygonVertex[] | null;
+		protected _testCollision(ray: Ray, mode: string): boolean | PolygonVertex | PolygonVertex[] | null;
 	}
 }

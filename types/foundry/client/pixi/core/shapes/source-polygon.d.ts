@@ -24,11 +24,7 @@ declare global {
 		 * @param origin The origin point to benchmark
 		 * @param config The polygon configuration to benchmark
 		 */
-		static benchmark(
-			iterations: number,
-			origin: Point,
-			config: PointSourcePolygonConfig,
-		): void;
+		static benchmark(iterations: number, origin: Point, config: PointSourcePolygonConfig): void;
 
 		/**
 		 * Compute the polygon given a point origin and radius
@@ -36,11 +32,7 @@ declare global {
 		 * @param [config={}] Configuration options which customize the polygon computation
 		 * @returns The computed polygon instance
 		 */
-		static create<T extends PointSourcePolygon>(
-			this: ConstructorOf<T>,
-			origin: Point,
-			config?: PointSourcePolygonConfig,
-		): T;
+		static create<T extends PointSourcePolygon>(this: ConstructorOf<T>, origin: Point, config?: PointSourcePolygonConfig): T;
 
 		override contains(x: number, y: number): boolean;
 
@@ -72,10 +64,7 @@ declare global {
 		 * @param [intersectionOptions] Options passed to the shape intersection method
 		 * @returns A new constrained polygon
 		 */
-		applyConstraint(
-			constraint?: PIXI.Circle | PIXI.Rectangle | PIXI.Polygon,
-			intersectionOptions?: object,
-		): this;
+		applyConstraint(constraint?: PIXI.Circle | PIXI.Rectangle | PIXI.Polygon, intersectionOptions?: object): this;
 
 		/* -------------------------------------------- */
 		/*  Collision Testing                           */
@@ -92,11 +81,7 @@ declare global {
 		 *          * all: returns a sorted array of PolygonVertex instances
 		 *          * closest: returns a PolygonVertex instance or null
 		 */
-		static testCollision(
-			origin: Point,
-			destination: Point,
-			config?: PointSourcePolygonConfig & { mode?: 'any' | 'all' | 'closest' },
-		): boolean | PolygonVertex | PolygonVertex[] | null;
+		static testCollision(origin: Point, destination: Point, config?: PointSourcePolygonConfig & { mode?: 'any' | 'all' | 'closest' }): boolean | PolygonVertex | PolygonVertex[] | null;
 
 		/**
 		 * Determine the set of collisions which occurs for a Ray.
@@ -104,10 +89,7 @@ declare global {
 		 * @param mode The collision mode being tested
 		 * @returns The collision test result
 		 */
-		protected abstract _testCollision(
-			ray: Ray,
-			mode: string,
-		): boolean | PolygonVertex | PolygonVertex[] | null;
+		protected abstract _testCollision(ray: Ray, mode: string): boolean | PolygonVertex | PolygonVertex[] | null;
 
 		/* -------------------------------------------- */
 		/*  Visualization and Debugging                 */

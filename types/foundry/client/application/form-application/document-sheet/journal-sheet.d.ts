@@ -4,9 +4,7 @@
  * @param entity The JournalEntry instance which is being edited
  * @param options Application options
  */
-declare class JournalSheet<
-	TJournalEntry extends JournalEntry,
-> extends DocumentSheet<TJournalEntry> {
+declare class JournalSheet<TJournalEntry extends JournalEntry> extends DocumentSheet<TJournalEntry> {
 	constructor(object: TJournalEntry, options?: DocumentSheetOptions);
 
 	protected _sheetMode: string | null;
@@ -22,21 +20,13 @@ declare class JournalSheet<
 	/** Guess the default view mode for the sheet based on the player's permissions to the Entry */
 	protected _inferDefaultMode(): string;
 
-	protected override _render(
-		force?: boolean,
-		options?: DocumentRenderOptions,
-	): Promise<void>;
+	protected override _render(force?: boolean, options?: DocumentRenderOptions): Promise<void>;
 
 	protected override _getHeaderButtons(): ApplicationHeaderButton[];
 
-	override getData(
-		options: DocumentSheetOptions,
-	): DocumentSheetData<TJournalEntry>;
+	override getData(options: DocumentSheetOptions): DocumentSheetData<TJournalEntry>;
 
-	override _updateObject(
-		event: Event,
-		formData: Record<string, unknown>,
-	): Promise<void>;
+	override _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 
 	/**
 	 * Handle requests to switch the rendered mode of the Journal Entry sheet

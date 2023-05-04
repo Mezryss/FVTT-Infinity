@@ -80,11 +80,7 @@ declare class FilePicker extends Application {
 	 *
 	 * @return  A Promise which resolves to the directories and files contained in the location
 	 */
-	static browse(
-		source: string,
-		target: string,
-		options?: { bucket?: string; extensions?: string[]; wildcard?: boolean },
-	): Promise<any>;
+	static browse(source: string, target: string, options?: { bucket?: string; extensions?: string[]; wildcard?: boolean }): Promise<any>;
 
 	/**
 	 * Dispatch a POST request to the server containing a directory path and a file to upload
@@ -93,12 +89,7 @@ declare class FilePicker extends Application {
 	 * @param file      The File object to upload
 	 * @param options   Additional file upload options passed as form data
 	 */
-	static upload(
-		source: string,
-		path: string,
-		file: File,
-		options: object,
-	): Promise<boolean>;
+	static upload(source: string, path: string, file: File, options: object): Promise<boolean>;
 
 	/**
 	 * Create a subdirectory within a given source. The requested subdirectory path must not already exist.
@@ -107,11 +98,7 @@ declare class FilePicker extends Application {
 	 * @param {Object} options    Optional arguments which modify the request
 	 * @return {Promise<Object>}
 	 */
-	static createDirectory(
-		source: string,
-		target: string,
-		options: object,
-	): Promise<object>;
+	static createDirectory(source: string, target: string, options: object): Promise<object>;
 
 	/**
 	 * Handle a drop event to support dropping files onto the file picker and automatically uploading them

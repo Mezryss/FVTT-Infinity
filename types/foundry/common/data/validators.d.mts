@@ -2,10 +2,7 @@
 export function isValidId(id: string): boolean;
 
 /** Test whether a file path has an extension in a list of provided extensions */
-export function _hasFileExtension(
-	path: string,
-	extensions: string[],
-): path is `${string}.${string}`;
+export function _hasFileExtension(path: string, extensions: string[]): path is `${string}.${string}`;
 
 /**
  * Test whether a file path has a valid image file extension or is base64 PNG data
@@ -48,10 +45,7 @@ export function hasAudioExtension(path: string): path is AudioFilePath;
  * @param array The set of allowed options
  * @return Is the valid included?
  */
-export function valueInArray<T extends readonly unknown[]>(
-	val: unknown,
-	array: T,
-): val is T[number];
+export function valueInArray<T extends readonly unknown[]>(val: unknown, array: T): val is T[number];
 
 /**
  * Assert that the given value parses as a valid JSON string

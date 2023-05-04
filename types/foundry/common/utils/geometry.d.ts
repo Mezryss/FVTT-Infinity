@@ -31,12 +31,7 @@ declare global {
 			 *
 			 * @returns Do the line segments intersect?
 			 */
-			function lineSegmentIntersects(
-				a: Point,
-				b: Point,
-				c: Point,
-				d: Point,
-			): boolean;
+			function lineSegmentIntersects(a: Point, b: Point, c: Point, d: Point): boolean;
 
 			/**
 			 * An internal helper method for computing the intersection between two infinite-length lines.
@@ -49,12 +44,7 @@ declare global {
 			 *
 			 * @returns An intersection point, or null if no intersection occurred
 			 */
-			function lineLineIntersection(
-				a: Point,
-				b: Point,
-				c: Point,
-				d: Point,
-			): LineIntersection | null;
+			function lineLineIntersection(a: Point, b: Point, c: Point, d: Point): LineIntersection | null;
 
 			/**
 			 * An internal helper method for computing the intersection between two finite line segments.
@@ -68,13 +58,7 @@ declare global {
 			 *
 			 * @returns An intersection point, or null if no intersection occurred
 			 */
-			function lineSegmentIntersection(
-				a: Point,
-				b: Point,
-				c: Point,
-				d: Point,
-				epsilon?: number,
-			): LineIntersection | null;
+			function lineSegmentIntersection(a: Point, b: Point, c: Point, d: Point, epsilon?: number): LineIntersection | null;
 
 			/**
 			 * Determine the intersection between a candidate wall and the circular radius of the polygon.
@@ -86,13 +70,7 @@ declare global {
 			 *
 			 * @returns The intersection of the segment AB with the circle
 			 */
-			export function lineCircleIntersection(
-				a: Point,
-				b: Point,
-				center: Point,
-				radius: number,
-				epsilon?: number,
-			): LineCircleIntersection;
+			export function lineCircleIntersection(a: Point, b: Point, center: Point, radius: number, epsilon?: number): LineCircleIntersection;
 
 			/**
 			 * Identify the point closest to C on segment AB
@@ -102,11 +80,7 @@ declare global {
 			 *
 			 * @returns The closest point to C on segment AB
 			 */
-			export function closestPointToSegment(
-				c: Point,
-				a: Point,
-				b: Point,
-			): Point;
+			export function closestPointToSegment(c: Point, a: Point, b: Point): Point;
 
 			/**
 			 * Determine the points of intersection between a line segment (p0,p1) and a circle.
@@ -119,13 +93,7 @@ declare global {
 			 * @param radius      The radius of the circle
 			 * @param [epsilon=0] A small tolerance for floating point precision
 			 */
-			function quadraticIntersection(
-				p0: Point,
-				p1: Point,
-				center: Point,
-				radius: number,
-				epsilon?: number,
-			): Point[];
+			function quadraticIntersection(p0: Point, p1: Point, center: Point, radius: number, epsilon?: number): Point[];
 		}
 	}
 

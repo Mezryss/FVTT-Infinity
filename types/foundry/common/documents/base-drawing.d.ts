@@ -7,11 +7,7 @@ declare module foundry {
 			static override get metadata(): DrawingMetadata;
 
 			/** Is a user able to update or delete an existing Drawing document? */
-			protected static _canModify(
-				user: BaseUser,
-				doc: BaseDrawing,
-				data: data.DrawingData,
-			): boolean;
+			protected static _canModify(user: BaseUser, doc: BaseDrawing, data: data.DrawingData): boolean;
 		}
 
 		interface BaseDrawing {

@@ -48,10 +48,7 @@ declare global {
 		 * @param recursive Reroll recursively, continuing to reroll until the condition is no longer met
 		 * @returns False if the modifier was unmatched
 		 */
-		reroll(
-			modifier: string,
-			{ recursive }?: { recursive?: boolean },
-		): boolean | void;
+		reroll(modifier: string, { recursive }?: { recursive?: boolean }): boolean | void;
 
 		/**
 		 * @see {@link Die#reroll}

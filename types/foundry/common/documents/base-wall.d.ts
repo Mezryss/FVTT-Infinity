@@ -7,11 +7,7 @@ declare module foundry {
 			static override get metadata(): WallMetadata;
 
 			/** Is a user able to update an existing Wall? */
-			protected static _canUpdate(
-				user: BaseUser,
-				doc: BaseWall,
-				data: data.WallData,
-			): boolean;
+			protected static _canUpdate(user: BaseUser, doc: BaseWall, data: data.WallData): boolean;
 
 			light: WallSenseType;
 			move: WallSenseType;

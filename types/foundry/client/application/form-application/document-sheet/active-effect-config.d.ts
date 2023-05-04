@@ -10,9 +10,7 @@ declare global {
 		tabs: { navSelector: string; contentSelector: string; initial: string }[];
 	}
 
-	interface ActiveEffectConfigData<
-		TDocument extends ActiveEffect = ActiveEffect,
-	> extends DocumentSheetData<TDocument> {
+	interface ActiveEffectConfigData<TDocument extends ActiveEffect = ActiveEffect> extends DocumentSheetData<TDocument> {
 		effect: TDocument;
 		isActorEffect: boolean;
 		isItemEffect: boolean;
@@ -20,9 +18,7 @@ declare global {
 		modes: Record<number, string>;
 	}
 
-	class ActiveEffectConfig<
-		TDocument extends ActiveEffect = ActiveEffect,
-	> extends DocumentSheet<TDocument> {
+	class ActiveEffectConfig<TDocument extends ActiveEffect = ActiveEffect> extends DocumentSheet<TDocument> {
 		/** @override */
 		static get defaultOptions(): ActiveEffectConfigOptions;
 

@@ -12,10 +12,7 @@ declare global {
 	 */
 	class PlaylistSound extends PlaylistSoundConstructor {
 		/** @override */
-		constructor(
-			data: PreCreate<foundry.data.PlaylistSoundSource>,
-			context?: DocumentConstructionContext<PlaylistSound>,
-		);
+		constructor(data: PreCreate<foundry.data.PlaylistSoundSource>, context?: DocumentConstructionContext<PlaylistSound>);
 
 		/** The Sound which manages playback for this playlist sound */
 		sound: Sound | null;

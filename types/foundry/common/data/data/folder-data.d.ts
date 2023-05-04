@@ -28,9 +28,7 @@ declare module foundry {
 			flags: Record<string, unknown>;
 		}
 
-		class FolderData<
-			TDocument extends documents.BaseFolder = documents.BaseFolder,
-		> extends abstract.DocumentData<TDocument> {
+		class FolderData<TDocument extends documents.BaseFolder = documents.BaseFolder> extends abstract.DocumentData<TDocument> {
 			static override defineSchema(): abstract.DocumentSchema;
 
 			static SORTING_MODES: ['a', 'm'];

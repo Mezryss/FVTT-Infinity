@@ -9,10 +9,7 @@ declare module foundry {
 		 * @property data The constructed data object for the document.
 		 */
 		class BaseUser extends abstract.Document {
-			constructor(
-				data: PreCreate<data.UserSource>,
-				context?: DocumentConstructionContext,
-			);
+			constructor(data: PreCreate<data.UserSource>, context?: DocumentConstructionContext);
 
 			flags: Record<string, Record<string, unknown>>;
 
@@ -54,10 +51,7 @@ declare module foundry {
 			 * @param [exact] Require the role match to be exact
 			 * @return Does the user have at this role level (or greater)?
 			 */
-			hasRole(
-				role: UserRole | UserRoleName,
-				{ exact }?: { exact: boolean },
-			): boolean;
+			hasRole(role: UserRole | UserRoleName, { exact }?: { exact: boolean }): boolean;
 		}
 
 		interface BaseUser {

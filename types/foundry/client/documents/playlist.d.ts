@@ -11,10 +11,7 @@ declare global {
 	 */
 	class Playlist extends PlaylistConstructor {
 		/** @override */
-		constructor(
-			data: PreCreate<foundry.data.PlaylistSource>,
-			context?: DocumentConstructionContext<Playlist>,
-		);
+		constructor(data: PreCreate<foundry.data.PlaylistSource>, context?: DocumentConstructionContext<Playlist>);
 
 		/**
 		 * Each sound which is played within the Playlist has a created Howl instance.
@@ -56,10 +53,7 @@ declare global {
 		 * @param [options.direction=1] Whether to advance forward (if 1) or backwards (if -1)
 		 * @returns The updated Playlist document
 		 */
-		playNext(
-			soundId: string,
-			{ direction }?: { direction?: number },
-		): Promise<this>;
+		playNext(soundId: string, { direction }?: { direction?: number }): Promise<this>;
 
 		/**
 		 * Begin playback of a specific Sound within this Playlist.
@@ -99,46 +93,17 @@ declare global {
 		/** Define the sorting order for the Sounds within this Playlist. For internal use. */
 		protected _sortSounds(a: PlaylistSound, b: PlaylistSound): number;
 
-		protected override _preUpdate(
-			data: DocumentUpdateData<this>,
-			options: DocumentModificationContext,
-			user: User,
-		): Promise<void>;
+		protected override _preUpdate(data: DocumentUpdateData<this>, options: DocumentModificationContext, user: User): Promise<void>;
 
-		protected override _onUpdate(
-			changed: DeepPartial<this['_source']>,
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onUpdate(changed: DeepPartial<this['_source']>, options: DocumentModificationContext, userId: string): void;
 
-		protected override _onDelete(
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onDelete(options: DocumentModificationContext, userId: string): void;
 
-		protected override _onCreateEmbeddedDocuments(
-			embeddedName: 'PlaylistSound',
-			documents: PlaylistSound[],
-			result: foundry.data.PlaylistSoundSource[],
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onCreateEmbeddedDocuments(embeddedName: 'PlaylistSound', documents: PlaylistSound[], result: foundry.data.PlaylistSoundSource[], options: DocumentModificationContext, userId: string): void;
 
-		protected override _onUpdateEmbeddedDocuments(
-			embeddedName: 'PlaylistSound',
-			documents: PlaylistSound[],
-			result: foundry.data.PlaylistSoundSource[],
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onUpdateEmbeddedDocuments(embeddedName: 'PlaylistSound', documents: PlaylistSound[], result: foundry.data.PlaylistSoundSource[], options: DocumentModificationContext, userId: string): void;
 
-		protected override _onDeleteEmbeddedDocuments(
-			embeddedName: 'PlaylistSound',
-			documents: ClientDocument[],
-			result: PlaylistSound[],
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		protected override _onDeleteEmbeddedDocuments(embeddedName: 'PlaylistSound', documents: ClientDocument[], result: PlaylistSound[], options: DocumentModificationContext, userId: string): void;
 
 		/** Handle callback logic when an individual sound within the Playlist concludes playback naturally */
 		protected _onSoundEnd(sound: PlaylistSound): Promise<this | undefined>;
@@ -149,8 +114,6 @@ declare global {
 		 */
 		protected _onSoundStart(sound: PlaylistSound): Promise<void>;
 
-		override toCompendium(
-			pack: CompendiumCollection<this>,
-		): foundry.data.PlaylistSource;
+		override toCompendium(pack: CompendiumCollection<this>): foundry.data.PlaylistSource;
 	}
 }

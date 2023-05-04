@@ -6,10 +6,7 @@ declare global {
 	 * @param config           The configuration of the Tour
 	 */
 	class Tour {
-		constructor(
-			config: TourConfig,
-			override: { id?: string; namspace?: string },
-		);
+		constructor(config: TourConfig, override: { id?: string; namspace?: string });
 
 		static STATUS: {
 			UNSTARTED: 'unstarted';
@@ -145,10 +142,7 @@ declare global {
 		 * @param event   A click event
 		 * @param buttons   The step buttons
 		 */
-		private _onButtonClick(
-			event: MouseEvent,
-			buttons: HTMLButtonElement[],
-		): void;
+		private _onButtonClick(event: MouseEvent, buttons: HTMLButtonElement[]): void;
 
 		/** Saves the current progress of the Tour to a world setting */
 		private _saveProgress(): void;

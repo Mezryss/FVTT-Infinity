@@ -61,17 +61,7 @@ declare global {
 		 * Draw the select rectangle given an event originated within the base canvas layer
 		 * @param coords The rectangle coordinates of the form {x, y, width, height}
 		 */
-		drawSelect({
-			x,
-			y,
-			width,
-			height,
-		}: {
-			x: number;
-			y: number;
-			width: number;
-			height: number;
-		}): void;
+		drawSelect({ x, y, width, height }: { x: number; y: number; width: number; height: number }): void;
 
 		override deactivate(): void;
 

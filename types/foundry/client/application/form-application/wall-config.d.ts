@@ -4,10 +4,7 @@ declare class WallConfig extends FormApplication {
 
 	override get title(): string;
 
-	protected override _updateObject(
-		event: Event,
-		formData: Record<string, unknown>,
-	): Promise<void>;
+	protected override _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 
 declare interface WallConfigOptions extends FormApplicationOptions {

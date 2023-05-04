@@ -46,10 +46,7 @@ declare class VideoHelper {
 	 * @return The created and cached base64 thumbnail image, or a placeholder image if the canvas is
 	 *         disabled and no thumbnail can be generated.
 	 */
-	createThumbnail(
-		src: string,
-		options: CreateThumbnailOptions,
-	): Promise<string>;
+	createThumbnail(src: string, options: CreateThumbnailOptions): Promise<string>;
 }
 
 interface CreateThumbnailOptions {

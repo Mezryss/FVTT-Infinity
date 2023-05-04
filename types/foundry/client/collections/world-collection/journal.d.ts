@@ -19,10 +19,6 @@ declare global {
 		 * @param mode    The JournalEntry mode to display
 		 * @param force   Display the entry to all players regardless of normal permissions
 		 */
-		static _showEntry(
-			entryId: string,
-			mode?: string,
-			force?: boolean,
-		): Promise<void>;
+		static _showEntry(entryId: string, mode?: string, force?: boolean): Promise<void>;
 	}
 }

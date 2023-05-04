@@ -1,9 +1,6 @@
 /** A special Graphics class which handles Grid layer highlighting */
 declare class GridHighlight extends PIXI.Graphics {
-	constructor(
-		name: string,
-		...args: ConstructorParameters<typeof PIXI.Graphics>
-	);
+	constructor(name: string, ...args: ConstructorParameters<typeof PIXI.Graphics>);
 
 	/** Track the Grid Highlight name */
 	name: string;

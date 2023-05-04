@@ -90,9 +90,7 @@ declare module foundry {
 			flags: Record<string, Record<string, unknown>>;
 		}
 
-		class TokenData<
-			TDocument extends documents.BaseToken = documents.BaseToken,
-		> extends abstract.DocumentData<TDocument> {
+		class TokenData<TDocument extends documents.BaseToken = documents.BaseToken> extends abstract.DocumentData<TDocument> {
 			lightAnimation: AnimationData<TDocument>;
 
 			bar1: TokenBarData<TDocument>;
@@ -100,8 +98,7 @@ declare module foundry {
 			bar2: TokenBarData<TDocument>;
 		}
 
-		interface TokenData
-			extends Omit<TokenSource, 'lightAnimation' | 'light' | 'bar1' | 'bar2'> {
+		interface TokenData extends Omit<TokenSource, 'lightAnimation' | 'light' | 'bar1' | 'bar2'> {
 			readonly _source: TokenSource;
 
 			light: LightData<NonNullable<this['document']>>;

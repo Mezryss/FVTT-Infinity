@@ -219,15 +219,7 @@ declare global {
 		 * @param y     The y-coordinate of the pan destination
 		 * @param scale The zoom level (max of CONFIG.Canvas.maxZoom) of the action
 		 */
-		pan({
-			x,
-			y,
-			scale,
-		}?: {
-			x?: number | null;
-			y?: number | null;
-			scale?: number | null;
-		}): void;
+		pan({ x, y, scale }?: { x?: number | null; y?: number | null; scale?: number | null }): void;
 
 		/**
 		 * Animate panning the canvas to a certain destination coordinate and zoom scale
@@ -242,12 +234,7 @@ declare global {
 		 * @param [view.speed]        The speed of animation in pixels per second; overrides duration if set
 		 * @returns A Promise which resolves once the animation has been completed
 		 */
-		animatePan(view?: {
-			x?: number;
-			y?: number;
-			scale?: number;
-			duration?: number;
-		}): Promise<unknown>;
+		animatePan(view?: { x?: number; y?: number; scale?: number; duration?: number }): Promise<unknown>;
 
 		/**
 		 * Recenter the canvas
@@ -266,15 +253,7 @@ declare global {
 		 * @param scale The requested scale
 		 * @return The allowed scale
 		 */
-		protected _constrainView({
-			x,
-			y,
-			scale,
-		}: {
-			x: number;
-			y: number;
-			scale: number;
-		}): {
+		protected _constrainView({ x, y, scale }: { x: number; y: number; scale: number }): {
 			x: number;
 			y: number;
 			scale: number;

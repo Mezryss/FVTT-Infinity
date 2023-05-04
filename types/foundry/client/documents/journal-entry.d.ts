@@ -45,28 +45,15 @@ declare global {
 		 * @param [duration=250] The speed of the pan animation in milliseconds
 		 * @return A Promise which resolves once the pan animation has concluded
 		 */
-		panToNote({
-			scale,
-			duration,
-		}?: {
-			scale?: number;
-			duration?: number;
-		}): Promise<void>;
+		panToNote({ scale, duration }?: { scale?: number; duration?: number }): Promise<void>;
 
 		/* -------------------------------------------- */
 		/*  Event Handlers                              */
 		/* -------------------------------------------- */
 
-		override _onUpdate(
-			changed: DeepPartial<this['_source']>,
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		override _onUpdate(changed: DeepPartial<this['_source']>, options: DocumentModificationContext, userId: string): void;
 
-		override _onDelete(
-			options: DocumentModificationContext,
-			userId: string,
-		): void;
+		override _onDelete(options: DocumentModificationContext, userId: string): void;
 	}
 
 	interface JournalEntry {

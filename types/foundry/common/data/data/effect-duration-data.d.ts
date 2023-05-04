@@ -20,9 +20,7 @@ declare module foundry {
 			startTurn: number | null;
 		}
 
-		class EffectDurationData<
-			TDocument extends documents.BaseActiveEffect = documents.BaseActiveEffect,
-		> extends abstract.DocumentData<TDocument> {}
+		class EffectDurationData<TDocument extends documents.BaseActiveEffect = documents.BaseActiveEffect> extends abstract.DocumentData<TDocument> {}
 
 		interface EffectDurationData extends EffectDurationSource {
 			readonly _source: EffectDurationSource;

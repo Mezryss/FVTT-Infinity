@@ -13,9 +13,7 @@ interface CanvasAnimationAttribute {
 	done?: number;
 }
 
-interface CanvasAnimationOptions<
-	TObject extends PIXI.DisplayObject = PIXI.DisplayObject,
-> {
+interface CanvasAnimationOptions<TObject extends PIXI.DisplayObject = PIXI.DisplayObject> {
 	/** A DisplayObject which defines context to the PIXI.Ticker function */
 	context?: TObject;
 	/** A unique name which can be used to reference the in-progress animation */

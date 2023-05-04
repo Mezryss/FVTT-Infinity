@@ -12,15 +12,10 @@ declare class TileHUD extends BasePlaceableHUD<Tile> {}
  * An implementation of the PlaceableHUD base class which renders a heads-up-display interface for Token objects.
  * This interface provides controls for visibility, attribute bars, elevation, status effects, and more.
  */
-declare class TokenHUD<
-	TToken extends Token = Token,
-> extends BasePlaceableHUD<TToken> {
+declare class TokenHUD<TToken extends Token = Token> extends BasePlaceableHUD<TToken> {
 	override getData(options?: ApplicationOptions): TokenHUDData;
 
-	protected _getStatusEffectChoices(): Record<
-		string,
-		TokenHUDStatusEffectChoice | undefined
-	>;
+	protected _getStatusEffectChoices(): Record<string, TokenHUDStatusEffectChoice | undefined>;
 }
 
 type TokenHUDData<T extends Token = Token> = BasePlaceableHUDData<T> & {
