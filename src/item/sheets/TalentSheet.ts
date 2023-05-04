@@ -64,7 +64,7 @@ export type TalentSheetContext = {
 /**
  * Talent sheet controller.
  */
-export class TalentSheet extends VueSheet(InfinityItemSheet<TalentDataModel>) {
+export default class TalentSheet extends VueSheet(InfinityItemSheet<TalentDataModel>) {
 	/**
 	 * Sheet action bindings.
 	 */

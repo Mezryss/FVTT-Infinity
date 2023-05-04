@@ -58,6 +58,11 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 		 * Whether the item is forbidden under the Concilium Convention (p.339).
 		 */
 		concilium: boolean;
+
+		/**
+		 * Any notes related to the restriction, such as factions that have lower restrictions.
+		 */
+		notes: string;
 	};
 
 	/**
@@ -136,10 +141,11 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 						initial: '',
 						nullable: false,
 					}),
-				}), {
+				}),
+				{
 					initial: [],
 					nullable: false,
-				}
+				},
 			),
 
 			restriction: new fields.SchemaField({
@@ -152,6 +158,11 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 
 				concilium: new fields.BooleanField({
 					initial: false,
+					nullable: false,
+				}),
+
+				notes: new fields.StringField({
+					initial: '',
 					nullable: false,
 				}),
 			}),

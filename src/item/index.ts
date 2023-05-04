@@ -1,6 +1,7 @@
 import InfinityItem from './InfinityItem';
 import TalentDataModel from './data/TalentDataModel';
-import { TalentSheet } from './sheets/TalentSheet';
+import AmmunitionSheet from './sheets/AmmunitionSheet';
+import TalentSheet from './sheets/TalentSheet';
 
 /**
  * Handle registration for all Item-related documents and document sheets.
@@ -25,6 +26,11 @@ function registerDataModels() {
  */
 function registerSheets() {
 	Items.unregisterSheet('core', ItemSheet);
+
+	Items.registerSheet('infinity', AmmunitionSheet, {
+		types: ['ammunition'],
+		makeDefault: true,
+	});
 
 	Items.registerSheet('infinity', TalentSheet, {
 		types: ['talent'],

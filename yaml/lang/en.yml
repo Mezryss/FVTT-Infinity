@@ -3,9 +3,10 @@ ACTOR:
 
 # ITEM:
 ITEM:
+  TypeAmmunition: Ammunition
   TypeTalent: Talent
 
-# Genesys
+# System Strings
 Infinity:
   System:
     Name: Infinity
@@ -27,6 +28,15 @@ Infinity:
       Intelligence: Int
       Personality: Per
       Willpower: Will
+
+  Items:
+    Ammunition:
+      Category:
+        Standard: Standard
+        Special: Special
+        Heavy: Heavy
+        Arrows: Arrows
+        Shells: Shells
 
   Skill:
     Acrobatics: Acrobatics

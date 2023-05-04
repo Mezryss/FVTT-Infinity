@@ -9,6 +9,10 @@ Actor:
 
 Item:
   types:
+    # Equipment Types
+    - ammunition
+
+    # Character Stats & Abilities
     - talent
 
   templates:
@@ -26,6 +30,7 @@ Item:
       restriction:
         value: 0
         concilium: false
+        notes: ''
       cost:
         static: 0
         rolled: 0
@@ -34,6 +39,14 @@ Item:
         value: 0
         notes: ''
 
+  # Equipment Types
+  ammunition:
+    templates:
+      - basicItemData
+      - gearItemData
+    category: 'Standard'
+
+  # Character Stats & Abilities
   talent:
     templates: [basicItemData]
     skill: 'Acrobatics'
