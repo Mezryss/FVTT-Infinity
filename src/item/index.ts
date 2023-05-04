@@ -1,6 +1,7 @@
 import InfinityItem from './InfinityItem';
 import TalentDataModel from './data/TalentDataModel';
 import AmmunitionSheet from './sheets/AmmunitionSheet';
+import ArmourSheet from './sheets/ArmourSheet';
 import TalentSheet from './sheets/TalentSheet';
 
 /**
@@ -29,6 +30,11 @@ function registerSheets() {
 
 	Items.registerSheet('infinity', AmmunitionSheet, {
 		types: ['ammunition'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', ArmourSheet, {
+		types: ['armour'],
 		makeDefault: true,
 	});
 

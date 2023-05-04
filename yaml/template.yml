@@ -11,6 +11,7 @@ Item:
   types:
     # Equipment Types
     - ammunition
+    - armour
 
     # Character Stats & Abilities
     - talent
@@ -45,6 +46,28 @@ Item:
       - basicItemData
       - gearItemData
     category: 'Standard'
+
+  armour:
+    templates:
+      - basicItemData
+      - gearItemData
+    # TODO: Customising Armour, Core Rulebook p.342
+    type: 'Civilian'
+    soak:
+      # Symbiont Armours
+      symbiont: 0
+      # Human Armours
+      head: 0
+      torso: 0
+      arm: 0
+      leg: 0
+    bts: 0
+    # Symbiont Armours
+    symbiont:
+      vigour: 10
+      wounds:
+        value: 0
+        max: 1
 
   # Character Stats & Abilities
   talent:

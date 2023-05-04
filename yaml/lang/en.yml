@@ -1,9 +1,12 @@
 ACTOR:
   TypeCharacter: Character
 
-# ITEM:
 ITEM:
+  # Equipment Types
   TypeAmmunition: Ammunition
+  TypeArmour: Armour
+
+  # Character Stats & Abilities
   TypeTalent: Talent
 
 # System Strings
@@ -37,6 +40,14 @@ Infinity:
         Heavy: Heavy
         Arrows: Arrows
         Shells: Shells
+
+    Armour:
+      Type:
+        Civilian: Civilian
+        Combat: Combat
+        Internal: Internal
+        Powered: Powered
+        Symbiont: Symbiont
 
   Skill:
     Acrobatics: Acrobatics
