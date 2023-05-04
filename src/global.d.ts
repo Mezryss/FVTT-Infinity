@@ -1,4 +1,5 @@
 import InfinityActor from './actor/InfinityActor';
+import InfinityItem from './item/InfinityItem';
 
 declare global {
 	const ui: FoundryUI;
@@ -20,8 +21,8 @@ declare global {
 		CompendiumDirectory,
 		Hotbar,
 		// Custom Item Typing
-		Item
+		InfinityItem
 	>;
 
-	const game: Game<InfinityActor, Actors, ChatMessage, Combat, Item>;
+	const game: Game<InfinityActor, Actors, ChatMessage, Combat, InfinityItem>;
 }

@@ -1,4 +1,4 @@
-import { App, UnwrapNestedRefs, reactive, createApp } from 'vue';
+import { App, UnwrapNestedRefs, createApp, reactive } from 'vue';
 
 /**
  * This symbol should be used to inject sheet data in the Vue views.
