@@ -11,6 +11,8 @@
 yarn-*.log
 
 # IDEs
+.idea/
+.fleet/
 .vscode/
 
 # Misc Files
