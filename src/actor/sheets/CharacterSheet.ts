@@ -116,19 +116,13 @@ export class CharacterSheet extends VueSheet(InfinityActorSheet) {
 	 * (EXPERIMENTATION PURPOSES) Updates the rank of a talent.
 	 */
 	async updateTalentRank(id: string, multiplier: number = 1) {
-		const item = this.actor.items.find((i) => i.id === id) as
-			| InfinityItem<TalentDataModel>
-			| undefined;
+		const item = this.actor.items.find((i) => i.id === id) as InfinityItem<TalentDataModel> | undefined;
 		if (!item || item.type !== 'talent' || !item.system.isRanked) {
 			return;
 		}
 
 		await item.update({
-			'system.rank.current': Math.clamped(
-				item.system.rank.current + multiplier,
-				1,
-				item.system.rank.max,
-			),
+			'system.rank.current': Math.clamped(item.system.rank.current + multiplier, 1, item.system.rank.max),
 		});
 	}
 }

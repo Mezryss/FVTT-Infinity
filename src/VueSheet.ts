@@ -16,10 +16,7 @@ type Constructor = new (...args: any[]) => {
 /**
  * Mixin adding support for Vue sheet definitions for Foundry app.
  */
-export function VueSheet<
-	BaseClass extends Constructor,
-	ContextType extends { [key: string]: any } | undefined = {},
->(baseClass: BaseClass) {
+export function VueSheet<BaseClass extends Constructor, ContextType extends { [key: string]: any } | undefined = {}>(baseClass: BaseClass) {
 	return class extends baseClass {
 		/**
 		 * Technically speaking we're redefining the form property here, but so far it hasn't been a problem.
@@ -63,12 +60,7 @@ export function VueSheet<
 			if (!this.form) {
 				const form = document.createElement('form');
 
-				const cssClass =
-					(vueContext as any)?.data?.cssClass ??
-					(
-						options?.classes && (options?.classes as string[] | undefined)
-					)?.join(' ') ??
-					'';
+				const cssClass = (vueContext as any)?.data?.cssClass ?? (options?.classes && (options?.classes as string[] | undefined))?.join(' ') ?? '';
 
 				form.className = `${cssClass} vue-app`;
 				form.setAttribute('autocomplete', 'off');

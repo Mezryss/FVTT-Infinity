@@ -11,9 +11,7 @@ export type DropData = {
 /**
  * Base class for Item sheets used by the system.
  */
-export default class InfinityItemSheet<
-	DataModelType extends foundry.abstract.DataModel = foundry.abstract.DataModel,
-> extends ItemSheet<InfinityItem<DataModelType>> {
+export default class InfinityItemSheet<DataModelType extends foundry.abstract.DataModel = foundry.abstract.DataModel> extends ItemSheet<InfinityItem<DataModelType>> {
 	static override get defaultOptions() {
 		return {
 			...super.defaultOptions,

@@ -23,8 +23,7 @@ const system = computed(() => context.system);
  * @param event Raw HTML Event to fetch the new value from.
  */
 async function updatePrereqType(index: number, event: Event) {
-	const newType = (event.target as HTMLSelectElement)
-		.value as TalentPrerequisite.Type;
+	const newType = (event.target as HTMLSelectElement).value as TalentPrerequisite.Type;
 
 	let value = system.value.prerequisites[index].value;
 
@@ -80,26 +79,12 @@ async function updatePrereqValue(index: number, event: Event) {
 
 		<div class="flex items-center gap-2">
 			<strong>Ranked:</strong>
-			<input
-				type="checkbox"
-				:checked="system.isRanked"
-				name="system.isRanked"
-			/>
+			<input type="checkbox" :checked="system.isRanked" name="system.isRanked" />
 
 			<template v-if="system.isRanked">
 				<div class="w-full grid grid-cols-2 gap-1">
-					<input
-						type="number"
-						:value="system.rank.current"
-						name="system.rank.current"
-						placeholder="Current Rank"
-					/>
-					<input
-						type="number"
-						:value="system.rank.max"
-						name="system.rank.max"
-						placeholder="Max Rank"
-					/>
+					<input type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
+					<input type="number" :value="system.rank.max" name="system.rank.max" placeholder="Max Rank" />
 				</div>
 			</template>
 		</div>
@@ -117,57 +102,22 @@ async function updatePrereqValue(index: number, event: Event) {
 				<a @click="actions.addPrerequisite">+</a>
 			</div>
 
-			<div
-				v-for="(prereq, index) in system.prerequisites"
-				:key="index"
-				class="flex gap-2 w-full items-center"
-			>
-				<select
-					@change="updatePrereqType(index, $event)"
-					:value="prereq.type"
-					:disabled="prereq.type === TalentPrerequisite.Type.Talent"
-				>
-					<option :value="TalentPrerequisite.Type.SkillExpertise">
-						<Localized :label="`Infinity.Skill.${system.skill}`" /> Expertise
-					</option>
-					<option :value="TalentPrerequisite.Type.SkillFocus">
-						<Localized :label="`Infinity.Skill.${system.skill}`" /> Focus
-					</option>
+			<div v-for="(prereq, index) in system.prerequisites" :key="index" class="flex gap-2 w-full items-center">
+				<select @change="updatePrereqType(index, $event)" :value="prereq.type" :disabled="prereq.type === TalentPrerequisite.Type.Talent">
+					<option :value="TalentPrerequisite.Type.SkillExpertise"><Localized :label="`Infinity.Skill.${system.skill}`" /> Expertise</option>
+					<option :value="TalentPrerequisite.Type.SkillFocus"><Localized :label="`Infinity.Skill.${system.skill}`" /> Focus</option>
 					<option :value="TalentPrerequisite.Type.Other">Other</option>
-					<option
-						:value="TalentPrerequisite.Type.Talent"
-						class="hidden"
-						disabled
-					>
-						Talent
-					</option>
+					<option :value="TalentPrerequisite.Type.Talent" class="hidden" disabled>Talent</option>
 				</select>
 
 				<!-- Another Talent -->
-				<Enriched
-					v-if="prereq.type === TalentPrerequisite.Type.Talent"
-					class="w-full"
-					:value="prereq.value.toString()"
-				/>
+				<Enriched v-if="prereq.type === TalentPrerequisite.Type.Talent" class="w-full" :value="prereq.value.toString()" />
 
 				<!-- Skill Value -->
-				<input
-					v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)"
-					class="w-full"
-					type="number"
-					:value="prereq.value"
-					:min="0"
-					@change="updatePrereqValue(index, $event)"
-				/>
+				<input v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" @change="updatePrereqValue(index, $event)" />
 
 				<!-- Catch-All -->
-				<input
-					v-else
-					class="w-full"
-					type="text"
-					:value="prereq.value"
-					@change="updatePrereqValue(index, $event)"
-				/>
+				<input v-else class="w-full" type="text" :value="prereq.value" @change="updatePrereqValue(index, $event)" />
 
 				<a @click="actions.removePrerequisite(index)">x</a>
 			</div>

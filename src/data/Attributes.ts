@@ -15,15 +15,7 @@ namespace Attribute {
 	/**
 	 * Convenience accessor for all character attributes.
 	 */
-	export const all: Attribute[] = [
-		Attribute.Agility,
-		Attribute.Awareness,
-		Attribute.Brawn,
-		Attribute.Coordination,
-		Attribute.Intelligence,
-		Attribute.Personality,
-		Attribute.Willpower,
-	];
+	export const all: Attribute[] = [Attribute.Agility, Attribute.Awareness, Attribute.Brawn, Attribute.Coordination, Attribute.Intelligence, Attribute.Personality, Attribute.Willpower];
 
 	/**
 	 * Retrieves the localized name of the specified Attribute.

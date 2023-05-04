@@ -80,33 +80,15 @@ namespace Skill {
 	export const BY_ATTRIBUTE: Record<Attribute, Skill[]> = {
 		[Attribute.Agility]: [Skill.Acrobatics, Skill.CloseCombat, Skill.Stealth],
 
-		[Attribute.Awareness]: [
-			Skill.Analysis,
-			Skill.Extraplanetary,
-			Skill.Observation,
-			Skill.Survival,
-			Skill.Thievery,
-		],
+		[Attribute.Awareness]: [Skill.Analysis, Skill.Extraplanetary, Skill.Observation, Skill.Survival, Skill.Thievery],
 
 		[Attribute.Brawn]: [Skill.Athletics, Skill.Resistance],
 
 		[Attribute.Coordination]: [Skill.Ballistics, Skill.Pilot, Skill.Spacecraft],
 
-		[Attribute.Intelligence]: [
-			Skill.Education,
-			Skill.Hacking,
-			Skill.Medicine,
-			Skill.Psychology,
-			Skill.Science,
-			Skill.Tech,
-		],
+		[Attribute.Intelligence]: [Skill.Education, Skill.Hacking, Skill.Medicine, Skill.Psychology, Skill.Science, Skill.Tech],
 
-		[Attribute.Personality]: [
-			Skill.AnimalHandling,
-			Skill.Command,
-			Skill.Lifestyle,
-			Skill.Persuade,
-		],
+		[Attribute.Personality]: [Skill.AnimalHandling, Skill.Command, Skill.Lifestyle, Skill.Persuade],
 
 		[Attribute.Willpower]: [Skill.Discipline],
 	};
@@ -115,9 +97,7 @@ namespace Skill {
 	 * Retrieves the Attribute for the specified skill.
 	 */
 	export function attribute(skill: Skill) {
-		return (Object.keys(Skill.BY_ATTRIBUTE) as Attribute[]).find((attr) =>
-			Skill.BY_ATTRIBUTE[attr].includes(skill),
-		)!;
+		return (Object.keys(Skill.BY_ATTRIBUTE) as Attribute[]).find((attr) => Skill.BY_ATTRIBUTE[attr].includes(skill))!;
 	}
 
 	/**

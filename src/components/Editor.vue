@@ -89,9 +89,7 @@ onUpdated(async () => {
 	for (let key of splitName) {
 		// If we've still got a key to find, but it isn't present, something's messed up.
 		if (obj[key] === undefined) {
-			console.warn(
-				`Attempting to update ${rootContext.document.name} editor field but '${props.name}' is undefined!`,
-			);
+			console.warn(`Attempting to update ${rootContext.document.name} editor field but '${props.name}' is undefined!`);
 			obj = undefined;
 			break;
 		}
@@ -126,9 +124,7 @@ async function activate() {
 
 	// Again, this shouldn't happen - but just in case.
 	if (editing.value) {
-		console.error(
-			`Attempted to activate an editor for ${props.name} in ${rootContext.document.name}, but the editor is already active!`,
-		);
+		console.error(`Attempted to activate an editor for ${props.name} in ${rootContext.document.name}, but the editor is already active!`);
 		return;
 	}
 
@@ -170,9 +166,7 @@ async function save() {
 	}
 
 	// Get a string value for the ProseMirror document structure
-	baseContent.value = ProseMirror.dom.serializeString(
-		editorInstance.view.state.doc.content,
-	);
+	baseContent.value = ProseMirror.dom.serializeString(editorInstance.view.state.doc.content);
 	await toRaw(rootContext.document).update({
 		[props.name]: baseContent.value,
 	});
@@ -191,18 +185,9 @@ async function save() {
 
 <template>
 	<div class="w-full h-full editor prosemirror" ref="rootDiv">
-		<a
-			v-if="button && rootContext.editable && !editing"
-			@click="activate"
-			class="editor-edit"
-			><i class="fas fa-edit"></i
-		></a>
+		<a v-if="button && rootContext.editable && !editing" @click="activate" class="editor-edit"><i class="fas fa-edit"></i></a>
 		<div v-if="!editing" class="editor-content" v-html="enrichedContent"></div>
-		<div
-			class="w-full h-full contents editor-content"
-			v-show="editing"
-			ref="editorContainer"
-		></div>
+		<div class="w-full h-full contents editor-content" v-show="editing" ref="editorContainer"></div>
 	</div>
 </template>
 

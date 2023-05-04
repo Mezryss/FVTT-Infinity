@@ -18,17 +18,9 @@ const talents = computed(() => context.talents);
 			<div class="flex gap-2 text-base">
 				<strong>{{ talent.name }}</strong>
 
-				<div
-					v-if="talent.system.isRanked"
-					class="flex w-full whitespace-nowrap gap-1 items-center"
-				>
-					<a class="text-lg" @click="actions.updateTalentRank(talent.id, -1)"
-						>-</a
-					>
-					<span class="whitespace-nowrap"
-						>{{ talent.system.rank.current }} /
-						{{ talent.system.rank.max }}</span
-					>
+				<div v-if="talent.system.isRanked" class="flex w-full whitespace-nowrap gap-1 items-center">
+					<a class="text-lg" @click="actions.updateTalentRank(talent.id, -1)">-</a>
+					<span class="whitespace-nowrap">{{ talent.system.rank.current }} / {{ talent.system.rank.max }}</span>
 					<a class="text-lg" @click="actions.updateTalentRank(talent.id)">+</a>
 				</div>
 			</div>

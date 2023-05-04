@@ -16,10 +16,7 @@ type TalentSheetActions = {
 	/**
 	 * Updates the value of a specified Prerequisite by index.
 	 */
-	updatePrerequisite: (
-		index: number,
-		newValue: TalentPrerequisite,
-	) => Promise<void>;
+	updatePrerequisite: (index: number, newValue: TalentPrerequisite) => Promise<void>;
 
 	/**
 	 * Removes the specified index from the list of prerequisites.
@@ -153,17 +150,12 @@ export class TalentSheet extends VueSheet(InfinityItemSheet<TalentDataModel>) {
 	 *
 	 * @inheritdoc
 	 */
-	protected override async _onDropItem(
-		_event: DragEvent,
-		data: DropData,
-	): Promise<void> {
+	protected override async _onDropItem(_event: DragEvent, data: DropData): Promise<void> {
 		if (!this.isEditable || !data.uuid) {
 			return;
 		}
 
-		const droppedItem = (await (
-			InfinityItem.implementation as any
-		).fromDropData(data)) as InfinityItem | undefined;
+		const droppedItem = (await (InfinityItem.implementation as any).fromDropData(data)) as InfinityItem | undefined;
 		if (!droppedItem || droppedItem.type !== 'talent') {
 			return;
 		}
