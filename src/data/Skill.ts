@@ -45,6 +45,36 @@ enum Skill {
 
 namespace Skill {
 	/**
+	 * Convenience accessor for all character skills.
+	 */
+	export const all: Skill[] = [
+		Skill.Acrobatics,
+		Skill.Analysis,
+		Skill.AnimalHandling,
+		Skill.Athletics,
+		Skill.Ballistics,
+		Skill.CloseCombat,
+		Skill.Command,
+		Skill.Discipline,
+		Skill.Education,
+		Skill.Extraplanetary,
+		Skill.Hacking,
+		Skill.Lifestyle,
+		Skill.Medicine,
+		Skill.Observation,
+		Skill.Persuade,
+		Skill.Pilot,
+		Skill.Psychology,
+		Skill.Resistance,
+		Skill.Science,
+		Skill.Spacecraft,
+		Skill.Stealth,
+		Skill.Survival,
+		Skill.Tech,
+		Skill.Thievery,
+	];
+
+	/**
 	 * A collection of skills broken down by their attributes.
 	 */
 	export const BY_ATTRIBUTE: Record<Attribute, Skill[]> = {

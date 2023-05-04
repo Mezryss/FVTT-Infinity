@@ -1,4 +1,6 @@
 import InfinityItem from './InfinityItem';
+import TalentDataModel from './data/TalentDataModel';
+import { TalentSheet } from './sheets/TalentSheet';
 
 /**
  * Handle registration for all Item-related documents and document sheets.
@@ -14,9 +16,18 @@ export function register() {
 /**
  * Register Item data model classes.
  */
-function registerDataModels() {}
+function registerDataModels() {
+	CONFIG.Item.systemDataModels.talent = TalentDataModel;
+}
 
 /**
  * Register Item sheet classes.
  */
-function registerSheets() {}
+function registerSheets() {
+	Items.unregisterSheet('core', ItemSheet);
+
+	Items.registerSheet('infinity', TalentSheet, {
+		types: ['talent'],
+		makeDefault: true,
+	});
+}

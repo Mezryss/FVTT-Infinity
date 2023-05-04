@@ -2,6 +2,8 @@ ACTOR:
   TypeCharacter: Character
 
 # ITEM:
+ITEM:
+  TypeTalent: Talent
 
 # Genesys
 Infinity:

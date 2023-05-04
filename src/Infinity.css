@@ -10,9 +10,17 @@
 }
 
 /**
- * Minimum Sheet Sizes
+ * Minimum Sheet Size: Actors
  */
 .window-app.actor {
 	min-width: 600px;
 	min-height: 400px;
+}
+
+/**
+ * Minimum Sheet Size: Items
+ */
+.window-app.item {
+	min-width: 400px;
+	min-height: 300px;
 }

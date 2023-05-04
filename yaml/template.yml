@@ -9,9 +9,18 @@ Actor:
 
 Item:
   types:
-    - basic
+    - talent
 
   templates:
     basicItemData:
       description: ''
       source: 'Core Rulebook'
+
+  talent:
+    templates: [basicItemData]
+    skill: 'Acrobatics'
+    isRanked: false
+    rank:
+      current: 1
+      max: 1
+    prerequisites: []
