@@ -72,7 +72,7 @@ async function updatePrereqValue(index: number, event: Event) {
 		<div class="flex items-center gap-2">
 			<strong>Skill:</strong>
 			<select :value="system.skill" name="system.skill" class="w-full">
-				<option v-for="skill in Skill.all" :key="skill">
+				<option v-for="skill in Skill.all" :key="skill" :value="skill">
 					<Localized :label="`Infinity.Skill.${skill}`" />
 				</option>
 			</select>
