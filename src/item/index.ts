@@ -1,7 +1,11 @@
 import InfinityItem from './InfinityItem';
+import AmmunitionDataModel from './data/AmmunitionDataModel';
+import ArmourDataModel from './data/ArmourDataModel';
+import AugmentationDataModel from './data/AugmentationDataModel';
 import TalentDataModel from './data/TalentDataModel';
 import AmmunitionSheet from './sheets/AmmunitionSheet';
 import ArmourSheet from './sheets/ArmourSheet';
+import AugmentationSheet from './sheets/AugmentationSheet';
 import TalentSheet from './sheets/TalentSheet';
 
 /**
@@ -19,6 +23,10 @@ export function register() {
  * Register Item data model classes.
  */
 function registerDataModels() {
+	CONFIG.Item.systemDataModels.ammunition = AmmunitionDataModel;
+	CONFIG.Item.systemDataModels.armour = ArmourDataModel;
+	CONFIG.Item.systemDataModels.augmentation = AugmentationDataModel;
+
 	CONFIG.Item.systemDataModels.talent = TalentDataModel;
 }
 
@@ -35,6 +43,11 @@ function registerSheets() {
 
 	Items.registerSheet('infinity', ArmourSheet, {
 		types: ['armour'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', AugmentationSheet, {
+		types: ['augmentation'],
 		makeDefault: true,
 	});
 

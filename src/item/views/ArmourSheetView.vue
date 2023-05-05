@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { RootContext } from '@/VueSheet';
+import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import ArmourType from '@/data/ArmourType';
@@ -104,6 +105,18 @@ const system = computed(() => context.system);
 			<strong>Tariff</strong>
 			<input type="number" :min="0" :value="system.tariff.value" name="system.tariff.value" />
 			<input type="text" class="w-full" :value="system.tariff.notes" name="system.tariff.notes" />
+		</div>
+
+		<div class="flex items-center gap-2">
+			<strong class="whitespace-nowrap">Maintenance</strong>
+			<input type="number" :min="0" :value="system.maintenance" name="system.maintenance" />
+		</div>
+
+		<hr class="w-full" />
+
+		<div class="flex flex-col items-start gap-2 min-h-[10em] h-full">
+			<h3 class="w-full">Description</h3>
+			<Editor name="system.description" :content="system.description" button />
 		</div>
 	</InfinitySheet>
 </template>

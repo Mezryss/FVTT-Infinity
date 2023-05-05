@@ -5,6 +5,7 @@ ITEM:
   # Equipment Types
   TypeAmmunition: Ammunition
   TypeArmour: Armour
+  TypeAugmentation: Augmentation
 
   # Character Stats & Abilities
   TypeTalent: Talent
