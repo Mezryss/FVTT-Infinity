@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import Skill from '@/data/Skill';
-import { computed, inject } from 'vue';
+
 import { TalentPrerequisite } from '../data/TalentDataModel';
 import { TalentSheetContext } from '../sheets/TalentSheet';
 

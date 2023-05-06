@@ -1,4 +1,5 @@
 import { VueSheet } from '@/VueSheet';
+
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet from '../InfinityItemSheet';
 import AugmentationDataModel from '../data/AugmentationDataModel';

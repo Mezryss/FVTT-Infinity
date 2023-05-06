@@ -1,7 +1,8 @@
 import { VueSheet } from '@/VueSheet';
+
 import InfinityItem from '../InfinityItem';
-import AmmunitionDataModel from '../data/AmmunitionDataModel';
 import InfinityItemSheet from '../InfinityItemSheet';
+import AmmunitionDataModel from '../data/AmmunitionDataModel';
 import AmmunitionSheetView from '../views/AmmunitionSheetView.vue';
 
 /**

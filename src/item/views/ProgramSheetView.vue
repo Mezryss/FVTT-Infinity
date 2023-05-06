@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import { ProgramSheetContext } from '../sheets/ProgramSheet';
+
 import { RootContext } from '@/VueSheet';
-import InfinitySheet from '@/components/InfinitySheet.vue';
 import Editor from '@/components/Editor.vue';
-import { ProgramType } from '../data/ProgramDataModel';
+import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
+
+import { ProgramType } from '../data/ProgramDataModel';
+import { ProgramSheetContext } from '../sheets/ProgramSheet';
 
 const context = inject<ProgramSheetContext>(RootContext)!;
 

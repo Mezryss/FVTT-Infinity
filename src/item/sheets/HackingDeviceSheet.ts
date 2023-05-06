@@ -1,9 +1,10 @@
 import { VueSheet } from '@/VueSheet';
+
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
 import HackingDeviceDataModel, { ProgramItemReference } from '../data/HackingDeviceDataModel';
-import HackingDeviceSheetViewVue from '../views/HackingDeviceSheetView.vue';
 import ProgramDataModel from '../data/ProgramDataModel';
+import HackingDeviceSheetViewVue from '../views/HackingDeviceSheetView.vue';
 
 /**
  * Function callbacks

@@ -1,4 +1,5 @@
 import { VueSheet } from '@/VueSheet';
+
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
 import TalentDataModel, { TalentPrerequisite } from '../data/TalentDataModel';

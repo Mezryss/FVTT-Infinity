@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import InfinitySheet from '@/components/InfinitySheet.vue';
-import { computed, inject } from 'vue';
+
 import { CharacterSheetContext } from '../sheets/CharacterSheet';
 
 const context = inject<CharacterSheetContext>(RootContext)!;

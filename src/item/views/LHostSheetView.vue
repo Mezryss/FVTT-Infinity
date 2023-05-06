@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import Attribute from '@/data/Attributes';
-import { computed, inject } from 'vue';
+
 import { LHostSheetContext } from '../sheets/LHostSheet';
 
 const context = inject<LHostSheetContext>(RootContext)!;

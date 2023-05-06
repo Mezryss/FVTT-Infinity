@@ -3,11 +3,14 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
 	root: true,
-	'extends': [
+	extends: [
 		'plugin:vue/vue3-essential',
 		'eslint:recommended',
 		'@vue/eslint-config-typescript',
 		'@vue/eslint-config-prettier/skip-formatting',
+	],
+	plugins: [
+		'import',
 	],
 	parserOptions: {
 		ecmaVersion: 'latest'
@@ -19,5 +22,30 @@ module.exports = {
 		'vue/no-unused-vars': ['error', { 'ignorePattern': '^_' }],
 		'no-undef': 'off', // ESLint whines about unknown globals, but TSC already checks those so who needs ESLint's checking?
 		'vue/multi-word-component-names': 'off',
+		'import/order': ['error', {
+			groups: [
+				'builtin',
+				'external',
+				'parent',
+				'sibling',
+				'index',
+			],
+			pathGroups: [
+				{
+					pattern: '@/**',
+					group: 'external',
+					position: 'after'
+				}
+			],
+			pathGroupsExcludedImportTypes: ['builtin'],
+			alphabetize: {
+				'order': 'asc',
+			},
+			'newlines-between': 'always',
+		}],
+		'sort-imports': ['error', {
+			allowSeparatedGroups: true,
+			ignoreDeclarationSort: true,
+		}]
 	},
 }
