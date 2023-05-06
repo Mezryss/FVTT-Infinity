@@ -32,14 +32,11 @@ Item:
       faults: []
       # TODO: Item Qualities
       restriction:
-        value: 0
+        value: ''
         concilium: false
-        notes: ''
       cost: ''
       maintenance: ''
-      tariff:
-        value: 0
-        notes: ''
+      tariff: '-'
 
   # Equipment Types
   ammunition:

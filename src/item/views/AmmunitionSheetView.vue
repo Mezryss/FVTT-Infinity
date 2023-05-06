@@ -36,9 +36,8 @@ const system = computed(() => context.system);
 
 		<div class="flex items-center gap-2">
 			<strong>Restriction:</strong>
-			<input type="number" :min="0" :value="system.restriction.value" name="system.restriction.value" />
+			<input type="text" :value="system.restriction.value" name="system.restriction.value" />
 			<input type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
-			<input type="text" class="w-full" :value="system.restriction.notes" name="system.restriction.notes" />
 		</div>
 
 		<div class="flex items-center gap-2">
@@ -48,8 +47,7 @@ const system = computed(() => context.system);
 
 		<div class="flex items-center gap-2">
 			<strong>Tariff</strong>
-			<input type="number" :min="0" :value="system.tariff.value" name="system.tariff.value" />
-			<input type="text" class="w-full" :value="system.tariff.notes" name="system.tariff.notes" />
+			<input type="text" class="w-full" :value="system.tariff" name="system.tariff" />
 		</div>
 
 		<div class="flex items-center gap-2">

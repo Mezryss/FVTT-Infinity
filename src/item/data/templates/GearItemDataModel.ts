@@ -175,20 +175,13 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 			),
 
 			restriction: new fields.SchemaField({
-				value: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
+				value: new fields.StringField({
+					initial: '',
 					nullable: false,
 				}),
 
 				concilium: new fields.BooleanField({
 					initial: false,
-					nullable: false,
-				}),
-
-				notes: new fields.StringField({
-					initial: '',
 					nullable: false,
 				}),
 			}),
@@ -203,18 +196,9 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 				nullable: false,
 			}),
 
-			tariff: new fields.SchemaField({
-				value: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
-					nullable: false,
-				}),
-
-				notes: new fields.StringField({
-					initial: '',
-					nullable: false,
-				}),
+			tariff: new fields.StringField({
+				initial: '-',
+				nullable: false,
 			}),
 		};
 	}
