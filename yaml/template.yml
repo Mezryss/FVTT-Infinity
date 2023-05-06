@@ -84,11 +84,7 @@ Item:
       momentum: 1
     term: 'Round'
     vector: ''
-    damage:
-      static: 0
-      rolled: 0
-      type: 'Physical'
-      # TODO: Damage Qualities on Contagions
+    damage: ''
 
   # Character Stats & Abilities
   talent:

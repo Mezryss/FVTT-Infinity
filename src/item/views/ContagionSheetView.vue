@@ -6,7 +6,6 @@ import Localized from '@/components/Localized.vue';
 import { computed, inject } from 'vue';
 import { ContagionCategory, ContagionTerm, ContagionType } from '../data/ContagionDataModel';
 import { ContagionSheetContext } from '../sheets/ContagionSheet';
-import DamageType from '@/data/DamageType';
 
 const context = inject<ContagionSheetContext>(RootContext)!;
 
@@ -60,13 +59,7 @@ const system = computed(() => context.system);
 
 		<div class="flex items-center gap-2">
 			<strong>Damage:</strong>
-			<input type="number" :value="system.damage.static" name="system.damage.static" />
-			<input type="number" :value="system.damage.rolled" name="system.damage.rolled" />
-			<select :value="system.damage.type" name="system.damage.type">
-				<option v-for="damageType in DamageType.all" :key="damageType" :value="damageType">
-					{{ damageType }}
-				</option>
-			</select>
+			<input type="text" :value="system.damage" name="system.damage" />
 		</div>
 
 		<hr class="w-full" />

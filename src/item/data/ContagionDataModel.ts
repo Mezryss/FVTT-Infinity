@@ -1,4 +1,3 @@
-import DamageType from '@/data/DamageType';
 import GearItemDataModel from './templates/GearItemDataModel';
 
 /**
@@ -93,22 +92,7 @@ export default abstract class ContagionDataModel extends GearItemDataModel {
 	/**
 	 * Damage value used by the contagion.
 	 */
-	abstract damage: {
-		/**
-		 * Static element of the damage.
-		 */
-		static: number;
-
-		/**
-		 * Rolled element of the damage.
-		 */
-		rolled: number;
-
-		/**
-		 * Damage Type
-		 */
-		type: DamageType;
-	};
+	abstract damage: string;
 
 	/**
 	 * @inheritdoc
@@ -158,25 +142,9 @@ export default abstract class ContagionDataModel extends GearItemDataModel {
 				nullable: false,
 			}),
 
-			damage: new fields.SchemaField({
-				static: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					nullable: false,
-				}),
-
-				rolled: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
-					nullable: false,
-				}),
-
-				type: new fields.StringField({
-					initial: DamageType.Physical,
-					choices: DamageType.all,
-					nullable: false,
-				}),
+			damage: new fields.StringField({
+				initial: '',
+				nullable: false,
 			}),
 		};
 	}
