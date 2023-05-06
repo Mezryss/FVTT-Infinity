@@ -4,6 +4,7 @@ import ArmourDataModel from './data/ArmourDataModel';
 import AugmentationDataModel from './data/AugmentationDataModel';
 import ContagionDataModel from './data/ContagionDataModel';
 import ExplosiveDataModel from './data/ExplosiveDataModel';
+import GearDataModel from './data/GearDataModel';
 import HackingDeviceDataModel from './data/HackingDeviceDataModel';
 import LHostDataModel from './data/LHostDataModel';
 import ProgramDataModel from './data/ProgramDataModel';
@@ -13,6 +14,7 @@ import ArmourSheet from './sheets/ArmourSheet';
 import AugmentationSheet from './sheets/AugmentationSheet';
 import ContagionSheet from './sheets/ContagionSheet';
 import ExplosiveSheet from './sheets/ExplosiveSheet';
+import GearSheet from './sheets/GearSheet';
 import HackingDeviceSheet from './sheets/HackingDeviceSheet';
 import LHostSheet from './sheets/LHostSheet';
 import ProgramSheet from './sheets/ProgramSheet';
@@ -38,6 +40,7 @@ function registerDataModels() {
 	CONFIG.Item.systemDataModels.augmentation = AugmentationDataModel;
 	CONFIG.Item.systemDataModels.contagion = ContagionDataModel;
 	CONFIG.Item.systemDataModels.explosive = ExplosiveDataModel;
+	CONFIG.Item.systemDataModels.gear = GearDataModel;
 	CONFIG.Item.systemDataModels.hackingDevice = HackingDeviceDataModel;
 	CONFIG.Item.systemDataModels.lhost = LHostDataModel;
 	CONFIG.Item.systemDataModels.program = ProgramDataModel;
@@ -73,6 +76,11 @@ function registerSheets() {
 
 	Items.registerSheet('infinity', ExplosiveSheet, {
 		types: ['explosive'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', GearSheet, {
+		types: ['gear'],
 		makeDefault: true,
 	});
 

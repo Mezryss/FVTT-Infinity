@@ -8,6 +8,7 @@ ITEM:
   TypeAugmentation: Augmentation
   TypeContagion: Contagion
   TypeExplosive: Explosive
+  TypeGear: Gear
   TypeHackingdevice: Hacking Device  # The lowercase d is intentional because of how Foundry generates keys for default localization.
   TypeLhost: LHost
   TypeProgram: Program
@@ -84,6 +85,12 @@ Infinity:
         Charge: Charge
         Grenade: Grenade
         Mine: Mine
+
+    Gear:
+      Type:
+        Other: Other
+        Resource: Resource
+        Tool: Tool
 
     Program:
       Type:

@@ -15,6 +15,7 @@ Item:
     - augmentation
     - contagion
     - explosive
+    - gear
     - hackingDevice
     - lhost
     - program
@@ -97,6 +98,12 @@ Item:
       - gearItemData
     category: 'Charge'
     damage: ''
+
+  gear:
+    templates:
+      - basicItemData
+      - gearItemData
+    type: 'Other'
 
   hackingDevice:
     templates:
