@@ -3,8 +3,8 @@ import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
-import ArmourType from '@/data/ArmourType';
 import { computed, inject } from 'vue';
+import { ArmourType } from '../data/ArmourDataModel';
 import { ArmourSheetContext } from '../sheets/ArmourSheet';
 
 const context = inject<ArmourSheetContext>(RootContext)!;

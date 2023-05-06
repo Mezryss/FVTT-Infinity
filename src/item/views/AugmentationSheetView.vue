@@ -2,8 +2,8 @@
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
-import { AugmentationCategory, AugmentationType } from '@/data/Augmentations';
 import { computed, inject } from 'vue';
+import { AugmentationCategory, AugmentationType } from '../data/AugmentationDataModel';
 import { AugmentationSheetContext } from '../sheets/AugmentationSheet';
 
 const context = inject<AugmentationSheetContext>(RootContext)!;

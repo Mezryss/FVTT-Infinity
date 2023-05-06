@@ -1,5 +1,23 @@
-import ArmourType from '@/data/ArmourType';
 import GearItemDataModel from './templates/GearItemDataModel';
+
+/**
+ * Armour Types.
+ */
+export enum ArmourType {
+	Civilian = 'Civilian',
+	Combat = 'Combat',
+	Internal = 'Internal',
+	Powered = 'Powered',
+	// Symbiont armours behave differently from human armours.
+	Symbiont = 'Symbiont',
+}
+
+export namespace ArmourType {
+	/**
+	 * Convenience accessor for all Armour types.
+	 */
+	export const all: ArmourType[] = [ArmourType.Civilian, ArmourType.Combat, ArmourType.Internal, ArmourType.Powered, ArmourType.Symbiont];
+}
 
 export default abstract class ArmourDataModel extends GearItemDataModel {
 	/**
