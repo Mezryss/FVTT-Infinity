@@ -1,19 +1,19 @@
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet from '../InfinityItemSheet';
-import ProgramDataModel from '../data/ProgramDataModel';
-import ProgramSheetView from '../views/ProgramSheetView.vue';
+import LHostDataModel from '../data/LHostDataModel';
+import LHostSheetView from '../views/LHostSheetView.vue';
 
 /**
- * Vue context for Program sheets.
+ * Vue context for LHost sheets.
  */
-export type ProgramSheetContext = {
+export type LHostSheetContext = {
 	/**
 	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
 	 *
 	 * @private
 	 */
-	document: InfinityItem<ProgramDataModel>;
+	document: InfinityItem<LHostDataModel>;
 
 	/**
 	 * Whether or not the sheet is editable.
@@ -33,24 +33,24 @@ export type ProgramSheetContext = {
 	/**
 	 * System data for the talent.
 	 */
-	system: ProgramDataModel;
+	system: LHostDataModel;
 };
 
 /**
- * Program sheet controller.
+ * LHost sheet controller.
  */
-export default class ProgramSheet extends VueSheet(InfinityItemSheet<ProgramDataModel>) {
+export default class LHostSheet extends VueSheet(InfinityItemSheet<LHostDataModel>) {
 	/**
 	 * Vue Component
 	 */
 	override get vueComponent() {
-		return ProgramSheetView;
+		return LHostSheetView;
 	}
 
 	/**
 	 * Vue Context
 	 */
-	override async getVueContext(): Promise<ProgramSheetContext> {
+	override async getVueContext(): Promise<LHostSheetContext> {
 		return {
 			document: this.item,
 			editable: this.isEditable,

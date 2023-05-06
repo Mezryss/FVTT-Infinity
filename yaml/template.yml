@@ -16,6 +16,7 @@ Item:
     - contagion
     - explosive
     - hackingDevice
+    - lhost
     - program
 
     # Character Stats & Abilities
@@ -95,6 +96,18 @@ Item:
     gadget: 0
     ic: 0
     programs: []
+
+  lhost:
+    lpCost: 0
+    attributes:
+      Agility: 0
+      Awareness: 0
+      Brawn: 0
+      Coordination: 0
+      Intelligence: 0
+      Personality: 0
+      Willpower: 0
+    # TODO: Special Abilities granted by LHost
 
   program:
     type: 'Sword'
