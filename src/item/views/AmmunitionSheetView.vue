@@ -43,8 +43,7 @@ const system = computed(() => context.system);
 
 		<div class="flex items-center gap-2">
 			<strong class="whitespace-nowrap">Reload Cost</strong>
-			<input type="number" :min="0" :value="system.cost.static" name="system.cost.static" />
-			<input type="number" :value="system.cost.rolled" name="system.cost.rolled" />
+			<input type="text" :value="system.cost" name="system.cost" />
 		</div>
 
 		<div class="flex items-center gap-2">

@@ -35,10 +35,7 @@ Item:
         value: 0
         concilium: false
         notes: ''
-      # TODO: Convert cost to a string?
-      cost:
-        static: 0
-        rolled: 0
+      cost: ''
       maintenance: ''
       tariff:
         value: 0
