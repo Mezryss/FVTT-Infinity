@@ -71,11 +71,17 @@ Item:
         max: 1
 
   augmentation:
+    templates:
+      - basicItemData
+      - gearItemData
     type: 'Implant'
     category: 'Cybernetic'
     location: ''
 
   contagion:
+    templates:
+      - basicItemData
+      - gearItemData
     category: 'Disease'
     type:
       value: 'Instant'
@@ -86,10 +92,16 @@ Item:
     damage: ''
 
   explosive:
+    templates:
+      - basicItemData
+      - gearItemData
     category: 'Charge'
     damage: ''
 
   hackingDevice:
+    templates:
+      - basicItemData
+      - gearItemData
     claw: 0
     sword: 0
     shield: 0
@@ -98,6 +110,9 @@ Item:
     programs: []
 
   lhost:
+    templates:
+      - basicItemData
+      - gearItemData
     lpCost: 0
     attributes:
       Agility: 0
@@ -110,6 +125,9 @@ Item:
     # TODO: Special Abilities granted by LHost
 
   program:
+    templates:
+      - basicItemData
+      - gearItemData
     type: 'Sword'
     rating: '1'
     damage: ''
