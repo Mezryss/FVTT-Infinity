@@ -8,6 +8,8 @@ ITEM:
   TypeAugmentation: Augmentation
   TypeContagion: Contagion
   TypeExplosive: Explosive
+  TypeHackingdevice: Hacking Device  # The lowercase d is intentional because of how Foundry generates keys for default localization.
+  TypeProgram: Program
 
   # Character Stats & Abilities
   TypeTalent: Talent
@@ -81,6 +83,16 @@ Infinity:
         Charge: Charge
         Grenade: Grenade
         Mine: Mine
+
+    Program:
+      Type:
+        # Note: These are intentionally all-caps to match styling in Core Rulebook.
+        Sword: SWORD
+        Claw: CLAW
+        Shield: SHIELD
+        Gadget: GADGET
+        IC: IC
+        Upgrade: UPGRADE
 
   Skill:
     Acrobatics: Acrobatics
