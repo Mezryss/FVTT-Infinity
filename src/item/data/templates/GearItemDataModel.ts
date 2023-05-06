@@ -194,7 +194,7 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 			}),
 
 			cost: new fields.SchemaField({
-				value: new fields.NumberField({
+				static: new fields.NumberField({
 					initial: 0,
 					integer: true,
 					min: 0,

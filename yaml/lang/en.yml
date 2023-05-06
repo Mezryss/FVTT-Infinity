@@ -7,6 +7,7 @@ ITEM:
   TypeArmour: Armour
   TypeAugmentation: Augmentation
   TypeContagion: Contagion
+  TypeExplosive: Explosive
 
   # Character Stats & Abilities
   TypeTalent: Talent
@@ -74,6 +75,12 @@ Infinity:
         Complex: Complex
         Progressive: Progressive
         Chronic: Chronic
+
+    Explosive:
+      Category:
+        Charge: Charge
+        Grenade: Grenade
+        Mine: Mine
 
   Skill:
     Acrobatics: Acrobatics
