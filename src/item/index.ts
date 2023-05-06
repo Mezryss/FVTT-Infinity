@@ -9,6 +9,7 @@ import HackingDeviceDataModel from './data/HackingDeviceDataModel';
 import LHostDataModel from './data/LHostDataModel';
 import ProgramDataModel from './data/ProgramDataModel';
 import TalentDataModel from './data/TalentDataModel';
+import WeaponDataModel from './data/WeaponDataModel';
 import AmmunitionSheet from './sheets/AmmunitionSheet';
 import ArmourSheet from './sheets/ArmourSheet';
 import AugmentationSheet from './sheets/AugmentationSheet';
@@ -19,6 +20,7 @@ import HackingDeviceSheet from './sheets/HackingDeviceSheet';
 import LHostSheet from './sheets/LHostSheet';
 import ProgramSheet from './sheets/ProgramSheet';
 import TalentSheet from './sheets/TalentSheet';
+import WeaponSheet from './sheets/WeaponSheet';
 
 /**
  * Handle registration for all Item-related documents and document sheets.
@@ -44,6 +46,7 @@ function registerDataModels() {
 	CONFIG.Item.systemDataModels.hackingDevice = HackingDeviceDataModel;
 	CONFIG.Item.systemDataModels.lhost = LHostDataModel;
 	CONFIG.Item.systemDataModels.program = ProgramDataModel;
+	CONFIG.Item.systemDataModels.weapon = WeaponDataModel;
 
 	CONFIG.Item.systemDataModels.talent = TalentDataModel;
 }
@@ -96,6 +99,11 @@ function registerSheets() {
 
 	Items.registerSheet('infinity', ProgramSheet, {
 		types: ['program'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', WeaponSheet, {
+		types: ['weapon'],
 		makeDefault: true,
 	});
 

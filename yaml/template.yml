@@ -19,6 +19,7 @@ Item:
     - hackingDevice
     - lhost
     - program
+    - weapon
 
     # Character Stats & Abilities
     - talent
@@ -138,6 +139,18 @@ Item:
     type: 'Sword'
     rating: '1'
     damage: ''
+
+  weapon:
+    templates:
+      - basicItemData
+      - gearItemData
+    type: 'Melee'
+    damage: ''
+    range: 'C'
+    burst: '1'
+    ammo:
+      allowed: ''
+      selected: ''
 
   # Character Stats & Abilities
   talent:

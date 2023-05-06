@@ -12,6 +12,7 @@ ITEM:
   TypeHackingdevice: Hacking Device  # The lowercase d is intentional because of how Foundry generates keys for default localization.
   TypeLhost: LHost
   TypeProgram: Program
+  TypeWeapon: Weapon
 
   # Character Stats & Abilities
   TypeTalent: Talent
@@ -101,6 +102,11 @@ Infinity:
         Gadget: GADGET
         IC: IC
         Upgrade: UPGRADE
+
+    Weapon:
+      Type:
+        Melee: Melee
+        Ranged: Ranged
 
   Skill:
     Acrobatics: Acrobatics
