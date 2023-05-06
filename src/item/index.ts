@@ -1,4 +1,5 @@
 import InfinityItem from './InfinityItem';
+import AbilityDataModel from './data/AbilityDataModel';
 import AmmunitionDataModel from './data/AmmunitionDataModel';
 import ArmourDataModel from './data/ArmourDataModel';
 import AugmentationDataModel from './data/AugmentationDataModel';
@@ -10,6 +11,7 @@ import LHostDataModel from './data/LHostDataModel';
 import ProgramDataModel from './data/ProgramDataModel';
 import TalentDataModel from './data/TalentDataModel';
 import WeaponDataModel from './data/WeaponDataModel';
+import AbilitySheet from './sheets/AbilitySheet';
 import AmmunitionSheet from './sheets/AmmunitionSheet';
 import ArmourSheet from './sheets/ArmourSheet';
 import AugmentationSheet from './sheets/AugmentationSheet';
@@ -48,6 +50,7 @@ function registerDataModels() {
 	CONFIG.Item.systemDataModels.program = ProgramDataModel;
 	CONFIG.Item.systemDataModels.weapon = WeaponDataModel;
 
+	CONFIG.Item.systemDataModels.abilities = AbilityDataModel;
 	CONFIG.Item.systemDataModels.talent = TalentDataModel;
 }
 
@@ -57,58 +60,29 @@ function registerDataModels() {
 function registerSheets() {
 	Items.unregisterSheet('core', ItemSheet);
 
-	Items.registerSheet('infinity', AmmunitionSheet, {
-		types: ['ammunition'],
-		makeDefault: true,
-	});
+	registerSheet(AbilitySheet, 'ability');
+	registerSheet(AmmunitionSheet, 'ammunition');
+	registerSheet(ArmourSheet, 'armour');
+	registerSheet(AugmentationSheet, 'augmentation');
+	registerSheet(ContagionSheet, 'contagion');
+	registerSheet(ExplosiveSheet, 'explosive');
+	registerSheet(GearSheet, 'gear');
+	registerSheet(HackingDeviceSheet, 'hackingDevice');
+	registerSheet(LHostSheet, 'lhost');
+	registerSheet(ProgramSheet, 'program');
+	registerSheet(TalentSheet, 'talent');
+	registerSheet(WeaponSheet, 'weapon');
+}
 
-	Items.registerSheet('infinity', ArmourSheet, {
-		types: ['armour'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', AugmentationSheet, {
-		types: ['augmentation'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', ContagionSheet, {
-		types: ['contagion'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', ExplosiveSheet, {
-		types: ['explosive'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', GearSheet, {
-		types: ['gear'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', HackingDeviceSheet, {
-		types: ['hackingDevice'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', LHostSheet, {
-		types: ['lhost'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', ProgramSheet, {
-		types: ['program'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', WeaponSheet, {
-		types: ['weapon'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', TalentSheet, {
-		types: ['talent'],
+/**
+ * Register a single sheet class for the selected Item types.
+ *
+ * @param sheetClass Sheet class to use.
+ * @param types A list of sheet types to use this sheet.
+ */
+function registerSheet(sheetClass: any, ...types: string[]) {
+	Items.registerSheet('infinity', sheetClass, {
+		types,
 		makeDefault: true,
 	});
 }

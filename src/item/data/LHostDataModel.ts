@@ -2,6 +2,15 @@ import Attribute from '@/data/Attributes';
 
 import GearItemDataModel from './templates/GearItemDataModel';
 
+/**
+ * Reference to a Special Ability item.
+ */
+export type AbilityItemReference = {
+	img: string;
+	name: string;
+	uuid: string;
+};
+
 export default abstract class LHostDataModel extends GearItemDataModel {
 	/**
 	 * Life Point cost if taken as a replacement body during Character Creation.
@@ -20,6 +29,11 @@ export default abstract class LHostDataModel extends GearItemDataModel {
 		[Attribute.Personality]: 0;
 		[Attribute.Willpower]: 0;
 	};
+
+	/**
+	 * A list of UUID links to Special Abilities granted by the LHost.
+	 */
+	abstract specialAbilities: AbilityItemReference[];
 
 	/**
 	 * @inheritdoc
@@ -79,6 +93,29 @@ export default abstract class LHostDataModel extends GearItemDataModel {
 					nullable: false,
 				}),
 			}),
+
+			specialAbilities: new fields.ArrayField(
+				new fields.SchemaField({
+					img: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					name: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					uuid: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+				}),
+				{
+					initial: [],
+					nullable: false,
+				},
+			),
 		};
 	}
 }

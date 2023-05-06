@@ -11,6 +11,7 @@ import { LHostSheetContext } from '../sheets/LHostSheet';
 
 const context = inject<LHostSheetContext>(RootContext)!;
 
+const actions = computed(() => context.actions);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
@@ -57,6 +58,15 @@ const system = computed(() => context.system);
 		<div class="flex items-center gap-2">
 			<strong>Maintenance</strong>
 			<input type="text" class="w-full" :value="system.maintenance" name="system.maintenance" />
+		</div>
+
+		<div v-if="system.specialAbilities.length > 0" class="flex flex-col gap-2">
+			<h3>Special Abilities</h3>
+			<div class="flex items-center gap-2" v-for="(ability, index) in system.specialAbilities" :key="ability.uuid">
+				<img class="w-6 h-6" :src="ability.img" />
+				<a class="w-full" @click="actions.openAbility(index)">{{ ability.name }}</a>
+				<a class="px-1" @click="actions.removeAbility(index)">X</a>
+			</div>
 		</div>
 
 		<hr class="w-full" />

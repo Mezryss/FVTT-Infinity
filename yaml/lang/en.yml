@@ -15,6 +15,7 @@ ITEM:
   TypeWeapon: Weapon
 
   # Character Stats & Abilities
+  TypeAbility: Special Ability
   TypeTalent: Talent
 
 # System Strings

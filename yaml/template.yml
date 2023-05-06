@@ -22,6 +22,7 @@ Item:
     - weapon
 
     # Character Stats & Abilities
+    - ability
     - talent
 
   templates:
@@ -130,7 +131,7 @@ Item:
       Intelligence: 0
       Personality: 0
       Willpower: 0
-    # TODO: Special Abilities granted by LHost
+    specialAbilities: []
 
   program:
     templates:
@@ -153,6 +154,11 @@ Item:
       selected: ''
 
   # Character Stats & Abilities
+  ability:
+    templates: [basicItemData]
+    isRanked: false
+    rank: 1
+
   talent:
     templates: [basicItemData]
     skill: 'Acrobatics'
