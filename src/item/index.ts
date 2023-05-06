@@ -2,10 +2,12 @@ import InfinityItem from './InfinityItem';
 import AmmunitionDataModel from './data/AmmunitionDataModel';
 import ArmourDataModel from './data/ArmourDataModel';
 import AugmentationDataModel from './data/AugmentationDataModel';
+import ContagionDataModel from './data/ContagionDataModel';
 import TalentDataModel from './data/TalentDataModel';
 import AmmunitionSheet from './sheets/AmmunitionSheet';
 import ArmourSheet from './sheets/ArmourSheet';
 import AugmentationSheet from './sheets/AugmentationSheet';
+import ContagionSheet from './sheets/ContagionSheet';
 import TalentSheet from './sheets/TalentSheet';
 
 /**
@@ -26,6 +28,7 @@ function registerDataModels() {
 	CONFIG.Item.systemDataModels.ammunition = AmmunitionDataModel;
 	CONFIG.Item.systemDataModels.armour = ArmourDataModel;
 	CONFIG.Item.systemDataModels.augmentation = AugmentationDataModel;
+	CONFIG.Item.systemDataModels.contagion = ContagionDataModel;
 
 	CONFIG.Item.systemDataModels.talent = TalentDataModel;
 }
@@ -48,6 +51,11 @@ function registerSheets() {
 
 	Items.registerSheet('infinity', AugmentationSheet, {
 		types: ['augmentation'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', ContagionSheet, {
+		types: ['contagion'],
 		makeDefault: true,
 	});
 

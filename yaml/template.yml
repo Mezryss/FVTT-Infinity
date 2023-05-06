@@ -13,6 +13,7 @@ Item:
     - ammunition
     - armour
     - augmentation
+    - contagion
 
     # Character Stats & Abilities
     - talent
@@ -74,6 +75,20 @@ Item:
     type: 'Implant'
     category: 'Cybernetic'
     location: ''
+
+  contagion:
+    category: 'Disease'
+    type:
+      value: 'Instant'
+      difficulty: 1
+      momentum: 1
+    term: 'Round'
+    vector: ''
+    damage:
+      static: 0
+      rolled: 0
+      type: 'Physical'
+      # TODO: Damage Qualities on Contagions
 
   # Character Stats & Abilities
   talent:

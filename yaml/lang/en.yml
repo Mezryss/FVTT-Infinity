@@ -6,6 +6,7 @@ ITEM:
   TypeAmmunition: Ammunition
   TypeArmour: Armour
   TypeAugmentation: Augmentation
+  TypeContagion: Contagion
 
   # Character Stats & Abilities
   TypeTalent: Talent
@@ -33,6 +34,11 @@ Infinity:
       Personality: Per
       Willpower: Will
 
+  DamageType:
+    Mental: Mental
+    Physical: Physical
+    Quantronic: Quantronic
+
   Items:
     Ammunition:
       Category:
@@ -49,6 +55,25 @@ Infinity:
         Internal: Internal
         Powered: Powered
         Symbiont: Symbiont
+
+    Contagion:
+      Category:
+        Disease: Disease
+        Drug: Drug
+        Poison: Poison
+        Other: Other
+      Term:
+        Round: Round
+        Minute: Minute
+        Hour: Hour
+        Day: Day
+        Week: Week
+        Month: Month
+      Type:
+        Instant: Instant
+        Complex: Complex
+        Progressive: Progressive
+        Chronic: Chronic
 
   Skill:
     Acrobatics: Acrobatics
