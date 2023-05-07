@@ -56,7 +56,6 @@ Item:
     templates:
       - basicItemData
       - gearItemData
-    # TODO: Customising Armour, Core Rulebook p.342
     type: 'Civilian'
     soak:
       # Symbiont Armours
@@ -73,6 +72,7 @@ Item:
       wounds:
         value: 0
         max: 1
+    loadout: []
 
   augmentation:
     templates:

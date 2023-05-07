@@ -1,6 +1,16 @@
 import GearItemDataModel from './templates/GearItemDataModel';
 
 /**
+ * Item references within an Armour's loadout.
+ */
+export type ArmourLoadoutItem = {
+	img: string;
+	name: string;
+	uuid: string;
+	quantity: number;
+};
+
+/**
  * Armour Types.
  */
 export enum ArmourType {
@@ -86,6 +96,11 @@ export default abstract class ArmourDataModel extends GearItemDataModel {
 	};
 
 	/**
+	 * Equipment included in the armour, either stock or through customization.
+	 */
+	abstract loadout: ArmourLoadoutItem[];
+
+	/**
 	 * @inheritdoc
 	 */
 	static override defineSchema() {
@@ -154,6 +169,36 @@ export default abstract class ArmourDataModel extends GearItemDataModel {
 					}),
 				}),
 			}),
+
+			loadout: new fields.ArrayField(
+				new fields.SchemaField({
+					img: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					name: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					uuid: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					quantity: new fields.NumberField({
+						initial: 1,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+				}),
+				{
+					initial: [],
+					nullable: false,
+				},
+			),
 		};
 	}
 }
