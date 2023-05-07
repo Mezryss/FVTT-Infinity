@@ -1,5 +1,6 @@
 import Attribute from '@/data/Attributes';
-import Defence from '@/data/Defences';
+import IHasDerivedData from '@/dataModel/IHasDerivedData';
+import InfinityActor from '../InfinityActor';
 
 /**
  * Adversary Types
@@ -32,7 +33,12 @@ type FieldOfExpertise = {
 	focus: number;
 };
 
-export default abstract class AdversaryDataModel extends foundry.abstract.DataModel {
+type StressTrack = {
+	value: number;
+	max: number;
+};
+
+export default abstract class AdversaryDataModel extends foundry.abstract.DataModel implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
 	/**
 	 * Adversary Type
 	 */
@@ -52,15 +58,21 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 	};
 
 	/**
+	 * Stress Tracks
+	 */
+	abstract stress: {
+		firewall: StressTrack;
+		vigour: StressTrack;
+		resolve: StressTrack;
+	};
+
+	/**
 	 * Defences
 	 */
 	abstract defences: {
-		[Defence.Firewall]: number;
-		[Defence.Security]: number;
-		[Defence.Resolve]: number;
-		[Defence.Morale]: number;
-		[Defence.Vigour]: number;
-		[Defence.Armour]: number;
+		security: number;
+		morale: number;
+		armour: number;
 	};
 
 	/**
@@ -94,6 +106,42 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 		 */
 		wounds: [];
 	};
+
+	/**
+	 * Prepare the maximum value of the adversary's Stress tracks.
+	 *
+	 * CRB p.415
+	 */
+	prepareDerivedData(actor: InfinityActor<AdversaryDataModel>) {
+		const system = actor.system;
+		let maxFirewall = system.stress.firewall.max;
+		let maxResolve = system.stress.resolve.max;
+		let maxVigour = system.stress.vigour.max;
+
+		switch (actor.system.type) {
+			case AdversaryType.Trooper:
+				maxFirewall = Math.ceil(system.attributes.Intelligence / 2);
+				maxResolve = Math.ceil(system.attributes.Willpower / 2);
+				maxVigour = Math.ceil(system.attributes.Brawn / 2);
+				break;
+
+			case AdversaryType.Elite:
+				maxFirewall = system.attributes.Intelligence;
+				maxResolve = system.attributes.Willpower;
+				maxVigour = system.attributes.Brawn;
+				break;
+
+			case AdversaryType.Nemesis:
+				maxFirewall = system.attributes.Intelligence + system.fieldsOfExpertise.technical.expertise;
+				maxResolve = system.attributes.Willpower + system.fieldsOfExpertise.fortitude.expertise;
+				maxVigour = system.attributes.Brawn + system.fieldsOfExpertise.fortitude.expertise;
+				break;
+		}
+
+		actor.system.stress.firewall.max = maxFirewall;
+		actor.system.stress.resolve.max = maxResolve;
+		actor.system.stress.vigour.max = maxVigour;
+	}
 
 	/**
 	 * @inheritdoc
@@ -152,40 +200,75 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 				}),
 			}),
 
+			stress: new fields.SchemaField({
+				firewall: new fields.SchemaField({
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+				}),
+
+				vigour: new fields.SchemaField({
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+				}),
+
+				resolve: new fields.SchemaField({
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						min: 0,
+						nullable: false,
+					}),
+				}),
+			}),
+
 			defences: new fields.SchemaField({
-				[Defence.Firewall]: new fields.NumberField({
+				security: new fields.NumberField({
 					initial: 0,
 					integer: true,
+					min: 0,
 					nullable: false,
 				}),
 
-				[Defence.Security]: new fields.NumberField({
+				morale: new fields.NumberField({
 					initial: 0,
 					integer: true,
+					min: 0,
 					nullable: false,
 				}),
 
-				[Defence.Resolve]: new fields.NumberField({
+				armour: new fields.NumberField({
 					initial: 0,
 					integer: true,
-					nullable: false,
-				}),
-
-				[Defence.Morale]: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Defence.Vigour]: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Defence.Armour]: new fields.NumberField({
-					initial: 0,
-					integer: true,
+					min: 0,
 					nullable: false,
 				}),
 			}),

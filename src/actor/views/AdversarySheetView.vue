@@ -5,7 +5,6 @@ import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import Attribute from '@/data/Attributes';
-import Defence from '@/data/Defences';
 import { WeaponType } from '@/item/data/WeaponDataModel';
 import { AdversaryType } from '../data/AdversaryDataModel';
 import { AdversarySheetContext } from '../sheets/AdversarySheet';
@@ -84,11 +83,48 @@ const abilities = computed(() => context.abilities);
 			</div>
 		</div>
 
+		<h3>Stress</h3>
+		<div class="grid grid-cols-3 whitespace-nowrap">
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Firewall</strong>
+				<div class="grid grid-cols-2">
+					<input type="number" :min="0" :value="system.stress.firewall.value" name="system.stress.firewall.value" class="w-10 text-center" />
+					<input type="number" :min="0" :value="system.stress.firewall.max" class="w-10 text-center" disabled />
+				</div>
+			</div>
+
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Resolve</strong>
+				<div class="grid grid-cols-2">
+					<input type="number" :min="0" :value="system.stress.resolve.value" name="system.stress.resolve.value" class="w-10 text-center" />
+					<input type="number" :min="0" :value="system.stress.resolve.max" class="w-10 text-center" disabled />
+				</div>
+			</div>
+
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Vigour</strong>
+				<div class="grid grid-cols-2">
+					<input type="number" :min="0" :value="system.stress.vigour.value" name="system.stress.vigour.value" class="w-10 text-center" />
+					<input type="number" :min="0" :value="system.stress.vigour.max" class="w-10 text-center" disabled />
+				</div>
+			</div>
+		</div>
+
 		<h3>Defences</h3>
 		<div class="grid grid-cols-3 whitespace-nowrap">
-			<div v-for="defence in Defence.all" :key="defence" class="flex flex-nowrap items-center gap-1 justify-self-center">
-				<strong>{{ defence }}</strong>
-				<input type="number" :min="0" :value="system.defences[defence]" :name="`system.defences.${defence}`" class="w-10 text-center" />
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Security</strong>
+				<input type="number" :min="0" :value="system.defences.security" name="system.defences.security" class="w-10 text-center" />
+			</div>
+
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Morale</strong>
+				<input type="number" :min="0" :value="system.defences.morale" name="system.defences.morale" class="w-10 text-center" />
+			</div>
+
+			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
+				<strong>Armour</strong>
+				<input type="number" :min="0" :value="system.defences.armour" name="system.defences.armour" class="w-10 text-center" />
 			</div>
 		</div>
 

@@ -15,13 +15,20 @@ Actor:
       Intelligence: 7
       Personality: 7
       Willpower: 7
+    stress:
+      firewall:
+        value: 0
+        max: 0
+      vigour:
+        value: 0
+        max: 0
+      resolve:
+        value: 0
+        max: 0
     defences:
-      Firewall: 0
-      Security: 0
-      Resolve: 0
-      Morale: 0
-      Vigour: 0
-      Armour: 0
+      security: 0
+      morale: 0
+      armour: 0
     fieldsOfExpertise:
       combat: &field_of_expertise
         expertise: 0

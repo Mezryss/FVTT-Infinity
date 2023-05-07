@@ -1,3 +1,4 @@
+import IHasDerivedData from '@/dataModel/IHasDerivedData';
 import IHasPreCreate from '@/dataModel/IHasPreCreate';
 
 /**
@@ -20,5 +21,12 @@ export default abstract class InfinityActor<DataModelType extends foundry.abstra
 		await (this.system as IHasPreCreate<this>).preCreate?.(this, data, options, user);
 
 		return super._preCreate(data, options, user);
+	}
+
+	/**
+	 * If the Data Model has a prepareDerivedData method, call it.
+	 */
+	override prepareDerivedData() {
+		(this.system as IHasDerivedData<this>).prepareDerivedData?.(this);
 	}
 }
