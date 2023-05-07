@@ -125,6 +125,11 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 	abstract infinityPoints: number;
 
 	/**
+	 * Descriptive text field for the Adversary
+	 */
+	abstract description: string;
+
+	/**
 	 * Prepare the maximum value of the adversary's Stress and Harm tracks.
 	 *
 	 * CRB p.415
@@ -479,6 +484,11 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 				initial: 0,
 				integer: true,
 				min: 0,
+				nullable: false,
+			}),
+
+			description: new fields.HTMLField({
+				initial: '',
 				nullable: false,
 			}),
 		};

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
@@ -195,5 +196,12 @@ const isRemote = computed(() => context.actorType === 'remote');
 				<Enriched :value="ability.system.description" />
 			</li>
 		</ul>
+
+		<hr class="w-full" />
+
+		<div class="flex flex-col items-start gap-2 min-h-[10em] h-full">
+			<h3 class="w-full">Description</h3>
+			<Editor name="system.description" :content="system.description" button />
+		</div>
 	</InfinitySheet>
 </template>

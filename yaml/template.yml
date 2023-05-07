@@ -6,7 +6,7 @@ Actor:
 
   templates: {}  # TODO: Design some templates for common attributes, particularly related to descriptions.
 
-  adversary:
+  adversary: &adversary
     type: 'Trooper'
     attributes:
       Agility: 7
@@ -47,50 +47,12 @@ Actor:
       metanoia: *harm
       wounds: *harm
     infinityPoints: 0
+    description: ''
 
   character:
     templates: []
 
-  remote:
-    type: 'Trooper'
-    attributes:
-      Agility: 7
-      Awareness: 7
-      Brawn: 7
-      Coordination: 7
-      Intelligence: 7
-      Personality: 7
-      Willpower: 7
-    stress:
-      firewall:
-        value: 0
-        max: 0
-      structure:
-        value: 0
-        max: 0
-      resolve:
-        value: 0
-        max: 0
-    defences:
-      security: 0
-      morale: 0
-      armour: 0
-    fieldsOfExpertise:
-      combat: &field_of_expertise
-        expertise: 0
-        focus: 0
-      fortitude: *field_of_expertise
-      movement: *field_of_expertise
-      senses: *field_of_expertise
-      social: *field_of_expertise
-      technical: *field_of_expertise
-    harms:
-      breaches: &harm
-        value: 0
-        max: 1
-        effects: []
-      metanoia: *harm
-      faults: *harm
+  remote: *adversary
 
 Item:
   types:
