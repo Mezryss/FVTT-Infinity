@@ -1,8 +1,40 @@
 Actor:
   types:
+    - adversary
     - character
 
-  templates: {}
+  templates: {}  # TODO: Design some templates for common attributes, particularly related to descriptions.
+
+  adversary:
+    type: 'Trooper'
+    attributes:
+      Agility: 7
+      Awareness: 7
+      Brawn: 7
+      Coordination: 7
+      Intelligence: 7
+      Personality: 7
+      Willpower: 7
+    defences:
+      Firewall: 0
+      Security: 0
+      Resolve: 0
+      Morale: 0
+      Vigour: 0
+      Armour: 0
+    fieldsOfExpertise:
+      combat: &field_of_expertise
+        expertise: 0
+        focus: 0
+      fortitude: *field_of_expertise
+      movement: *field_of_expertise
+      senses: *field_of_expertise
+      social: *field_of_expertise
+      technical: *field_of_expertise
+    harms:
+      breaches: []
+      metanoia: []
+      wounds: []
 
   character:
     templates: []

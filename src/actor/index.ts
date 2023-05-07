@@ -1,4 +1,6 @@
 import InfinityActor from './InfinityActor';
+import AdversaryDataModel from './data/AdversaryDataModel';
+import AdversarySheet from './sheets/AdversarySheet';
 import { CharacterSheet } from './sheets/CharacterSheet';
 
 /**
@@ -15,7 +17,9 @@ export function register() {
 /**
  * Register Actor data model classes.
  */
-function registerDataModels() {}
+function registerDataModels() {
+	CONFIG.Actor.systemDataModels.adversary = AdversaryDataModel;
+}
 
 /**
  * Register Actor sheet classes.
@@ -23,8 +27,19 @@ function registerDataModels() {}
 function registerSheets() {
 	Actors.unregisterSheet('core', ActorSheet);
 
-	Actors.registerSheet('infinity', CharacterSheet, {
-		types: ['character'],
+	registerSheet(AdversarySheet, 'adversary');
+	registerSheet(CharacterSheet, 'character');
+}
+
+/**
+ * Register a single sheet class for the selected Item types.
+ *
+ * @param sheetClass Sheet class to use.
+ * @param types A list of sheet types to use this sheet.
+ */
+function registerSheet(sheetClass: any, ...types: string[]) {
+	Actors.registerSheet('infinity', sheetClass, {
+		types,
 		makeDefault: true,
 	});
 }
