@@ -7,12 +7,16 @@ import InfinityActorSheet from '../InfinityActorSheet';
 import AdversaryDataModel from '../data/AdversaryDataModel';
 import AdversarySheetView from '../views/AdversarySheetView.vue';
 
+type HarmCategory = 'breaches' | 'metanoia' | 'wounds';
+
 /**
  * Vue Sheet Actions
  */
 type AdversarySheetActions = {
 	removeAttack: (uuid: string) => Promise<void>;
 	removeAbility: (uuid: string) => Promise<void>;
+	addHarm: (category: HarmCategory) => Promise<void>;
+	removeHarm: (category: HarmCategory, index: number) => Promise<void>;
 };
 
 /**
@@ -69,6 +73,8 @@ export default class AdversarySheet extends VueSheet(InfinityActorSheet<Adversar
 	private actions: AdversarySheetActions = {
 		removeAbility: this.removeItem.bind(this),
 		removeAttack: this.removeItem.bind(this),
+		addHarm: this.addHarm.bind(this),
+		removeHarm: this.removeHarm.bind(this),
 	};
 
 	/**
@@ -97,5 +103,28 @@ export default class AdversarySheet extends VueSheet(InfinityActorSheet<Adversar
 	async removeItem(uuid: string) {
 		const item = this.actor.items.find((i) => i.uuid === uuid);
 		await item?.delete();
+	}
+
+	async addHarm(category: HarmCategory) {
+		const harmEffects = this.actor.system.harms[category].effects;
+
+		await this.actor.update({
+			[`system.harms.${category}.effects`]: [...harmEffects, `New ${category.capitalize()}`],
+		});
+	}
+
+	async removeHarm(category: HarmCategory, index: number) {
+		const harmEffects = this.actor.system.harms[category].effects;
+
+		if (index >= harmEffects.length) {
+			return;
+		}
+
+		const effectsCopy = [...harmEffects];
+		effectsCopy.splice(index, 1);
+
+		await this.actor.update({
+			[`system.harms.${category}.effects`]: effectsCopy,
+		});
 	}
 }

@@ -399,38 +399,80 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 			}),
 
 			harms: new fields.SchemaField({
-				breaches: new fields.ArrayField(
-					new fields.StringField({
-						initial: '',
-						nullable: false,
-					}),
-					{
-						initial: [],
-						nullable: false,
-					},
-				),
+				breaches: new fields.SchemaField({
+					effects: new fields.ArrayField(
+						new fields.StringField({
+							initial: '',
+							nullable: false,
+						}),
+						{
+							initial: [],
+							nullable: false,
+						},
+					),
 
-				metanoia: new fields.ArrayField(
-					new fields.StringField({
-						initial: '',
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
 						nullable: false,
 					}),
-					{
-						initial: [],
-						nullable: false,
-					},
-				),
 
-				wounds: new fields.ArrayField(
-					new fields.StringField({
-						initial: '',
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
 						nullable: false,
 					}),
-					{
-						initial: [],
+				}),
+
+				metanoia: new fields.SchemaField({
+					effects: new fields.ArrayField(
+						new fields.StringField({
+							initial: '',
+							nullable: false,
+						}),
+						{
+							initial: [],
+							nullable: false,
+						},
+					),
+
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
 						nullable: false,
-					},
-				),
+					}),
+
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						nullable: false,
+					}),
+				}),
+
+				wounds: new fields.SchemaField({
+					effects: new fields.ArrayField(
+						new fields.StringField({
+							initial: '',
+							nullable: false,
+						}),
+						{
+							initial: [],
+							nullable: false,
+						},
+					),
+
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						nullable: false,
+					}),
+
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						nullable: false,
+					}),
+				}),
 			}),
 
 			infinityPoints: new fields.NumberField({
