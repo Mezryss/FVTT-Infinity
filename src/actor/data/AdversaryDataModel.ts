@@ -33,7 +33,19 @@ type FieldOfExpertise = {
 	focus: number;
 };
 
+/**
+ * (Refactor) Tracks current/max value for stress.
+ */
 type StressTrack = {
+	value: number;
+	max: number;
+};
+
+/**
+ * (Refactor) Tracks current/max value for a type of Harm, as well as a list of Harm Effects.
+ */
+type HarmTrack = {
+	effects: string[];
 	value: number;
 	max: number;
 };
@@ -94,53 +106,80 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 		/**
 		 * Quantronic Harm
 		 */
-		breaches: string[];
+		breaches: HarmTrack;
 
 		/**
 		 * Mental Harm
 		 */
-		metanoia: string[];
+		metanoia: HarmTrack;
 
 		/**
 		 * Physical Harm
 		 */
-		wounds: [];
+		wounds: HarmTrack;
 	};
 
 	/**
-	 * Prepare the maximum value of the adversary's Stress tracks.
+	 * Infinity Points for Nemesis adversaries.
+	 */
+	abstract infinityPoints: number;
+
+	/**
+	 * Prepare the maximum value of the adversary's Stress and Harm tracks.
 	 *
 	 * CRB p.415
 	 */
 	prepareDerivedData(actor: InfinityActor<AdversaryDataModel>) {
 		const system = actor.system;
+
 		let maxFirewall = system.stress.firewall.max;
 		let maxResolve = system.stress.resolve.max;
 		let maxVigour = system.stress.vigour.max;
+
+		const breaches = system.harms.breaches;
+		const metanoia = system.harms.metanoia;
+		const wounds = system.harms.wounds;
 
 		switch (actor.system.type) {
 			case AdversaryType.Trooper:
 				maxFirewall = Math.ceil(system.attributes.Intelligence / 2);
 				maxResolve = Math.ceil(system.attributes.Willpower / 2);
 				maxVigour = Math.ceil(system.attributes.Brawn / 2);
+
+				breaches.max = metanoia.max = wounds.max = 1;
+
 				break;
 
 			case AdversaryType.Elite:
 				maxFirewall = system.attributes.Intelligence;
 				maxResolve = system.attributes.Willpower;
 				maxVigour = system.attributes.Brawn;
+
+				breaches.max = metanoia.max = wounds.max = 2;
+
 				break;
 
 			case AdversaryType.Nemesis:
 				maxFirewall = system.attributes.Intelligence + system.fieldsOfExpertise.technical.expertise;
 				maxResolve = system.attributes.Willpower + system.fieldsOfExpertise.fortitude.expertise;
 				maxVigour = system.attributes.Brawn + system.fieldsOfExpertise.fortitude.expertise;
+
+				breaches.max = metanoia.max = wounds.max = 5;
+
 				break;
 		}
 
 		actor.system.stress.firewall.max = maxFirewall;
 		actor.system.stress.resolve.max = maxResolve;
 		actor.system.stress.vigour.max = maxVigour;
+
+		breaches.value = breaches.effects.length;
+		metanoia.value = metanoia.effects.length;
+		wounds.value = wounds.effects.length;
+
+		actor.system.harms.breaches = breaches;
+		actor.system.harms.metanoia = metanoia;
+		actor.system.harms.wounds = wounds;
 	}
 
 	/**
@@ -392,6 +431,13 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 						nullable: false,
 					},
 				),
+			}),
+
+			infinityPoints: new fields.NumberField({
+				initial: 0,
+				integer: true,
+				min: 0,
+				nullable: false,
 			}),
 		};
 	}

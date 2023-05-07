@@ -39,9 +39,13 @@ Actor:
       social: *field_of_expertise
       technical: *field_of_expertise
     harms:
-      breaches: []
-      metanoia: []
-      wounds: []
+      breaches: &harm
+        value: 0
+        max: 1
+        effects: []
+      metanoia: *harm
+      wounds: *harm
+    infinityPoints: 0
 
   character:
     templates: []

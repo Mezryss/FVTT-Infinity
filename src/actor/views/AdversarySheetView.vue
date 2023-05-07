@@ -83,6 +83,11 @@ const abilities = computed(() => context.abilities);
 			</div>
 		</div>
 
+		<div v-if="system.type === AdversaryType.Nemesis" class="flex flex-nowrap whitespace-nowrap gap-2">
+			<strong>Infinity Points</strong>
+			<input type="number" :min="0" :value="system.infinityPoints" name="system.infinityPoints" />
+		</div>
+
 		<h3>Stress</h3>
 		<div class="grid grid-cols-3 whitespace-nowrap">
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
