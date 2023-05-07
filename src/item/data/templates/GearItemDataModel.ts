@@ -1,5 +1,4 @@
 import { ItemQualityReference } from '../ItemQualityDataModel';
-
 import BasicItemDataModel from './BasicItemDataModel';
 
 /**

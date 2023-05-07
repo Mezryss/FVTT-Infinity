@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
-
 import { AugmentationCategory, AugmentationType } from '../data/AugmentationDataModel';
 import { AugmentationSheetContext } from '../sheets/AugmentationSheet';
 

@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
-
 import { ItemQualitySheetContext } from '../sheets/ItemQualitySheet';
 
 const context = inject<ItemQualitySheetContext>(RootContext)!;

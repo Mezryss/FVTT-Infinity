@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
-
 import { ExplosiveCategory } from '../data/ExplosiveDataModel';
 import { ItemSize } from '../data/templates/GearItemDataModel';
 import { ExplosiveSheetContext } from '../sheets/ExplosiveSheet';

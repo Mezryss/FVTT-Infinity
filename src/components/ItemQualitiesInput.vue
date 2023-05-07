@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-
 import InfinityItem from '@/item/InfinityItem';
 import ItemQualityDataModel, { ItemQualityReference } from '@/item/data/ItemQualityDataModel';
 

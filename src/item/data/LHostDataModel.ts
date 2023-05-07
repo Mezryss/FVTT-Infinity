@@ -1,5 +1,4 @@
 import Attribute from '@/data/Attributes';
-
 import GearItemDataModel from './templates/GearItemDataModel';
 
 /**

@@ -1,7 +1,6 @@
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import TalentDataModel from '@/item/data/TalentDataModel';
-
 import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
 import CharacterSheetView from '../views/CharacterSheetView.vue';

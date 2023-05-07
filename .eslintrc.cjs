@@ -41,7 +41,7 @@ module.exports = {
 			alphabetize: {
 				'order': 'asc',
 			},
-			'newlines-between': 'always',
+			'newlines-between': 'never',
 		}],
 		'sort-imports': ['error', {
 			allowSeparatedGroups: true,

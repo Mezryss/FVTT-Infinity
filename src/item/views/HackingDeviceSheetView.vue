@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
-
 import { HackingDeviceSheetContext } from '../sheets/HackingDeviceSheet';
 
 const context = inject<HackingDeviceSheetContext>(RootContext)!;

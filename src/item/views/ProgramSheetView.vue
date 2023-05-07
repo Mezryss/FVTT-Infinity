@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
-
 import { ProgramType } from '../data/ProgramDataModel';
 import { ProgramSheetContext } from '../sheets/ProgramSheet';
 

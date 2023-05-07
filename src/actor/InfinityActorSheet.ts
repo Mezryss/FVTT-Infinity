@@ -1,5 +1,4 @@
 import InfinityItem from '@/item/InfinityItem';
-
 import InfinityActor from './InfinityActor';
 
 /**

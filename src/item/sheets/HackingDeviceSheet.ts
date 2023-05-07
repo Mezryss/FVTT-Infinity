@@ -1,5 +1,4 @@
 import { VueSheet } from '@/VueSheet';
-
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
 import HackingDeviceDataModel, { ProgramItemReference } from '../data/HackingDeviceDataModel';

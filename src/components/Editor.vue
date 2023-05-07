@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { inject, onMounted, onUpdated, ref, toRaw } from 'vue';
-
 import { RootContext } from '@/VueSheet';
 import InfinityActor from '@/actor/InfinityActor';
 import InfinityItem from '@/item/InfinityItem';
