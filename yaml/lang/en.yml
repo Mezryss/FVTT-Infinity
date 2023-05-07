@@ -16,6 +16,7 @@ ITEM:
 
   # Character Stats & Abilities
   TypeAbility: Special Ability
+  TypeItemquality: Item Quality
   TypeTalent: Talent
 
 # System Strings

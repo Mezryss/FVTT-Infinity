@@ -4,6 +4,7 @@ import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
+import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
 
 import { ExplosiveCategory } from '../data/ExplosiveDataModel';
@@ -12,9 +13,24 @@ import { ExplosiveSheetContext } from '../sheets/ExplosiveSheet';
 
 const context = inject<ExplosiveSheetContext>(RootContext)!;
 
+const actions = computed(() => context.actions);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
+
+async function rankChanged(index: number, newRank: number) {
+	await actions.value.updateQuality(index, {
+		...system.value.qualities[index],
+		rank: newRank,
+	});
+}
+
+async function specializationChanged(index: number, newSpec: string) {
+	await actions.value.updateQuality(index, {
+		...system.value.qualities[index],
+		specialization: newSpec,
+	});
+}
 </script>
 
 <template>
@@ -49,7 +65,7 @@ const system = computed(() => context.system);
 			</select>
 		</div>
 
-		<em>TODO: Item Qualities</em>
+		<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
 
 		<div class="flex items-center gap-2">
 			<strong>Restriction:</strong>

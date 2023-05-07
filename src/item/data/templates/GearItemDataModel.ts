@@ -1,3 +1,5 @@
+import { ItemQualityReference } from '../ItemQualityDataModel';
+
 import BasicItemDataModel from './BasicItemDataModel';
 
 /**
@@ -70,6 +72,11 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 	 * Current selection of Faults.
 	 */
 	abstract faults: ItemFault[];
+
+	/**
+	 * Current selection of Item Qualities.
+	 */
+	abstract qualities: ItemQualityReference[];
 
 	/**
 	 * Restriction value for the item.
@@ -164,6 +171,36 @@ export default abstract class GearItemDataModel extends BasicItemDataModel {
 					}),
 
 					description: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+				}),
+				{
+					initial: [],
+					nullable: false,
+				},
+			),
+
+			qualities: new fields.ArrayField(
+				new fields.SchemaField({
+					uuid: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					name: new fields.StringField({
+						initial: '',
+						nullable: false,
+					}),
+
+					rank: new fields.NumberField({
+						initial: 1,
+						integer: true,
+						min: 1,
+						nullable: false,
+					}),
+
+					specialization: new fields.StringField({
 						initial: '',
 						nullable: false,
 					}),

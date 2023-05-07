@@ -7,6 +7,7 @@ import ContagionDataModel from './data/ContagionDataModel';
 import ExplosiveDataModel from './data/ExplosiveDataModel';
 import GearDataModel from './data/GearDataModel';
 import HackingDeviceDataModel from './data/HackingDeviceDataModel';
+import ItemQualityDataModel from './data/ItemQualityDataModel';
 import LHostDataModel from './data/LHostDataModel';
 import ProgramDataModel from './data/ProgramDataModel';
 import TalentDataModel from './data/TalentDataModel';
@@ -19,6 +20,7 @@ import ContagionSheet from './sheets/ContagionSheet';
 import ExplosiveSheet from './sheets/ExplosiveSheet';
 import GearSheet from './sheets/GearSheet';
 import HackingDeviceSheet from './sheets/HackingDeviceSheet';
+import ItemQualitySheet from './sheets/ItemQualitySheet';
 import LHostSheet from './sheets/LHostSheet';
 import ProgramSheet from './sheets/ProgramSheet';
 import TalentSheet from './sheets/TalentSheet';
@@ -51,6 +53,7 @@ function registerDataModels() {
 	CONFIG.Item.systemDataModels.weapon = WeaponDataModel;
 
 	CONFIG.Item.systemDataModels.abilities = AbilityDataModel;
+	CONFIG.Item.systemDataModels.itemQuality = ItemQualityDataModel;
 	CONFIG.Item.systemDataModels.talent = TalentDataModel;
 }
 
@@ -68,6 +71,7 @@ function registerSheets() {
 	registerSheet(ExplosiveSheet, 'explosive');
 	registerSheet(GearSheet, 'gear');
 	registerSheet(HackingDeviceSheet, 'hackingDevice');
+	registerSheet(ItemQualitySheet, 'itemQuality');
 	registerSheet(LHostSheet, 'lhost');
 	registerSheet(ProgramSheet, 'program');
 	registerSheet(TalentSheet, 'talent');
