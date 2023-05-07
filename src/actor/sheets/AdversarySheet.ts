@@ -64,6 +64,11 @@ export type AdversarySheetContext = {
 	 * Special Abilities the Actor has access to.
 	 */
 	abilities: InfinityItem<AbilityDataModel>[];
+
+	/**
+	 * Type of the actor, needed since this covers both Adversaries & Remotes.
+	 */
+	actorType: string;
 };
 
 export default class AdversarySheet extends VueSheet(InfinityActorSheet<AdversaryDataModel>) {
@@ -97,6 +102,7 @@ export default class AdversarySheet extends VueSheet(InfinityActorSheet<Adversar
 			system: this.actor.system,
 			attacks: this.actor.items.filter((i) => i.type === 'weapon') as InfinityItem<WeaponDataModel>[],
 			abilities: this.actor.items.filter((i) => i.type === 'ability') as InfinityItem<AbilityDataModel>[],
+			actorType: this.actor.type,
 		};
 	}
 

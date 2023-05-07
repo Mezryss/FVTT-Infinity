@@ -19,6 +19,8 @@ export function register() {
  */
 function registerDataModels() {
 	CONFIG.Actor.systemDataModels.adversary = AdversaryDataModel;
+	// Remotes are identical to Adversaries, except they use Structure & Faults instead of Vigour & Wounds.
+	CONFIG.Actor.systemDataModels.remote = AdversaryDataModel;
 }
 
 /**
@@ -27,7 +29,7 @@ function registerDataModels() {
 function registerSheets() {
 	Actors.unregisterSheet('core', ActorSheet);
 
-	registerSheet(AdversarySheet, 'adversary');
+	registerSheet(AdversarySheet, 'adversary', 'remote');
 	registerSheet(CharacterSheet, 'character');
 }
 

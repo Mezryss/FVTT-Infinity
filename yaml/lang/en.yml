@@ -1,6 +1,7 @@
 ACTOR:
   TypeAdversary: Adversary
   TypeCharacter: Character
+  TypeRemote: Remote
 
 ITEM:
   # Equipment Types

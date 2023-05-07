@@ -18,6 +18,8 @@ const system = computed(() => context.system);
 
 const attacks = computed(() => context.attacks);
 const abilities = computed(() => context.abilities);
+
+const isRemote = computed(() => context.actorType === 'remote');
 </script>
 
 <template>
@@ -107,7 +109,7 @@ const abilities = computed(() => context.abilities);
 			</div>
 
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
-				<strong>Vigour</strong>
+				<strong>{{ isRemote ? 'Vigour' : 'Structure' }}</strong>
 				<div class="grid grid-cols-2">
 					<input type="number" :min="0" :value="system.stress.vigour.value" name="system.stress.vigour.value" class="w-10 text-center" />
 					<input type="number" :min="0" :value="system.stress.vigour.max" class="w-10 text-center" disabled />
@@ -161,7 +163,7 @@ const abilities = computed(() => context.abilities);
 
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
 				<div class="flex flex-nowrap items-center w-full">
-					<strong class="w-full">Wounds ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
+					<strong class="w-full">{{ isRemote ? 'Wounds' : 'Faults' }} ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
 					<a @click="actions.addHarm('wounds')" class="text-xl">&plus;</a>
 				</div>
 
