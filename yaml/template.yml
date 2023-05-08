@@ -74,11 +74,11 @@ Item:
     - talent
 
   templates:
-    basicItemData:
+    hasBasicItemData:
       description: ''
       source: 'Core Rulebook'
 
-    gearItemData:
+    hasGearData:
       size: 'Insignificant'
       structure:
         value: 1
@@ -95,14 +95,14 @@ Item:
   # Equipment Types
   ammunition:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     category: 'Standard'
 
   armour:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     type: 'Civilian'
     soak:
       # Symbiont Armours
@@ -123,16 +123,16 @@ Item:
 
   augmentation:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     type: 'Implant'
     category: 'Cybernetic'
     location: ''
 
   contagion:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     category: 'Disease'
     type:
       value: 'Instant'
@@ -144,21 +144,21 @@ Item:
 
   explosive:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     category: 'Charge'
     damage: ''
 
   gear:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     type: 'Other'
 
   hackingDevice:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     claw: 0
     sword: 0
     shield: 0
@@ -168,8 +168,8 @@ Item:
 
   lhost:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     lpCost: 0
     attributes:
       Agility: 0
@@ -183,16 +183,16 @@ Item:
 
   program:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     type: 'Sword'
     rating: '1'
     damage: ''
 
   weapon:
     templates:
-      - basicItemData
-      - gearItemData
+      - hasBasicItemData
+      - hasGearData
     type: 'Melee'
     damage: ''
     range: 'C'
@@ -203,19 +203,19 @@ Item:
 
   # Character Stats & Abilities
   ability:
-    templates: [basicItemData]
+    templates: [hasBasicItemData]
     isRanked: false
     rank: 1
 
   itemQuality:
-    templates: [basicItemData]
+    templates: [hasBasicItemData]
     type: 'General'
     isRanked: false
     isSpecialized: false
     specializationPlaceholder: ''
 
   talent:
-    templates: [basicItemData]
+    templates: [hasBasicItemData]
     skill: 'Acrobatics'
     isRanked: false
     rank:

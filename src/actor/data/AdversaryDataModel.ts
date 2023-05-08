@@ -1,6 +1,7 @@
 import Attribute from '@/data/Attributes';
 import IHasDerivedData from '@/dataModel/IHasDerivedData';
 import InfinityActor from '../InfinityActor';
+import HasDescription from './templates/HasDescription';
 
 /**
  * Adversary Types
@@ -50,7 +51,7 @@ type HarmTrack = {
 	max: number;
 };
 
-export default abstract class AdversaryDataModel extends foundry.abstract.DataModel implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
+export default abstract class AdversaryDataModel extends HasDescription(foundry.abstract.DataModel) implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
 	/**
 	 * Adversary Type
 	 */
@@ -125,11 +126,6 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 	abstract infinityPoints: number;
 
 	/**
-	 * Descriptive text field for the Adversary
-	 */
-	abstract description: string;
-
-	/**
 	 * Prepare the maximum value of the adversary's Stress and Harm tracks.
 	 *
 	 * CRB p.415
@@ -194,6 +190,8 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 		const fields = foundry.data.fields;
 
 		return {
+			...super.defineSchema(),
+
 			type: new fields.StringField({
 				initial: AdversaryType.Trooper,
 				choices: AdversaryType.all,
@@ -484,11 +482,6 @@ export default abstract class AdversaryDataModel extends foundry.abstract.DataMo
 				initial: 0,
 				integer: true,
 				min: 0,
-				nullable: false,
-			}),
-
-			description: new fields.HTMLField({
-				initial: '',
 				nullable: false,
 			}),
 		};

@@ -6,7 +6,7 @@ import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
 import { WeaponType } from '../data/WeaponDataModel';
-import { ItemSize } from '../data/templates/GearItemDataModel';
+import { ItemSize } from '../data/templates/HasGearData';
 import { WeaponSheetContext } from '../sheets/WeaponSheet';
 
 const context = inject<WeaponSheetContext>(RootContext)!;
@@ -57,6 +57,11 @@ async function specializationChanged(index: number, newSpec: string) {
 		<div v-if="system.type === WeaponType.Ranged" class="flex items-center gap-2">
 			<strong>Burst:</strong>
 			<input type="text" :value="system.burst" name="system.burst" />
+		</div>
+
+		<div v-if="system.type === WeaponType.Ranged" class="flex items-center gap-2">
+			<strong>Range:</strong>
+			<input type="text" :value="system.range" name="system.range" />
 		</div>
 
 		<div class="flex items-center gap-2">

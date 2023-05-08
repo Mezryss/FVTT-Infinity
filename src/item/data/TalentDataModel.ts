@@ -1,5 +1,5 @@
 import Skill from '@/data/Skill';
-import BasicItemDataModel from './templates/BasicItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
 
 /**
  * Represents one of the Prerequisites for taking a talent.
@@ -58,7 +58,7 @@ export namespace TalentPrerequisite {
 /**
  * Data model for Talent items.
  */
-export default abstract class TalentDataModel extends BasicItemDataModel {
+export default abstract class TalentDataModel extends HasBasicItemData(foundry.abstract.DataModel) {
 	/**
 	 * Every Talent in the game is part of a talent tree tied to a specific skill.
 	 */

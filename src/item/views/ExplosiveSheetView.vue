@@ -6,7 +6,7 @@ import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
 import { ExplosiveCategory } from '../data/ExplosiveDataModel';
-import { ItemSize } from '../data/templates/GearItemDataModel';
+import { ItemSize } from '../data/templates/HasGearData';
 import { ExplosiveSheetContext } from '../sheets/ExplosiveSheet';
 
 const context = inject<ExplosiveSheetContext>(RootContext)!;

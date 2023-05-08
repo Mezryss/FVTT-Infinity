@@ -1,6 +1,6 @@
-import BasicItemDataModel from './templates/BasicItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
 
-export default abstract class AbilityDataModel extends BasicItemDataModel {
+export default abstract class AbilityDataModel extends HasBasicItemData(foundry.abstract.DataModel) {
 	/**
 	 * Whether the Special Ability is ranked.
 	 */

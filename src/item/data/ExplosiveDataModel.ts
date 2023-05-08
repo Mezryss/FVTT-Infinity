@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Explosive Categories.
@@ -16,7 +17,7 @@ export namespace ExplosiveCategory {
 	export const all: ExplosiveCategory[] = [ExplosiveCategory.Charge, ExplosiveCategory.Grenade, ExplosiveCategory.Mine];
 }
 
-export default abstract class ExplosiveDataModel extends GearItemDataModel {
+export default abstract class ExplosiveDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Category for the explosive.
 	 */

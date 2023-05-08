@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 export enum GearType {
 	/**
@@ -29,7 +30,7 @@ export namespace GearType {
  *
  * None of these items have special mechanics or stats beyond the default set, so no need for distinct data models.
  */
-export default abstract class GearDataModel extends GearItemDataModel {
+export default abstract class GearDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Gear Type.
 	 */

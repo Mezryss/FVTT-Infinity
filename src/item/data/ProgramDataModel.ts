@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Program types.
@@ -42,7 +43,7 @@ export namespace ProgramType {
 	export const all: ProgramType[] = [ProgramType.Sword, ProgramType.Claw, ProgramType.Shield, ProgramType.Gadget, ProgramType.IC, ProgramType.Upgrade];
 }
 
-export default abstract class ProgramDataModel extends GearItemDataModel {
+export default abstract class ProgramDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Type of program, p.352
 	 */

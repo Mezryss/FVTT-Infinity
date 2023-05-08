@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Augmentation Types
@@ -43,7 +44,7 @@ export namespace AugmentationCategory {
 	export const all: AugmentationCategory[] = [AugmentationCategory.Cybernetic, AugmentationCategory.Biograft, AugmentationCategory.Silk];
 }
 
-export default abstract class AugmentationDataModel extends GearItemDataModel {
+export default abstract class AugmentationDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Augmentation Type (p.344)
 	 */

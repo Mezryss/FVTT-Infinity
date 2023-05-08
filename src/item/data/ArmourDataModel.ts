@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Item references within an Armour's loadout.
@@ -29,7 +30,7 @@ export namespace ArmourType {
 	export const all: ArmourType[] = [ArmourType.Civilian, ArmourType.Combat, ArmourType.Internal, ArmourType.Powered, ArmourType.Symbiont];
 }
 
-export default abstract class ArmourDataModel extends GearItemDataModel {
+export default abstract class ArmourDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Type of armour.
 	 */

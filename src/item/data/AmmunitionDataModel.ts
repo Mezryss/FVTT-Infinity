@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Ammunition categories.
@@ -18,7 +19,7 @@ export namespace AmmunitionCategory {
 	export const all: AmmunitionCategory[] = [AmmunitionCategory.Standard, AmmunitionCategory.Special, AmmunitionCategory.Heavy, AmmunitionCategory.Arrows, AmmunitionCategory.Shells];
 }
 
-export default abstract class AmmunitionDataModel extends GearItemDataModel {
+export default abstract class AmmunitionDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Ammunition Category.
 	 */

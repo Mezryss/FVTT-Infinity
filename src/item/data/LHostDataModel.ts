@@ -1,5 +1,6 @@
 import Attribute from '@/data/Attributes';
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Reference to a Special Ability item.
@@ -10,7 +11,7 @@ export type AbilityItemReference = {
 	uuid: string;
 };
 
-export default abstract class LHostDataModel extends GearItemDataModel {
+export default abstract class LHostDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Life Point cost if taken as a replacement body during Character Creation.
 	 */

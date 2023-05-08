@@ -6,7 +6,7 @@ import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import Localized from '@/components/Localized.vue';
 import { GearType } from '../data/GearDataModel';
-import { ItemSize } from '../data/templates/GearItemDataModel';
+import { ItemSize } from '../data/templates/HasGearData';
 import { GearSheetContext } from '../sheets/GearSheet';
 
 const context = inject<GearSheetContext>(RootContext)!;

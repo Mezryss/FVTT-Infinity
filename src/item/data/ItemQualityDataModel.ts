@@ -1,4 +1,4 @@
-import BasicItemDataModel from './templates/BasicItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
 
 /**
  * A reference to an Item Quality instance.
@@ -52,7 +52,7 @@ export namespace ItemQualityType {
 	export const all: ItemQualityType[] = [ItemQualityType.General, ItemQualityType.Armour, ItemQualityType.Attack];
 }
 
-export default abstract class ItemQualityDataModel extends BasicItemDataModel {
+export default abstract class ItemQualityDataModel extends HasBasicItemData(foundry.abstract.DataModel) {
 	/**
 	 * Quality Type/Category
 	 */

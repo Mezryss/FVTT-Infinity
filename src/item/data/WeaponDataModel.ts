@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * Weapon Types
@@ -15,7 +16,7 @@ export namespace WeaponType {
 	export const all: WeaponType[] = [WeaponType.Melee, WeaponType.Ranged];
 }
 
-export default abstract class WeaponDataModel extends GearItemDataModel {
+export default abstract class WeaponDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Weapon Type
 	 */

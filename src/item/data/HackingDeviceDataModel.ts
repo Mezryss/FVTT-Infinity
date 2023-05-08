@@ -1,4 +1,5 @@
-import GearItemDataModel from './templates/GearItemDataModel';
+import HasBasicItemData from './templates/HasBasicItemData';
+import HasGearData from './templates/HasGearData';
 
 /**
  * A reference to a Program item.
@@ -9,7 +10,7 @@ export type ProgramItemReference = {
 	uuid: string;
 };
 
-export default abstract class HackingDeviceDataModel extends GearItemDataModel {
+export default abstract class HackingDeviceDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
 	/**
 	 * Rating for Control Programs (CLAW)
 	 */
