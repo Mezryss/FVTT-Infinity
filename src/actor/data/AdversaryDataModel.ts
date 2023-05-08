@@ -1,7 +1,8 @@
-import Attribute from '@/data/Attributes';
 import IHasDerivedData from '@/dataModel/IHasDerivedData';
 import InfinityActor from '../InfinityActor';
+import HasAttributes from './templates/HasAttributes';
 import HasDescription from './templates/HasDescription';
+import HasStress from './templates/HasStress';
 
 /**
  * Adversary Types
@@ -34,59 +35,11 @@ type FieldOfExpertise = {
 	focus: number;
 };
 
-/**
- * (Refactor) Tracks current/max value for stress.
- */
-type StressTrack = {
-	value: number;
-	max: number;
-};
-
-/**
- * (Refactor) Tracks current/max value for a type of Harm, as well as a list of Harm Effects.
- */
-type HarmTrack = {
-	effects: string[];
-	value: number;
-	max: number;
-};
-
-export default abstract class AdversaryDataModel extends HasDescription(foundry.abstract.DataModel) implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
+export default abstract class AdversaryDataModel extends HasStress(HasAttributes(HasDescription(foundry.abstract.DataModel))) implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
 	/**
 	 * Adversary Type
 	 */
 	abstract type: AdversaryType;
-
-	/**
-	 * Adversary Attributes
-	 */
-	abstract attributes: {
-		[Attribute.Agility]: number;
-		[Attribute.Awareness]: number;
-		[Attribute.Brawn]: number;
-		[Attribute.Coordination]: number;
-		[Attribute.Intelligence]: number;
-		[Attribute.Personality]: number;
-		[Attribute.Willpower]: number;
-	};
-
-	/**
-	 * Stress Tracks
-	 */
-	abstract stress: {
-		firewall: StressTrack;
-		vigour: StressTrack;
-		resolve: StressTrack;
-	};
-
-	/**
-	 * Defences
-	 */
-	abstract defences: {
-		security: number;
-		morale: number;
-		armour: number;
-	};
 
 	/**
 	 * Fields of Expertise
@@ -98,26 +51,6 @@ export default abstract class AdversaryDataModel extends HasDescription(foundry.
 		senses: FieldOfExpertise;
 		social: FieldOfExpertise;
 		technical: FieldOfExpertise;
-	};
-
-	/**
-	 * Harms
-	 */
-	abstract harms: {
-		/**
-		 * Quantronic Harm
-		 */
-		breaches: HarmTrack;
-
-		/**
-		 * Mental Harm
-		 */
-		metanoia: HarmTrack;
-
-		/**
-		 * Physical Harm
-		 */
-		wounds: HarmTrack;
 	};
 
 	/**
@@ -196,123 +129,6 @@ export default abstract class AdversaryDataModel extends HasDescription(foundry.
 				initial: AdversaryType.Trooper,
 				choices: AdversaryType.all,
 				nullable: false,
-			}),
-
-			attributes: new fields.SchemaField({
-				[Attribute.Agility]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Awareness]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Brawn]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Coordination]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Intelligence]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Personality]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-
-				[Attribute.Willpower]: new fields.NumberField({
-					initial: 7,
-					integer: true,
-					nullable: false,
-				}),
-			}),
-
-			stress: new fields.SchemaField({
-				firewall: new fields.SchemaField({
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-				}),
-
-				vigour: new fields.SchemaField({
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-				}),
-
-				resolve: new fields.SchemaField({
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						min: 0,
-						nullable: false,
-					}),
-				}),
-			}),
-
-			defences: new fields.SchemaField({
-				security: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
-					nullable: false,
-				}),
-
-				morale: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
-					nullable: false,
-				}),
-
-				armour: new fields.NumberField({
-					initial: 0,
-					integer: true,
-					min: 0,
-					nullable: false,
-				}),
 			}),
 
 			fieldsOfExpertise: new fields.SchemaField({
@@ -394,83 +210,6 @@ export default abstract class AdversaryDataModel extends HasDescription(foundry.
 					}),
 
 					focus: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-				}),
-			}),
-
-			harms: new fields.SchemaField({
-				breaches: new fields.SchemaField({
-					effects: new fields.ArrayField(
-						new fields.StringField({
-							initial: '',
-							nullable: false,
-						}),
-						{
-							initial: [],
-							nullable: false,
-						},
-					),
-
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-				}),
-
-				metanoia: new fields.SchemaField({
-					effects: new fields.ArrayField(
-						new fields.StringField({
-							initial: '',
-							nullable: false,
-						}),
-						{
-							initial: [],
-							nullable: false,
-						},
-					),
-
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-				}),
-
-				wounds: new fields.SchemaField({
-					effects: new fields.ArrayField(
-						new fields.StringField({
-							initial: '',
-							nullable: false,
-						}),
-						{
-							initial: [],
-							nullable: false,
-						},
-					),
-
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						nullable: false,
-					}),
-
-					max: new fields.NumberField({
 						initial: 0,
 						integer: true,
 						nullable: false,

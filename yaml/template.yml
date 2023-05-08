@@ -4,32 +4,49 @@ Actor:
     - character
     - remote
 
-  templates: {}  # TODO: Design some templates for common attributes, particularly related to descriptions.
+  templates:
+    hasAttributes:
+      attributes:
+        Agility: 7
+        Awareness: 7
+        Brawn: 7
+        Coordination: 7
+        Intelligence: 7
+        Personality: 7
+        Willpower: 7
+
+    hasDescription:
+      description: ''
+
+    hasStress:
+      defences:
+        security: 0
+        morale: 0
+        armour: 0
+      stress:
+        firewall:
+          value: 0
+          max: 0
+        vigour:
+          value: 0
+          max: 0
+        resolve:
+          value: 0
+          max: 0
+      harms:
+        breaches: &harm
+          value: 0
+          max: 1
+          effects: []
+        metanoia: *harm
+        wounds: *harm
 
   adversary: &adversary
+    templates:
+      - hasAttributes
+      - hasDescription
+      - hasStress
     type: 'Trooper'
-    attributes:
-      Agility: 7
-      Awareness: 7
-      Brawn: 7
-      Coordination: 7
-      Intelligence: 7
-      Personality: 7
-      Willpower: 7
-    stress:
-      firewall:
-        value: 0
-        max: 0
-      vigour:
-        value: 0
-        max: 0
-      resolve:
-        value: 0
-        max: 0
-    defences:
-      security: 0
-      morale: 0
-      armour: 0
     fieldsOfExpertise:
       combat: &field_of_expertise
         expertise: 0
@@ -39,15 +56,7 @@ Actor:
       senses: *field_of_expertise
       social: *field_of_expertise
       technical: *field_of_expertise
-    harms:
-      breaches: &harm
-        value: 0
-        max: 1
-        effects: []
-      metanoia: *harm
-      wounds: *harm
     infinityPoints: 0
-    description: ''
 
   character:
     templates: []
