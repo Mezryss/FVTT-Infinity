@@ -1,6 +1,7 @@
 ACTOR:
   TypeAdversary: Adversary
   TypeCharacter: Character
+  TypeGeist: Geist
   TypeRemote: Remote
 
 ITEM:

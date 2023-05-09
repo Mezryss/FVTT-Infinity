@@ -2,6 +2,7 @@ Actor:
   types:
     - adversary
     - character
+    - geist
     - remote
 
   templates:
@@ -60,6 +61,15 @@ Actor:
 
   character:
     templates: []
+
+  geist:
+    templates:
+      - hasAttributes
+      - hasDescription
+      - hasStress
+    characterUuid: ''
+    skills: []
+    traits: []
 
   remote: *adversary
 
