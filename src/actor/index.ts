@@ -1,9 +1,11 @@
 import InfinityActor from './InfinityActor';
 import AdversaryDataModel from './data/AdversaryDataModel';
 import GeistDataModel from './data/GeistDataModel';
+import VehicleDataModel from './data/VehicleDataModel';
 import AdversarySheet from './sheets/AdversarySheet';
 import { CharacterSheet } from './sheets/CharacterSheet';
 import GeistSheet from './sheets/GeistSheet';
+import VehicleSheet from './sheets/VehicleSheet';
 
 /**
  * Handle registration for all Actor-related documents and document sheets.
@@ -24,6 +26,7 @@ function registerDataModels() {
 	// Remotes are identical to Adversaries, except they use Structure & Faults instead of Vigour & Wounds.
 	CONFIG.Actor.systemDataModels.remote = AdversaryDataModel;
 	CONFIG.Actor.systemDataModels.geist = GeistDataModel;
+	CONFIG.Actor.systemDataModels.vehicle = VehicleDataModel;
 }
 
 /**
@@ -35,6 +38,7 @@ function registerSheets() {
 	registerSheet(AdversarySheet, 'adversary', 'remote');
 	registerSheet(CharacterSheet, 'character');
 	registerSheet(GeistSheet, 'geist');
+	registerSheet(VehicleSheet, 'vehicle');
 }
 
 /**

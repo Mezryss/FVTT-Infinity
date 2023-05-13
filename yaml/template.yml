@@ -4,6 +4,7 @@ Actor:
     - character
     - geist
     - remote
+    - vehicle
 
   templates:
     hasAttributes:
@@ -72,6 +73,20 @@ Actor:
     traits: []
 
   remote: *adversary
+
+  vehicle:
+    templates:
+      - hasDescription
+      - hasStress
+    types: []
+    scale: 0
+    speed: 0
+    brawn:
+      value: 0
+      superhuman: 0
+    passengers: '1'
+    impact: '0'
+    bts: 0
 
 Item:
   types:

@@ -3,6 +3,7 @@ ACTOR:
   TypeCharacter: Character
   TypeGeist: Geist
   TypeRemote: Remote
+  TypeVehicle: Vehicle
 
 ITEM:
   # Equipment Types
