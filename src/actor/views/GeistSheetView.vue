@@ -40,7 +40,7 @@ const newSkillSelect = ref(Skill.Acrobatics);
 		</div>
 
 		<h3>Stress</h3>
-		<div class="grid grid-cols-3 whitespace-nowrap">
+		<div class="grid grid-cols-2 whitespace-nowrap">
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
 				<strong>Firewall</strong>
 				<div class="grid grid-cols-2">
@@ -56,18 +56,10 @@ const newSkillSelect = ref(Skill.Acrobatics);
 					<input type="number" :min="0" :value="system.stress.resolve.max" class="w-10 text-center" disabled />
 				</div>
 			</div>
-
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
-				<strong>Structure</strong>
-				<div class="grid grid-cols-2">
-					<input type="number" :min="0" :value="system.stress.vigour.value" name="system.stress.vigour.value" class="w-10 text-center" />
-					<input type="number" :min="0" :value="system.stress.vigour.max" class="w-10 text-center" disabled />
-				</div>
-			</div>
 		</div>
 
 		<h3>Defences</h3>
-		<div class="grid grid-cols-3 whitespace-nowrap">
+		<div class="grid grid-cols-2 whitespace-nowrap">
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
 				<strong>Security</strong>
 				<input type="number" :min="0" :value="system.defences.security" name="system.defences.security" class="w-10 text-center" />
@@ -77,15 +69,10 @@ const newSkillSelect = ref(Skill.Acrobatics);
 				<strong>Morale</strong>
 				<input type="number" :min="0" :value="system.defences.morale" name="system.defences.morale" class="w-10 text-center" />
 			</div>
-
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-center">
-				<strong>Armour</strong>
-				<input type="number" :min="0" :value="system.defences.armour" name="system.defences.armour" class="w-10 text-center" />
-			</div>
 		</div>
 
 		<h3>Harms</h3>
-		<div class="grid grid-cols-3 whitespace-nowrap gap-3">
+		<div class="grid grid-cols-2 whitespace-nowrap gap-3">
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
 				<div class="flex flex-nowrap items-center w-full">
 					<strong class="w-full">Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
@@ -107,18 +94,6 @@ const newSkillSelect = ref(Skill.Acrobatics);
 				<div class="flex flex-nowrap items-center w-full gap-1" v-for="(metanoia, index) in system.harms.metanoia.effects" :key="index">
 					<input type="text" class="flex flex-nowrap items-center w-full" :value="metanoia" :name="`system.harms.metanoia.effects.${index}`" />
 					<a class="text-xl" @click="actions.removeHarm('metanoia', index)">&times;</a>
-				</div>
-			</div>
-
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
-				<div class="flex flex-nowrap items-center w-full">
-					<strong class="w-full">Faults ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
-					<a @click="actions.addHarm('wounds')" class="text-xl">&plus;</a>
-				</div>
-
-				<div class="flex flex-nowrap items-center w-full gap-1" v-for="(wound, index) in system.harms.wounds.effects" :key="index">
-					<input type="text" class="flex flex-nowrap items-center w-full" :value="wound" :name="`system.harms.wounds.effects.${index}`" />
-					<a class="text-xl" @click="actions.removeHarm('wounds', index)">&times;</a>
 				</div>
 			</div>
 		</div>

@@ -37,30 +37,27 @@ export default abstract class GeistDataModel extends HasStress(HasAttributes(Has
 
 		let maxFirewall = system.stress.firewall.max;
 		let maxResolve = system.stress.resolve.max;
-		let maxVigour = system.stress.vigour.max;
 
 		const breaches = system.harms.breaches;
 		const metanoia = system.harms.metanoia;
-		const wounds = system.harms.wounds;
 
-		// TODO: Tie these to appropriate Skills on the Geist.
-		maxFirewall = system.attributes.Intelligence.value; // + system.fieldsOfExpertise.technical.expertise;
-		maxResolve = system.attributes.Willpower.value; // + system.fieldsOfExpertise.fortitude.expertise;
-		maxVigour = system.attributes.Brawn.value; // + system.fieldsOfExpertise.fortitude.expertise;
+		// TODO: Firewall values should all pull from owning character.
+		const hacking = system.skills.find((s) => s.skill === Skill.Hacking);
+		const discipline = system.skills.find((s) => s.skill === Skill.Discipline);
 
-		breaches.max = metanoia.max = wounds.max = 5;
+		maxFirewall = system.attributes.Intelligence.value + (hacking?.expertise ?? 0);
+		maxResolve = system.attributes.Willpower.value + (discipline?.expertise ?? 0);
+
+		breaches.max = metanoia.max = 5;
 
 		actor.system.stress.firewall.max = maxFirewall;
 		actor.system.stress.resolve.max = maxResolve;
-		actor.system.stress.vigour.max = maxVigour;
 
 		breaches.value = breaches.effects.length;
 		metanoia.value = metanoia.effects.length;
-		wounds.value = wounds.effects.length;
 
 		actor.system.harms.breaches = breaches;
 		actor.system.harms.metanoia = metanoia;
-		actor.system.harms.wounds = wounds;
 	}
 
 	static override defineSchema() {
