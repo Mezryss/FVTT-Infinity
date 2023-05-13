@@ -44,9 +44,9 @@ export default abstract class GeistDataModel extends HasStress(HasAttributes(Has
 		const wounds = system.harms.wounds;
 
 		// TODO: Tie these to appropriate Skills on the Geist.
-		maxFirewall = system.attributes.Intelligence; // + system.fieldsOfExpertise.technical.expertise;
-		maxResolve = system.attributes.Willpower; // + system.fieldsOfExpertise.fortitude.expertise;
-		maxVigour = system.attributes.Brawn; // + system.fieldsOfExpertise.fortitude.expertise;
+		maxFirewall = system.attributes.Intelligence.value; // + system.fieldsOfExpertise.technical.expertise;
+		maxResolve = system.attributes.Willpower.value; // + system.fieldsOfExpertise.fortitude.expertise;
+		maxVigour = system.attributes.Brawn.value; // + system.fieldsOfExpertise.fortitude.expertise;
 
 		breaches.max = metanoia.max = wounds.max = 5;
 

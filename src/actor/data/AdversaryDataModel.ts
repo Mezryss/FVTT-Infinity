@@ -76,27 +76,27 @@ export default abstract class AdversaryDataModel extends HasStress(HasAttributes
 
 		switch (actor.system.type) {
 			case AdversaryType.Trooper:
-				maxFirewall = Math.ceil(system.attributes.Intelligence / 2);
-				maxResolve = Math.ceil(system.attributes.Willpower / 2);
-				maxVigour = Math.ceil(system.attributes.Brawn / 2);
+				maxFirewall = Math.ceil(system.attributes.Intelligence.value / 2);
+				maxResolve = Math.ceil(system.attributes.Willpower.value / 2);
+				maxVigour = Math.ceil(system.attributes.Brawn.value / 2);
 
 				breaches.max = metanoia.max = wounds.max = 1;
 
 				break;
 
 			case AdversaryType.Elite:
-				maxFirewall = system.attributes.Intelligence;
-				maxResolve = system.attributes.Willpower;
-				maxVigour = system.attributes.Brawn;
+				maxFirewall = system.attributes.Intelligence.value;
+				maxResolve = system.attributes.Willpower.value;
+				maxVigour = system.attributes.Brawn.value;
 
 				breaches.max = metanoia.max = wounds.max = 2;
 
 				break;
 
 			case AdversaryType.Nemesis:
-				maxFirewall = system.attributes.Intelligence + system.fieldsOfExpertise.technical.expertise;
-				maxResolve = system.attributes.Willpower + system.fieldsOfExpertise.fortitude.expertise;
-				maxVigour = system.attributes.Brawn + system.fieldsOfExpertise.fortitude.expertise;
+				maxFirewall = system.attributes.Intelligence.value + system.fieldsOfExpertise.technical.expertise;
+				maxResolve = system.attributes.Willpower.value + system.fieldsOfExpertise.fortitude.expertise;
+				maxVigour = system.attributes.Brawn.value + system.fieldsOfExpertise.fortitude.expertise;
 
 				breaches.max = metanoia.max = wounds.max = 5;
 

@@ -9,13 +9,15 @@ Actor:
   templates:
     hasAttributes:
       attributes:
-        Agility: 7
-        Awareness: 7
-        Brawn: 7
-        Coordination: 7
-        Intelligence: 7
-        Personality: 7
-        Willpower: 7
+        Agility: &attribute
+          value: 7
+          superhuman: 0
+        Awareness: *attribute
+        Brawn: *attribute
+        Coordination: *attribute
+        Intelligence: *attribute
+        Personality: *attribute
+        Willpower: *attribute
 
     hasDescription:
       description: ''

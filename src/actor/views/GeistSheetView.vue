@@ -36,7 +36,7 @@ const newSkillSelect = ref(Skill.Acrobatics);
 				<Localized :label="`Infinity.Attributes.Abbreviations.${attribute}`" />
 			</span>
 
-			<input v-for="attribute in Attribute.all" :key="attribute" type="number" class="text-base w-full text-center" :value="system.attributes[attribute]" :min="0" :name="`system.attributes.${attribute}`" />
+			<input v-for="attribute in Attribute.all" :key="attribute" type="number" class="text-base w-full text-center" :value="system.attributes[attribute].value" :min="0" :name="`system.attributes.${attribute}.value`" />
 		</div>
 
 		<h3>Stress</h3>
