@@ -1,5 +1,6 @@
 import InfinityActor from './InfinityActor';
 import AdversaryDataModel from './data/AdversaryDataModel';
+import CharacterDataModel from './data/CharacterDataModel';
 import GeistDataModel from './data/GeistDataModel';
 import VehicleDataModel from './data/VehicleDataModel';
 import AdversarySheet from './sheets/AdversarySheet';
@@ -23,6 +24,7 @@ export function register() {
  */
 function registerDataModels() {
 	CONFIG.Actor.systemDataModels.adversary = AdversaryDataModel;
+	CONFIG.Actor.systemDataModels.character = CharacterDataModel;
 	// Remotes are identical to Adversaries, except they use Structure & Faults instead of Vigour & Wounds.
 	CONFIG.Actor.systemDataModels.remote = AdversaryDataModel;
 	CONFIG.Actor.systemDataModels.geist = GeistDataModel;

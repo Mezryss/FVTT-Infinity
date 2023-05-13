@@ -1,18 +1,25 @@
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
+import AbilityDataModel from '@/item/data/AbilityDataModel';
 import TalentDataModel from '@/item/data/TalentDataModel';
 import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
+import CharacterDataModel from '../data/CharacterDataModel';
 import CharacterSheetView from '../views/CharacterSheetView.vue';
+
+type HarmCategory = 'breaches' | 'metanoia' | 'wounds';
+
+const INVENTORY_ITEM_TYPES = ['ammunition', 'armour', 'augmentation', 'contagion', 'explosive', 'gear', 'hackingDevice', 'lhost', 'weapon'];
 
 /**
  * Function Callbacks
  */
 type CharacterSheetActions = {
-	/**
-	 * (EXPERIMENTATION PURPOSES) Updates the rank of a talent.
-	 */
-	updateTalentRank: (id: string, multiplier?: number) => Promise<void>;
+	addHarm: (category: HarmCategory) => Promise<void>;
+	removeHarm: (category: HarmCategory, index: number) => Promise<void>;
+	removeItem: (uuid: string) => Promise<void>;
+	addTrait: () => Promise<void>;
+	removeTrait: (index: number) => Promise<void>;
 };
 
 /**
@@ -47,40 +54,36 @@ export type CharacterSheetContext = {
 	name: string;
 
 	/**
-	 * Character talents.
+	 * System data for the actor.
 	 */
-	talents: {
-		/**
-		 * Document UUID
-		 */
-		id: string;
+	system: CharacterDataModel;
 
-		/**
-		 * Talent Name
-		 */
-		name: string;
+	/**
+	 * Talents & Special Abilities.
+	 */
+	abilities: InfinityItem<AbilityDataModel | TalentDataModel>[];
 
-		/**
-		 * Talent Icon
-		 */
-		img: string;
-
-		/**
-		 * Talent System
-		 */
-		system: TalentDataModel;
-	}[];
+	/**
+	 * Inventory
+	 */
+	inventory: InfinityItem[];
 };
 
 /**
  * Player Character sheet controller.
  */
-export class CharacterSheet extends VueSheet(InfinityActorSheet) {
+export class CharacterSheet extends VueSheet(InfinityActorSheet<CharacterDataModel>) {
 	/**
 	 * Sheet action bindings.
 	 */
 	private actions: CharacterSheetActions = {
-		updateTalentRank: this.updateTalentRank.bind(this),
+		addHarm: this.addHarm.bind(this),
+		removeHarm: this.removeHarm.bind(this),
+
+		removeItem: this.removeItem.bind(this),
+
+		addTrait: this.addTrait.bind(this),
+		removeTrait: this.removeTrait.bind(this),
 	};
 
 	/**
@@ -100,29 +103,56 @@ export class CharacterSheet extends VueSheet(InfinityActorSheet) {
 			editable: this.isEditable,
 			img: this.actor.img,
 			name: this.actor.name,
-
-			talents: this.actor.items
-				.filter((i) => i.type === 'talent')
-				.map((talent) => ({
-					id: talent.id,
-					name: talent.name,
-					img: talent.img,
-					system: talent.system,
-				})),
+			system: this.actor.system,
+			abilities: this.actor.items.filter((i) => ['ability', 'talent'].includes(i.type)) as InfinityItem<AbilityDataModel | TalentDataModel>[],
+			inventory: this.actor.items.filter((i) => INVENTORY_ITEM_TYPES.includes(i.type)) as InfinityItem[],
 		};
 	}
 
-	/**
-	 * (EXPERIMENTATION PURPOSES) Updates the rank of a talent.
-	 */
-	async updateTalentRank(id: string, multiplier: number = 1) {
-		const item = this.actor.items.find((i) => i.id === id) as InfinityItem<TalentDataModel> | undefined;
-		if (!item || item.type !== 'talent' || !item.system.isRanked) {
+	async removeItem(uuid: string) {
+		const item = this.actor.items.find((i) => i.uuid === uuid);
+		await item?.delete();
+	}
+
+	async addHarm(category: HarmCategory) {
+		const harmEffects = this.actor.system.harms[category].effects;
+
+		await this.actor.update({
+			[`system.harms.${category}.effects`]: [...harmEffects, `New ${category.capitalize()}`],
+		});
+	}
+
+	async removeHarm(category: HarmCategory, index: number) {
+		const harmEffects = this.actor.system.harms[category].effects;
+
+		if (index >= harmEffects.length) {
 			return;
 		}
 
-		await item.update({
-			'system.rank.current': Math.clamped(item.system.rank.current + multiplier, 1, item.system.rank.max),
+		const effectsCopy = [...harmEffects];
+		effectsCopy.splice(index, 1);
+
+		await this.actor.update({
+			[`system.harms.${category}.effects`]: effectsCopy,
+		});
+	}
+
+	async addTrait() {
+		await this.actor.update({
+			'system.traits': [...this.actor.system.traits, ''],
+		});
+	}
+
+	async removeTrait(index: number) {
+		const traitsCopy = [...this.actor.system.traits];
+		if (index >= traitsCopy.length) {
+			return;
+		}
+
+		traitsCopy.splice(index, 1);
+
+		await this.actor.update({
+			'system.traits': traitsCopy,
 		});
 	}
 }
