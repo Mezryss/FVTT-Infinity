@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
-import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
-import InfinitySheet from '@/components/InfinitySheet.vue';
+import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import Skill from '@/data/Skill';
 import { TalentPrerequisite } from '../data/TalentDataModel';
@@ -60,14 +59,7 @@ async function updatePrereqValue(index: number, event: Event) {
 </script>
 
 <template>
-	<InfinitySheet class="flex flex-col flex-nowrap gap-1">
-		<div class="flex items-center gap-2">
-			<img :src="img" data-edit="img" class="aspect-square w-12 h-12" />
-			<input type="text" name="name" :value="name" placeholder="Item Name" />
-		</div>
-
-		<hr class="w-full" />
-
+	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<div class="flex items-center gap-2">
 			<strong>Skill:</strong>
 			<select :value="system.skill" name="system.skill" class="w-full">
@@ -87,11 +79,6 @@ async function updatePrereqValue(index: number, event: Event) {
 					<input type="number" :value="system.rank.max" name="system.rank.max" placeholder="Max Rank" />
 				</div>
 			</template>
-		</div>
-
-		<div class="flex items-center gap-2">
-			<strong>Source:</strong>
-			<input type="text" name="system.source" :value="system.source" />
 		</div>
 
 		<div class="flex flex-col items-start gap-2">
@@ -122,10 +109,5 @@ async function updatePrereqValue(index: number, event: Event) {
 				<a @click="actions.removePrerequisite(index)">x</a>
 			</div>
 		</div>
-
-		<div class="flex flex-col items-start gap-2 min-h-[10em] h-full">
-			<h3 class="w-full">Description</h3>
-			<Editor name="system.description" :content="system.description" button />
-		</div>
-	</InfinitySheet>
+	</ItemSheet>
 </template>

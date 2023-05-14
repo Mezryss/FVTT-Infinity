@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
-import Editor from '@/components/Editor.vue';
-import InfinitySheet from '@/components/InfinitySheet.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
+import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import { ProgramType } from '../data/ProgramDataModel';
 import { ProgramSheetContext } from '../sheets/ProgramSheet';
@@ -31,14 +30,7 @@ async function specializationChanged(index: number, newSpec: string) {
 </script>
 
 <template>
-	<InfinitySheet class="flex flex-col flex-nowrap gap-1">
-		<div class="flex items-center gap-2">
-			<img :src="img" data-edit="img" class="aspect-square w-12 h-12" />
-			<input type="text" name="name" :value="name" placeholder="Item Name" />
-		</div>
-
-		<hr class="w-full" />
-
+	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<div class="flex items-center gap-2">
 			<strong>Type:</strong>
 			<select :value="system.type" name="system.type">
@@ -75,12 +67,5 @@ async function specializationChanged(index: number, newSpec: string) {
 			<strong>Tariff</strong>
 			<input type="text" class="w-full" :value="system.tariff" name="system.tariff" />
 		</div>
-
-		<hr class="w-full" />
-
-		<div class="flex flex-col items-start gap-2 min-h-[10em] h-full">
-			<h3 class="w-full">Description</h3>
-			<Editor name="system.description" :content="system.description" button />
-		</div>
-	</InfinitySheet>
+	</ItemSheet>
 </template>

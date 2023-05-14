@@ -34,6 +34,11 @@ export type AbilitySheetContext = {
 	 * System data for the talent.
 	 */
 	system: AbilityDataModel;
+
+	/**
+	 * Whether the item is Owned.
+	 */
+	owned: boolean;
 };
 
 /**
@@ -57,6 +62,7 @@ export default class AbilitySheet extends VueSheet(InfinityItemSheet<AbilityData
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
 		};
 	}
 }

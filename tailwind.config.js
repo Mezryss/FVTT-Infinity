@@ -8,7 +8,18 @@ export default {
 	},
 	important: true,
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				'light-hexes': "url('assets/images/SheetBG.svg')",
+			},
+			backgroundSize: {
+				'4k': '3840px 2160px',
+				'4kp': '2160px 3840px',
+			},
+			fontFamily: {
+				'orbitron': ['Orbitron', 'sans-serif'],
+			},
+		},
 	},
 	plugins: [
 		require('@tailwindcss/container-queries'),

@@ -1,3 +1,7 @@
+<!--
+	Utilizes Foundry's TextEditor to enrich text and output the resulting HTML.
+-->
+
 <script lang="ts" setup>
 import { onMounted, onUpdated, ref } from 'vue';
 

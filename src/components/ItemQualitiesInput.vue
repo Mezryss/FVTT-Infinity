@@ -1,3 +1,7 @@
+<!--
+	Input field for a list of Item Qualities, allowing for handling of changing ranks & specialization
+	values, as well as removing an individual quality.
+-->
 <script lang="ts" setup>
 import { computed } from 'vue';
 import InfinityItem from '@/item/InfinityItem';
@@ -26,6 +30,11 @@ const emit = defineEmits<{
 	(e: 'remove', index: number): void;
 }>();
 
+/**
+ * Item qualities aren't actually embedded, and instead are listed as UUIDs with their associated Name, Rank, & Specialization data.
+ *
+ * We need to fetch the actual Items' system data for the list for display, though.
+ */
 const loadedQualities = computed(() => {
 	return props.qualities.map((quality) => {
 		const item = fromUuidSync(quality.uuid) as InfinityItem<ItemQualityDataModel>;
@@ -37,6 +46,11 @@ const loadedQualities = computed(() => {
 	});
 });
 
+/**
+ * Opens the sheet view for the given item UUID, if the UUID still exists and is valid.
+ *
+ * @param uuid Item UUID to display.
+ */
 async function openItem(uuid: string) {
 	const item = await fromUuid(uuid);
 	item?.sheet?.render(true);

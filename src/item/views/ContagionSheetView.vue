@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
-import Editor from '@/components/Editor.vue';
-import InfinitySheet from '@/components/InfinitySheet.vue';
+import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import { ContagionCategory, ContagionTerm, ContagionType } from '../data/ContagionDataModel';
 import { ContagionSheetContext } from '../sheets/ContagionSheet';
@@ -15,14 +14,7 @@ const system = computed(() => context.system);
 </script>
 
 <template>
-	<InfinitySheet class="flex flex-col flex-nowrap gap-1">
-		<div class="flex items-center gap-2">
-			<img :src="img" data-edit="img" class="aspect-square w-12 h-12" />
-			<input type="text" name="name" :value="name" placeholder="Item Name" />
-		</div>
-
-		<hr class="w-full" />
-
+	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<div class="flex items-center gap-2">
 			<strong>Category:</strong>
 			<select :value="system.category" name="system.category" class="w-full">
@@ -61,12 +53,5 @@ const system = computed(() => context.system);
 			<strong>Damage:</strong>
 			<input type="text" :value="system.damage" name="system.damage" />
 		</div>
-
-		<hr class="w-full" />
-
-		<div class="flex flex-col items-start gap-2 min-h-[10em] h-full">
-			<h3 class="w-full">Description</h3>
-			<Editor name="system.description" :content="system.description" button />
-		</div>
-	</InfinitySheet>
+	</ItemSheet>
 </template>

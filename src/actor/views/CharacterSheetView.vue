@@ -204,9 +204,9 @@ const inventory = computed(() => context.inventory);
 		<h3>Attributes & Skills</h3>
 		<div class="grid grid-cols-7 whitespace-nowrap justify-items-center mx-4 mb-4" v-for="attribute in Attribute.all" :key="attribute">
 			<span class="col-span-6 justify-self-start text-lg">
-				<Localized :label="`Infinity.Attributes.${ attribute }`" />
+				<Localized :label="`Infinity.Attributes.${attribute}`" />
 			</span>
-			<input type="number" class="w-20 text-center text-lg" :value="system.attributes[attribute].value" :name="`system.attributes.${ attribute }.value`" />
+			<input type="number" class="w-20 text-center text-lg" :value="system.attributes[attribute].value" :name="`system.attributes.${attribute}.value`" />
 
 			<strong class="col-span-2 justify-self-start">Skill</strong>
 			<strong class="col-span-2">Signature</strong>
@@ -216,12 +216,12 @@ const inventory = computed(() => context.inventory);
 
 			<template v-for="skill in Skill.BY_ATTRIBUTE[attribute]" :key="skill">
 				<strong class="col-span-2 justify-self-start">
-					<Localized :label="`Infinity.Skill.${ skill }`" />
+					<Localized :label="`Infinity.Skill.${skill}`" />
 				</strong>
-				<input class="col-span-2" type="checkbox" :checked="system.skills[skill].signature" :name="`system.skills.${ skill }.signature`" />
+				<input class="col-span-2" type="checkbox" :checked="system.skills[skill].signature" :name="`system.skills.${skill}.signature`" />
 
-				<input type="number" :value="system.skills[skill].expertise" :name="`system.skills.${ skill }.expertise`" class="text-center" />
-				<input type="number" :value="system.skills[skill].focus" :name="`system.skills.${ skill }.focus`" class="text-center" />
+				<input type="number" :value="system.skills[skill].expertise" :name="`system.skills.${skill}.expertise`" class="text-center" />
+				<input type="number" :value="system.skills[skill].focus" :name="`system.skills.${skill}.focus`" class="text-center" />
 				<input type="number" :value="system.attributes[attribute].value + system.skills[skill].expertise" class="text-center" readonly />
 			</template>
 		</div>

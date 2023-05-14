@@ -1,5 +1,9 @@
+<!--
+	Wraps Foundry's localization functionality. Supports format arguments, as well as enriched text.
+-->
 <script lang="ts" setup>
 import { computed } from 'vue';
+import Enriched from './Enriched.vue';
 
 const props = withDefaults(
 	defineProps<{
@@ -27,6 +31,6 @@ const localizedValue = computed(() => (props.formatArgs === undefined ? game.i18
 </script>
 
 <template>
-	<span v-if="enriched" v-html="localizedValue"></span>
+	<Enriched v-if="enriched" :value="localizedValue" />
 	<template v-else>{{ localizedValue }}</template>
 </template>

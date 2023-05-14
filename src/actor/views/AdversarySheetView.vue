@@ -21,6 +21,11 @@ const attacks = computed(() => context.attacks);
 const abilities = computed(() => context.abilities);
 
 const isRemote = computed(() => context.actorType === 'remote');
+
+async function openItem(uuid: string) {
+	const item = await fromUuid(uuid);
+	item?.sheet?.render(true);
+}
 </script>
 
 <template>
@@ -192,7 +197,7 @@ const isRemote = computed(() => context.actorType === 'remote');
 		<ul>
 			<li v-for="ability in abilities" :key="ability.uuid" class="flex flex-row flex-wrap items-center gap-1">
 				<a class="-my-4 text-xl" @click="actions.removeAbility(ability.uuid)">&times;</a>
-				<strong>{{ ability.name }}:</strong>
+				<a @click="openItem(ability.uuid)" class="font-bold">{{ ability.name }}{{ ability.system.isRanked ? ' ' + ability.system.rank : '' }}:</a>
 				<Enriched :value="ability.system.description" />
 			</li>
 		</ul>

@@ -1,3 +1,7 @@
+<!--
+	Wrapper for Foundry's ProseMirror Editor.
+-->
+
 <script lang="ts" setup>
 import { inject, onMounted, onUpdated, ref, toRaw } from 'vue';
 import { RootContext } from '@/VueSheet';

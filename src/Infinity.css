@@ -24,3 +24,23 @@
 	min-width: 400px;
 	min-height: 300px;
 }
+
+/**
+ * Set the default background for .window-content so we don't fallback to the ugly parchment during window close animation.
+ */
+.window-app.infinity.sheet .window-content {
+	background-image: url('assets/images/SheetBG.svg');
+	background-size: 2160px 3840px;
+}
+
+/**
+ * Orbitron Font is available under Open Font License (see assets/fonts/Orbitron/OFL.txt).
+ *
+ * This font is used frequently in the Infinity rulebooks for title blocks.
+ */
+@font-face {
+	font-family: 'Orbitron';
+	src: url('assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('opentype-variations');
+	font-weight: 400 900;
+	font-style: normal;
+}
