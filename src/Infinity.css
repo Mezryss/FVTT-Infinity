@@ -5,7 +5,7 @@
 /**
  * Remove Foundry's default padding on sheet windows, so our sheets can take their whole window.
  */
-.sheet .window-content {
+.infinity .window-content {
 	padding: 0;
 }
 
@@ -43,4 +43,13 @@
 	src: url('assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('opentype-variations');
 	font-weight: 400 900;
 	font-style: normal;
+}
+
+/**
+ * Some Foundry overrides.
+ */
+.content-link {
+	background-color: #1e3a8a !important;
+	border-color: #1e40af;
+	color: #f0f9ff;
 }

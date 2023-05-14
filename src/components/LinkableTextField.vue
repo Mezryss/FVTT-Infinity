@@ -7,20 +7,22 @@ import { computed, inject, ref, toRaw } from 'vue';
 import { RootContext } from '@/VueSheet';
 import Enriched from './Enriched.vue';
 
-const props = withDefaults(
-	defineProps<{
-		/**
-		 * Name of the field (e.g. system.source)
-		 */
-		name: string;
+const props = defineProps<{
+	/**
+	 * Name of the field (e.g. system.source)
+	 */
+	name: string;
 
-		/**
-		 * Current value of the field
-		 */
-		value: string;
-	}>(),
-	{},
-);
+	/**
+	 * Current value of the field
+	 */
+	value: string;
+
+	/**
+	 * CSS Classes for the <input> field.
+	 */
+	inputClasses?: string | Record<string, boolean>;
+}>();
 
 /**
  * Test for Foundry's UUID enricher format to determine if we're currently linking a document.
@@ -81,7 +83,7 @@ async function drop(event: DragEvent) {
 	<span
 		class="flex items-center gap-1 w-full py-1 border-[1px] rounded-sm border-dashed border-transparent h-7"
 		:class="{
-			'border-sky-600': dragCount > 0,
+			'border-sky-400 bg-sky-400 bg-opacity-10': dragCount > 0,
 		}"
 		@dragenter="dragEnter"
 		@dragleave="dragLeave"
@@ -92,6 +94,6 @@ async function drop(event: DragEvent) {
 			<a @click="updateValue('')"><i class="fas fa-times" /></a>
 		</template>
 
-		<input v-else type="text" :name="name" :value="value" class="w-full" />
+		<input v-else type="text" :name="name" :value="value" class="w-full" :class="inputClasses" style="color: unset" />
 	</span>
 </template>

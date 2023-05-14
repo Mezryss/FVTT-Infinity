@@ -4,7 +4,7 @@
 
 <template>
 	<div class="font-orbitron bg-sky-300 relative p-0.5">
-		<div class="flex items-center gap-1 bg-blue-950 p-0.5 text-white">
+		<div class="flex items-center gap-2 bg-blue-950 py-0.5 px-1 text-white">
 			<slot />
 		</div>
 	</div>
