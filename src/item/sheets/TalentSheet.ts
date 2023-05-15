@@ -59,6 +59,11 @@ export type TalentSheetContext = {
 	 * System data for the talent.
 	 */
 	system: TalentDataModel;
+
+	/**
+	 * Whether the Item document is owned.
+	 */
+	owned: boolean;
 };
 
 /**
@@ -92,6 +97,7 @@ export default class TalentSheet extends VueSheet(InfinityItemSheet<TalentDataMo
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
 		};
 	}
 

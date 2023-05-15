@@ -5,7 +5,8 @@ import Enriched from '@/components/Enriched.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import Skill from '@/data/Skill';
-import { TalentPrerequisite } from '../data/TalentDataModel';
+import InfinityItem from '../InfinityItem';
+import TalentDataModel, { TalentPrerequisite } from '../data/TalentDataModel';
 import { TalentSheetContext } from '../sheets/TalentSheet';
 
 const context = inject<TalentSheetContext>(RootContext)!;
@@ -14,6 +15,43 @@ const actions = computed(() => context.actions);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
+
+const owned = computed(() => context.owned);
+
+/**
+ * All of the non-talent (Skill Expertise, Skill Focus, and Misc.) prerequisites for display first.
+ */
+const nonTalentPreReqs = computed(() => context.system.prerequisites.filter((p) => p.type !== TalentPrerequisite.Type.Talent));
+
+/**
+ * Fetches the full tree of talent prerequisites required to take this talent.
+ */
+const talentPreReqs = computed(() => {
+	const talents = context.system.prerequisites.filter((p) => p.type === TalentPrerequisite.Type.Talent);
+
+	return recurseTalentPrerequisites(talents.map((t) => t.value as string));
+});
+
+/**
+ * Recursively fetches a full tree of UUIDs for talent prerequisites.
+ */
+function recurseTalentPrerequisites(uuids: string[]): string[] {
+	return uuids.flatMap((uuid) => {
+		const itemUuid = /^@UUID\[(?<uuid>.*)\]{.*}$/i.exec(uuid)?.groups?.uuid;
+		if (!itemUuid) {
+			return [uuid];
+		}
+
+		const item = fromUuidSync(itemUuid) as InfinityItem<TalentDataModel>;
+		if (!item || !(item instanceof InfinityItem) || item.type !== 'talent') {
+			return [uuid];
+		}
+
+		const itemTalents = item.system.prerequisites.filter((p) => p.type === TalentPrerequisite.Type.Talent).map((t) => t.value as string);
+
+		return [uuid, ...recurseTalentPrerequisites(itemTalents)];
+	});
+}
 
 /**
  * Updates the type of the prerequisite at a given index.
@@ -60,6 +98,29 @@ async function updatePrereqValue(index: number, event: Event) {
 
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
+		<template #sidebar>
+			<div class="flex flex-col flex-nowrap w-full h-full text-sm gap-1">
+				<span class="font-orbitron font-semibold w-full text-center underline underline-offset-2">Talent Summary</span>
+
+				<span v-if="system.isRanked" class="flex gap-1">
+					<strong>Max Ranks:</strong>
+					<span>{{ system.rank.max }}</span>
+				</span>
+
+				<template v-if="system.prerequisites.length > 0">
+					<strong>Prerequisites:</strong>
+					<span v-for="(prereq, index) in nonTalentPreReqs" :key="index" class="pl-2 after:inline after:content-[','] last-of-type:after:content-none">
+						<template v-if="[TalentPrerequisite.Type.SkillExpertise, TalentPrerequisite.Type.SkillFocus].includes(prereq.type)">
+							<Localized :label="`Infinity.Skill.${system.skill}`" /> {{ prereq.type === TalentPrerequisite.Type.SkillExpertise ? 'Expertise' : 'Focus' }} {{ prereq.value }}
+						</template>
+						<template v-else>{{ prereq.value }}</template>
+					</span>
+
+					<Enriched v-for="talent in talentPreReqs" :key="talent" :value="talent" />
+				</template>
+			</div>
+		</template>
+
 		<div class="flex items-center gap-2">
 			<strong>Skill:</strong>
 			<select :value="system.skill" name="system.skill" class="w-full">
@@ -75,8 +136,16 @@ async function updatePrereqValue(index: number, event: Event) {
 
 			<template v-if="system.isRanked">
 				<div class="w-full grid grid-cols-2 gap-1">
-					<input type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
-					<input type="number" :value="system.rank.max" name="system.rank.max" placeholder="Max Rank" />
+					<input v-if="owned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
+					<input
+						:class="{
+							'col-span-2': !owned,
+						}"
+						type="number"
+						:value="system.rank.max"
+						name="system.rank.max"
+						placeholder="Max Rank"
+					/>
 				</div>
 			</template>
 		</div>

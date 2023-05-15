@@ -21,6 +21,13 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 					dragSelector: '.item-list .item',
 				},
 			],
+			tabs: [
+				{
+					navSelector: '.sheet-tabs',
+					contentSelector: '.sheet-body',
+					initial: 'description',
+				},
+			],
 		};
 	}
 

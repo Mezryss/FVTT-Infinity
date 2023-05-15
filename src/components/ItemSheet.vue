@@ -3,10 +3,15 @@
 -->
 
 <script lang="ts" setup>
+import { useSlots } from 'vue';
 import Editor from './Editor.vue';
 import InfinitySheet from './InfinitySheet.vue';
 import LinkableTextField from './LinkableTextField.vue';
 import TitleBox from './TitleBox.vue';
+import SheetBody from './tabs/SheetBody.vue';
+import TabBar from './tabs/TabBar.vue';
+import TabContent from './tabs/TabContent.vue';
+import TabLink from './tabs/TabLink.vue';
 
 withDefaults(
 	defineProps<{
@@ -39,6 +44,8 @@ withDefaults(
 		showActiveEffects: false,
 	},
 );
+
+const slots = useSlots();
 </script>
 
 <template>
@@ -54,11 +61,30 @@ withDefaults(
 			</div>
 		</TitleBox>
 
-		<slot />
+		<div class="flex flex-nowrap h-full w-full gap-1">
+			<!-- TODO: Make the sidebar responsive to container (window) width. -->
+			<div v-if="slots.sidebar" class="h-full w-40 flex-shrink-0 bg-sky-400 bg-opacity-20 rounded-md p-0.5">
+				<slot name="sidebar" />
+			</div>
+			<div class="w-full h-full flex flex-col flex-nowrap">
+				<TabBar>
+					<TabLink v-if="description !== undefined" tab="description">Description</TabLink>
+					<TabLink tab="detail">Details</TabLink>
+					<TabLink v-if="showActiveEffects" tab="effects">Effects</TabLink>
+				</TabBar>
 
-		<div v-if="description !== undefined" class="flex flex-col items-start gap-2 h-full min-h-[10em]">
-			<h3 class="w-full">Description</h3>
-			<Editor name="system.description" :content="description" button />
+				<SheetBody>
+					<TabContent tab="detail">
+						<slot />
+					</TabContent>
+
+					<TabContent v-if="description !== undefined" tab="description">
+						<div class="flex flex-col items-start gap-2 h-full min-h-[10em] w-full">
+							<Editor name="system.description" :content="description" button />
+						</div>
+					</TabContent>
+				</SheetBody>
+			</div>
 		</div>
 	</InfinitySheet>
 </template>
