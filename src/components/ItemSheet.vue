@@ -49,22 +49,24 @@ const slots = useSlots();
 </script>
 
 <template>
-	<InfinitySheet class="flex flex-col flex-nowrap gap-1 p-2">
-		<TitleBox class="-m-1 mb-0.5">
-			<img :src="img" data-edit="img" class="aspect-square h-12 border-none bg-sky-300 bg-opacity-75 hover:cursor-pointer rounded-md" />
+	<InfinitySheet class="flex flex-col flex-nowrap gap-2 p-2 text-base">
+		<TitleBox class="-m-1">
+			<img :src="img" data-edit="img" class="aspect-square h-14 border-none bg-sky-300 bg-opacity-75 hover:cursor-pointer rounded-md" />
 			<div class="flex flex-col flex-nowrap gap-0.5 w-full">
-				<input type="text" name="name" :value="name" placeholder="Item Name" class="text-sky-50 text-xl border-none appearance-none focus:outline-none focus:shadow-none focus:bg-white focus:bg-opacity-5 font-bold" />
-				<div v-if="source !== undefined" class="flex gap-1 text-xs items-center">
+				<input type="text" name="name" :value="name" placeholder="Item Name" class="text-sky-50 text-lg border-none appearance-none focus:outline-none focus:shadow-none focus:bg-white focus:bg-opacity-5 font-bold" />
+				<div v-if="source !== undefined" class="flex gap-1 text-sm items-center">
 					<strong>Source:</strong>
 					<LinkableTextField name="system.source" :value="source" input-classes="border-none appearance-none focus:outline-none focus:shadow-none focus:bg-white focus:bg-opacity-5" />
 				</div>
 			</div>
 		</TitleBox>
 
-		<div class="flex flex-nowrap h-full w-full gap-1">
+		<div class="flex flex-nowrap h-full w-full gap-2">
 			<!-- TODO: Make the sidebar responsive to container (window) width. -->
-			<div v-if="slots.sidebar" class="h-full w-40 flex-shrink-0 bg-sky-400 bg-opacity-20 rounded-md p-0.5">
-				<slot name="sidebar" />
+			<div v-if="slots.sidebar" class="h-full w-48 flex-shrink-0 bg-sky-400 bg-opacity-20 rounded-md p-1">
+				<div class="flex flex-col flex-nowrap w-full h-full gap-1">
+					<slot name="sidebar" />
+				</div>
 			</div>
 			<div class="w-full h-full flex flex-col flex-nowrap">
 				<TabBar>

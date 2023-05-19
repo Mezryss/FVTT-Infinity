@@ -139,7 +139,7 @@ async function activate() {
 	// Prose options. For the most part, these are identical to Foundry v10, except we change our save callback and only allow ProseMirror.
 	const options = {
 		target: editorDiv,
-		fieldName: name,
+		fieldName: props.name,
 		save_onsavecallback: save,
 		engine: 'prosemirror',
 		collaborate: props.collaborate,
@@ -188,7 +188,7 @@ async function save() {
 </script>
 
 <template>
-	<div class="w-full h-full editor prosemirror" ref="rootDiv">
+	<div class="w-full h-full editor prosemirror text-base" ref="rootDiv">
 		<a v-if="button && rootContext.editable && !editing" @click="activate" class="editor-edit"><i class="fas fa-edit"></i></a>
 		<div v-if="!editing" class="editor-content" v-html="enrichedContent"></div>
 		<div class="w-full h-full contents editor-content" v-show="editing" ref="editorContainer"></div>

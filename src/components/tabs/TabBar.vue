@@ -17,7 +17,13 @@ withDefaults(
 </script>
 
 <template>
-	<nav class="sheet-tabs" :data-group="group">
+	<nav class="sheet-tabs font-orbitron text-sm border-0 border-b-[1px] border-opacity-50 border-sky-400" :data-group="group">
 		<slot />
 	</nav>
 </template>
+
+<style lang="scss">
+.sheet-tabs .active {
+	font-weight: bold;
+}
+</style>

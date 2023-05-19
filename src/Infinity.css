@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 /**
+ * Override Foundry's default rem size.
+ */
+html {
+	font-size: 14px !important;
+	--font-size-14: 14px !important;
+}
+
+/**
  * Remove Foundry's default padding on sheet windows, so our sheets can take their whole window.
  */
 .infinity .window-content {
