@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
@@ -31,31 +32,35 @@ async function specializationChanged(index: number, newSpec: string) {
 
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
-		<div class="flex items-center gap-2">
+		<template #sidebar>
+			<GearSidebar item-type="Ammunition" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+				<span class="flex gap-1">
+					<strong>Category:</strong>
+					<span>{{ system.category }}</span>
+				</span>
+			</GearSidebar>
+		</template>
+
+		<div class="w-full grid grid-cols-5 items-center gap-1">
 			<strong>Category:</strong>
-			<select :value="system.category" name="system.category" class="w-full">
+			<select :value="system.category" name="system.category" class="col-span-4">
 				<option v-for="category in AmmunitionCategory.all" :key="category" :value="category">
 					<Localized :label="`Infinity.Items.Ammunition.Category.${category}`" />
 				</option>
 			</select>
-		</div>
 
-		<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
+			<ItemQualitiesInput class="col-span-5" :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
 
-		<div class="flex items-center gap-2">
 			<strong>Restriction:</strong>
-			<input type="text" :value="system.restriction.value" name="system.restriction.value" />
-			<input type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
-		</div>
+			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<!-- TODO: Label Concilium checkboxes -->
+			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
-		<div class="flex items-center gap-2">
 			<strong class="whitespace-nowrap">Reload Cost</strong>
-			<input type="text" :value="system.cost" name="system.cost" />
-		</div>
+			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
 
-		<div class="flex items-center gap-2">
 			<strong>Tariff</strong>
-			<input type="text" class="w-full" :value="system.tariff" name="system.tariff" />
+			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
 		</div>
 	</ItemSheet>
 </template>

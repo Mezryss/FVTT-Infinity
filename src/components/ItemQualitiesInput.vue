@@ -59,9 +59,9 @@ async function openItem(uuid: string) {
 
 <template>
 	<div class="flex flex-col flex-nowrap">
-		<h3>Item Qualities</h3>
-		<em v-if="qualities.length === 0">No Qualities Added</em>
-		<div v-else class="flex flex-wrap gap-x-1 gap-y-1">
+		<span class="text-lg font-orbitron font-semibold">Item Qualities</span>
+		<em class="ml-4" v-if="qualities.length === 0">No Qualities Added</em>
+		<div v-else class="flex flex-wrap gap-x-1 gap-y-1 ml-4">
 			<div v-for="(quality, index) in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center bg-slate-400 rounded-md border-[1px] border-solid border-slate-900 p-1">
 				<a @click="openItem(quality.uuid)">{{ quality.name }}</a>
 				<template v-if="editable">

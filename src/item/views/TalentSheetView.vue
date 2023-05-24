@@ -108,8 +108,14 @@ async function updatePrereqValue(index: number, event: Event) {
 			</span>
 
 			<span v-if="system.isRanked" class="flex gap-1">
-				<strong>Max Ranks:</strong>
-				<span>{{ system.rank.max }}</span>
+				<template v-if="owned">
+					<strong>Rank:</strong>
+					<span>{{ system.rank.current }}/{{ system.rank.max }}</span>
+				</template>
+				<template v-else>
+					<strong>Max Ranks:</strong>
+					<span>{{ system.rank.max }}</span>
+				</template>
 			</span>
 
 			<template v-if="system.prerequisites.length > 0">

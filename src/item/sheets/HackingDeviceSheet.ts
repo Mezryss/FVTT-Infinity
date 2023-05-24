@@ -2,7 +2,6 @@ import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
 import HackingDeviceDataModel, { ProgramItemReference } from '../data/HackingDeviceDataModel';
-import ProgramDataModel from '../data/ProgramDataModel';
 import HackingDeviceSheetViewVue from '../views/HackingDeviceSheetView.vue';
 
 /**
@@ -10,18 +9,11 @@ import HackingDeviceSheetViewVue from '../views/HackingDeviceSheetView.vue';
  */
 type HackingDeviceSheetActions = {
 	/**
-	 * Open the Item sheet for the specified Program.
-	 *
-	 * @param index Index of the Program to open.
-	 */
-	openProgram: (index: number) => Promise<void>;
-
-	/**
 	 * Remove a Program reference from the device's installed program list.
 	 *
-	 * @param index Index of the Program to remove.
+	 * @param uuid UUID of the Program to remove.
 	 */
-	removeProgram: (index: number) => Promise<void>;
+	removeProgram: (uuid: string) => Promise<void>;
 };
 
 /**
@@ -69,7 +61,6 @@ export default class HackingDeviceSheet extends VueSheet(InfinityItemSheet<Hacki
 	 * Sheet action bindings.
 	 */
 	private actions: HackingDeviceSheetActions = {
-		openProgram: this.openProgram.bind(this),
 		removeProgram: this.removeProgram.bind(this),
 	};
 
@@ -121,25 +112,9 @@ export default class HackingDeviceSheet extends VueSheet(InfinityItemSheet<Hacki
 		});
 	}
 
-	async openProgram(index: number) {
-		if (index >= this.item.system.programs.length) {
-			return;
-		}
-
-		const item = (await fromUuid(this.item.system.programs[index].uuid)) as InfinityItem<ProgramDataModel>;
-		await item?.sheet?.render(true);
-	}
-
-	async removeProgram(index: number) {
-		if (index >= this.item.system.programs.length) {
-			return;
-		}
-
-		const programsCopy = [...this.item.system.programs];
-		programsCopy.splice(index, 1);
-
+	async removeProgram(uuid: string) {
 		await this.item.update({
-			'system.programs': programsCopy,
+			'system.programs': this.item.system.programs.filter((p) => p.uuid !== uuid),
 		});
 	}
 }

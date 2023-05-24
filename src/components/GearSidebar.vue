@@ -1,0 +1,52 @@
+<script lang="ts" setup>
+import { ItemSize } from '@/item/data/templates/HasGearData';
+import SidebarLabel from './SidebarLabel.vue';
+
+defineProps<{
+	itemType: string;
+
+	size?: ItemSize;
+	restriction?: {
+		value: number;
+		concilium: boolean;
+		notes: string;
+	};
+	cost?: string;
+	maintenance?: string;
+	tariff?: string;
+}>();
+</script>
+
+<template>
+	<SidebarLabel class="whitespace-nowrap">{{ itemType }}</SidebarLabel>
+
+	<slot />
+
+	<span v-if="size" class="flex gap-1">
+		<strong>Size:</strong>
+		<span>{{ size }}</span>
+	</span>
+
+	<span v-if="restriction?.value" class="flex gap-1">
+		<strong>Restriction:</strong>
+		<span>
+			{{ restriction.value }}
+			{{ restriction.concilium ? '(C)' : null }}
+		</span>
+	</span>
+
+	<span v-if="cost" class="flex gap-1">
+		<strong>Cost:</strong>
+		<span>{{ cost }}</span>
+	</span>
+
+	<span v-if="maintenance" class="flex gap-1">
+		<strong>Maintenance:</strong>
+		<span>{{ maintenance }}</span>
+	</span>
+
+	<span v-if="tariff" class="flex gap-1">
+		<strong>Tariff:</strong>
+		<span>{{ tariff }}</span>
+	</span>
+</template>

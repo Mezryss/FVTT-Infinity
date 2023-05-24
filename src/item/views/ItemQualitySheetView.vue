@@ -13,15 +13,28 @@ const system = computed(() => context.system);
 
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
-		<div class="flex items-center gap-2">
-			<strong>Ranked:</strong>
-			<input type="checkbox" :checked="system.isRanked" name="system.isRanked" />
-		</div>
+		<template #sidebar>
+			<div class="flex flex-col gap-1">
+				<span class="flex gap-1">
+					<strong>Ranked:</strong>
+					<span>{{ system.isRanked ? 'Yes' : 'No' }}</span>
+				</span>
 
-		<div class="flex items-center gap-2">
+				<span class="flex gap-1">
+					<strong>Specialized:</strong>
+					<span>{{ system.isSpecialized ? 'Yes' : 'No' }}</span>
+				</span>
+			</div>
+		</template>
+
+		<div class="w-full grid grid-cols-5 items-center gap-1">
+			<strong>Ranked:</strong>
+			<input type="checkbox" :checked="system.isRanked" name="system.isRanked" class="justify-self-center" />
+			<span class="col-span-3" />
+
 			<strong>Specialized:</strong>
-			<input type="checkbox" :checked="system.isSpecialized" name="system.isSpecialized" />
-			<input v-if="system.isSpecialized" type="text" :value="system.specializationPlaceholder" name="system.specializationPlaceholder" placeholder="Specialization Placeholder" />
+			<input type="checkbox" :checked="system.isSpecialized" name="system.isSpecialized" class="justify-self-center" />
+			<input v-if="system.isSpecialized" type="text" :value="system.specializationPlaceholder" name="system.specializationPlaceholder" placeholder="Specialization Placeholder" class="col-span-3" />
 		</div>
 	</ItemSheet>
 </template>

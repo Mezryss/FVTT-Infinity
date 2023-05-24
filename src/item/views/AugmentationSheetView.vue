@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import { AugmentationCategory, AugmentationType } from '../data/AugmentationDataModel';
@@ -30,45 +31,50 @@ async function specializationChanged(index: number, newSpec: string) {
 
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
-		<div class="flex items-center gap-2">
-			<strong>Category:</strong>
-			<select :value="system.category" name="system.category" class="w-full">
+		<template #sidebar>
+			<GearSidebar item-type="Augmentation" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
+				<span class="flex gap-1">
+					<strong>Category:</strong>
+					<span>{{ system.category }}</span>
+				</span>
+
+				<span class="flex gap-1">
+					<strong>Type:</strong>
+					<span>{{ system.type }}</span>
+				</span>
+			</GearSidebar>
+		</template>
+
+		<div class="w-full grid grid-cols-5 items-center gap-1">
+			<strong>Category</strong>
+			<select :value="system.category" name="system.category" class="w-full col-span-4">
 				<option v-for="augCategory in AugmentationCategory.all" :key="augCategory" :value="augCategory">
 					{{ augCategory }}
 				</option>
 			</select>
-		</div>
 
-		<div class="flex items-center gap-2">
-			<strong>Type:</strong>
-			<select :value="system.type" name="system.type" class="w-full">
+			<strong>Type</strong>
+			<select :value="system.type" name="system.type" class="w-full col-span-4">
 				<option v-for="augType in AugmentationType.all" :key="augType" :value="augType">
 					{{ augType }}
 				</option>
 			</select>
-		</div>
 
-		<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" class="col-span-5" />
 
-		<div class="flex items-center gap-2">
 			<strong>Restriction:</strong>
-			<input type="text" :value="system.restriction.value" name="system.restriction.value" />
-			<input type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
-		</div>
+			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<!-- TODO: Label Concilium checkboxes -->
+			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
-		<div class="flex items-center gap-2">
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" :value="system.cost" name="system.cost" />
-		</div>
+			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
 
-		<div class="flex items-center gap-2">
 			<strong>Tariff</strong>
-			<input type="text" class="w-full" :value="system.tariff" name="system.tariff" />
-		</div>
+			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
 
-		<div class="flex items-center gap-2">
-			<strong class="whitespace-nowrap">Maintenance</strong>
-			<input type="number" :min="0" :value="system.maintenance" name="system.maintenance" />
+			<strong>Maintenance</strong>
+			<input type="text" class="col-span-4 text-center" :value="system.maintenance" name="system.maintenance" />
 		</div>
 	</ItemSheet>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
@@ -31,41 +32,46 @@ async function specializationChanged(index: number, newSpec: string) {
 
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
-		<div class="flex items-center gap-2">
-			<strong>Type:</strong>
-			<select :value="system.type" name="system.type">
+		<template #sidebar>
+			<GearSidebar item-type="Program" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+				<span class="flex gap-1">
+					<strong>Type:</strong>
+					<span>{{ system.type }}</span>
+				</span>
+
+				<span class="flex gap-1">
+					<strong>Rating:</strong>
+					<span>{{ system.rating }}</span>
+				</span>
+			</GearSidebar>
+		</template>
+
+		<div class="w-full grid grid-cols-5 items-center gap-1">
+			<strong>Type</strong>
+			<select :value="system.type" name="system.type" class="col-span-4">
 				<option v-for="programType in ProgramType.all" :key="programType" :value="programType">
 					<Localized :label="`Infinity.Items.Program.Type.${programType}`" />
 				</option>
 			</select>
-		</div>
 
-		<div class="flex items-center gap-2">
-			<strong>Rating:</strong>
-			<input type="text" :value="system.rating" name="system.rating" />
-		</div>
+			<strong>Rating</strong>
+			<input type="text" :value="system.rating" name="system.rating" class="col-span-4 text-center" />
 
-		<div class="flex items-center gap-2">
-			<strong>Damage:</strong>
-			<input type="text" :value="system.damage" name="system.damage" />
-		</div>
+			<strong>Damage</strong>
+			<input type="text" :value="system.damage" name="system.damage" class="col-span-4 text-center" />
 
-		<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" class="col-span-5" />
 
-		<div class="flex items-center gap-2">
 			<strong>Restriction:</strong>
-			<input type="text" :value="system.restriction.value" name="system.restriction.value" />
-			<input type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
-		</div>
+			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<!-- TODO: Label Concilium checkboxes -->
+			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
-		<div class="flex items-center gap-2">
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" :value="system.cost" name="system.cost" />
-		</div>
+			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
 
-		<div class="flex items-center gap-2">
 			<strong>Tariff</strong>
-			<input type="text" class="w-full" :value="system.tariff" name="system.tariff" />
+			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
 		</div>
 	</ItemSheet>
 </template>

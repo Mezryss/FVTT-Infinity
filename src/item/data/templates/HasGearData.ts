@@ -99,39 +99,19 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
 		};
 
 		/**
-		 * Cost of the item.
+		 * Cost roll for the item.
 		 */
-		abstract cost: {
-			/**
-			 * The static part of the item's cost.
-			 */
-			static: number;
-
-			/**
-			 * The number of dice rolled for the rolled part of the item's cost.
-			 */
-			rolled: number;
-		};
+		abstract cost: string;
 
 		/**
 		 * Maintenance cost for the item.
 		 */
-		abstract maintenance: number;
+		abstract maintenance: string;
 
 		/**
 		 * Tariff value for the item.
 		 */
-		abstract tariff: {
-			/**
-			 * Tariff value for the item.
-			 */
-			value: number;
-
-			/**
-			 * Any notes related to the tariff, such as locations that have a lower tariff value.
-			 */
-			notes: string;
-		};
+		abstract tariff: string;
 
 		/**
 		 * @inheritdoc

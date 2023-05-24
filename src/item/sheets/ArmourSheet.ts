@@ -80,6 +80,11 @@ export type ArmourSheetContext = {
 	 * System data for the item.
 	 */
 	system: ArmourDataModel;
+
+	/**
+	 * Whether the Item document belongs to an Actor.
+	 */
+	owned: boolean;
 };
 
 /**
@@ -114,6 +119,7 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
 		};
 	}
 
