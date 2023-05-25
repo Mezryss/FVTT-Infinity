@@ -7,6 +7,31 @@ declare global {
 			export import _DataModel = AbstractDataModel._DataModel;
 
 			/**
+			 * A specialized subclass of DataModel, intended to represent a Document's type-specific data.
+			 * Systems or Modules that provide DataModel implementations for sub-types of Documents (such as Actors or Items)
+			 * should subclass this class instead of the base DataModel class.
+			 */
+			abstract class TypeDataModel extends DataModel {
+				/**
+				 * The package that is providing this DataModel for the given sub-type.
+				 *
+				 * TODO: In the future, it might be a good idea to provide typing for the Module and System classes in these type defs.
+				 */
+				readonly modelProvider: unknown;
+
+				/**
+				 * Prepare data related to this DataModel itself, before any derived data is computed.
+				 */
+				prepareBaseData(): void;
+
+				/**
+				 * Apply transformations of derivations to the values of the source data object.
+				 * Compute data fields whose values are not stored to the database.
+				 */
+				prepareDerivedData(): void;
+			}
+
+			/**
 			 * A schema entry which describes a field of DocumentData
 			 * @property type           An object which defines the data type of this field
 			 * @property required       Is this field required to have an assigned value? Default is false.

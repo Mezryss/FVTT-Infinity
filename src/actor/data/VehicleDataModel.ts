@@ -1,7 +1,7 @@
 import HasDescription from './templates/HasDescription';
 import HasStress from './templates/HasStress';
 
-export default abstract class VehicleDataModel extends HasStress(HasDescription(foundry.abstract.DataModel)) {
+export default abstract class VehicleDataModel extends HasStress(HasDescription(foundry.abstract.TypeDataModel)) {
 	/**
 	 * List of Types the vehicle has.
 	 */

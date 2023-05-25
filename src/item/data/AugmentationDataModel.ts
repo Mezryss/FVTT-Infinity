@@ -44,7 +44,7 @@ export namespace AugmentationCategory {
 	export const all: AugmentationCategory[] = [AugmentationCategory.Cybernetic, AugmentationCategory.Biograft, AugmentationCategory.Silk];
 }
 
-export default abstract class AugmentationDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class AugmentationDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Augmentation Type (p.344)
 	 */

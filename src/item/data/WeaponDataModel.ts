@@ -16,7 +16,7 @@ export namespace WeaponType {
 	export const all: WeaponType[] = [WeaponType.Melee, WeaponType.Ranged];
 }
 
-export default abstract class WeaponDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class WeaponDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Weapon Type
 	 */

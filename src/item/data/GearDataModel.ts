@@ -30,7 +30,7 @@ export namespace GearType {
  *
  * None of these items have special mechanics or stats beyond the default set, so no need for distinct data models.
  */
-export default abstract class GearDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class GearDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Gear Type.
 	 */

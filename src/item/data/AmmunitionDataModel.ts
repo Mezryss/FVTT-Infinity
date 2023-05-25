@@ -19,7 +19,7 @@ export namespace AmmunitionCategory {
 	export const all: AmmunitionCategory[] = [AmmunitionCategory.Standard, AmmunitionCategory.Special, AmmunitionCategory.Heavy, AmmunitionCategory.Arrows, AmmunitionCategory.Shells];
 }
 
-export default abstract class AmmunitionDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class AmmunitionDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Ammunition Category.
 	 */

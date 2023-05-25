@@ -11,7 +11,7 @@ export type AbilityItemReference = {
 	uuid: string;
 };
 
-export default abstract class LHostDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class LHostDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Life Point cost if taken as a replacement body during Character Creation.
 	 */

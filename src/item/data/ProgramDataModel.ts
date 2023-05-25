@@ -43,7 +43,7 @@ export namespace ProgramType {
 	export const all: ProgramType[] = [ProgramType.Sword, ProgramType.Claw, ProgramType.Shield, ProgramType.Gadget, ProgramType.IC, ProgramType.Upgrade];
 }
 
-export default abstract class ProgramDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class ProgramDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Type of program, p.352
 	 */

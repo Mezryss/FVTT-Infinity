@@ -54,7 +54,7 @@ export namespace ContagionTerm {
 	export const all: ContagionTerm[] = [ContagionTerm.Round, ContagionTerm.Minute, ContagionTerm.Hour, ContagionTerm.Day, ContagionTerm.Week, ContagionTerm.Month];
 }
 
-export default abstract class ContagionDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class ContagionDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Category for the Contagion item.
 	 */

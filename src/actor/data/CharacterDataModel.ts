@@ -1,5 +1,4 @@
 import Skill from '@/data/Skill';
-import InfinityActor from '../InfinityActor';
 import HasAttributes from './templates/HasAttributes';
 
 /**
@@ -39,7 +38,7 @@ type SkillValue = {
 	focus: number;
 };
 
-export default abstract class CharacterDataModel extends HasAttributes(foundry.abstract.DataModel) {
+export default abstract class CharacterDataModel extends HasAttributes(foundry.abstract.TypeDataModel) {
 	/**
 	 * Character meta-information.
 	 *
@@ -236,16 +235,14 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 	 *
 	 * CRB p.71
 	 */
-	prepareDerivedData(actor: InfinityActor<CharacterDataModel>) {
-		const system = actor.system;
+	override prepareDerivedData() {
+		const breaches = this.harms.breaches;
+		const metanoia = this.harms.metanoia;
+		const wounds = this.harms.wounds;
 
-		const breaches = system.harms.breaches;
-		const metanoia = system.harms.metanoia;
-		const wounds = system.harms.wounds;
-
-		actor.system.stress.firewall.max = system.attributes.Intelligence.value + system.skills.Hacking.expertise;
-		actor.system.stress.resolve.max = system.attributes.Willpower.value + system.skills.Discipline.expertise;
-		actor.system.stress.vigour.max = system.attributes.Brawn.value + system.skills.Resistance.expertise;
+		this.stress.firewall.max = this.attributes.Intelligence.value + this.skills.Hacking.expertise;
+		this.stress.resolve.max = this.attributes.Willpower.value + this.skills.Discipline.expertise;
+		this.stress.vigour.max = this.attributes.Brawn.value + this.skills.Resistance.expertise;
 
 		breaches.max = metanoia.max = wounds.max = 5;
 
@@ -253,9 +250,9 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 		metanoia.value = metanoia.effects.length;
 		wounds.value = wounds.effects.length;
 
-		actor.system.harms.breaches = breaches;
-		actor.system.harms.metanoia = metanoia;
-		actor.system.harms.wounds = wounds;
+		this.harms.breaches = breaches;
+		this.harms.metanoia = metanoia;
+		this.harms.wounds = wounds;
 	}
 
 	static override defineSchema() {

@@ -1,6 +1,4 @@
 import Skill from '@/data/Skill';
-import IHasDerivedData from '@/dataModel/IHasDerivedData';
-import InfinityActor from '../InfinityActor';
 import HasAttributes from './templates/HasAttributes';
 import HasDescription from './templates/HasDescription';
 import HasStress from './templates/HasStress';
@@ -11,7 +9,7 @@ type GeistSkill = {
 	focus: number;
 };
 
-export default abstract class GeistDataModel extends HasStress(HasAttributes(HasDescription(foundry.abstract.DataModel))) implements IHasDerivedData<InfinityActor<GeistDataModel>> {
+export default abstract class GeistDataModel extends HasStress(HasAttributes(HasDescription(foundry.abstract.TypeDataModel))) {
 	/**
 	 * UUID of the Character this Geist belongs to.
 	 */
@@ -32,32 +30,30 @@ export default abstract class GeistDataModel extends HasStress(HasAttributes(Has
 	 *
 	 * CRB p.415
 	 */
-	prepareDerivedData(actor: InfinityActor<GeistDataModel>) {
-		const system = actor.system;
+	override prepareDerivedData() {
+		let maxFirewall = this.stress.firewall.max;
+		let maxResolve = this.stress.resolve.max;
 
-		let maxFirewall = system.stress.firewall.max;
-		let maxResolve = system.stress.resolve.max;
-
-		const breaches = system.harms.breaches;
-		const metanoia = system.harms.metanoia;
+		const breaches = this.harms.breaches;
+		const metanoia = this.harms.metanoia;
 
 		// TODO: Firewall values should all pull from owning character.
-		const hacking = system.skills.find((s) => s.skill === Skill.Hacking);
-		const discipline = system.skills.find((s) => s.skill === Skill.Discipline);
+		const hacking = this.skills.find((s) => s.skill === Skill.Hacking);
+		const discipline = this.skills.find((s) => s.skill === Skill.Discipline);
 
-		maxFirewall = system.attributes.Intelligence.value + (hacking?.expertise ?? 0);
-		maxResolve = system.attributes.Willpower.value + (discipline?.expertise ?? 0);
+		maxFirewall = this.attributes.Intelligence.value + (hacking?.expertise ?? 0);
+		maxResolve = this.attributes.Willpower.value + (discipline?.expertise ?? 0);
 
 		breaches.max = metanoia.max = 5;
 
-		actor.system.stress.firewall.max = maxFirewall;
-		actor.system.stress.resolve.max = maxResolve;
+		this.stress.firewall.max = maxFirewall;
+		this.stress.resolve.max = maxResolve;
 
 		breaches.value = breaches.effects.length;
 		metanoia.value = metanoia.effects.length;
 
-		actor.system.harms.breaches = breaches;
-		actor.system.harms.metanoia = metanoia;
+		this.harms.breaches = breaches;
+		this.harms.metanoia = metanoia;
 	}
 
 	static override defineSchema() {

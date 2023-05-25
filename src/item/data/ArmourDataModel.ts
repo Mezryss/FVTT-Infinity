@@ -30,7 +30,7 @@ export namespace ArmourType {
 	export const all: ArmourType[] = [ArmourType.Civilian, ArmourType.Combat, ArmourType.Internal, ArmourType.Powered, ArmourType.Symbiont];
 }
 
-export default abstract class ArmourDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class ArmourDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Type of armour.
 	 */

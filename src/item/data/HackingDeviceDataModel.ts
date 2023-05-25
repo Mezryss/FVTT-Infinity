@@ -10,7 +10,7 @@ export type ProgramItemReference = {
 	uuid: string;
 };
 
-export default abstract class HackingDeviceDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class HackingDeviceDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Rating for Control Programs (CLAW)
 	 */

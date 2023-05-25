@@ -58,7 +58,7 @@ export namespace TalentPrerequisite {
 /**
  * Data model for Talent items.
  */
-export default abstract class TalentDataModel extends HasBasicItemData(foundry.abstract.DataModel) {
+export default abstract class TalentDataModel extends HasBasicItemData(foundry.abstract.TypeDataModel) {
 	/**
 	 * Every Talent in the game is part of a talent tree tied to a specific skill.
 	 */

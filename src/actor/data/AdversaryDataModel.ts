@@ -1,5 +1,3 @@
-import IHasDerivedData from '@/dataModel/IHasDerivedData';
-import InfinityActor from '../InfinityActor';
 import HasAttributes from './templates/HasAttributes';
 import HasDescription from './templates/HasDescription';
 import HasStress from './templates/HasStress';
@@ -35,7 +33,7 @@ type FieldOfExpertise = {
 	focus: number;
 };
 
-export default abstract class AdversaryDataModel extends HasStress(HasAttributes(HasDescription(foundry.abstract.DataModel))) implements IHasDerivedData<InfinityActor<AdversaryDataModel>> {
+export default abstract class AdversaryDataModel extends HasStress(HasAttributes(HasDescription(foundry.abstract.TypeDataModel))) {
 	/**
 	 * Adversary Type
 	 */
@@ -63,57 +61,55 @@ export default abstract class AdversaryDataModel extends HasStress(HasAttributes
 	 *
 	 * CRB p.415
 	 */
-	prepareDerivedData(actor: InfinityActor<AdversaryDataModel>) {
-		const system = actor.system;
+	override prepareDerivedData() {
+		let maxFirewall = this.stress.firewall.max;
+		let maxResolve = this.stress.resolve.max;
+		let maxVigour = this.stress.vigour.max;
 
-		let maxFirewall = system.stress.firewall.max;
-		let maxResolve = system.stress.resolve.max;
-		let maxVigour = system.stress.vigour.max;
+		const breaches = this.harms.breaches;
+		const metanoia = this.harms.metanoia;
+		const wounds = this.harms.wounds;
 
-		const breaches = system.harms.breaches;
-		const metanoia = system.harms.metanoia;
-		const wounds = system.harms.wounds;
-
-		switch (actor.system.type) {
+		switch (this.type) {
 			case AdversaryType.Trooper:
-				maxFirewall = Math.ceil(system.attributes.Intelligence.value / 2);
-				maxResolve = Math.ceil(system.attributes.Willpower.value / 2);
-				maxVigour = Math.ceil(system.attributes.Brawn.value / 2);
+				maxFirewall = Math.ceil(this.attributes.Intelligence.value / 2);
+				maxResolve = Math.ceil(this.attributes.Willpower.value / 2);
+				maxVigour = Math.ceil(this.attributes.Brawn.value / 2);
 
 				breaches.max = metanoia.max = wounds.max = 1;
 
 				break;
 
 			case AdversaryType.Elite:
-				maxFirewall = system.attributes.Intelligence.value;
-				maxResolve = system.attributes.Willpower.value;
-				maxVigour = system.attributes.Brawn.value;
+				maxFirewall = this.attributes.Intelligence.value;
+				maxResolve = this.attributes.Willpower.value;
+				maxVigour = this.attributes.Brawn.value;
 
 				breaches.max = metanoia.max = wounds.max = 2;
 
 				break;
 
 			case AdversaryType.Nemesis:
-				maxFirewall = system.attributes.Intelligence.value + system.fieldsOfExpertise.technical.expertise;
-				maxResolve = system.attributes.Willpower.value + system.fieldsOfExpertise.fortitude.expertise;
-				maxVigour = system.attributes.Brawn.value + system.fieldsOfExpertise.fortitude.expertise;
+				maxFirewall = this.attributes.Intelligence.value + this.fieldsOfExpertise.technical.expertise;
+				maxResolve = this.attributes.Willpower.value + this.fieldsOfExpertise.fortitude.expertise;
+				maxVigour = this.attributes.Brawn.value + this.fieldsOfExpertise.fortitude.expertise;
 
 				breaches.max = metanoia.max = wounds.max = 5;
 
 				break;
 		}
 
-		actor.system.stress.firewall.max = maxFirewall;
-		actor.system.stress.resolve.max = maxResolve;
-		actor.system.stress.vigour.max = maxVigour;
+		this.stress.firewall.max = maxFirewall;
+		this.stress.resolve.max = maxResolve;
+		this.stress.vigour.max = maxVigour;
 
 		breaches.value = breaches.effects.length;
 		metanoia.value = metanoia.effects.length;
 		wounds.value = wounds.effects.length;
 
-		actor.system.harms.breaches = breaches;
-		actor.system.harms.metanoia = metanoia;
-		actor.system.harms.wounds = wounds;
+		this.harms.breaches = breaches;
+		this.harms.metanoia = metanoia;
+		this.harms.wounds = wounds;
 	}
 
 	/**

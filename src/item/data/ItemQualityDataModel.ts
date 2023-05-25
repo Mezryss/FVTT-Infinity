@@ -52,7 +52,7 @@ export namespace ItemQualityType {
 	export const all: ItemQualityType[] = [ItemQualityType.General, ItemQualityType.Armour, ItemQualityType.Attack];
 }
 
-export default abstract class ItemQualityDataModel extends HasBasicItemData(foundry.abstract.DataModel) {
+export default abstract class ItemQualityDataModel extends HasBasicItemData(foundry.abstract.TypeDataModel) {
 	/**
 	 * Quality Type/Category
 	 */

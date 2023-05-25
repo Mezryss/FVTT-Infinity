@@ -17,7 +17,7 @@ export namespace ExplosiveCategory {
 	export const all: ExplosiveCategory[] = [ExplosiveCategory.Charge, ExplosiveCategory.Grenade, ExplosiveCategory.Mine];
 }
 
-export default abstract class ExplosiveDataModel extends HasGearData(HasBasicItemData(foundry.abstract.DataModel)) {
+export default abstract class ExplosiveDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
 	/**
 	 * Category for the explosive.
 	 */
