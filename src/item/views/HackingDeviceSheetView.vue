@@ -50,7 +50,7 @@ async function openProgram(uuid: string) {
 			</GearSidebar>
 		</template>
 
-		<div class="w-full grid grid-cols-5 items-center gap-1">
+		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>CLAW</strong>
 			<input type="number" :min="0" :value="system.claw" name="system.claw" class="col-span-4" />
 
@@ -66,7 +66,7 @@ async function openProgram(uuid: string) {
 			<strong>IC</strong>
 			<input type="number" :min="0" :value="system.ic" name="system.ic" class="col-span-4" />
 
-			<strong>Restriction:</strong>
+			<strong>Restriction</strong>
 			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />

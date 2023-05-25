@@ -54,7 +54,7 @@ async function openItem(uuid: string) {
 			</GearSidebar>
 		</template>
 
-		<div class="w-full grid grid-cols-5 items-center gap-1">
+		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>Type:</strong>
 			<select :value="system.type" name="system.type" class="col-span-4">
 				<option v-for="armourType in ArmourType.all" :key="armourType" :value="armourType">
@@ -121,7 +121,7 @@ async function openItem(uuid: string) {
 				<a v-if="context.editable" class="hidden group-hover/item:block text-xl -my-4 px-1" @click="actions.removeLoadoutItem(index)">&times;</a>
 			</div>
 
-			<strong>Restriction:</strong>
+			<strong>Restriction</strong>
 			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />

@@ -46,7 +46,7 @@ async function specializationChanged(index: number, newSpec: string) {
 			</GearSidebar>
 		</template>
 
-		<div class="w-full grid grid-cols-5 items-center gap-1">
+		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>Type</strong>
 			<select :value="system.type" name="system.type" class="col-span-4">
 				<option v-for="programType in ProgramType.all" :key="programType" :value="programType">
@@ -62,7 +62,7 @@ async function specializationChanged(index: number, newSpec: string) {
 
 			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" class="col-span-5" />
 
-			<strong>Restriction:</strong>
+			<strong>Restriction</strong>
 			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />

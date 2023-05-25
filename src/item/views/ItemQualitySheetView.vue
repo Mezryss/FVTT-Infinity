@@ -27,7 +27,7 @@ const system = computed(() => context.system);
 			</div>
 		</template>
 
-		<div class="w-full grid grid-cols-5 items-center gap-1">
+		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>Ranked:</strong>
 			<input type="checkbox" :checked="system.isRanked" name="system.isRanked" class="justify-self-center" />
 			<span class="col-span-3" />

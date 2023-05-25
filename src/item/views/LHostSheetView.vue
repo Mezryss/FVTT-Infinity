@@ -26,7 +26,7 @@ const system = computed(() => context.system);
 			</GearSidebar>
 		</template>
 
-		<div class="w-full grid grid-cols-5 items-center gap-1">
+		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<span class="text-lg font-orbitron font-semibold col-span-5">Attribute Modifiers</span>
 
 			<div class="grid gap-x-2 gap-y-1 grid-cols-7 items-center col-span-5">

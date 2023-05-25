@@ -1,27 +1,28 @@
-ACTOR:
-  TypeAdversary: Adversary
-  TypeCharacter: Character
-  TypeGeist: Geist
-  TypeRemote: Remote
-  TypeVehicle: Vehicle
+TYPES:
+  Actor:
+    adversary: Adversary
+    character: Character
+    geist: Geist
+    remote: Remote
+    vehicle: Vehicle
 
-ITEM:
-  # Equipment Types
-  TypeAmmunition: Ammunition
-  TypeArmour: Armour
-  TypeAugmentation: Augmentation
-  TypeContagion: Contagion
-  TypeExplosive: Explosive
-  TypeGear: Gear
-  TypeHackingdevice: Hacking Device  # The lowercase d is intentional because of how Foundry generates keys for default localization.
-  TypeLhost: LHost
-  TypeProgram: Program
-  TypeWeapon: Weapon
+  Item:
+    # Equipment Types
+    ammunition: Ammunition
+    armour: Armour
+    augmentation: Augmentation
+    contagion: Contagion
+    explosive: Explosive
+    gear: Gear
+    hackingDevice: Hacking Device
+    lhost: LHost
+    program: Program
+    weapon: Weapon
 
-  # Character Stats & Abilities
-  TypeAbility: Special Ability
-  TypeItemquality: Item Quality
-  TypeTalent: Talent
+    # Character Stats & Abilities
+    ability: Special Ability
+    itemQuality: Item Quality
+    talent: Talent
 
 # System Strings
 Infinity:

@@ -23,12 +23,12 @@ export function register() {
  * Register Actor data model classes.
  */
 function registerDataModels() {
-	CONFIG.Actor.systemDataModels.adversary = AdversaryDataModel;
-	CONFIG.Actor.systemDataModels.character = CharacterDataModel;
+	CONFIG.Actor.dataModels.adversary = AdversaryDataModel;
+	CONFIG.Actor.dataModels.character = CharacterDataModel;
 	// Remotes are identical to Adversaries, except they use Structure & Faults instead of Vigour & Wounds.
-	CONFIG.Actor.systemDataModels.remote = AdversaryDataModel;
-	CONFIG.Actor.systemDataModels.geist = GeistDataModel;
-	CONFIG.Actor.systemDataModels.vehicle = VehicleDataModel;
+	CONFIG.Actor.dataModels.remote = AdversaryDataModel;
+	CONFIG.Actor.dataModels.geist = GeistDataModel;
+	CONFIG.Actor.dataModels.vehicle = VehicleDataModel;
 }
 
 /**

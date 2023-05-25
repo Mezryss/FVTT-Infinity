@@ -68,7 +68,7 @@ const slots = useSlots();
 					<slot name="sidebar" />
 				</div>
 			</div>
-			<div class="w-full h-full flex flex-col flex-nowrap">
+			<div class="w-full h-full flex flex-col flex-nowrap @container">
 				<TabBar>
 					<TabLink v-if="description !== undefined" tab="description">Description</TabLink>
 					<TabLink tab="detail">Details</TabLink>

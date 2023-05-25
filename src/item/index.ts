@@ -41,20 +41,20 @@ export function register() {
  * Register Item data model classes.
  */
 function registerDataModels() {
-	CONFIG.Item.systemDataModels.ammunition = AmmunitionDataModel;
-	CONFIG.Item.systemDataModels.armour = ArmourDataModel;
-	CONFIG.Item.systemDataModels.augmentation = AugmentationDataModel;
-	CONFIG.Item.systemDataModels.contagion = ContagionDataModel;
-	CONFIG.Item.systemDataModels.explosive = ExplosiveDataModel;
-	CONFIG.Item.systemDataModels.gear = GearDataModel;
-	CONFIG.Item.systemDataModels.hackingDevice = HackingDeviceDataModel;
-	CONFIG.Item.systemDataModels.lhost = LHostDataModel;
-	CONFIG.Item.systemDataModels.program = ProgramDataModel;
-	CONFIG.Item.systemDataModels.weapon = WeaponDataModel;
+	CONFIG.Item.dataModels.ammunition = AmmunitionDataModel;
+	CONFIG.Item.dataModels.armour = ArmourDataModel;
+	CONFIG.Item.dataModels.augmentation = AugmentationDataModel;
+	CONFIG.Item.dataModels.contagion = ContagionDataModel;
+	CONFIG.Item.dataModels.explosive = ExplosiveDataModel;
+	CONFIG.Item.dataModels.gear = GearDataModel;
+	CONFIG.Item.dataModels.hackingDevice = HackingDeviceDataModel;
+	CONFIG.Item.dataModels.lhost = LHostDataModel;
+	CONFIG.Item.dataModels.program = ProgramDataModel;
+	CONFIG.Item.dataModels.weapon = WeaponDataModel;
 
-	CONFIG.Item.systemDataModels.abilities = AbilityDataModel;
-	CONFIG.Item.systemDataModels.itemQuality = ItemQualityDataModel;
-	CONFIG.Item.systemDataModels.talent = TalentDataModel;
+	CONFIG.Item.dataModels.abilities = AbilityDataModel;
+	CONFIG.Item.dataModels.itemQuality = ItemQualityDataModel;
+	CONFIG.Item.dataModels.talent = TalentDataModel;
 }
 
 /**

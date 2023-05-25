@@ -29,8 +29,8 @@ html {
  * Minimum Sheet Size: Items
  */
 .window-app.item {
-	min-width: 600px;
-	min-height: 400px;
+	min-width: 400px;
+	min-height: 300px;
 }
 
 /**
