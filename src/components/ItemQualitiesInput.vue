@@ -61,29 +61,40 @@ async function openItem(uuid: string) {
 	<div class="flex flex-col flex-nowrap">
 		<span class="text-lg font-orbitron font-semibold">Item Qualities</span>
 		<em class="ml-4" v-if="qualities.length === 0">No Qualities Added</em>
-		<div v-else class="flex flex-wrap gap-x-1 gap-y-1 ml-4">
-			<div v-for="(quality, index) in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center bg-slate-400 rounded-md border-[1px] border-solid border-slate-900 p-1">
-				<a @click="openItem(quality.uuid)">{{ quality.name }}</a>
+		<div v-else class="flex flex-wrap gap-1 ml-4">
+			<div v-for="(quality, index) in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center rounded-md border-[1px] border-solid border-slate-900 px-1 py-0.5 bg-slate-900 bg-opacity-10">
+				<a @click="openItem(quality.uuid)" class="flex gap-1">
+					<span>{{ quality.name }}</span>
+					<template v-if="!editable">
+						<span v-if="quality.system?.isSpecialized">({{ quality.specialization || quality.system?.specializationPlaceholder }})</span>
+						<span v-if="quality.system?.isRanked">{{ quality.rank }}</span>
+					</template>
+				</a>
 				<template v-if="editable">
 					<!-- Specialization -->
 					<input
 						v-if="editable && quality.system?.isSpecialized"
 						type="text"
-						class="text-xs w-20"
+						class="text-sm w-20 text-center rounded-sm h-6"
 						:value="quality.specialization"
 						:placeholder="quality.system.specializationPlaceholder"
 						@change="emit('specialization-changed', index, ($event.currentTarget as HTMLInputElement).value)"
 					/>
 
 					<!-- Rank -->
-					<input v-if="editable && quality.system?.isRanked" type="number" class="text-xs w-8 text-center" :min="1" :value="quality.rank" @change="emit('rank-changed', index, +($event.currentTarget as HTMLInputElement).value)" />
+					<input
+						v-if="editable && quality.system?.isRanked"
+						type="number"
+						class="text-sm w-8 text-center rounded-sm h-6"
+						:min="1"
+						:value="quality.rank"
+						@change="emit('rank-changed', index, +($event.currentTarget as HTMLInputElement).value)"
+					/>
 
 					<!-- Delete Action -->
-					<a @click="emit('remove', index)" class="px-1 relative text-xl -my-2">&times;</a>
-				</template>
-				<template v-else>
-					<span class="text-xs text-slate-700" v-if="quality.system?.isSpecialized">{{ quality.specialization || quality.system?.specializationPlaceholder }}</span>
-					<span class="text-xs text-slate-700" v-if="quality.system?.isRanked">{{ quality.rank }}</span>
+					<a @click="emit('remove', index)" class="px-1 relative text-sm -my-2">
+						<i class="fas fa-trash" />
+					</a>
 				</template>
 			</div>
 		</div>
