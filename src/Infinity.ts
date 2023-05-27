@@ -1,4 +1,5 @@
 import { register as registerActors } from '@/actor';
+import { register as registerFonts } from '@/fonts';
 import { register as registerItems } from '@/item';
 
 import './Infinity.css';
@@ -15,6 +16,7 @@ Hooks.once('init', async () => {
 	registerItems();
 
 	// Misc. Modules
+	registerFonts();
 
 	console.debug('Infinity | Initialization Complete.');
 });
