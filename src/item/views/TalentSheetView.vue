@@ -2,6 +2,7 @@
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
 import Enriched from '@/components/Enriched.vue';
+import Field from '@/components/Field.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import SidebarLabel from '@/components/SidebarLabel.vue';
@@ -83,11 +84,9 @@ async function updatePrereqType(index: number, event: Event) {
  * Updates the value of the prerequisite at a given index.
  *
  * @param index Index for the prerequisite to update.
- * @param event Raw HTML event to fetch the new value from.
+ * @param value New value for the prereq.
  */
-async function updatePrereqValue(index: number, event: Event) {
-	const value = (event.target as HTMLInputElement).value as string | number;
-
+async function updatePrereqValue(index: number, value: string | number) {
 	await actions.value.updatePrerequisite(index, {
 		type: system.value.prerequisites[index].type,
 		value,
@@ -136,7 +135,7 @@ async function updatePrereqValue(index: number, event: Event) {
 		<div class="flex flex-col flex-nowrap gap-2 whitespace-nowrap">
 			<div class="flex items-center gap-2">
 				<strong>Skill:</strong>
-				<select :value="system.skill" name="system.skill" class="w-full">
+				<select :value="system.skill" name="system.skill" class="w-full px-2">
 					<option v-for="skill in Skill.all" :key="skill" :value="skill">
 						<Localized :label="`Infinity.Skill.${skill}`" />
 					</option>
@@ -150,9 +149,8 @@ async function updatePrereqValue(index: number, event: Event) {
 				<template v-if="system.isRanked">
 					<strong>Max Rank:</strong>
 					<div class="w-full grid grid-cols-2 gap-1">
-						<input v-if="owned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
-						<input
-							class="text-center"
+						<Field v-if="owned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
+						<Field
 							:class="{
 								'col-span-2': !owned,
 							}"
@@ -172,7 +170,7 @@ async function updatePrereqValue(index: number, event: Event) {
 				</div>
 
 				<div v-for="(prereq, index) in system.prerequisites" :key="index" class="flex gap-2 w-full items-center">
-					<select @change="updatePrereqType(index, $event)" :value="prereq.type" :disabled="prereq.type === TalentPrerequisite.Type.Talent">
+					<select @change="updatePrereqType(index, $event)" :value="prereq.type" :disabled="prereq.type === TalentPrerequisite.Type.Talent" class="px-2">
 						<option :value="TalentPrerequisite.Type.SkillExpertise"><Localized :label="`Infinity.Skill.${system.skill}`" /> Expertise</option>
 						<option :value="TalentPrerequisite.Type.SkillFocus"><Localized :label="`Infinity.Skill.${system.skill}`" /> Focus</option>
 						<option :value="TalentPrerequisite.Type.Other">Other</option>
@@ -183,10 +181,10 @@ async function updatePrereqValue(index: number, event: Event) {
 					<Enriched v-if="prereq.type === TalentPrerequisite.Type.Talent" class="w-full text-center" :value="prereq.value.toString()" />
 
 					<!-- Skill Value -->
-					<input v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" @change="updatePrereqValue(index, $event)" />
+					<Field v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" />
 
 					<!-- Catch-All -->
-					<input v-else class="w-full" type="text" :value="prereq.value" @change="updatePrereqValue(index, $event)" />
+					<Field v-else class="w-full" type="text" :value="prereq.value" @change="(value) => updatePrereqValue(index, value)" />
 
 					<a class="text-sm" @click="actions.removePrerequisite(index)"><i class="fas fa-trash" /></a>
 				</div>

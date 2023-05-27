@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import SidebarLabel from '@/components/SidebarLabel.vue';
 import { AbilitySheetContext } from '../sheets/AbilitySheet';
@@ -33,7 +34,7 @@ const owned = computed(() => context.owned);
 		<div class="flex items-center gap-2">
 			<strong>Ranked:</strong>
 			<input type="checkbox" :checked="system.isRanked" name="system.isRanked" />
-			<input v-if="system.isRanked && owned" type="number" :value="system.rank" name="system.rank" placeholder="Current Rank" />
+			<Field v-if="system.isRanked && owned" type="number" :value="system.rank" name="system.rank" placeholder="Current Rank" />
 		</div>
 	</ItemSheet>
 </template>

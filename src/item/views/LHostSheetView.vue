@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
@@ -34,25 +35,25 @@ const system = computed(() => context.system);
 					<Localized :label="`Infinity.Attributes.Abbreviations.${attribute}`" />
 				</div>
 
-				<input type="number" class="w-full text-center" v-for="attribute in Attribute.all" :key="attribute" :value="system.attributes[attribute]" :name="`system.attributes.${attribute}`" />
+				<Field type="number" class="w-full" v-for="attribute in Attribute.all" :key="attribute" :value="system.attributes[attribute]" :name="`system.attributes.${attribute}`" />
 			</div>
 
 			<strong class="whitespace-nowrap" data-tooltip="Only applicable during Character Creation">LP Cost</strong>
-			<input type="number" :value="system.lpCost" name="system.lpCost" class="col-span-4" />
+			<Field type="number" :value="system.lpCost" name="system.lpCost" class="col-span-4" />
 
 			<strong>Restriction</strong>
-			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
+			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />
 
 			<strong>Tariff</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
+			<Field type="text" class="col-span-4" :value="system.tariff" name="system.tariff" />
 
 			<strong>Maintenance</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.maintenance" name="system.maintenance" />
+			<Field type="text" class="col-span-4" :value="system.maintenance" name="system.maintenance" />
 
 			<template v-if="system.specialAbilities.length > 0">
 				<span class="text-lg font-orbitron font-semibold col-span-5">Special Abilities</span>

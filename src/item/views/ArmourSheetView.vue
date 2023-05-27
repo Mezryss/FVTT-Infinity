@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
@@ -41,48 +42,48 @@ async function openItem(uuid: string) {
 
 		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>Type:</strong>
-			<select :value="system.type" name="system.type" class="col-span-4">
+			<select :value="system.type" name="system.type" class="col-span-4 px-2">
 				<option v-for="armourType in ArmourType.all" :key="armourType" :value="armourType">
 					<Localized :label="`Infinity.Items.Armour.Type.${armourType}`" />
 				</option>
 			</select>
 
 			<strong>BTS</strong>
-			<input type="number" name="system.bts" :value="system.bts" class="col-span-4 text-center" />
+			<Field type="number" name="system.bts" :value="system.bts" class="col-span-4" />
 
 			<!-- Human Armour -->
 			<template v-if="system.type !== ArmourType.Symbiont">
 				<span class="text-lg font-orbitron font-semibold col-span-5">Armour Soak</span>
 
 				<strong>Head</strong>
-				<input type="number" name="system.soak.head" :value="system.soak.head" :min="0" class="col-span-4 text-center" />
+				<Field type="number" name="system.soak.head" :value="system.soak.head" :min="0" class="col-span-4" />
 
 				<strong>Torso</strong>
-				<input type="number" name="system.soak.torso" :value="system.soak.torso" :min="0" class="col-span-4 text-center" />
+				<Field type="number" name="system.soak.torso" :value="system.soak.torso" :min="0" class="col-span-4" />
 
 				<strong>Arms</strong>
-				<input type="number" name="system.soak.arm" :value="system.soak.arm" :min="0" class="col-span-4 text-center" />
+				<Field type="number" name="system.soak.arm" :value="system.soak.arm" :min="0" class="col-span-4" />
 
 				<strong>Legs</strong>
-				<input type="number" name="system.soak.leg" :value="system.soak.leg" :min="0" class="col-span-4 text-center" />
+				<Field type="number" name="system.soak.leg" :value="system.soak.leg" :min="0" class="col-span-4" />
 			</template>
 
 			<!-- Symbiont Armour -->
 			<!-- TODO: Symbionts have a few changes in the Tohaa sourcebook so this will eventually need to be readdressed. -->
 			<template v-else>
 				<strong>Armour Soak</strong>
-				<input type="number" name="system.soak.symbiont" :value="system.soak.symbiont" class="col-span-4 text-center" />
+				<Field type="number" name="system.soak.symbiont" :value="system.soak.symbiont" class="col-span-4" />
 
 				<strong>Vigour</strong>
-				<input type="number" name="system.symbiont.vigour" :value="system.symbiont.vigour" class="col-span-4 text-center" />
+				<Field type="number" name="system.symbiont.vigour" :value="system.symbiont.vigour" class="col-span-4" />
 
 				<strong>Wounds</strong>
-				<input v-if="owned" type="number" name="system.symbiont.wounds.value" :value="system.symbiont.wounds.value" class="col-span-2 text-center" />
-				<input
+				<Field v-if="owned" type="number" name="system.symbiont.wounds.value" :value="system.symbiont.wounds.value" class="col-span-2" />
+				<Field
 					type="number"
 					name="system.symbiont.wounds.max"
 					:value="system.symbiont.wounds.max"
-					class="text-center col-span-2"
+					class="col-span-2"
 					:class="{
 						'col-span-4': !owned,
 					}"
@@ -107,18 +108,18 @@ async function openItem(uuid: string) {
 			</div>
 
 			<strong>Restriction</strong>
-			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
+			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />
 
 			<strong>Tariff</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
+			<Field type="text" class="col-span-4" :value="system.tariff" name="system.tariff" />
 
 			<strong>Maintenance</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.maintenance" name="system.maintenance" />
+			<Field type="text" class="col-span-4" :value="system.maintenance" name="system.maintenance" />
 		</div>
 	</ItemSheet>
 </template>

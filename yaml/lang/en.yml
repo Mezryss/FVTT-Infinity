@@ -60,6 +60,16 @@ Infinity:
         Nemesis: Nemesis
 
   Items:
+    Size:
+      Insignificant: Insignificant
+      OneHanded: One-Handed
+      TwoHanded: Two-Handed
+      Unbalanced: Unbalanced
+      Unwieldy: Unwieldy
+      Mounted: Mounted
+      Massive: Massive
+      Facility: Facility
+
     Ammunition:
       Category:
         Standard: Standard

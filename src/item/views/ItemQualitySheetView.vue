@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import SidebarLabel from '@/components/SidebarLabel.vue';
 import { ItemQualitySheetContext } from '../sheets/ItemQualitySheet';
@@ -37,7 +38,7 @@ const system = computed(() => context.system);
 
 			<strong>Specialized:</strong>
 			<input type="checkbox" :checked="system.isSpecialized" name="system.isSpecialized" class="justify-self-center" />
-			<input v-if="system.isSpecialized" type="text" :value="system.specializationPlaceholder" name="system.specializationPlaceholder" placeholder="Specialization Placeholder" class="col-span-3" />
+			<Field v-if="system.isSpecialized" type="text" :value="system.specializationPlaceholder" name="system.specializationPlaceholder" placeholder="Specialization Placeholder" class="col-span-3" />
 		</div>
 	</ItemSheet>
 </template>

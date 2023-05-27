@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import InfinityItem from '../InfinityItem';
@@ -52,30 +53,30 @@ async function openProgram(uuid: string) {
 
 		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>CLAW</strong>
-			<input type="number" :min="0" :value="system.claw" name="system.claw" class="col-span-4" />
+			<Field type="number" :min="0" :value="system.claw" name="system.claw" class="col-span-4" />
 
 			<strong>SWORD</strong>
-			<input type="number" :min="0" :value="system.sword" name="system.sword" class="col-span-4" />
+			<Field type="number" :min="0" :value="system.sword" name="system.sword" class="col-span-4" />
 
 			<strong>SHIELD</strong>
-			<input type="number" :min="0" :value="system.shield" name="system.shield" class="col-span-4" />
+			<Field type="number" :min="0" :value="system.shield" name="system.shield" class="col-span-4" />
 
 			<strong>GADGET</strong>
-			<input type="number" :min="0" :value="system.gadget" name="system.gadget" class="col-span-4" />
+			<Field type="number" :min="0" :value="system.gadget" name="system.gadget" class="col-span-4" />
 
 			<strong>IC</strong>
-			<input type="number" :min="0" :value="system.ic" name="system.ic" class="col-span-4" />
+			<Field type="number" :min="0" :value="system.ic" name="system.ic" class="col-span-4" />
 
 			<strong>Restriction</strong>
-			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
+			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />
 
 			<strong>Tariff</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
+			<Field type="text" class="col-span-4" :value="system.tariff" name="system.tariff" />
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Upgrades</span>
 			<em v-if="upgrades.length === 0" class="ml-4 col-span-5">No Upgrades</em>

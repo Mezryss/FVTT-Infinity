@@ -37,7 +37,7 @@ const system = computed(() => context.system);
 
 				<span class="flex gap-1">
 					<strong>Size:</strong>
-					<span>{{ system.size }}</span>
+					<span><Localized :label="`Infinity.Items.Size.${system.size}`" /></span>
 				</span>
 			</GearSidebar>
 		</template>
@@ -64,7 +64,7 @@ const system = computed(() => context.system);
 			<strong>Size</strong>
 			<select class="col-span-4" :value="system.size" name="system.size">
 				<option v-for="size in ItemSize.all" :key="size" :value="size">
-					{{ size }}
+					<Localized :label="`Infinity.Items.Size.${size}`" />
 				</option>
 			</select>
 

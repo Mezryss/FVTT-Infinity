@@ -4,7 +4,7 @@ withDefaults(
 		/**
 		 * Property name on the document.
 		 */
-		name: string;
+		name?: string;
 
 		/**
 		 * Input field type.
@@ -30,6 +30,16 @@ withDefaults(
 		 * Placeholder Value
 		 */
 		placeholder?: string;
+
+		/**
+		 * Min value for number inputs
+		 */
+		min?: number;
+
+		/**
+		 * Max value for number inputs
+		 */
+		max?: number;
 	}>(),
 	{
 		editable: true,
@@ -37,9 +47,13 @@ withDefaults(
 		type: 'text',
 	},
 );
+
+const emit = defineEmits<{
+	(e: 'change', value: string | number): void;
+}>();
 </script>
 
 <template>
-	<input class="px-2" v-if="!readonly && editable" :type="type" :name="name" :value="value" :placeholder="placeholder" />
+	<input v-if="!readonly && editable" class="px-2" :type="type" :name="name" :value="value" :placeholder="placeholder" :min="min" :max="max" @change="emit('change', ($event.target as HTMLInputElement).value as string | number)" />
 	<span v-else>{{ value }}</span>
 </template>

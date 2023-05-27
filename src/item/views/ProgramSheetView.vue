@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
@@ -40,23 +41,23 @@ const system = computed(() => context.system);
 			</select>
 
 			<strong>Rating</strong>
-			<input type="text" :value="system.rating" name="system.rating" class="col-span-4 text-center" />
+			<Field type="text" :value="system.rating" name="system.rating" class="col-span-4" />
 
 			<strong>Damage</strong>
-			<input type="text" :value="system.damage" name="system.damage" class="col-span-4 text-center" />
+			<Field type="text" :value="system.damage" name="system.damage" class="col-span-4" />
 
 			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 
 			<strong>Restriction</strong>
-			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
+			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />
 
 			<strong>Tariff</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
+			<Field type="text" class="col-span-4" :value="system.tariff" name="system.tariff" />
 		</div>
 	</ItemSheet>
 </template>

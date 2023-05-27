@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
@@ -32,14 +33,14 @@ const system = computed(() => context.system);
 
 		<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
 			<strong>Category</strong>
-			<select :value="system.category" name="system.category" class="w-full col-span-4">
+			<select :value="system.category" name="system.category" class="w-full col-span-4 px-2">
 				<option v-for="augCategory in AugmentationCategory.all" :key="augCategory" :value="augCategory">
 					{{ augCategory }}
 				</option>
 			</select>
 
 			<strong>Type</strong>
-			<select :value="system.type" name="system.type" class="w-full col-span-4">
+			<select :value="system.type" name="system.type" class="w-full col-span-4 px-2">
 				<option v-for="augType in AugmentationType.all" :key="augType" :value="augType">
 					{{ augType }}
 				</option>
@@ -48,18 +49,18 @@ const system = computed(() => context.system);
 			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 
 			<strong>Restriction</strong>
-			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />
+			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
 			<!-- TODO: Label Concilium checkboxes -->
 			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.cost" name="system.cost" />
+			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />
 
 			<strong>Tariff</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.tariff" name="system.tariff" />
+			<Field type="text" class="col-span-4" :value="system.tariff" name="system.tariff" />
 
 			<strong>Maintenance</strong>
-			<input type="text" class="col-span-4 text-center" :value="system.maintenance" name="system.maintenance" />
+			<Field type="text" class="col-span-4" :value="system.maintenance" name="system.maintenance" />
 		</div>
 	</ItemSheet>
 </template>
