@@ -2,6 +2,7 @@
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
 import ItemSheet from '@/components/ItemSheet.vue';
+import SidebarLabel from '@/components/SidebarLabel.vue';
 import { ItemQualitySheetContext } from '../sheets/ItemQualitySheet';
 
 const context = inject<ItemQualitySheetContext>(RootContext)!;
@@ -15,6 +16,8 @@ const system = computed(() => context.system);
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
 			<div class="flex flex-col gap-1">
+				<SidebarLabel label="TYPES.Item.itemQuality" />
+
 				<span class="flex gap-1">
 					<strong>Ranked:</strong>
 					<span>{{ system.isRanked ? 'Yes' : 'No' }}</span>

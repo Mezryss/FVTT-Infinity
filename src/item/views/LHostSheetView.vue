@@ -18,7 +18,7 @@ const system = computed(() => context.system);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="LHost" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
+			<GearSidebar item-type="lhost" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
 				<span class="flex gap-1">
 					<strong>Life Point Cost:</strong>
 					<span>{{ system.lpCost }}</span>

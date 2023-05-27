@@ -18,7 +18,7 @@ const system = computed(() => context.system);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Program" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+			<GearSidebar item-type="program" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
 				<span class="flex gap-1">
 					<strong>Type:</strong>
 					<span>{{ system.type }}</span>

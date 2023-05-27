@@ -31,7 +31,7 @@ async function openItem(uuid: string) {
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Armour" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
+			<GearSidebar item-type="armour" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
 				<span class="flex gap-1">
 					<strong>Type:</strong>
 					<span>{{ system.type }}</span>

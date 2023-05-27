@@ -21,7 +21,7 @@ const editable = computed(() => context.editable);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Ammunition" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+			<GearSidebar item-type="ammunition" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
 				<span class="flex gap-1">
 					<strong>Category:</strong>
 					<span>{{ system.category }}</span>

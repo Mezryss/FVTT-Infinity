@@ -18,7 +18,7 @@ defineProps<{
 </script>
 
 <template>
-	<SidebarLabel class="whitespace-nowrap">{{ itemType }}</SidebarLabel>
+	<SidebarLabel class="whitespace-nowrap" :label="`TYPES.Item.${itemType}`" />
 
 	<slot />
 

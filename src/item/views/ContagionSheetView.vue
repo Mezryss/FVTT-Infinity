@@ -17,7 +17,7 @@ const system = computed(() => context.system);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Contagion" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+			<GearSidebar item-type="contagion" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
 				<span>{{ system.vector }}, {{ system.category }}, {{ system.type.value }} {{ system.type.difficulty }} ({{ system.type.momentum }} Momentum), {{ system.term }}, {{ system.damage }} damage</span>
 			</GearSidebar>
 		</template>

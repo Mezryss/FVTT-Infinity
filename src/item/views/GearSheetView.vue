@@ -19,7 +19,7 @@ const system = computed(() => context.system);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Gear" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
+			<GearSidebar item-type="gear" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
 				<span class="flex gap-1">
 					<strong>Size:</strong>
 					<span>{{ system.size }}</span>

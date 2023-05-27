@@ -17,7 +17,7 @@ const owned = computed(() => context.owned);
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<SidebarLabel>Ability Summary</SidebarLabel>
+			<SidebarLabel label="TYPES.Item.ability" />
 
 			<span class="flex gap-1">
 				<strong>Ranked:</strong>

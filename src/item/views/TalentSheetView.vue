@@ -100,7 +100,7 @@ async function updatePrereqValue(index: number, event: Event) {
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<SidebarLabel>Talent Summary</SidebarLabel>
+			<SidebarLabel label="TYPES.Item.talent" />
 
 			<span class="flex gap-1">
 				<strong>Skill:</strong>

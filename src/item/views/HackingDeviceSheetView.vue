@@ -38,7 +38,7 @@ async function openProgram(uuid: string) {
 <template>
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
-			<GearSidebar item-type="Program" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
+			<GearSidebar item-type="hackingDevice" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff">
 				<span class="flex flex-wrap gap-1">
 					<span>CLAW-{{ system.claw }},</span>
 					<span>SWORD-{{ system.sword }},</span>
