@@ -40,9 +40,7 @@ const editable = computed(() => context.editable);
 			<ItemQualitiesInput class="col-span-5" :qualities="system.qualities" :editable="editable" />
 
 			<strong>Restriction</strong>
-			<Field class="col-span-3" :value="system.restriction.value" name="system.restriction.value" :editable="editable" />
-			<!-- TODO: Label Concilium checkboxes -->
-			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
+			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />
 
 			<strong class="whitespace-nowrap">Reload Cost</strong>
 			<Field class="col-span-4" :value="system.cost" name="system.cost" :editable="editable" />

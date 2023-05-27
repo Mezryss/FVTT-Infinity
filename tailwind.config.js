@@ -16,8 +16,13 @@ export default {
 				'4k': '3840px 2160px',
 				'4kp': '2160px 3840px',
 			},
+			borderWidth: {
+				'1': '1px',
+			},
 			fontFamily: {
 				'orbitron': ['Orbitron', 'sans-serif'],
+				'infinity-icon': ['Infinity-Icons', 'Roboto Flex', 'sans-serif'],
+				'roboto-flex': ['Roboto Flex', 'sans-serif']
 			},
 		},
 	},

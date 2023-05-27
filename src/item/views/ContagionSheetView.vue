@@ -13,6 +13,8 @@ const context = inject<ContagionSheetContext>(RootContext)!;
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
+
+const editable = computed(() => context.editable);
 </script>
 
 <template>
@@ -41,7 +43,7 @@ const system = computed(() => context.system);
 			<Field type="number" :min="0" :value="system.type.momentum" name="system.type.momentum" />
 
 			<strong>Term</strong>
-			<select :value="system.term" name="system.term" class="w-full col-span-4">
+			<select :value="system.term" name="system.term" class="w-full col-span-4 px-2">
 				<option v-for="term in ContagionTerm.all" :key="term" :value="term">
 					<Localized :label="`Infinity.Items.Contagion.Term.${term}`" />
 				</option>
@@ -54,9 +56,7 @@ const system = computed(() => context.system);
 			<Field type="text" :value="system.damage" name="system.damage" class="col-span-4" />
 
 			<strong>Restriction</strong>
-			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
-			<!-- TODO: Label Concilium checkboxes -->
-			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
+			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
 			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />

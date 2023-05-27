@@ -3,11 +3,48 @@
 @tailwind utilities;
 
 /**
+ * Orbitron Font is available under Open Font License (see assets/fonts/Orbitron/OFL.txt).
+ *
+ * This font is used frequently in the Infinity rulebooks for title blocks.
+ */
+@font-face {
+	font-family: 'Orbitron';
+	src: url('assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('opentype-variations');
+	font-weight: 400 900;
+	font-style: normal;
+}
+
+/**
+ * Roboto Flex is available under Open Font License (see assets/fonts/RobotoFlex/OFL.txt).
+ */
+@font-face {
+	font-family: 'Roboto Flex';
+	src: url('assets/fonts/RobotoFlex/RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf') format('opentype-variations');
+	font-optical-sizing: auto;
+	font-weight: 100 1000;
+	font-stretch: 25% 151%;
+	font-style: oblique -10deg 0deg;
+}
+
+/**
+ * Infinity Icons font
+ */
+@font-face {
+	font-family: 'Infinity-Icons';
+	src: url('assets/fonts/InfinityIcons/InfinityIcons.eot');
+	src: url('assets/fonts/InfinityIcons/InfinityIcons.eot?#iefix') format('embedded-opentype'), url('assets/fonts/InfinityIcons/InfinityIcons.woff') format('woff'), url('assets/fonts/InfinityIcons/InfinityIcons.ttf') format('truetype'),
+		url('assets/fonts/InfinityIcons/InfinityIcons.svg#InfinityIcons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/**
  * Override Foundry's default rem size.
  */
 html {
 	font-size: 14px !important;
 	--font-size-14: 14px !important;
+	font-family: 'Roboto Flex', sans-serif;
 }
 
 /**
@@ -39,18 +76,6 @@ html {
 .window-app.infinity.sheet .window-content {
 	background-image: url('assets/images/SheetBG.svg');
 	background-size: 2160px 3840px;
-}
-
-/**
- * Orbitron Font is available under Open Font License (see assets/fonts/Orbitron/OFL.txt).
- *
- * This font is used frequently in the Infinity rulebooks for title blocks.
- */
-@font-face {
-	font-family: 'Orbitron';
-	src: url('assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('opentype-variations');
-	font-weight: 400 900;
-	font-style: normal;
 }
 
 /**

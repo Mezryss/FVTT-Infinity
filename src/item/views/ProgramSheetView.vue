@@ -14,6 +14,8 @@ const context = inject<ProgramSheetContext>(RootContext)!;
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
+
+const editable = computed(() => context.editable);
 </script>
 
 <template>
@@ -49,9 +51,7 @@ const system = computed(() => context.system);
 			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 
 			<strong>Restriction</strong>
-			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
-			<!-- TODO: Label Concilium checkboxes -->
-			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
+			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
 			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />

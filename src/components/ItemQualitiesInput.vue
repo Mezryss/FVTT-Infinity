@@ -76,7 +76,7 @@ async function openItem(uuid: string) {
 		<span class="text-lg font-orbitron font-semibold">Item Qualities</span>
 		<em class="ml-4" v-if="qualities.length === 0">No Qualities Added</em>
 		<div v-else class="flex flex-wrap gap-1 ml-4">
-			<div v-for="quality in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center rounded-md border-[1px] border-solid border-slate-900 px-1 py-0.5 bg-slate-900 bg-opacity-10">
+			<div v-for="quality in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center rounded-md border-[1px] border-solid border-slate-900 px-1 py-0.5 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
 				<a @click="openItem(quality.uuid)" class="flex gap-1">
 					<span>{{ quality.name }}</span>
 					<template v-if="!editable">

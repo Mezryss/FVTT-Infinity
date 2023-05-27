@@ -16,6 +16,7 @@ const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
 
+const editable = computed(() => context.editable);
 const owned = computed(() => context.owned);
 
 async function loadoutQuantityChanged(uuid: string, newQuantity: number) {
@@ -94,11 +95,7 @@ async function openItem(uuid: string) {
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Loadout</span>
 			<em v-if="system.loadout.length === 0" class="col-span-5 ml-4">No Installed Equipment</em>
-			<div
-				v-for="item in system.loadout"
-				:key="item.uuid"
-				class="flex flex-nowrap items-center gap-2 bg-slate-400 hover:bg-slate-300 rounded-md p-1 text-white hover:text-black whitespace-nowrap border-[1px] border-solid border-slate-900 group/item col-span-5 ml-4"
-			>
+			<div v-for="item in system.loadout" :key="item.uuid" class="flex flex-nowrap items-center gap-2 p-1 col-span-5 ml-4 rounded-md border-1 border-solid border-slate-900 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
 				<img :src="item.img" class="w-6 h-6 aspect-square border-0" />
 				<a @click="openItem(item.uuid)">{{ item.name }}</a>
 				<input v-if="context.editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(item.uuid, +($event.target as HTMLInputElement).value)" />
@@ -108,9 +105,7 @@ async function openItem(uuid: string) {
 			</div>
 
 			<strong>Restriction</strong>
-			<Field type="text" class="col-span-3" :value="system.restriction.value" name="system.restriction.value" />
-			<!-- TODO: Label Concilium checkboxes -->
-			<input class="justify-self-center" type="checkbox" :checked="system.restriction.concilium" name="system.restriction.concilium" />
+			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />
 
 			<strong class="whitespace-nowrap">Cost</strong>
 			<Field type="text" class="col-span-4" :value="system.cost" name="system.cost" />

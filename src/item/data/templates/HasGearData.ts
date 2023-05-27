@@ -81,22 +81,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
 		/**
 		 * Restriction value for the item.
 		 */
-		abstract restriction: {
-			/**
-			 * The actual Restriction value.
-			 */
-			value: number;
-
-			/**
-			 * Whether the item is forbidden under the Concilium Convention (p.339).
-			 */
-			concilium: boolean;
-
-			/**
-			 * Any notes related to the restriction, such as factions that have lower restrictions.
-			 */
-			notes: string;
-		};
+		abstract restriction: string;
 
 		/**
 		 * Cost roll for the item.
@@ -191,16 +176,9 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
 					},
 				),
 
-				restriction: new fields.SchemaField({
-					value: new fields.StringField({
-						initial: '',
-						nullable: false,
-					}),
-
-					concilium: new fields.BooleanField({
-						initial: false,
-						nullable: false,
-					}),
+				restriction: new fields.StringField({
+					initial: '',
+					nullable: false,
 				}),
 
 				cost: new fields.StringField({

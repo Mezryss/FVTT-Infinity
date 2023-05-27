@@ -6,11 +6,7 @@ defineProps<{
 	itemType: string;
 
 	size?: ItemSize;
-	restriction?: {
-		value: number;
-		concilium: boolean;
-		notes: string;
-	};
+	restriction?: string;
 	cost?: string;
 	maintenance?: string;
 	tariff?: string;
@@ -27,22 +23,19 @@ defineProps<{
 		<span>{{ size }}</span>
 	</span>
 
-	<span v-if="restriction?.value" class="flex gap-1">
+	<span v-if="restriction" class="flex gap-1">
 		<strong>Restriction:</strong>
-		<span>
-			{{ restriction.value }}
-			{{ restriction.concilium ? '(C)' : null }}
-		</span>
+		<span class="font-infinity-icon">{{ restriction }}</span>
 	</span>
 
 	<span v-if="cost" class="flex gap-1">
 		<strong>Cost:</strong>
-		<span>{{ cost }}</span>
+		<span class="font-infinity-icon">{{ cost }}</span>
 	</span>
 
 	<span v-if="maintenance" class="flex gap-1">
 		<strong>Maintenance:</strong>
-		<span>{{ maintenance }}</span>
+		<span class="font-infinity-icon">{{ maintenance }}</span>
 	</span>
 
 	<span v-if="tariff" class="flex gap-1">
