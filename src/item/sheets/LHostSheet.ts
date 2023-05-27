@@ -1,3 +1,4 @@
+import IBaseSheetContext from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
@@ -26,39 +27,7 @@ type LHostSheetActions = {
 /**
  * Vue context for LHost sheets.
  */
-export type LHostSheetContext = {
-	/**
-	 * Sheet actions callable by the view.
-	 */
-	actions: LHostSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityItem<LHostDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Talent Item icon.
-	 */
-	img: string;
-
-	/**
-	 * Talent Item name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the talent.
-	 */
-	system: LHostDataModel;
-};
+export type LHostSheetContext = IBaseSheetContext<LHostDataModel, LHostSheetActions>;
 
 /**
  * LHost sheet controller.
@@ -90,6 +59,8 @@ export default class LHostSheet extends VueSheet(InfinityItemSheet<LHostDataMode
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
+			limited: this.item.limited,
 		};
 	}
 

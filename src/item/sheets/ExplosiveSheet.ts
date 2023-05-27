@@ -1,3 +1,4 @@
+import IBaseSheetContext from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
@@ -28,39 +29,7 @@ type ExplosiveSheetActions = {
 /**
  * Vue context for Explosive sheets.
  */
-export type ExplosiveSheetContext = {
-	/**
-	 * Vue sheet actions
-	 */
-	actions: ExplosiveSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityItem<ExplosiveDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Talent Item icon.
-	 */
-	img: string;
-
-	/**
-	 * Talent Item name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the talent.
-	 */
-	system: ExplosiveDataModel;
-};
+export type ExplosiveSheetContext = IBaseSheetContext<ExplosiveDataModel, ExplosiveSheetActions>;
 
 /**
  * Explosive sheet controller.
@@ -92,6 +61,8 @@ export default class ExplosiveSheet extends VueSheet(InfinityItemSheet<Explosive
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
+			limited: this.item.limited,
 		};
 	}
 

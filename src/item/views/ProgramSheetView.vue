@@ -10,7 +10,7 @@ import { ProgramSheetContext } from '../sheets/ProgramSheet';
 
 const context = inject<ProgramSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

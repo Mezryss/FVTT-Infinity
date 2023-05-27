@@ -10,7 +10,7 @@ import { ArmourSheetContext } from '../sheets/ArmourSheet';
 
 const context = inject<ArmourSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

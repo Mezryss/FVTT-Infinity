@@ -14,7 +14,7 @@ defineProps<{
 </script>
 
 <template>
-	<span class="font-orbitron font-semibold w-full text-center underline underline-offset-2">
+	<span class="font-orbitron font-semibold">
 		<slot>
 			<Localized v-if="label !== undefined" :label="label" />
 		</slot>

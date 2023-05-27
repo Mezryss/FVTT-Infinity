@@ -9,7 +9,7 @@ import { HackingDeviceSheetContext } from '../sheets/HackingDeviceSheet';
 
 const context = inject<HackingDeviceSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

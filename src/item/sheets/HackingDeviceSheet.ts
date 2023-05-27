@@ -1,3 +1,4 @@
+import IBaseSheetContext from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
@@ -19,39 +20,7 @@ type HackingDeviceSheetActions = {
 /**
  * Vue context for Hacking Device sheets.
  */
-export type HackingDeviceSheetContext = {
-	/**
-	 * Sheet actions callable by the View.
-	 */
-	actions: HackingDeviceSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityItem<HackingDeviceDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Talent Item icon.
-	 */
-	img: string;
-
-	/**
-	 * Talent Item name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the talent.
-	 */
-	system: HackingDeviceDataModel;
-};
+export type HackingDeviceSheetContext = IBaseSheetContext<HackingDeviceDataModel, HackingDeviceSheetActions>;
 
 /**
  * Hacking Device sheet controller.
@@ -82,6 +51,8 @@ export default class HackingDeviceSheet extends VueSheet(InfinityItemSheet<Hacki
 			img: this.item.img,
 			name: this.item.name,
 			system: this.item.system,
+			owned: this.item.isOwned,
+			limited: this.item.limited,
 		};
 	}
 

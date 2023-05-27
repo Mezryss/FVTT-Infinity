@@ -1,3 +1,4 @@
+import IBaseSheetContext from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
@@ -48,44 +49,7 @@ type ArmourSheetActions = {
 /**
  * Vue context for Armour sheets.
  */
-export type ArmourSheetContext = {
-	/**
-	 * Vue sheet actions
-	 */
-	actions: ArmourSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityItem<ArmourDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Item icon.
-	 */
-	img: string;
-
-	/**
-	 * Item name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the item.
-	 */
-	system: ArmourDataModel;
-
-	/**
-	 * Whether the Item document belongs to an Actor.
-	 */
-	owned: boolean;
-};
+export type ArmourSheetContext = IBaseSheetContext<ArmourDataModel, ArmourSheetActions>;
 
 /**
  * Armour sheet controller.
@@ -120,6 +84,7 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 			name: this.item.name,
 			system: this.item.system,
 			owned: this.item.isOwned,
+			limited: this.item.limited,
 		};
 	}
 
