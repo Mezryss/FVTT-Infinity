@@ -22,8 +22,8 @@ if (process.env.NODE_ENV === 'production') {
 	releaseOnlyAliases = [
 		{
 			find: 'vue',
-			replacement: path.resolve(__dirname, 'external/vue.esm-browser.prod.js')
-		}
+			replacement: path.resolve(__dirname, 'external/vue.esm-browser.prod.js'),
+		},
 	];
 } else {
 	devOnlyAliases = [];
@@ -37,10 +37,10 @@ export default defineConfig({
 		port: 30001,
 		open: false,
 		proxy: {
-			'^/assets': `http://${ PROXY_HOST }:${ PROXY_PORT }/systems/infinity/`,
-			'^(?!/systems/infinity)': `http://${ PROXY_HOST }:${ PROXY_PORT }/`,
+			'^/assets': `http://${PROXY_HOST}:${PROXY_PORT}/systems/infinity/`,
+			'^(?!/systems/infinity)': `http://${PROXY_HOST}:${PROXY_PORT}/`,
 			'/socket.io': {
-				target: `ws://${ PROXY_HOST }:${ PROXY_PORT }`,
+				target: `ws://${PROXY_HOST}:${PROXY_PORT}`,
 				ws: true,
 			},
 		},
@@ -69,11 +69,11 @@ export default defineConfig({
 		alias: [
 			{
 				find: '@',
-				replacement: path.resolve(__dirname, 'src')
+				replacement: path.resolve(__dirname, 'src'),
 			},
 			{
 				find: '@scss',
-				replacement: path.resolve(__dirname, 'src/scss')
+				replacement: path.resolve(__dirname, 'src/scss'),
 			},
 			...devOnlyAliases,
 			...releaseOnlyAliases,

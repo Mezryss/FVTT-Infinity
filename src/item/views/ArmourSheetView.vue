@@ -17,23 +17,8 @@ const system = computed(() => context.system);
 
 const owned = computed(() => context.owned);
 
-async function rankChanged(index: number, newRank: number) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		rank: newRank,
-	});
-}
-
-async function specializationChanged(index: number, newSpec: string) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		specialization: newSpec,
-	});
-}
-
-async function loadoutQuantityChanged(index: number, newQuantity: number) {
-	await actions.value.updateLoadoutItem(index, {
-		...system.value.loadout[index],
+async function loadoutQuantityChanged(uuid: string, newQuantity: number) {
+	await actions.value.updateLoadoutItem(uuid, {
 		quantity: newQuantity,
 	});
 }
@@ -104,21 +89,21 @@ async function openItem(uuid: string) {
 				/>
 			</template>
 
-			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" class="col-span-5" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Loadout</span>
 			<em v-if="system.loadout.length === 0" class="col-span-5 ml-4">No Installed Equipment</em>
 			<div
-				v-for="(item, index) in system.loadout"
+				v-for="item in system.loadout"
 				:key="item.uuid"
 				class="flex flex-nowrap items-center gap-2 bg-slate-400 hover:bg-slate-300 rounded-md p-1 text-white hover:text-black whitespace-nowrap border-[1px] border-solid border-slate-900 group/item col-span-5 ml-4"
 			>
 				<img :src="item.img" class="w-6 h-6 aspect-square border-0" />
 				<a @click="openItem(item.uuid)">{{ item.name }}</a>
-				<input v-if="context.editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(index, +($event.target as HTMLInputElement).value)" />
+				<input v-if="context.editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(item.uuid, +($event.target as HTMLInputElement).value)" />
 				<span v-else>({{ item.quantity }})</span>
 				<div class="w-full" />
-				<a v-if="context.editable" class="hidden group-hover/item:block text-xl -my-4 px-1" @click="actions.removeLoadoutItem(index)">&times;</a>
+				<a v-if="context.editable" class="px-1" @click="actions.removeLoadoutItem(item.uuid)"><i class="fas fa-trash" /></a>
 			</div>
 
 			<strong>Restriction</strong>

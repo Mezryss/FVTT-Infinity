@@ -2,8 +2,9 @@ import IBaseSheetContext from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
+import { ItemQualitiesActions, addItemQuality, removeItemQuality, updateItemQuality } from '../ItemQualities';
 import ArmourDataModel, { ArmourLoadoutItem } from '../data/ArmourDataModel';
-import { ItemQualityReference } from '../data/ItemQualityDataModel';
+import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import ArmourSheetViewVue from '../views/ArmourSheetView.vue';
 
 /**
@@ -14,36 +15,21 @@ export const ARMOUR_LOADOUT_ALLOWLIST = ['ammunition', 'augmentation', 'contagio
 /**
  * Vue sheet actions
  */
-type ArmourSheetActions = {
+type ArmourSheetActions = ItemQualitiesActions & {
 	/**
-	 * Update the Item Quality at the specified index.
+	 * Update the Loadout item with the specified UUID.
 	 *
-	 * @param index Index to be updated.
-	 * @param newValue New values to be updated. UUID cannot be changed.
+	 * @param uuid UUID of the contents to be updated.
+	 * @param newValue New values to be used.
 	 */
-	updateQuality: (index: number, newValues: Exclude<ItemQualityReference, 'uuid'>) => Promise<void>;
-
-	/**
-	 * Remove the Item Quality at the specified index.
-	 *
-	 * @param index Index to be removed.
-	 */
-	removeQuality: (index: number) => Promise<void>;
-
-	/**
-	 * Update the Loadout item at the specified index.
-	 *
-	 * @param index Index to be updated.
-	 * @param newValue New values to be updated. UUID cannot be changed.
-	 */
-	updateLoadoutItem: (index: number, newValues: Exclude<ArmourLoadoutItem, 'uuid'>) => Promise<void>;
+	updateLoadoutItem: (uuid: string, newValues: Partial<ArmourLoadoutItem>) => Promise<void>;
 
 	/**
 	 * Remove the Loadout item at the specified index.
 	 *
-	 * @param index Index to be removed.
+	 * @param uuid UUID to be removed.
 	 */
-	removeLoadoutItem: (index: number) => Promise<void>;
+	removeLoadoutItem: (uuid: string) => Promise<void>;
 };
 
 /**
@@ -59,8 +45,10 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 	 * View Actions
 	 */
 	private actions: ArmourSheetActions = {
-		updateQuality: this.updateQuality.bind(this),
-		removeQuality: this.removeQuality.bind(this),
+		addItemQuality: addItemQuality.bind(this),
+		updateItemQuality: updateItemQuality.bind(this),
+		removeItemQuality: removeItemQuality.bind(this),
+
 		updateLoadoutItem: this.updateLoadoutItem.bind(this),
 		removeLoadoutItem: this.removeLoadoutItem.bind(this),
 	};
@@ -106,22 +94,7 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 		const droppedUuid = droppedItem.uuid;
 
 		if (droppedItem.type === 'itemQuality') {
-			// Disallow dropping multiple of the same quality.
-			if (this.item.system.qualities.find((q) => q.uuid === droppedUuid)) {
-				return;
-			}
-
-			await this.item.update({
-				'system.qualities': [
-					...this.item.system.qualities,
-					{
-						uuid: droppedUuid,
-						name: droppedItem.name,
-						rank: 1,
-						specialization: '',
-					},
-				] as ItemQualityReference[],
-			});
+			await this.actions.addItemQuality(droppedItem as InfinityItem<ItemQualityDataModel>);
 		} else {
 			const loadout = [...this.item.system.loadout];
 			const existingIndex = loadout.findIndex((i) => i.uuid === droppedUuid);
@@ -147,86 +120,39 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 	}
 
 	/**
-	 * Update the Item Quality at the specified index.
+	 * Update the Loadout item with the specified UUID.
 	 *
-	 * @param index Index to be updated.
-	 * @param newValue New values to be updated. UUID cannot be changed.
+	 * @param uuid UUID of the contents to be updated.
+	 * @param newValue New values to be used.
 	 */
-	async updateQuality(index: number, newValues: Exclude<ItemQualityReference, 'uuid'>) {
-		const qualities = this.item.system.qualities;
-		if (index >= qualities.length) {
+	async updateLoadoutItem(uuid: string, newValues: Partial<ArmourLoadoutItem>) {
+		const loadout = [...this.item.system.loadout];
+
+		const itemIdx = loadout.findIndex((i) => i.uuid === uuid);
+		if (itemIdx < 0) {
 			return;
 		}
 
-		const qualitiesCopy = [...qualities];
-		qualitiesCopy[index] = {
-			...qualities[index],
+		loadout[itemIdx] = {
+			...loadout[itemIdx],
 			...newValues,
+			// Ensure UUID is never accidentally changed.
+			uuid: loadout[itemIdx].uuid,
 		};
 
 		await this.item.update({
-			'system.qualities': qualitiesCopy,
-		});
-	}
-
-	/**
-	 * Remove the Item Quality at the specified index.
-	 *
-	 * @param index Index to be removed.
-	 */
-	async removeQuality(index: number) {
-		const qualities = this.item.system.qualities;
-		if (index >= qualities.length) {
-			return;
-		}
-
-		const qualitiesCopy = [...qualities];
-		qualitiesCopy.splice(index, 1);
-
-		await this.item.update({
-			'system.qualities': qualitiesCopy,
-		});
-	}
-
-	/**
-	 * Update the Loadout item at the specified index.
-	 *
-	 * @param index Index to be updated.
-	 * @param newValue New values to be updated. UUID cannot be changed.
-	 */
-	async updateLoadoutItem(index: number, newValues: Exclude<ArmourLoadoutItem, 'uuid'>) {
-		const loadout = this.item.system.loadout;
-		if (index >= loadout.length) {
-			return;
-		}
-
-		const loadoutCopy = [...loadout];
-		loadoutCopy[index] = {
-			...loadout[index],
-			...newValues,
-		};
-
-		await this.item.update({
-			'system.loadout': loadoutCopy,
+			'system.loadout': loadout,
 		});
 	}
 
 	/**
 	 * Remove the Loadout item at the specified index.
 	 *
-	 * @param index Index to be removed.
+	 * @param uuid UUID to be removed.
 	 */
-	async removeLoadoutItem(index: number) {
-		const loadout = this.item.system.loadout;
-		if (index >= loadout.length) {
-			return;
-		}
-
-		const loadoutCopy = [...loadout];
-		loadoutCopy.splice(index, 1);
-
+	async removeLoadoutItem(uuid: string) {
 		await this.item.update({
-			'system.loadout': loadoutCopy,
+			'system.loadout': this.item.system.loadout.filter((i) => i.uuid !== uuid),
 		});
 	}
 }

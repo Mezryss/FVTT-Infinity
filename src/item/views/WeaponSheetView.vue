@@ -11,24 +11,9 @@ import { WeaponSheetContext } from '../sheets/WeaponSheet';
 
 const context = inject<WeaponSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
-
-async function rankChanged(index: number, newRank: number) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		rank: newRank,
-	});
-}
-
-async function specializationChanged(index: number, newSpec: string) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		specialization: newSpec,
-	});
-}
 </script>
 
 <template>
@@ -86,7 +71,7 @@ async function specializationChanged(index: number, newSpec: string) {
 			<strong>Ammo</strong>
 			<input type="text" :value="system.ammo.allowed" name="system.ammo.allowed" class="col-span-4 text-center" />
 
-			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" class="col-span-5" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 
 			<strong>Restriction</strong>
 			<input type="text" class="col-span-3 text-center" :value="system.restriction.value" name="system.restriction.value" />

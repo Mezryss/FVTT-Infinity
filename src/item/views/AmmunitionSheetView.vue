@@ -11,26 +11,11 @@ import { AmmunitionSheetContext } from '../sheets/AmmunitionSheet';
 
 const context = inject<AmmunitionSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);
 
 const editable = computed(() => context.editable);
-
-async function rankChanged(index: number, newRank: number) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		rank: newRank,
-	});
-}
-
-async function specializationChanged(index: number, newSpec: string) {
-	await actions.value.updateQuality(index, {
-		...system.value.qualities[index],
-		specialization: newSpec,
-	});
-}
 </script>
 
 <template>
@@ -52,7 +37,7 @@ async function specializationChanged(index: number, newSpec: string) {
 				</option>
 			</select>
 
-			<ItemQualitiesInput class="col-span-5" :qualities="system.qualities" :editable="editable" @rank-changed="rankChanged" @specialization-changed="specializationChanged" @remove="actions.removeQuality" />
+			<ItemQualitiesInput class="col-span-5" :qualities="system.qualities" :editable="editable" />
 
 			<strong>Restriction</strong>
 			<Field class="col-span-3" :value="system.restriction.value" name="system.restriction.value" :editable="editable" />

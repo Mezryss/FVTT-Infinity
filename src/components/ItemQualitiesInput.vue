@@ -3,8 +3,10 @@
 	values, as well as removing an individual quality.
 -->
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
+import { RootContext } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
+import { ItemQualitiesActions } from '@/item/ItemQualities';
 import ItemQualityDataModel, { ItemQualityReference } from '@/item/data/ItemQualityDataModel';
 
 const props = withDefaults(
@@ -24,11 +26,23 @@ const props = withDefaults(
 	},
 );
 
-const emit = defineEmits<{
-	(e: 'rank-changed', index: number, newRank: number): void;
-	(e: 'specialization-changed', index: number, newSpecialization: string): void;
-	(e: 'remove', index: number): void;
-}>();
+const context = inject<{
+	actions?: ItemQualitiesActions;
+}>(RootContext)!;
+
+const actions = computed(() => context.actions);
+
+async function rankChanged(uuid: string, newRank: number) {
+	await actions.value?.updateItemQuality(uuid, {
+		rank: newRank,
+	});
+}
+
+async function specializationChanged(uuid: string, newSpec: string) {
+	await actions.value?.updateItemQuality(uuid, {
+		specialization: newSpec,
+	});
+}
 
 /**
  * Item qualities aren't actually embedded, and instead are listed as UUIDs with their associated Name, Rank, & Specialization data.
@@ -62,7 +76,7 @@ async function openItem(uuid: string) {
 		<span class="text-lg font-orbitron font-semibold">Item Qualities</span>
 		<em class="ml-4" v-if="qualities.length === 0">No Qualities Added</em>
 		<div v-else class="flex flex-wrap gap-1 ml-4">
-			<div v-for="(quality, index) in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center rounded-md border-[1px] border-solid border-slate-900 px-1 py-0.5 bg-slate-900 bg-opacity-10">
+			<div v-for="quality in loadedQualities" :key="quality.uuid" class="flex gap-1 items-center rounded-md border-[1px] border-solid border-slate-900 px-1 py-0.5 bg-slate-900 bg-opacity-10">
 				<a @click="openItem(quality.uuid)" class="flex gap-1">
 					<span>{{ quality.name }}</span>
 					<template v-if="!editable">
@@ -78,7 +92,7 @@ async function openItem(uuid: string) {
 						class="text-sm w-20 text-center rounded-sm h-6"
 						:value="quality.specialization"
 						:placeholder="quality.system.specializationPlaceholder"
-						@change="emit('specialization-changed', index, ($event.currentTarget as HTMLInputElement).value)"
+						@change="specializationChanged(quality.uuid, ($event.currentTarget as HTMLInputElement).value)"
 					/>
 
 					<!-- Rank -->
@@ -88,11 +102,11 @@ async function openItem(uuid: string) {
 						class="text-sm w-8 text-center rounded-sm h-6"
 						:min="1"
 						:value="quality.rank"
-						@change="emit('rank-changed', index, +($event.currentTarget as HTMLInputElement).value)"
+						@change="rankChanged(quality.uuid, +($event.currentTarget as HTMLInputElement).value)"
 					/>
 
 					<!-- Delete Action -->
-					<a @click="emit('remove', index)" class="px-1 relative text-sm -my-2">
+					<a @click="actions?.removeItemQuality(quality.uuid)" class="px-1 relative text-sm -my-2">
 						<i class="fas fa-trash" />
 					</a>
 				</template>
