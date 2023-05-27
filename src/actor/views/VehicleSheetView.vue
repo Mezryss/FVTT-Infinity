@@ -9,7 +9,7 @@ import { VehicleSheetContext } from '../sheets/VehicleSheet';
 
 const context = inject<VehicleSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

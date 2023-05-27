@@ -1,8 +1,8 @@
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import AbilityDataModel from '@/item/data/AbilityDataModel';
 import TalentDataModel from '@/item/data/TalentDataModel';
-import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
 import CharacterDataModel from '../data/CharacterDataModel';
 import CharacterSheetView from '../views/CharacterSheetView.vue';
@@ -25,39 +25,7 @@ type CharacterSheetActions = {
 /**
  * Vue context for Character sheets.
  */
-export type CharacterSheetContext = {
-	/**
-	 * Collection of actions the sheet view can call.
-	 */
-	actions: CharacterSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityActor;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Character icon.
-	 */
-	img: string;
-
-	/**
-	 * Character name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the actor.
-	 */
-	system: CharacterDataModel;
-
+export type CharacterSheetContext = IBaseSheetContext<CharacterDataModel, CharacterSheetActions> & {
 	/**
 	 * Talents & Special Abilities.
 	 */
@@ -98,12 +66,8 @@ export class CharacterSheet extends VueSheet(InfinityActorSheet<CharacterDataMod
 	 */
 	override async getVueContext(): Promise<CharacterSheetContext> {
 		return {
-			actions: this.actions,
-			document: this.actor,
-			editable: this.isEditable,
-			img: this.actor.img,
-			name: this.actor.name,
-			system: this.actor.system,
+			...IBaseSheetContext.baseContext(this),
+
 			abilities: this.actor.items.filter((i) => ['ability', 'talent'].includes(i.type)) as InfinityItem<AbilityDataModel | TalentDataModel>[],
 			inventory: this.actor.items.filter((i) => INVENTORY_ITEM_TYPES.includes(i.type)) as InfinityItem[],
 		};

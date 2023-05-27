@@ -1,8 +1,8 @@
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import Skill from '@/data/Skill';
 import InfinityItem from '@/item/InfinityItem';
 import TalentDataModel from '@/item/data/TalentDataModel';
-import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
 import GeistDataModel from '../data/GeistDataModel';
 import GeistSheetView from '../views/GeistSheetView.vue';
@@ -63,39 +63,7 @@ type GeistSheetActions = {
 /**
  * Vue Context for Geist Sheets
  */
-export type GeistSheetContext = {
-	/**
-	 * Vue sheet actions
-	 */
-	actions: GeistSheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityActor<GeistDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Actor icon.
-	 */
-	img: string;
-
-	/**
-	 * Actor name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the actor.
-	 */
-	system: GeistDataModel;
-
+export type GeistSheetContext = IBaseSheetContext<GeistDataModel, GeistSheetActions> & {
 	/**
 	 * Talent items on the actor.
 	 */
@@ -131,12 +99,8 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 	 */
 	override async getVueContext(): Promise<GeistSheetContext> {
 		return {
-			actions: this.actions,
-			document: this.actor,
-			editable: this.isEditable,
-			img: this.actor.img,
-			name: this.actor.name,
-			system: this.actor.system,
+			...IBaseSheetContext.baseContext(this),
+
 			talents: this.actor.items.filter((i) => i.type === 'talent') as InfinityItem<TalentDataModel>[],
 		};
 	}

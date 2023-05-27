@@ -10,7 +10,7 @@ import { CharacterSheetContext } from '../sheets/CharacterSheet';
 
 const context = inject<CharacterSheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

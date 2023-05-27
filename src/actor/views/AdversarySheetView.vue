@@ -12,7 +12,7 @@ import { AdversarySheetContext } from '../sheets/AdversarySheet';
 
 const context = inject<AdversarySheetContext>(RootContext)!;
 
-const actions = computed(() => context.actions);
+const actions = computed(() => context.actions!);
 const name = computed(() => context.name);
 const img = computed(() => context.img);
 const system = computed(() => context.system);

@@ -1,8 +1,8 @@
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import AbilityDataModel from '@/item/data/AbilityDataModel';
 import WeaponDataModel from '@/item/data/WeaponDataModel';
-import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
 import AdversaryDataModel from '../data/AdversaryDataModel';
 import AdversarySheetView from '../views/AdversarySheetView.vue';
@@ -22,39 +22,7 @@ type AdversarySheetActions = {
 /**
  * Vue Context for Adversary Sheets
  */
-export type AdversarySheetContext = {
-	/**
-	 * Vue sheet actions
-	 */
-	actions: AdversarySheetActions;
-
-	/**
-	 * A link to the document. This should not be used by the Vue sheets directly, but is required for the Editor component.
-	 *
-	 * @private
-	 */
-	document: InfinityActor<AdversaryDataModel>;
-
-	/**
-	 * Whether or not the sheet is editable.
-	 */
-	editable: boolean;
-
-	/**
-	 * Actor icon.
-	 */
-	img: string;
-
-	/**
-	 * Actor name.
-	 */
-	name: string;
-
-	/**
-	 * System data for the actor.
-	 */
-	system: AdversaryDataModel;
-
+export type AdversarySheetContext = IBaseSheetContext<AdversaryDataModel, AdversarySheetActions> & {
 	/**
 	 * Weapons the Actor has on its sheet.
 	 */
@@ -94,12 +62,8 @@ export default class AdversarySheet extends VueSheet(InfinityActorSheet<Adversar
 	 */
 	override async getVueContext(): Promise<AdversarySheetContext> {
 		return {
-			actions: this.actions,
-			document: this.actor,
-			editable: this.isEditable,
-			img: this.actor.img,
-			name: this.actor.name,
-			system: this.actor.system,
+			...IBaseSheetContext.baseContext(this),
+
 			attacks: this.actor.items.filter((i) => i.type === 'weapon') as InfinityItem<WeaponDataModel>[],
 			abilities: this.actor.items.filter((i) => i.type === 'ability') as InfinityItem<AbilityDataModel>[],
 			actorType: this.actor.type,
