@@ -1,4 +1,4 @@
-import IBaseSheetContext from '@/IBaseSheetContext';
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItemSheet from '../InfinityItemSheet';
 import ContagionDataModel from '../data/ContagionDataModel';
@@ -24,14 +24,6 @@ export default class ContagionSheet extends VueSheet(InfinityItemSheet<Contagion
 	 * Vue Context
 	 */
 	override async getVueContext(): Promise<ContagionSheetContext> {
-		return {
-			document: this.item,
-			editable: this.isEditable,
-			img: this.item.img,
-			name: this.item.name,
-			system: this.item.system,
-			owned: this.item.isOwned,
-			limited: this.item.limited,
-		};
+		return IBaseSheetContext.baseContext(this);
 	}
 }

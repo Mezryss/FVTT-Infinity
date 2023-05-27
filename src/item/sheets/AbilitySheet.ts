@@ -1,4 +1,4 @@
-import IBaseSheetContext from '@/IBaseSheetContext';
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItemSheet from '../InfinityItemSheet';
 import AbilityDataModel from '../data/AbilityDataModel';
@@ -24,14 +24,6 @@ export default class AbilitySheet extends VueSheet(InfinityItemSheet<AbilityData
 	 * Vue Context
 	 */
 	override async getVueContext(): Promise<AbilitySheetContext> {
-		return {
-			document: this.item,
-			editable: this.isEditable,
-			img: this.item.img,
-			name: this.item.name,
-			system: this.item.system,
-			owned: this.item.isOwned,
-			limited: this.item.limited,
-		};
+		return IBaseSheetContext.baseContext(this);
 	}
 }

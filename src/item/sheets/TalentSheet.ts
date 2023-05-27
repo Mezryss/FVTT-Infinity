@@ -1,4 +1,4 @@
-import IBaseSheetContext from '@/IBaseSheetContext';
+import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
@@ -54,16 +54,7 @@ export default class TalentSheet extends VueSheet(InfinityItemSheet<TalentDataMo
 	 * Vue Context
 	 */
 	override async getVueContext(): Promise<TalentSheetContext> {
-		return {
-			actions: this.actions,
-			document: this.item,
-			editable: this.isEditable,
-			img: this.item.img,
-			name: this.item.name,
-			system: this.item.system,
-			owned: this.item.isOwned,
-			limited: this.item.limited,
-		};
+		return IBaseSheetContext.baseContext(this);
 	}
 
 	/**
