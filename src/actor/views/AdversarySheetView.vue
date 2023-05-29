@@ -149,6 +149,47 @@ async function openItem(uuid: string) {
 							</div>
 						</NPCBlock>
 
+						<NPCBlock label="Harms">
+							<div class="grid grid-cols-3 whitespace-nowrap gap-3 w-full bg-sky-100">
+								<em class="col-span-3 text-center">TEMPORARY UI - TO BE REPLACED WITH DEDICATED HARM TRACKER COMPONENTS</em>
+								<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
+									<div class="flex flex-nowrap items-center w-full">
+										<strong class="w-full">Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
+										<a @click="actions.addHarm('breaches')" class="text-xl">&plus;</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1" v-for="(breach, index) in system.harms.breaches.effects" :key="index">
+										<input type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.breaches.effects.${index}`" />
+										<a class="text-xl" @click="actions.removeHarm('breaches', index)">&times;</a>
+									</div>
+								</div>
+
+								<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
+									<div class="flex flex-nowrap items-center w-full">
+										<strong class="w-full">Metanoia ({{ system.harms.metanoia.value }}/{{ system.harms.metanoia.max }})</strong>
+										<a @click="actions.addHarm('metanoia')" class="text-xl">&plus;</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1" v-for="(metanoia, index) in system.harms.metanoia.effects" :key="index">
+										<input type="text" class="flex flex-nowrap items-center w-full" :value="metanoia" :name="`system.harms.metanoia.effects.${index}`" />
+										<a class="text-xl" @click="actions.removeHarm('metanoia', index)">&times;</a>
+									</div>
+								</div>
+
+								<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
+									<div class="flex flex-nowrap items-center w-full">
+										<strong class="w-full">{{ isRemote ? 'Faults' : 'Wounds' }} ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
+										<a @click="actions.addHarm('wounds')" class="text-xl">&plus;</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1" v-for="(wound, index) in system.harms.wounds.effects" :key="index">
+										<input type="text" class="flex flex-nowrap items-center w-full" :value="wound" :name="`system.harms.wounds.effects.${index}`" />
+										<a class="text-xl" @click="actions.removeHarm('wounds', index)">&times;</a>
+									</div>
+								</div>
+							</div>
+						</NPCBlock>
+
 						<div class="flex flex-col bg-sky-600 bg-opacity-40 -my-2 p-2 rounded-br-3xl gap-0.5">
 							<span v-if="system.type === AdversaryType.Nemesis" class="font-orbitron text-lg font-bold uppercase flex gap-2 whitespace-nowrap">
 								<!-- TODO: Replace with a shared Infinity Points component in the future. -->
@@ -246,46 +287,5 @@ async function openItem(uuid: string) {
 				</TabContent>
 			</SheetBody>
 		</div>
-
-		<!--
-		<h3>Harms</h3>
-		<div class="grid grid-cols-3 whitespace-nowrap gap-3">
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
-				<div class="flex flex-nowrap items-center w-full">
-					<strong class="w-full">Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
-					<a @click="actions.addHarm('breaches')" class="text-xl">&plus;</a>
-				</div>
-
-				<div class="flex flex-nowrap items-center w-full gap-1" v-for="(breach, index) in system.harms.breaches.effects" :key="index">
-					<input type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.breaches.effects.${index}`" />
-					<a class="text-xl" @click="actions.removeHarm('breaches', index)">&times;</a>
-				</div>
-			</div>
-
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
-				<div class="flex flex-nowrap items-center w-full">
-					<strong class="w-full">Metanoia ({{ system.harms.metanoia.value }}/{{ system.harms.metanoia.max }})</strong>
-					<a @click="actions.addHarm('metanoia')" class="text-xl">&plus;</a>
-				</div>
-
-				<div class="flex flex-nowrap items-center w-full gap-1" v-for="(metanoia, index) in system.harms.metanoia.effects" :key="index">
-					<input type="text" class="flex flex-nowrap items-center w-full" :value="metanoia" :name="`system.harms.metanoia.effects.${index}`" />
-					<a class="text-xl" @click="actions.removeHarm('metanoia', index)">&times;</a>
-				</div>
-			</div>
-
-			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
-				<div class="flex flex-nowrap items-center w-full">
-					<strong class="w-full">{{ isRemote ? 'Faults' : 'Wounds' }} ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
-					<a @click="actions.addHarm('wounds')" class="text-xl">&plus;</a>
-				</div>
-
-				<div class="flex flex-nowrap items-center w-full gap-1" v-for="(wound, index) in system.harms.wounds.effects" :key="index">
-					<input type="text" class="flex flex-nowrap items-center w-full" :value="wound" :name="`system.harms.wounds.effects.${index}`" />
-					<a class="text-xl" @click="actions.removeHarm('wounds', index)">&times;</a>
-				</div>
-			</div>
-		</div>
-		-->
 	</InfinitySheet>
 </template>
