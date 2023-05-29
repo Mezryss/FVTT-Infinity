@@ -66,30 +66,26 @@ async function openItem(uuid: string) {
 				<TabContent tab="details">
 					<div class="flex flex-col gap-2">
 						<NPCBlock label="Attributes">
-							<div class="grid grid-cols-7 gap-0.5">
-								<span v-for="attribute in Attribute.all" :key="attribute" class="w-full text-center bg-sky-200 uppercase p-0.5 font-roboto-flex font-semibold text-blue-950">
+							<div class="grid grid-cols-7 gap-0.5 max-w-5xl">
+								<span v-for="attribute in Attribute.all" :key="attribute" class="w-full text-center bg-sky-200 uppercase p-0.5 font-roboto-flex font-semibold text-blue-950 flex items-center gap-1 justify-center">
 									<Localized :label="`Infinity.Attributes.Abbreviations.${attribute}`" />
+									<span v-if="system.attributes[attribute].superhuman > 0" class="cursor-help" :data-tooltip="`Superhuman ${attribute}`">(+{{ system.attributes[attribute].superhuman }})</span>
 								</span>
 
-								<!-- TODO: Handle display of Superhuman attribute value when > 0 -->
-								<div v-for="attribute in Attribute.all" :key="attribute" class="grid grid-cols-2 gap-0.5 items-center">
-									<input
-										type="number"
-										class="w-full text-center bg-white border-0 rounded-none"
-										:class="{
-											'col-span-2': system.attributes[attribute].superhuman <= 0,
-										}"
-										:value="system.attributes[attribute].value"
-										:min="0"
-										:name="`system.attributes.${attribute}.value`"
-									/>
-									<span v-if="system.attributes[attribute].superhuman > 0" class="text-white text-center text-lg font-roboto-flex cursor-help" :data-tooltip="`Superhuman ${attribute}`"> +{{ system.attributes[attribute].superhuman }} </span>
-								</div>
+								<input
+									v-for="attribute in Attribute.all"
+									:key="attribute"
+									type="number"
+									class="w-full text-center bg-white border-0 rounded-none"
+									:value="system.attributes[attribute].value"
+									:min="0"
+									:name="`system.attributes.${attribute}.value`"
+								/>
 							</div>
 						</NPCBlock>
 
 						<NPCBlock label="Fields of Expertise">
-							<div class="grid grid-cols-12 grid-rows-2 items-center gap-0.5">
+							<div class="grid grid-cols-12 grid-rows-2 items-center gap-0.5 max-w-5xl">
 								<span class="col-span-2 h-full text-center font-roboto-flex font-semibold bg-sky-200 flex items-center px-1">
 									<a>Combat</a>
 								</span>
@@ -129,7 +125,7 @@ async function openItem(uuid: string) {
 						</NPCBlock>
 
 						<NPCBlock label="Defences">
-							<div class="grid grid-cols-12 grid-rows-2 items-center gap-0.5">
+							<div class="grid grid-cols-12 grid-rows-2 items-center gap-0.5 max-w-5xl">
 								<span class="col-span-2 h-full text-center font-roboto-flex font-semibold bg-sky-200 flex items-center px-1">Firewall</span>
 								<Field type="number" :min="0" :value="system.stress.firewall.value" name="system.stress.firewall.value" class="bg-white rounded-none w-full h-full text-center p-0.5 m-0 border-none" />
 								<Field type="number" :min="0" :value="system.stress.firewall.max" name="system.stress.firewall.max" class="bg-white rounded-none w-full h-full text-center p-0.5 m-0 border-none" readonly />
@@ -154,6 +150,12 @@ async function openItem(uuid: string) {
 						</NPCBlock>
 
 						<div class="flex flex-col bg-sky-600 bg-opacity-40 -my-2 p-2 rounded-br-3xl gap-0.5">
+							<span v-if="system.type === AdversaryType.Nemesis" class="font-orbitron text-lg font-bold uppercase flex gap-2 whitespace-nowrap">
+								<!-- TODO: Replace with a shared Infinity Points component in the future. -->
+								<span data-tooltip="Will be replaced with a proper, shared control in the future.">Infinity Points:</span>
+								<Field type="number" :min="0" :value="system.infinityPoints" name="system.infinityPoints" class="border-0 bg-white bg-opacity-50 text-center" />
+							</span>
+
 							<span class="font-orbitron text-lg font-bold uppercase">Attacks</span>
 							<ul v-if="attacks.length > 0" class="-mt-1 list-disc">
 								<li v-for="attack in attacks" :key="attack.uuid" class="mb-2 last:mb-0">
@@ -246,11 +248,6 @@ async function openItem(uuid: string) {
 		</div>
 
 		<!--
-		<div v-if="system.type === AdversaryType.Nemesis" class="flex flex-nowrap whitespace-nowrap gap-2">
-			<strong>Infinity Points</strong>
-			<input type="number" :min="0" :value="system.infinityPoints" name="system.infinityPoints" />
-		</div>
-
 		<h3>Harms</h3>
 		<div class="grid grid-cols-3 whitespace-nowrap gap-3">
 			<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
@@ -289,15 +286,6 @@ async function openItem(uuid: string) {
 				</div>
 			</div>
 		</div>
-
-		<h3>Special Abilities</h3>
-		<ul>
-			<li v-for="ability in abilities" :key="ability.uuid" class="flex flex-row flex-wrap items-center gap-1">
-				<a class="-my-4 text-xl" @click="actions.removeItem(ability.uuid)">&times;</a>
-				<a @click="openItem(ability.uuid)" class="font-bold">{{ ability.name }}{{ ability.system.isRanked ? ' ' + ability.system.rank : '' }}:</a>
-				<Enriched :value="ability.system.description" />
-			</li>
-		</ul>
 		-->
 	</InfinitySheet>
 </template>
