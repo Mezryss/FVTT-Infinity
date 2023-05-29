@@ -159,9 +159,9 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
 						}),
 
 						rank: new fields.NumberField({
-							initial: 1,
+							initial: 0,
 							integer: true,
-							min: 1,
+							min: 0,
 							nullable: false,
 						}),
 

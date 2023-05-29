@@ -54,6 +54,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<input v-if="!readonly && editable" class="px-2" :type="type" :name="name" :value="value" :placeholder="placeholder" :min="min" :max="max" @change="emit('change', ($event.target as HTMLInputElement).value as string | number)" />
-	<span v-else>{{ value }}</span>
+	<input
+		v-if="!readonly && editable"
+		class="px-2 font-roboto-flex"
+		:type="type"
+		:name="name"
+		:value="value"
+		:placeholder="placeholder"
+		:min="min"
+		:max="max"
+		@change="emit('change', ($event.target as HTMLInputElement).value as string | number)"
+	/>
+	<span class="font-roboto-flex" v-else>{{ value }}</span>
 </template>

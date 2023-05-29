@@ -47,13 +47,15 @@ export async function addItemQuality(this: InfinityItemSheet<GearDataModel>, qua
 		return;
 	}
 
+	console.error(quality.system);
+
 	await this.item.update({
 		'system.qualities': [
 			...this.item.system.qualities,
 			{
 				uuid: quality.uuid,
 				name: quality.name,
-				rank: 1,
+				rank: quality.system.isRanked ? 1 : 0,
 				specialization: '',
 			},
 		] as ItemQualityReference[],

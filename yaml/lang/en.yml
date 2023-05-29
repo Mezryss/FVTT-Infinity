@@ -39,13 +39,13 @@ Infinity:
     Willpower: Willpower
 
     Abbreviations:
-      Agility: Ag
+      Agility: Agi
       Awareness: Awa
-      Brawn: Br
-      Coordination: Co
+      Brawn: Brw
+      Coordination: Coo
       Intelligence: Int
       Personality: Per
-      Willpower: Will
+      Willpower: Wil
 
   DamageType:
     Mental: Mental

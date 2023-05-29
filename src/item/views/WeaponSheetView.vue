@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
+import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
@@ -22,17 +23,17 @@ const editable = computed(() => context.editable);
 	<ItemSheet :name="name" :img="img" :description="system.description" :source="system.source">
 		<template #sidebar>
 			<GearSidebar item-type="weapon" :restriction="system.restriction" :cost="system.cost" :tariff="system.tariff" :maintenance="system.maintenance">
-				<span class="flex gap-1">
+				<span v-if="system.type === WeaponType.Ranged" class="flex gap-1">
 					<strong>Range:</strong>
 					<span>{{ system.range }}</span>
 				</span>
 
 				<span class="flex gap-1">
 					<strong>Damage:</strong>
-					<span>{{ system.damage }}</span>
+					<span class="font-infinity-icon">{{ system.damage }}</span>
 				</span>
 
-				<span class="flex gap-1">
+				<span v-if="system.type === WeaponType.Ranged" class="flex gap-1">
 					<strong>Burst:</strong>
 					<span>{{ system.burst }}</span>
 				</span>
@@ -53,12 +54,12 @@ const editable = computed(() => context.editable);
 			</select>
 
 			<strong>Damage</strong>
-			<input type="text" :value="system.damage" name="system.damage" class="col-span-4 text-center" />
-
-			<strong>Burst</strong>
-			<input type="text" :value="system.burst" name="system.burst" class="col-span-4 text-center" />
+			<input type="text" :value="system.damage" name="system.damage" class="col-span-4 text-center font-infinity-icon" />
 
 			<template v-if="system.type === WeaponType.Ranged">
+				<strong>Burst</strong>
+				<input type="text" :value="system.burst" name="system.burst" class="col-span-4 text-center" />
+
 				<strong>Range</strong>
 				<input type="text" :value="system.range" name="system.range" class="col-span-4 text-center" />
 			</template>
@@ -70,8 +71,10 @@ const editable = computed(() => context.editable);
 				</option>
 			</select>
 
-			<strong>Ammo</strong>
-			<input type="text" :value="system.ammo.allowed" name="system.ammo.allowed" class="col-span-4 text-center" />
+			<template v-if="system.type === WeaponType.Ranged">
+				<strong>Ammo</strong>
+				<input type="text" :value="system.ammo.allowed" name="system.ammo.allowed" class="col-span-4 text-center" />
+			</template>
 
 			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
 

@@ -2,6 +2,7 @@ import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import AbilityDataModel from '@/item/data/AbilityDataModel';
+import GearDataModel from '@/item/data/GearDataModel';
 import WeaponDataModel from '@/item/data/WeaponDataModel';
 import InfinityActorSheet from '../InfinityActorSheet';
 import AdversaryDataModel from '../data/AdversaryDataModel';
@@ -13,8 +14,7 @@ type HarmCategory = 'breaches' | 'metanoia' | 'wounds';
  * Vue Sheet Actions
  */
 type AdversarySheetActions = {
-	removeAttack: (uuid: string) => Promise<void>;
-	removeAbility: (uuid: string) => Promise<void>;
+	removeItem: (uuid: string) => Promise<void>;
 	addHarm: (category: HarmCategory) => Promise<void>;
 	removeHarm: (category: HarmCategory, index: number) => Promise<void>;
 };
@@ -29,6 +29,11 @@ export type AdversarySheetContext = IBaseSheetContext<AdversaryDataModel, Advers
 	attacks: InfinityItem<WeaponDataModel>[];
 
 	/**
+	 * Non-Weapon Equipment the Actor has.
+	 */
+	gear: InfinityItem<GearDataModel>[];
+
+	/**
 	 * Special Abilities the Actor has access to.
 	 */
 	abilities: InfinityItem<AbilityDataModel>[];
@@ -40,12 +45,24 @@ export type AdversarySheetContext = IBaseSheetContext<AdversaryDataModel, Advers
 };
 
 export default class AdversarySheet extends VueSheet(InfinityActorSheet<AdversaryDataModel>) {
+	static override get defaultOptions() {
+		return {
+			...super.defaultOptions,
+			tabs: [
+				{
+					navSelector: '.sheet-tabs',
+					contentSelector: '.sheet-body',
+					initial: 'details',
+				},
+			],
+		};
+	}
+
 	/**
 	 * View Actions
 	 */
 	private actions: AdversarySheetActions = {
-		removeAbility: this.removeItem.bind(this),
-		removeAttack: this.removeItem.bind(this),
+		removeItem: this.removeItem.bind(this),
 		addHarm: this.addHarm.bind(this),
 		removeHarm: this.removeHarm.bind(this),
 	};
@@ -66,6 +83,7 @@ export default class AdversarySheet extends VueSheet(InfinityActorSheet<Adversar
 
 			attacks: this.actor.items.filter((i) => i.type === 'weapon') as InfinityItem<WeaponDataModel>[],
 			abilities: this.actor.items.filter((i) => i.type === 'ability') as InfinityItem<AbilityDataModel>[],
+			gear: this.actor.items.filter((i) => !['ability', 'itemQuality', 'talent', 'weapon'].includes(i.type)) as InfinityItem<GearDataModel>[],
 			actorType: this.actor.type,
 		};
 	}
