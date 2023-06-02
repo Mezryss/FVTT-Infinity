@@ -1,4 +1,4 @@
-# FVTT Genesys
+# FVTT Infinity
 
 An implementation of [Modiphius](https://www.modiphius.net/)'s Infinity 2D20 roleplaying game.
 
