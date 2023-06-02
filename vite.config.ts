@@ -19,12 +19,7 @@ let releaseOnlyAliases: AliasOptions = [];
 let devOnlyAliases: AliasOptions = [];
 
 if (process.env.NODE_ENV === 'production') {
-	releaseOnlyAliases = [
-		{
-			find: 'vue',
-			replacement: path.resolve(__dirname, 'external/vue.esm-browser.prod.js'),
-		},
-	];
+	releaseOnlyAliases = [];
 } else {
 	devOnlyAliases = [];
 }
@@ -33,6 +28,11 @@ if (process.env.NODE_ENV === 'production') {
 export default defineConfig({
 	// Proxy w/Foundry. See https://foundryvtt.wiki/en/development/guides/vite
 	base: '/systems/infinity',
+	define: {
+		'process.env': {
+			NODE_ENV: process.env.NODE_ENV,
+		},
+	},
 	server: {
 		port: 30001,
 		open: false,
