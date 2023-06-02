@@ -149,9 +149,57 @@ async function openItem(uuid: string) {
 							</div>
 						</NPCBlock>
 
-						<NPCBlock label="Harms">
-							<div class="grid grid-cols-3 whitespace-nowrap gap-3 w-full bg-sky-100">
-								<em class="col-span-3 text-center">TEMPORARY UI - TO BE REPLACED WITH DEDICATED HARM TRACKER COMPONENTS</em>
+						<NPCBlock label="Harm Effects">
+							<div class="grid grid-cols-3 whitespace-nowrap w-full bg-sky-100">
+								<div class="flex flex-col flex-nowrap">
+									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
+										<strong>Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
+										<a @click="actions.addHarm('breaches')">
+											<i class="fas fa-plus" />
+										</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.breaches.effects" :key="index">
+										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.breaches.effects.${index}`" />
+										<a @click="actions.removeHarm('breaches', index)">
+											<i class="fas fa-trash" />
+										</a>
+									</div>
+								</div>
+
+								<div class="flex flex-col flex-nowrap">
+									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
+										<strong>Metanoia ({{ system.harms.metanoia.value }}/{{ system.harms.metanoia.max }})</strong>
+										<a @click="actions.addHarm('metanoia')">
+											<i class="fas fa-plus" />
+										</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.metanoia.effects" :key="index">
+										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.metanoia.effects.${index}`" />
+										<a @click="actions.removeHarm('metanoia', index)">
+											<i class="fas fa-trash" />
+										</a>
+									</div>
+								</div>
+
+								<div class="flex flex-col flex-nowrap">
+									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
+										<strong>{{ isRemote ? 'Faults' : 'Wounds' }} ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
+										<a @click="actions.addHarm('wounds')">
+											<i class="fas fa-plus" />
+										</a>
+									</div>
+
+									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.wounds.effects" :key="index">
+										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.wounds.effects.${index}`" />
+										<a @click="actions.removeHarm('wounds', index)">
+											<i class="fas fa-trash" />
+										</a>
+									</div>
+								</div>
+
+								<!-- <em class="col-span-3 text-center">TEMPORARY UI - TO BE REPLACED WITH DEDICATED HARM TRACKER COMPONENTS</em>
 								<div class="flex flex-nowrap flex-col items-center gap-1 justify-self-start w-full">
 									<div class="flex flex-nowrap items-center w-full">
 										<strong class="w-full">Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
@@ -186,7 +234,7 @@ async function openItem(uuid: string) {
 										<input type="text" class="flex flex-nowrap items-center w-full" :value="wound" :name="`system.harms.wounds.effects.${index}`" />
 										<a class="text-xl" @click="actions.removeHarm('wounds', index)">&times;</a>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</NPCBlock>
 
