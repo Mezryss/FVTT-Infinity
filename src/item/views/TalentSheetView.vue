@@ -181,10 +181,10 @@ async function updatePrereqValue(index: number, value: string | number) {
 					<Enriched v-if="prereq.type === TalentPrerequisite.Type.Talent" class="w-full text-center" :value="prereq.value.toString()" />
 
 					<!-- Skill Value -->
-					<Field v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" @change="(value) => updatePrereqValue(index, value)" />
+					<Field v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" @change="(value: string|number) => updatePrereqValue(index, value)" />
 
 					<!-- Catch-All -->
-					<Field v-else class="w-full" type="text" :value="prereq.value" @change="(value) => updatePrereqValue(index, value)" />
+					<Field v-else class="w-full" type="text" :value="prereq.value" @change="(value: string|number) => updatePrereqValue(index, value)" />
 
 					<a class="text-sm" @click="actions.removePrerequisite(index)"><i class="fas fa-trash" /></a>
 				</div>
