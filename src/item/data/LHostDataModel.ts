@@ -1,4 +1,5 @@
 import Attribute from '@/data/Attributes';
+
 import HasBasicItemData from './templates/HasBasicItemData';
 import HasGearData from './templates/HasGearData';
 

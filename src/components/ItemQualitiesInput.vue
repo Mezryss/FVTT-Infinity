@@ -4,6 +4,7 @@
 -->
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import { ItemQualitiesActions } from '@/item/ItemQualities';
@@ -14,7 +15,7 @@ const props = withDefaults(
 		/**
 		 * The list of Item Quality references.
 		 */
-		qualities: ItemQualityReference[];
+		qualities: Readonly<ItemQualityReference[]>;
 
 		/**
 		 * Whether or not the list is editable.

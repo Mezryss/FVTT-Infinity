@@ -1,5 +1,6 @@
 import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
+
 import InfinityItemSheet from '../InfinityItemSheet';
 import ContagionDataModel from '../data/ContagionDataModel';
 import ContagionSheetView from '../views/ContagionSheetView.vue';

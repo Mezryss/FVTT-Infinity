@@ -3,6 +3,8 @@ import { register as registerEnrichers } from '@/enrichers';
 import { register as registerFonts } from '@/fonts';
 import { register as registerItems } from '@/item';
 
+import './StoreManager';
+
 import './Infinity.css';
 
 Hooks.once('init', async () => {

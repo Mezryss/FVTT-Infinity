@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import Attribute from '@/data/Attributes';
 import Skill from '@/data/Skill';
+
 import { CharacterSheetContext } from '../sheets/CharacterSheet';
 
 const context = inject<CharacterSheetContext>(RootContext)!;

@@ -3,10 +3,10 @@
 -->
 
 <script lang="ts" setup>
-import { inject, onMounted, onUpdated, ref, toRaw } from 'vue';
-import { RootContext } from '@/VueSheet';
-import InfinityActor from '@/actor/InfinityActor';
-import InfinityItem from '@/item/InfinityItem';
+import { storeToRefs } from 'pinia';
+import { onMounted, onUpdated, ref } from 'vue';
+
+import { useDocumentStore } from '@/stores/documentStore';
 
 const props = withDefaults(
 	defineProps<{
@@ -68,12 +68,10 @@ const enrichedContent = ref('');
 let editing = ref(false);
 
 /**
- * Get the root Vue App context, so we can access the document being modified.
+ * Fetch the document & editability from a Document Store.
  */
-const rootContext = inject<{
-	document: InfinityItem | InfinityActor;
-	editable?: boolean;
-}>(RootContext)!;
+const documentStore = useDocumentStore();
+const { document: foundryDocument, editable } = storeToRefs(documentStore);
 
 /**
  * Ensure the base content is enriched on mount.
@@ -89,11 +87,11 @@ onMounted(enrichContent);
 onUpdated(async () => {
 	// Name should be a path split by '.' - such as system.notes.value
 	const splitName = props.name.split('.');
-	let obj: any = rootContext.document;
+	let obj: any = foundryDocument.value;
 	for (let key of splitName) {
 		// If we've still got a key to find, but it isn't present, something's messed up.
 		if (obj[key] === undefined) {
-			console.warn(`Attempting to update ${rootContext.document.name} editor field but '${props.name}' is undefined!`);
+			console.warn(`Attempting to update ${foundryDocument.value?.name} editor field but '${props.name}' is undefined!`);
 			obj = undefined;
 			break;
 		}
@@ -128,7 +126,7 @@ async function activate() {
 
 	// Again, this shouldn't happen - but just in case.
 	if (editing.value) {
-		console.error(`Attempted to activate an editor for ${props.name} in ${rootContext.document.name}, but the editor is already active!`);
+		console.error(`Attempted to activate an editor for ${props.name} in ${foundryDocument.value?.name}, but the editor is already active!`);
 		return;
 	}
 
@@ -143,7 +141,7 @@ async function activate() {
 		save_onsavecallback: save,
 		engine: 'prosemirror',
 		collaborate: props.collaborate,
-		document: props.collaborate ? rootContext.document : undefined,
+		document: props.collaborate ? foundryDocument.value : undefined,
 		height: rootDiv.value!.offsetHeight,
 		plugins: {
 			menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
@@ -171,7 +169,7 @@ async function save() {
 
 	// Get a string value for the ProseMirror document structure
 	baseContent.value = ProseMirror.dom.serializeString(editorInstance.view.state.doc.content);
-	await toRaw(rootContext.document).update({
+	await foundryDocument.value?.update({
 		[props.name]: baseContent.value,
 	});
 
@@ -189,7 +187,7 @@ async function save() {
 
 <template>
 	<div class="w-full h-full editor prosemirror text-base font-roboto-flex" ref="rootDiv">
-		<a v-if="button && rootContext.editable && !editing" @click="activate" class="editor-edit"><i class="fas fa-edit"></i></a>
+		<a v-if="button && editable && !editing" @click="activate" class="editor-edit"><i class="fas fa-edit"></i></a>
 		<div v-if="!editing" class="editor-content" v-html="enrichedContent"></div>
 		<div class="w-full h-full contents editor-content" v-show="editing" ref="editorContainer"></div>
 	</div>

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import { WeaponType } from '@/item/data/WeaponDataModel';
+
 import { VehicleSheetContext } from '../sheets/VehicleSheet';
 
 const context = inject<VehicleSheetContext>(RootContext)!;

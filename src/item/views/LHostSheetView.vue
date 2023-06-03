@@ -1,21 +1,24 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import Attribute from '@/data/Attributes';
+import { useItemStore } from '@/stores/itemStore';
+
+import LHostDataModel from '../data/LHostDataModel';
 import { LHostSheetContext } from '../sheets/LHostSheet';
 
+const itemStore = useItemStore<LHostDataModel>();
+const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
+
 const context = inject<LHostSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
-
-const editable = computed(() => context.editable);
 </script>
 
 <template>

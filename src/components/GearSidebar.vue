@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ItemSize } from '@/item/data/templates/HasGearData';
+
 import SidebarLabel from './SidebarLabel.vue';
 
 defineProps<{

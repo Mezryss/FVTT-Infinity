@@ -1,21 +1,20 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { RootContext } from '@/VueSheet';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
-import { AmmunitionCategory } from '../data/AmmunitionDataModel';
-import { AmmunitionSheetContext } from '../sheets/AmmunitionSheet';
+import { useItemStore } from '@/stores/itemStore';
 
-const context = inject<AmmunitionSheetContext>(RootContext)!;
+import AmmunitionDataModel, { AmmunitionCategory } from '../data/AmmunitionDataModel';
 
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+const itemStore = useItemStore<AmmunitionDataModel>();
 
-const editable = computed(() => context.editable);
+const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 </script>
 
 <template>

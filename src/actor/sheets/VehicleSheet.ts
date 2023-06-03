@@ -3,6 +3,7 @@ import { VueSheet } from '@/VueSheet';
 import InfinityItem from '@/item/InfinityItem';
 import AbilityDataModel from '@/item/data/AbilityDataModel';
 import WeaponDataModel from '@/item/data/WeaponDataModel';
+
 import InfinityActorSheet from '../InfinityActorSheet';
 import VehicleDataModel from '../data/VehicleDataModel';
 import VehicleSheetView from '../views/VehicleSheetView.vue';

@@ -1,3 +1,6 @@
+import { useDocumentStore } from '@/stores/documentStore';
+import { useItemStore } from '@/stores/itemStore';
+
 import InfinityItem from './InfinityItem';
 
 /**
@@ -29,6 +32,21 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 				},
 			],
 		};
+	}
+
+	get documentUuid() {
+		return this.item.uuid;
+	}
+
+	async updateStores() {
+		const uuid = this.item.uuid;
+
+		const documentStore = useDocumentStore(uuid);
+		documentStore.document = this.item;
+		documentStore.editable = this.isEditable;
+
+		const itemStore = useItemStore(uuid);
+		itemStore.setItem(this.item);
 	}
 
 	/**

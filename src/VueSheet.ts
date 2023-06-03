@@ -1,16 +1,28 @@
 import { App, UnwrapNestedRefs, createApp, reactive } from 'vue';
 
+import { StoreManager } from '@/StoreManager';
+
 /**
  * This symbol should be used to inject sheet data in the Vue views.
  */
 export const RootContext = Symbol('Vue Root Context');
 
 /**
+ * For DocumentSheets specifically, injection point for the Document UUID.
+ */
+export const DocumentUuid = Symbol('Document UUID');
+
+/**
  * Typing data for Vue Sheet constructors. The functions defined here are the minimum from Foundry needed for proper type-checking within VueSheet.
  */
 type Constructor = new (...args: any[]) => {
+	/* Critical items from Application classes */
 	activateListeners(html: JQuery): void;
 	close(options?: {}): Promise<void>;
+
+	/* Optional items defined prior to the Vue Sheet for interacting with Vue. */
+	readonly documentUuid?: string;
+	updateStores?(): Promise<void>;
 };
 
 /**
@@ -76,10 +88,16 @@ export function VueSheet<BaseClass extends Constructor, ContextType extends { [k
 			// Initialize the vue app if necessary
 			if (!this.vueApp) {
 				this.vueApp = createApp(this.vueComponent);
+				this.vueApp.use(StoreManager.instance);
 				this.vueApp.provide(RootContext, this.vueContext);
+				this.vueApp.provide(DocumentUuid, this.documentUuid);
+
+				this.updateStores?.();
 
 				this.vueApp.mount(this.form);
 			} else if (this.vueContext && vueContext) {
+				this.updateStores?.();
+
 				// Update context & actor data injected into the existing Vue app
 				for (const key of Object.keys(vueContext)) {
 					this.vueContext[key] = vueContext[key];

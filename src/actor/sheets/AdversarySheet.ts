@@ -4,6 +4,7 @@ import InfinityItem from '@/item/InfinityItem';
 import AbilityDataModel from '@/item/data/AbilityDataModel';
 import GearDataModel from '@/item/data/GearDataModel';
 import WeaponDataModel from '@/item/data/WeaponDataModel';
+
 import InfinityActorSheet from '../InfinityActorSheet';
 import AdversaryDataModel from '../data/AdversaryDataModel';
 import AdversarySheetView from '../views/AdversarySheetView.vue';

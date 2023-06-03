@@ -1,16 +1,17 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { RootContext } from '@/VueSheet';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import Field from '@/components/Field.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import SidebarLabel from '@/components/SidebarLabel.vue';
-import { ItemQualitySheetContext } from '../sheets/ItemQualitySheet';
+import { useItemStore } from '@/stores/itemStore';
 
-const context = inject<ItemQualitySheetContext>(RootContext)!;
+import ItemQualityDataModel from '../data/ItemQualityDataModel';
 
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+const itemStore = useItemStore<ItemQualityDataModel>();
+const { name, img, system: storeSystem } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 </script>
 
 <template>

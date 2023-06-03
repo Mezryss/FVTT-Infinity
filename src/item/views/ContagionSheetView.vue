@@ -1,20 +1,18 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { RootContext } from '@/VueSheet';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
-import { ContagionCategory, ContagionTerm, ContagionType } from '../data/ContagionDataModel';
-import { ContagionSheetContext } from '../sheets/ContagionSheet';
+import { useItemStore } from '@/stores/itemStore';
 
-const context = inject<ContagionSheetContext>(RootContext)!;
+import ContagionDataModel, { ContagionCategory, ContagionTerm, ContagionType } from '../data/ContagionDataModel';
 
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
-
-const editable = computed(() => context.editable);
+const itemStore = useItemStore<ContagionDataModel>();
+const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 </script>
 
 <template>

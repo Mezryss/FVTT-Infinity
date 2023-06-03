@@ -3,6 +3,7 @@
 -->
 <script lang="ts" setup>
 import { computed } from 'vue';
+
 import Enriched from './Enriched.vue';
 
 const props = withDefaults(

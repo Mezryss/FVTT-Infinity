@@ -1,23 +1,24 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
-import { ArmourType } from '../data/ArmourDataModel';
+import { useItemStore } from '@/stores/itemStore';
+
+import ArmourDataModel, { ArmourType } from '../data/ArmourDataModel';
 import { ArmourSheetContext } from '../sheets/ArmourSheet';
 
 const context = inject<ArmourSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
 
-const editable = computed(() => context.editable);
-const owned = computed(() => context.owned);
+const itemStore = useItemStore<ArmourDataModel>();
+const { name, img, system: storeSystem, editable, isOwned } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 
 async function loadoutQuantityChanged(uuid: string, newQuantity: number) {
 	await actions.value.updateLoadoutItem(uuid, {
@@ -79,14 +80,14 @@ async function openItem(uuid: string) {
 				<Field type="number" name="system.symbiont.vigour" :value="system.symbiont.vigour" class="col-span-4" />
 
 				<strong>Wounds</strong>
-				<Field v-if="owned" type="number" name="system.symbiont.wounds.value" :value="system.symbiont.wounds.value" class="col-span-2" />
+				<Field v-if="isOwned" type="number" name="system.symbiont.wounds.value" :value="system.symbiont.wounds.value" class="col-span-2" />
 				<Field
 					type="number"
 					name="system.symbiont.wounds.max"
 					:value="system.symbiont.wounds.max"
 					class="col-span-2"
 					:class="{
-						'col-span-4': !owned,
+						'col-span-4': !isOwned,
 					}"
 				/>
 			</template>

@@ -4,6 +4,7 @@
 
 <script lang="ts" setup>
 import { useSlots } from 'vue';
+
 import Editor from './Editor.vue';
 import InfinitySheet from './InfinitySheet.vue';
 import LinkableTextField from './LinkableTextField.vue';

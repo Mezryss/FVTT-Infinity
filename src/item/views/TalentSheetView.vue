@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Enriched from '@/components/Enriched.vue';
 import Field from '@/components/Field.vue';
@@ -7,29 +9,29 @@ import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import SidebarLabel from '@/components/SidebarLabel.vue';
 import Skill from '@/data/Skill';
+import { useItemStore } from '@/stores/itemStore';
+
 import InfinityItem from '../InfinityItem';
 import TalentDataModel, { TalentPrerequisite } from '../data/TalentDataModel';
 import { TalentSheetContext } from '../sheets/TalentSheet';
 
+const itemStore = useItemStore<TalentDataModel>();
+const { name, img, system: storeSystem, isOwned } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
+
 const context = inject<TalentSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
-
-const owned = computed(() => context.owned);
 
 /**
  * All of the non-talent (Skill Expertise, Skill Focus, and Misc.) prerequisites for display first.
  */
-const nonTalentPreReqs = computed(() => context.system.prerequisites.filter((p) => p.type !== TalentPrerequisite.Type.Talent));
+const nonTalentPreReqs = computed(() => system.value.prerequisites.filter((p) => p.type !== TalentPrerequisite.Type.Talent));
 
 /**
  * Fetches the full tree of talent prerequisites required to take this talent.
  */
 const talentPreReqs = computed(() => {
-	const talents = context.system.prerequisites.filter((p) => p.type === TalentPrerequisite.Type.Talent);
+	const talents = system.value.prerequisites.filter((p) => p.type === TalentPrerequisite.Type.Talent);
 
 	return recurseTalentPrerequisites(talents.map((t) => t.value as string));
 });
@@ -107,7 +109,7 @@ async function updatePrereqValue(index: number, value: string | number) {
 			</span>
 
 			<span v-if="system.isRanked" class="flex gap-1">
-				<template v-if="owned">
+				<template v-if="isOwned">
 					<strong>Rank:</strong>
 					<span>{{ system.rank.current }}/{{ system.rank.max }}</span>
 				</template>
@@ -149,10 +151,10 @@ async function updatePrereqValue(index: number, value: string | number) {
 				<template v-if="system.isRanked">
 					<strong>Max Rank:</strong>
 					<div class="w-full grid grid-cols-2 gap-1">
-						<Field v-if="owned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
+						<Field v-if="isOwned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
 						<Field
 							:class="{
-								'col-span-2': !owned,
+								'col-span-2': !isOwned,
 							}"
 							type="number"
 							:value="system.rank.max"

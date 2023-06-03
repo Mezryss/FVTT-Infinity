@@ -1,31 +1,34 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
+import { useItemStore } from '@/stores/itemStore';
+
 import InfinityItem from '../InfinityItem';
+import HackingDeviceDataModel from '../data/HackingDeviceDataModel';
 import ProgramDataModel, { ProgramType } from '../data/ProgramDataModel';
 import { HackingDeviceSheetContext } from '../sheets/HackingDeviceSheet';
 
 const context = inject<HackingDeviceSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
 
-const editable = computed(() => context.editable);
+const itemStore = useItemStore<HackingDeviceDataModel>();
+const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 
 const programs = computed(() =>
-	context.system.programs.filter((program) => {
+	system.value.programs.filter((program) => {
 		const programItem = fromUuidSync(program.uuid) as InfinityItem<ProgramDataModel>;
 
 		return programItem && programItem.system.type !== ProgramType.Upgrade;
 	}),
 );
 const upgrades = computed(() =>
-	context.system.programs.filter((program) => {
+	system.value.programs.filter((program) => {
 		const programItem = fromUuidSync(program.uuid) as InfinityItem<ProgramDataModel>;
 
 		return programItem && programItem.system.type === ProgramType.Upgrade;

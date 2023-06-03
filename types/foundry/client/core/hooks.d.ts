@@ -23,7 +23,9 @@ declare global {
 	type HookParamsRender<T extends Application, N extends string> = HookParameters<`render${N}`, [T, JQuery, ReturnType<T['getData']>]>;
 	type HookParamsRenderChatMessage = HookParameters<'renderChatMessage', [ChatMessage, JQuery, foundry.data.ChatMessageSource]>;
 	type HookParamsTargetToken = HookParameters<'targetToken', [User, Token, boolean]>;
-	type HookParamsUpdate<T extends ClientDocument, N extends string> = HookParameters<`update${N}`, [T, DocumentUpdateData<T>, DocumentModificationContext]>;
+	type HookParamsCreate<T extends ClientDocument, N extends string> = HookParameters<`create${N}`, [T, DocumentModificationContext, string]>;
+	type HookParamsUpdate<T extends ClientDocument, N extends string> = HookParameters<`update${N}`, [T, DocumentUpdateData<T>, DocumentModificationContext, string]>;
+	type HookParamsDelete<T extends ClientDocument, N extends string> = HookParameters<`delete${N}`, [T, DocumentModificationContext, string]>;
 	type HookParamsUpdateWorldTime = HookParameters<'updateWorldTime', [number, number]>;
 
 	class Hooks {
@@ -65,6 +67,12 @@ declare global {
 		static on(...args: HookParamsUpdate<Scene, 'Scene'>): number;
 		static on(...args: HookParamsUpdateWorldTime): number;
 		static on(...args: HookParameters<string, unknown[]>): number;
+		static on(...args: HookParamsCreate<Actor, 'Actor'>): number;
+		static on(...args: HookParamsUpdate<Actor, 'Actor'>): number;
+		static on(...args: HookParamsDelete<Actor, 'Actor'>): number;
+		static on(...args: HookParamsCreate<Item, 'Item'>): number;
+		static on(...args: HookParamsUpdate<Item, 'Item'>): number;
+		static on(...args: HookParamsDelete<Item, 'Item'>): number;
 
 		/**
 		 * Register a callback handler for an event which is only triggered once the first time the event occurs.
@@ -104,6 +112,12 @@ declare global {
 		static once(...args: HookParamsUpdate<Scene, 'Scene'>): number;
 		static once(...args: HookParamsUpdateWorldTime): number;
 		static once(...args: HookParameters<string, unknown[]>): number;
+		static once(...args: HookParamsCreate<Actor, 'Actor'>): number;
+		static once(...args: HookParamsUpdate<Actor, 'Actor'>): number;
+		static once(...args: HookParamsDelete<Actor, 'Actor'>): number;
+		static once(...args: HookParamsCreate<Item, 'Item'>): number;
+		static once(...args: HookParamsUpdate<Item, 'Item'>): number;
+		static once(...args: HookParamsDelete<Item, 'Item'>): number;
 
 		static on(...args: HookParameters<'diceSoNiceReady', [Dice3d]>): number;
 		static once(...args: HookParameters<'diceSoNiceReady', [Dice3d]>): number;

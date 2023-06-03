@@ -1,21 +1,19 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { RootContext } from '@/VueSheet';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
-import { ProgramType } from '../data/ProgramDataModel';
-import { ProgramSheetContext } from '../sheets/ProgramSheet';
+import { useItemStore } from '@/stores/itemStore';
 
-const context = inject<ProgramSheetContext>(RootContext)!;
+import ProgramDataModel, { ProgramType } from '../data/ProgramDataModel';
 
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
-
-const editable = computed(() => context.editable);
+const itemStore = useItemStore<ProgramDataModel>();
+const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
+const system = computed(() => storeSystem.value!);
 </script>
 
 <template>
@@ -48,7 +46,7 @@ const editable = computed(() => context.editable);
 			<strong>Damage</strong>
 			<Field type="text" :value="system.damage" name="system.damage" class="col-span-4" />
 
-			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="editable" class="col-span-5" />
 
 			<strong>Restriction</strong>
 			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
+
 import { RootContext } from '@/VueSheet';
 import ContextMenu from '@/components/ContextMenu.vue';
 import Editor from '@/components/Editor.vue';
@@ -15,6 +16,7 @@ import TabContent from '@/components/tabs/TabContent.vue';
 import TabLink from '@/components/tabs/TabLink.vue';
 import Attribute from '@/data/Attributes';
 import Skill from '@/data/Skill';
+
 import InfinityActor from '../InfinityActor';
 import CharacterDataModel from '../data/CharacterDataModel';
 import { GeistSheetContext } from '../sheets/GeistSheet';

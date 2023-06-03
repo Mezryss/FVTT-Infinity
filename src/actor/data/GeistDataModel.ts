@@ -1,4 +1,5 @@
 import Skill from '@/data/Skill';
+
 import HasAttributes from './templates/HasAttributes';
 import HasDescription from './templates/HasDescription';
 import HasStress from './templates/HasStress';

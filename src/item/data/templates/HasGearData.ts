@@ -1,4 +1,5 @@
 import { TemplateConstructor } from '@/dataModel/DataTemplates';
+
 import { ItemQualityReference } from '../ItemQualityDataModel';
 
 /**
