@@ -1,9 +1,7 @@
 import { VueSheet } from '@/VueSheet';
 
-import InfinityItem from '../InfinityItem';
-import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
+import InfinityItemSheet from '../InfinityItemSheet';
 import GearDataModel from '../data/GearDataModel';
-import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import GearSheetView from '../views/GearSheetView.vue';
 
 /**
@@ -15,19 +13,5 @@ export default class GearSheet extends VueSheet(InfinityItemSheet<GearDataModel>
 	 */
 	override get vueComponent() {
 		return GearSheetView;
-	}
-
-	/**
-	 * Handle drag-and-drop support for Item Qualities.
-	 *
-	 * @inheritdoc
-	 */
-	protected override async _onDropItem(_event: DragEvent, data: DropData) {
-		if (!this.isEditable || !data.uuid) {
-			return;
-		}
-
-		const droppedItem = (await (InfinityItem.implementation as any).fromDropData(data)) as InfinityItem<ItemQualityDataModel> | undefined;
-		await this.addItemQuality(droppedItem);
 	}
 }
