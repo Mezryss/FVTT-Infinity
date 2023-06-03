@@ -3,7 +3,9 @@ import { VueSheet } from '@/VueSheet';
 import Skill from '@/data/Skill';
 import InfinityItem from '@/item/InfinityItem';
 import TalentDataModel from '@/item/data/TalentDataModel';
+import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
+import CharacterDataModel from '../data/CharacterDataModel';
 import GeistDataModel from '../data/GeistDataModel';
 import GeistSheetView from '../views/GeistSheetView.vue';
 
@@ -13,6 +15,11 @@ type HarmCategory = 'breaches' | 'metanoia' | 'wounds';
  * Vue sheet actions
  */
 type GeistSheetActions = {
+	/**
+	 * Remove the character marked as this geist's Owner.
+	 */
+	removeOwner: () => Promise<void>;
+
 	/**
 	 * Add the specified Skill to the Geist's skill list.
 	 *
@@ -71,10 +78,25 @@ export type GeistSheetContext = IBaseSheetContext<GeistDataModel, GeistSheetActi
 };
 
 export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataModel>) {
+	static override get defaultOptions() {
+		return {
+			...super.defaultOptions,
+			tabs: [
+				{
+					navSelector: '.sheet-tabs',
+					contentSelector: '.sheet-body',
+					initial: 'details',
+				},
+			],
+		};
+	}
+
 	/**
 	 * View action bindings
 	 */
 	private actions: GeistSheetActions = {
+		removeOwner: this.removeOwner.bind(this),
+
 		addSkill: this.addSkill.bind(this),
 		removeSkill: this.removeSkill.bind(this),
 
@@ -105,6 +127,12 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 		};
 	}
 
+	async removeOwner() {
+		await this.actor.update({
+			'system.characterUuid': '',
+		});
+	}
+
 	async addSkill(skill: Skill) {
 		const skills = this.actor.system.skills;
 		if (skills.find((s) => s.skill === skill)) {
@@ -119,7 +147,7 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 					expertise: 0,
 					focus: 0,
 				},
-			],
+			].sort((a, b) => a.skill.localeCompare(b.skill)),
 		});
 	}
 
@@ -175,5 +203,20 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 
 	async removeItem(uuid: string) {
 		await this.actor.items.find((i) => i.uuid === uuid)?.delete();
+	}
+
+	protected override async _onDropActor(event: any, data: DropCanvasData<'Actor', InfinityActor<GeistDataModel>>) {
+		if (!this.isEditable || !data.uuid) {
+			return;
+		}
+
+		const actor = (await (InfinityActor.implementation as any).fromDropData(data)) as InfinityActor<CharacterDataModel>;
+		if (!actor || actor.type !== 'character') {
+			return;
+		}
+
+		await this.actor.update({
+			'system.characterUuid': actor.uuid,
+		});
 	}
 }

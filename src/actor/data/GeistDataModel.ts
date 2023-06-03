@@ -37,7 +37,6 @@ export default abstract class GeistDataModel extends HasStress(HasAttributes(Has
 		const breaches = this.harms.breaches;
 		const metanoia = this.harms.metanoia;
 
-		// TODO: Firewall values should all pull from owning character.
 		const hacking = this.skills.find((s) => s.skill === Skill.Hacking);
 		const discipline = this.skills.find((s) => s.skill === Skill.Discipline);
 

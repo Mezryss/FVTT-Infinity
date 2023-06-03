@@ -45,7 +45,7 @@ function closeContextMenu(event: Event) {
 	<div class="relative" @contextmenu="!usePrimaryClick && showContextMenu($event)" @click="usePrimaryClick && showContextMenu($event)">
 		<div
 			v-if="showMenu"
-			class="flex flex-col flex-nowrap gap-0.5 absolute min-w-[100px] border-1 bg-sky-200 border-solid border-sky-700 rounded-md p-0.5 z-10"
+			class="flex flex-col flex-nowrap gap-0.5 absolute min-w-[100px] border-1 bg-sky-200 border-solid border-sky-700 rounded-md p-0.5 z-10 font-roboto-flex text-base text-black"
 			:class="{
 				'left-0': orientation === 'left',
 				'right-0': orientation === 'right',
