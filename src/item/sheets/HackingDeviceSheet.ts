@@ -1,4 +1,3 @@
-import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 
 import InfinityItem from '../InfinityItem';
@@ -7,45 +6,14 @@ import HackingDeviceDataModel, { ProgramItemReference } from '../data/HackingDev
 import HackingDeviceSheetViewVue from '../views/HackingDeviceSheetView.vue';
 
 /**
- * Function callbacks
- */
-type HackingDeviceSheetActions = {
-	/**
-	 * Remove a Program reference from the device's installed program list.
-	 *
-	 * @param uuid UUID of the Program to remove.
-	 */
-	removeProgram: (uuid: string) => Promise<void>;
-};
-
-/**
- * Vue context for Hacking Device sheets.
- */
-export type HackingDeviceSheetContext = IBaseSheetContext<HackingDeviceSheetActions>;
-
-/**
  * Hacking Device sheet controller.
  */
 export default class HackingDeviceSheet extends VueSheet(InfinityItemSheet<HackingDeviceDataModel>) {
-	/**
-	 * Sheet action bindings.
-	 */
-	private actions: HackingDeviceSheetActions = {
-		removeProgram: this.removeProgram.bind(this),
-	};
-
 	/**
 	 * Vue Component
 	 */
 	override get vueComponent() {
 		return HackingDeviceSheetViewVue;
-	}
-
-	/**
-	 * Vue Context
-	 */
-	override async getVueContext(): Promise<HackingDeviceSheetContext> {
-		return IBaseSheetContext.baseContext(this);
 	}
 
 	/**
@@ -72,12 +40,6 @@ export default class HackingDeviceSheet extends VueSheet(InfinityItemSheet<Hacki
 					img: droppedItem.img,
 				},
 			] as ProgramItemReference[],
-		});
-	}
-
-	async removeProgram(uuid: string) {
-		await this.item.update({
-			'system.programs': this.item.system.programs.filter((p) => p.uuid !== uuid),
 		});
 	}
 }

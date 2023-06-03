@@ -1,20 +1,16 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
+import HackingDeviceProgram from '@/components/items/HackingDeviceProgram.vue';
 import { useItemStore } from '@/stores/itemStore';
 
 import InfinityItem from '../InfinityItem';
 import HackingDeviceDataModel from '../data/HackingDeviceDataModel';
 import ProgramDataModel, { ProgramType } from '../data/ProgramDataModel';
-import { HackingDeviceSheetContext } from '../sheets/HackingDeviceSheet';
-
-const context = inject<HackingDeviceSheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
 
 const itemStore = useItemStore<HackingDeviceDataModel>();
 const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
@@ -35,9 +31,10 @@ const upgrades = computed(() =>
 	}),
 );
 
-async function openProgram(uuid: string) {
-	const item = await fromUuid(uuid);
-	await item?.sheet?.render(true);
+async function removeProgram(uuid: string) {
+	await itemStore.update({
+		'system.programs': system.value.programs.filter((p) => p.uuid !== uuid),
+	});
 }
 </script>
 
@@ -83,19 +80,11 @@ async function openProgram(uuid: string) {
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Upgrades</span>
 			<em v-if="upgrades.length === 0" class="ml-4 col-span-5">No Upgrades</em>
-			<div v-for="program in upgrades" :key="program.uuid" class="flex flex-nowrap items-center gap-2 p-1 col-span-5 ml-4 rounded-md border-1 border-solid border-slate-900 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
-				<img class="w-6 h-6" :src="program.img" />
-				<a class="w-full" @click="openProgram(program.uuid)">{{ program.name }}</a>
-				<a class="px-1" @click="actions.removeProgram(program.uuid)"><i class="fas fa-trash" /></a>
-			</div>
+			<HackingDeviceProgram v-for="program in upgrades" :key="program.uuid" :uuid="program.uuid" :editable="editable" @delete="removeProgram(program.uuid)" />
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Installed Programs</span>
 			<em v-if="programs.length === 0" class="ml-4 col-span-5">No Programs Installed</em>
-			<div v-for="program in programs" :key="program.uuid" class="flex flex-nowrap items-center gap-2 p-1 col-span-5 ml-4 rounded-md border-1 border-solid border-slate-900 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
-				<img class="w-6 h-6" :src="program.img" />
-				<a class="w-full" @click="openProgram(program.uuid)">{{ program.name }}</a>
-				<a class="px-1" @click="actions.removeProgram(program.uuid)"><i class="fas fa-trash" /></a>
-			</div>
+			<HackingDeviceProgram v-for="program in programs" :key="program.uuid" :uuid="program.uuid" :editable="editable" @delete="removeProgram(program.uuid)" />
 		</div>
 	</ItemSheet>
 </template>

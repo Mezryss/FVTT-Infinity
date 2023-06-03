@@ -7,9 +7,8 @@ import HasGearData from './templates/HasGearData';
  * Reference to a Special Ability item.
  */
 export type AbilityItemReference = {
-	img: string;
-	name: string;
 	uuid: string;
+	rank: number;
 };
 
 export default abstract class LHostDataModel extends HasGearData(HasBasicItemData(foundry.abstract.TypeDataModel)) {
@@ -97,19 +96,15 @@ export default abstract class LHostDataModel extends HasGearData(HasBasicItemDat
 
 			specialAbilities: new fields.ArrayField(
 				new fields.SchemaField({
-					img: new fields.StringField({
-						initial: '',
-						nullable: false,
-					}),
-
-					name: new fields.StringField({
-						initial: '',
-						nullable: false,
-					}),
-
 					uuid: new fields.StringField({
 						initial: '',
 						nullable: false,
+					}),
+
+					rank: new fields.NumberField({
+						initial: 1,
+						nullable: false,
+						min: 0,
 					}),
 				}),
 				{

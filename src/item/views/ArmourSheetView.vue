@@ -1,33 +1,45 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
 import ItemQualitiesInput from '@/components/itemQualities/ItemQualitiesInput.vue';
+import ArmourLoadoutItemView from '@/components/items/ArmourLoadoutItem.vue';
 import { useItemStore } from '@/stores/itemStore';
 
-import ArmourDataModel, { ArmourType } from '../data/ArmourDataModel';
-import { ArmourSheetContext } from '../sheets/ArmourSheet';
-
-const context = inject<ArmourSheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
+import ArmourDataModel, { ArmourLoadoutItem, ArmourType } from '../data/ArmourDataModel';
 
 const itemStore = useItemStore<ArmourDataModel>();
 const { name, img, system: storeSystem, editable, isOwned } = storeToRefs(itemStore);
 const system = computed(() => storeSystem.value!);
 
-async function loadoutQuantityChanged(uuid: string, newQuantity: number) {
-	await actions.value.updateLoadoutItem(uuid, {
-		quantity: newQuantity,
+async function updateLoadoutItem(uuid: string, newValue: Partial<ArmourLoadoutItem>) {
+	const loadoutCopy = [...system.value.loadout];
+
+	const itemIdx = loadoutCopy.findIndex((i) => i.uuid === uuid);
+	if (itemIdx < 0) {
+		return;
+	}
+
+	loadoutCopy[itemIdx] = {
+		...loadoutCopy[itemIdx],
+		...newValue,
+		// Ensure UUID is never accidentally changed.
+		uuid,
+	};
+
+	await itemStore.update({
+		'system.loadout': loadoutCopy,
 	});
 }
 
-async function openItem(uuid: string) {
-	(await fromUuid(uuid))?.sheet?.render(true);
+async function removeLoadoutItem(uuid: string) {
+	await itemStore.update({
+		'system.loadout': system.value.loadout.filter((i) => i.uuid !== uuid),
+	});
 }
 </script>
 
@@ -96,14 +108,15 @@ async function openItem(uuid: string) {
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Loadout</span>
 			<em v-if="system.loadout.length === 0" class="col-span-5 ml-4">No Installed Equipment</em>
-			<div v-for="item in system.loadout" :key="item.uuid" class="flex flex-nowrap items-center gap-2 p-1 col-span-5 ml-4 rounded-md border-1 border-solid border-slate-900 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
-				<img :src="item.img" class="w-6 h-6 aspect-square border-0" />
-				<a @click="openItem(item.uuid)">{{ item.name }}</a>
-				<input v-if="editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(item.uuid, +($event.target as HTMLInputElement).value)" />
-				<span v-else>({{ item.quantity }})</span>
-				<div class="w-full" />
-				<a v-if="editable" class="px-1" @click="actions.removeLoadoutItem(item.uuid)"><i class="fas fa-trash" /></a>
-			</div>
+			<ArmourLoadoutItemView
+				v-for="item in system.loadout"
+				:key="item.uuid"
+				:uuid="item.uuid"
+				:quantity="item.quantity"
+				:editable="editable"
+				@delete="removeLoadoutItem(item.uuid)"
+				@quantity-changed="updateLoadoutItem(item.uuid, { quantity: $event })"
+			/>
 
 			<strong>Restriction</strong>
 			<Field type="text" class="col-span-4 font-infinity-icon" :value="system.restriction" name="system.restriction" :editable="editable" />

@@ -24,7 +24,7 @@ const qualities = computed(() => (system.value as unknown as HasItemQualities).q
 async function updateQuality(uuid: string, newValue: Partial<ItemQualityReference>) {
 	const qualitiesCopy = [...qualities.value];
 
-	const qualityIdx = qualities.value.findIndex((q) => q.uuid === uuid);
+	const qualityIdx = qualitiesCopy.findIndex((q) => q.uuid === uuid);
 	if (qualityIdx < 0) {
 		return;
 	}

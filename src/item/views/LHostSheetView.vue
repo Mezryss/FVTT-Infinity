@@ -1,24 +1,26 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
+import AbilitySummary from '@/components/items/AbilitySummary.vue';
 import Attribute from '@/data/Attributes';
 import { useItemStore } from '@/stores/itemStore';
 
 import LHostDataModel from '../data/LHostDataModel';
-import { LHostSheetContext } from '../sheets/LHostSheet';
 
 const itemStore = useItemStore<LHostDataModel>();
 const { name, img, system: storeSystem, editable } = storeToRefs(itemStore);
 const system = computed(() => storeSystem.value!);
 
-const context = inject<LHostSheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
+async function removeAbility(uuid: string) {
+	await itemStore.update({
+		'system.specialAbilities': system.value.specialAbilities.filter((a) => a.uuid !== uuid),
+	});
+}
 </script>
 
 <template>
@@ -60,10 +62,8 @@ const actions = computed(() => context.actions!);
 
 			<template v-if="system.specialAbilities.length > 0">
 				<span class="text-lg font-orbitron font-semibold col-span-5">Special Abilities</span>
-				<div class="flex items-center gap-2 col-span-5 ml-4" v-for="(ability, index) in system.specialAbilities" :key="ability.uuid">
-					<img class="w-6 h-6" :src="ability.img" />
-					<a class="w-full" @click="actions.openAbility(index)">{{ ability.name }}</a>
-					<a class="px-1" @click="actions.removeAbility(index)"><i class="fas fa-trash" /></a>
+				<div class="ml-4 col-span-5">
+					<AbilitySummary v-for="ability in system.specialAbilities" :key="ability.uuid" :uuid="ability.uuid" :rank="ability.rank" :editable="editable" @delete="removeAbility(ability.uuid)" />
 				</div>
 			</template>
 		</div>

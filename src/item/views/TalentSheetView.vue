@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import Enriched from '@/components/Enriched.vue';
 import Field from '@/components/Field.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
@@ -13,14 +12,10 @@ import { useItemStore } from '@/stores/itemStore';
 
 import InfinityItem from '../InfinityItem';
 import TalentDataModel, { TalentPrerequisite } from '../data/TalentDataModel';
-import { TalentSheetContext } from '../sheets/TalentSheet';
 
 const itemStore = useItemStore<TalentDataModel>();
 const { name, img, system: storeSystem, isOwned } = storeToRefs(itemStore);
 const system = computed(() => storeSystem.value!);
-
-const context = inject<TalentSheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
 
 /**
  * All of the non-talent (Skill Expertise, Skill Focus, and Misc.) prerequisites for display first.
@@ -58,43 +53,44 @@ function recurseTalentPrerequisites(uuids: string[]): string[] {
 }
 
 /**
- * Updates the type of the prerequisite at a given index.
- *
- * @param index Index for the prerequisite to update.
- * @param event Raw HTML Event to fetch the new value from.
- */
-async function updatePrereqType(index: number, event: Event) {
-	const newType = (event.target as HTMLSelectElement).value as TalentPrerequisite.Type;
-
-	let value = system.value.prerequisites[index].value;
-
-	if (TalentPrerequisite.Type.numeric.includes(newType)) {
-		value = +value;
-
-		if (isNaN(value)) {
-			value = 0;
-		}
-	}
-
-	await actions.value.updatePrerequisite(index, {
-		type: newType,
-		value,
-	});
-}
-
-/**
  * Updates the value of the prerequisite at a given index.
  *
  * @param index Index for the prerequisite to update.
  * @param value New value for the prereq.
  */
-async function updatePrereqValue(index: number, value: string | number) {
-	await actions.value.updatePrerequisite(index, {
-		type: system.value.prerequisites[index].type,
-		value,
-	});
+async function updatePrerequisite(index: number, newValue: Partial<TalentPrerequisite>) {
+	const prereqCopy = [...system.value.prerequisites];
 
-	return 0;
+	prereqCopy[index] = {
+		...prereqCopy[index],
+		...newValue,
+	};
+
+	await itemStore.update({
+		'system.prerequisites': prereqCopy,
+	});
+}
+
+async function addPrerequisite() {
+	await itemStore.update({
+		'system.prerequisites': [
+			...system.value.prerequisites,
+			{
+				type: TalentPrerequisite.Type.SkillExpertise,
+				value: 1,
+			} as TalentPrerequisite,
+		],
+	});
+}
+
+async function removePrerequisite(index: number) {
+	const prereqCopy = [...system.value.prerequisites];
+
+	prereqCopy.splice(index, 1);
+
+	await itemStore.update({
+		'system.prerequisites': prereqCopy,
+	});
 }
 </script>
 
@@ -168,11 +164,11 @@ async function updatePrereqValue(index: number, value: string | number) {
 			<div class="flex flex-col items-start gap-2">
 				<div class="flex gap-2 w-full items-center border-0 border-sky-400 border-opacity-50 border-solid border-b-[1px]">
 					<span class="w-full font-orbitron font-semibold">Prerequisites</span>
-					<a class="text-sm" @click="actions.addPrerequisite"><i class="fas fa-plus" /></a>
+					<a class="text-sm" @click="addPrerequisite"><i class="fas fa-plus" /></a>
 				</div>
 
 				<div v-for="(prereq, index) in system.prerequisites" :key="index" class="flex gap-2 w-full items-center">
-					<select @change="updatePrereqType(index, $event)" :value="prereq.type" :disabled="prereq.type === TalentPrerequisite.Type.Talent" class="px-2">
+					<select @change="updatePrerequisite(index, { type: ($event.target as HTMLSelectElement).value as TalentPrerequisite.Type })" :value="prereq.type" :disabled="prereq.type === TalentPrerequisite.Type.Talent" class="px-2">
 						<option :value="TalentPrerequisite.Type.SkillExpertise"><Localized :label="`Infinity.Skill.${system.skill}`" /> Expertise</option>
 						<option :value="TalentPrerequisite.Type.SkillFocus"><Localized :label="`Infinity.Skill.${system.skill}`" /> Focus</option>
 						<option :value="TalentPrerequisite.Type.Other">Other</option>
@@ -183,12 +179,12 @@ async function updatePrereqValue(index: number, value: string | number) {
 					<Enriched v-if="prereq.type === TalentPrerequisite.Type.Talent" class="w-full text-center" :value="prereq.value.toString()" />
 
 					<!-- Skill Value -->
-					<Field v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="prereq.value" :min="0" @change="(value: string|number) => updatePrereqValue(index, value)" />
+					<Field v-else-if="TalentPrerequisite.Type.numeric.includes(prereq.type)" class="w-full" type="number" :value="+prereq.value" :min="0" @change="updatePrerequisite(index, { value: +$event })" />
 
 					<!-- Catch-All -->
-					<Field v-else class="w-full" type="text" :value="prereq.value" @change="(value: string|number) => updatePrereqValue(index, value)" />
+					<Field v-else class="w-full" type="text" :value="prereq.value" @change="updatePrerequisite(index, { value: $event })" />
 
-					<a class="text-sm" @click="actions.removePrerequisite(index)"><i class="fas fa-trash" /></a>
+					<a class="text-sm" @click="removePrerequisite(index)"><i class="fas fa-trash" /></a>
 				</div>
 			</div>
 		</div>

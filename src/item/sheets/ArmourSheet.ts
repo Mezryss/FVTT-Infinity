@@ -1,9 +1,8 @@
-import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
-import ArmourDataModel, { ArmourLoadoutItem } from '../data/ArmourDataModel';
+import ArmourDataModel from '../data/ArmourDataModel';
 import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import ArmourSheetViewVue from '../views/ArmourSheetView.vue';
 
@@ -13,54 +12,14 @@ import ArmourSheetViewVue from '../views/ArmourSheetView.vue';
 export const ARMOUR_LOADOUT_ALLOWLIST = ['ammunition', 'augmentation', 'contagion', 'explosive', 'gear', 'hackingDevice', 'weapon'];
 
 /**
- * Vue sheet actions
- */
-type ArmourSheetActions = {
-	/**
-	 * Update the Loadout item with the specified UUID.
-	 *
-	 * @param uuid UUID of the contents to be updated.
-	 * @param newValue New values to be used.
-	 */
-	updateLoadoutItem: (uuid: string, newValues: Partial<ArmourLoadoutItem>) => Promise<void>;
-
-	/**
-	 * Remove the Loadout item at the specified index.
-	 *
-	 * @param uuid UUID to be removed.
-	 */
-	removeLoadoutItem: (uuid: string) => Promise<void>;
-};
-
-/**
- * Vue context for Armour sheets.
- */
-export type ArmourSheetContext = IBaseSheetContext<ArmourSheetActions>;
-
-/**
  * Armour sheet controller.
  */
 export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataModel>) {
-	/**
-	 * View Actions
-	 */
-	private actions: ArmourSheetActions = {
-		updateLoadoutItem: this.updateLoadoutItem.bind(this),
-		removeLoadoutItem: this.removeLoadoutItem.bind(this),
-	};
-
 	/**
 	 * Vue Component
 	 */
 	override get vueComponent() {
 		return ArmourSheetViewVue;
-	}
-
-	/**
-	 * Vue Context
-	 */
-	override async getVueContext(): Promise<ArmourSheetContext> {
-		return IBaseSheetContext.baseContext(this);
 	}
 
 	/**
@@ -104,42 +63,5 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 				'system.loadout': loadout,
 			});
 		}
-	}
-
-	/**
-	 * Update the Loadout item with the specified UUID.
-	 *
-	 * @param uuid UUID of the contents to be updated.
-	 * @param newValue New values to be used.
-	 */
-	async updateLoadoutItem(uuid: string, newValues: Partial<ArmourLoadoutItem>) {
-		const loadout = [...this.item.system.loadout];
-
-		const itemIdx = loadout.findIndex((i) => i.uuid === uuid);
-		if (itemIdx < 0) {
-			return;
-		}
-
-		loadout[itemIdx] = {
-			...loadout[itemIdx],
-			...newValues,
-			// Ensure UUID is never accidentally changed.
-			uuid: loadout[itemIdx].uuid,
-		};
-
-		await this.item.update({
-			'system.loadout': loadout,
-		});
-	}
-
-	/**
-	 * Remove the Loadout item at the specified index.
-	 *
-	 * @param uuid UUID to be removed.
-	 */
-	async removeLoadoutItem(uuid: string) {
-		await this.item.update({
-			'system.loadout': this.item.system.loadout.filter((i) => i.uuid !== uuid),
-		});
 	}
 }
