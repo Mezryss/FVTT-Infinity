@@ -23,7 +23,7 @@ type AdversarySheetActions = {
 /**
  * Vue Context for Adversary Sheets
  */
-export type AdversarySheetContext = IBaseSheetContext<AdversaryDataModel, AdversarySheetActions> & {
+export type AdversarySheetContext = IBaseSheetContext<AdversarySheetActions> & {
 	/**
 	 * Weapons the Actor has on its sheet.
 	 */

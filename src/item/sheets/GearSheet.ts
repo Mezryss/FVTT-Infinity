@@ -8,7 +8,7 @@ import GearDataModel from '../data/GearDataModel';
 import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import GearSheetView from '../views/GearSheetView.vue';
 
-export type GearSheetContext = IBaseSheetContext<GearDataModel, ItemQualitiesActions>;
+export type GearSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Gear sheet controller.

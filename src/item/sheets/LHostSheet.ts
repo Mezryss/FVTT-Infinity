@@ -28,7 +28,7 @@ type LHostSheetActions = {
 /**
  * Vue context for LHost sheets.
  */
-export type LHostSheetContext = IBaseSheetContext<LHostDataModel, LHostSheetActions>;
+export type LHostSheetContext = IBaseSheetContext<LHostSheetActions>;
 
 /**
  * LHost sheet controller.

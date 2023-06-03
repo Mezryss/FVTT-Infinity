@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
 
 import { RootContext } from '@/VueSheet';
@@ -17,22 +18,23 @@ import TabContent from '@/components/tabs/TabContent.vue';
 import TabLink from '@/components/tabs/TabLink.vue';
 import Attribute from '@/data/Attributes';
 import { WeaponType } from '@/item/data/WeaponDataModel';
+import { useActorStore } from '@/stores/actorStore';
 
-import { AdversaryType } from '../data/AdversaryDataModel';
+import AdversaryDataModel, { AdversaryType } from '../data/AdversaryDataModel';
 import { AdversarySheetContext } from '../sheets/AdversarySheet';
 
 const context = inject<AdversarySheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+
+const actorStore = useActorStore<AdversaryDataModel>();
+const { name, img, system: storeSystem, type } = storeToRefs(actorStore);
+const system = computed(() => storeSystem.value!);
 
 const attacks = computed(() => context.attacks);
 const abilities = computed(() => context.abilities);
 const gear = computed(() => context.gear);
 
-const isRemote = computed(() => context.actorType === 'remote');
+const isRemote = computed(() => type.value === 'remote');
 
 async function openItem(uuid: string) {
 	const item = await fromUuid(uuid);

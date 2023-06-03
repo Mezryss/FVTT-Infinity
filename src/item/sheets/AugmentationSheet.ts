@@ -11,7 +11,7 @@ import AugmentationSheetView from '../views/AugmentationSheetView.vue';
 /**
  * Vue context for Augmentation sheets.
  */
-export type AugmentationSheetContext = IBaseSheetContext<AugmentationDataModel, ItemQualitiesActions>;
+export type AugmentationSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Augmentation sheet controller.

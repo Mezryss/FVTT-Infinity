@@ -11,7 +11,7 @@ import WeaponSheetView from '../views/WeaponSheetView.vue';
 /**
  * Vue context for Weapon sheets.
  */
-export type WeaponSheetContext = IBaseSheetContext<WeaponDataModel, ItemQualitiesActions>;
+export type WeaponSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Weapon sheet controller.

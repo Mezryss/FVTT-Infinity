@@ -71,7 +71,7 @@ type GeistSheetActions = {
 /**
  * Vue Context for Geist Sheets
  */
-export type GeistSheetContext = IBaseSheetContext<GeistDataModel, GeistSheetActions> & {
+export type GeistSheetContext = IBaseSheetContext<GeistSheetActions> & {
 	/**
 	 * Talent items on the actor.
 	 */

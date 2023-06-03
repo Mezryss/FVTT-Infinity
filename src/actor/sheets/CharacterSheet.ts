@@ -26,7 +26,7 @@ type CharacterSheetActions = {
 /**
  * Vue context for Character sheets.
  */
-export type CharacterSheetContext = IBaseSheetContext<CharacterDataModel, CharacterSheetActions> & {
+export type CharacterSheetContext = IBaseSheetContext<CharacterSheetActions> & {
 	/**
 	 * Talents & Special Abilities.
 	 */

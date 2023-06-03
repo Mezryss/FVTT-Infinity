@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
 
 import { RootContext } from '@/VueSheet';
@@ -7,15 +8,17 @@ import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
 import Attribute from '@/data/Attributes';
 import Skill from '@/data/Skill';
+import { useActorStore } from '@/stores/actorStore';
 
+import CharacterDataModel from '../data/CharacterDataModel';
 import { CharacterSheetContext } from '../sheets/CharacterSheet';
 
 const context = inject<CharacterSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+
+const actorStore = useActorStore<CharacterDataModel>();
+const { name, img, system: storeSystem } = storeToRefs(actorStore);
+const system = computed(() => storeSystem.value!);
 
 const abilities = computed(() => context.abilities);
 const inventory = computed(() => context.inventory);

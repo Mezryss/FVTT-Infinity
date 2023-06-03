@@ -11,7 +11,7 @@ import ExplosiveSheetView from '../views/ExplosiveSheetView.vue';
 /**
  * Vue context for Explosive sheets.
  */
-export type ExplosiveSheetContext = IBaseSheetContext<ExplosiveDataModel, ItemQualitiesActions>;
+export type ExplosiveSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Explosive sheet controller.

@@ -11,7 +11,7 @@ import AmmunitionSheetView from '../views/AmmunitionSheetView.vue';
 /**
  * Vue context for Ammunition sheets.
  */
-export type AmmunitionSheetContext = IBaseSheetContext<AmmunitionDataModel, ItemQualitiesActions>;
+export type AmmunitionSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Ammunition sheet controller.

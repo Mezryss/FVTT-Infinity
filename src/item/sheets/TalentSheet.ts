@@ -29,7 +29,7 @@ type TalentSheetActions = {
 /**
  * Vue context for Talent sheets.
  */
-export type TalentSheetContext = IBaseSheetContext<TalentDataModel, TalentSheetActions>;
+export type TalentSheetContext = IBaseSheetContext<TalentSheetActions>;
 
 /**
  * Talent sheet controller.

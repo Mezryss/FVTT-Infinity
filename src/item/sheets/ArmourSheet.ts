@@ -36,7 +36,7 @@ type ArmourSheetActions = ItemQualitiesActions & {
 /**
  * Vue context for Armour sheets.
  */
-export type ArmourSheetContext = IBaseSheetContext<ArmourDataModel, ArmourSheetActions>;
+export type ArmourSheetContext = IBaseSheetContext<ArmourSheetActions>;
 
 /**
  * Armour sheet controller.

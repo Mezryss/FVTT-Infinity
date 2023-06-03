@@ -1,4 +1,6 @@
 import InfinityItem from '@/item/InfinityItem';
+import { useActorStore } from '@/stores/actorStore';
+import { useDocumentStore } from '@/stores/documentStore';
 
 import InfinityActor from './InfinityActor';
 
@@ -14,5 +16,20 @@ export default class InfinityActorSheet<ActorDataModelType extends foundry.abstr
 			...super.defaultOptions,
 			classes: ['infinity', 'sheet', 'actor'],
 		};
+	}
+
+	get documentUuid() {
+		return this.actor.uuid;
+	}
+
+	async updateStores() {
+		const uuid = this.actor.uuid;
+
+		const documentStore = useDocumentStore(uuid);
+		documentStore.document = this.actor;
+		documentStore.editable = this.isEditable;
+
+		const actorStore = useActorStore(uuid);
+		actorStore.setActor(this.actor);
 	}
 }

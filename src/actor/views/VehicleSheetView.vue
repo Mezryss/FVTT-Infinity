@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
 
 import { RootContext } from '@/VueSheet';
@@ -6,15 +7,17 @@ import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import { WeaponType } from '@/item/data/WeaponDataModel';
+import { useActorStore } from '@/stores/actorStore';
 
+import VehicleDataModel from '../data/VehicleDataModel';
 import { VehicleSheetContext } from '../sheets/VehicleSheet';
 
 const context = inject<VehicleSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+
+const actorStore = useActorStore<VehicleDataModel>();
+const { name, img, system: storeSystem } = storeToRefs(actorStore);
+const system = computed(() => storeSystem.value!);
 
 const abilities = computed(() => context.abilities);
 const gear = computed(() => context.gear);

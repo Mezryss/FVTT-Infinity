@@ -1,6 +1,8 @@
 import { createPinia } from 'pinia';
 
+import InfinityActor from './actor/InfinityActor';
 import InfinityItem from './item/InfinityItem';
+import { useActorStore } from './stores/actorStore';
 import { useItemStore } from './stores/itemStore';
 
 export namespace StoreManager {
@@ -12,19 +14,16 @@ function updateItemStore(item: Item) {
 	itemStore.setItem(item as InfinityItem);
 }
 
-Hooks.on('createActor', (...args: any[]) => {
-	console.warn('CREATE ACTOR');
-	console.log(args);
-});
+function updateActorStore(actor: Actor) {
+	const actorStore = useActorStore(actor.uuid);
+	actorStore.setActor(actor as InfinityActor);
+}
 
-Hooks.on('updateActor', (...args: any[]) => {
-	console.warn('UPDATE ACTOR');
-	console.log(args);
-});
-
-Hooks.on('deleteActor', (...args: any[]) => {
-	console.warn('DELETE ACTOR');
-	console.log(args);
+Hooks.on('createActor', updateActorStore);
+Hooks.on('updateActor', updateActorStore);
+Hooks.on('deleteActor', (actor: Actor) => {
+	const actorStore = useActorStore(actor.uuid);
+	actorStore.setActor(null);
 });
 
 Hooks.on('createItem', updateItemStore);

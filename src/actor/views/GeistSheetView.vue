@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { computed, inject } from 'vue';
 
 import { RootContext } from '@/VueSheet';
@@ -16,17 +17,19 @@ import TabContent from '@/components/tabs/TabContent.vue';
 import TabLink from '@/components/tabs/TabLink.vue';
 import Attribute from '@/data/Attributes';
 import Skill from '@/data/Skill';
+import { useActorStore } from '@/stores/actorStore';
 
 import InfinityActor from '../InfinityActor';
 import CharacterDataModel from '../data/CharacterDataModel';
+import GeistDataModel from '../data/GeistDataModel';
 import { GeistSheetContext } from '../sheets/GeistSheet';
 
 const context = inject<GeistSheetContext>(RootContext)!;
-
 const actions = computed(() => context.actions!);
-const name = computed(() => context.name);
-const img = computed(() => context.img);
-const system = computed(() => context.system);
+
+const actorStore = useActorStore<GeistDataModel>();
+const { name, img, system: storeSystem } = storeToRefs(actorStore);
+const system = computed(() => storeSystem.value!);
 
 const owningCharacter = computed(() => {
 	if (system.value.characterUuid) {

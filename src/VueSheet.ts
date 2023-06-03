@@ -13,10 +13,16 @@ export const RootContext = Symbol('Vue Root Context');
 export const DocumentUuid = Symbol('Document UUID');
 
 /**
+ * For all applications, injection point for the App ID.
+ */
+export const AppId = Symbol('Application ID');
+
+/**
  * Typing data for Vue Sheet constructors. The functions defined here are the minimum from Foundry needed for proper type-checking within VueSheet.
  */
 type Constructor = new (...args: any[]) => {
 	/* Critical items from Application classes */
+	id: string;
 	activateListeners(html: JQuery): void;
 	close(options?: {}): Promise<void>;
 
@@ -90,6 +96,7 @@ export function VueSheet<BaseClass extends Constructor, ContextType extends { [k
 				this.vueApp = createApp(this.vueComponent);
 				this.vueApp.use(StoreManager.instance);
 				this.vueApp.provide(RootContext, this.vueContext);
+				this.vueApp.provide(AppId, this.id);
 				this.vueApp.provide(DocumentUuid, this.documentUuid);
 
 				this.updateStores?.();

@@ -21,7 +21,7 @@ type HackingDeviceSheetActions = {
 /**
  * Vue context for Hacking Device sheets.
  */
-export type HackingDeviceSheetContext = IBaseSheetContext<HackingDeviceDataModel, HackingDeviceSheetActions>;
+export type HackingDeviceSheetContext = IBaseSheetContext<HackingDeviceSheetActions>;
 
 /**
  * Hacking Device sheet controller.

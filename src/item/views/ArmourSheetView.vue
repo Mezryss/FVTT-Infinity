@@ -92,17 +92,17 @@ async function openItem(uuid: string) {
 				/>
 			</template>
 
-			<ItemQualitiesInput :qualities="system.qualities" :editable="context.editable" class="col-span-5" />
+			<ItemQualitiesInput :qualities="system.qualities" :editable="editable" class="col-span-5" />
 
 			<span class="text-lg font-orbitron font-semibold col-span-5">Loadout</span>
 			<em v-if="system.loadout.length === 0" class="col-span-5 ml-4">No Installed Equipment</em>
 			<div v-for="item in system.loadout" :key="item.uuid" class="flex flex-nowrap items-center gap-2 p-1 col-span-5 ml-4 rounded-md border-1 border-solid border-slate-900 bg-slate-900 bg-opacity-10 hover:bg-opacity-20">
 				<img :src="item.img" class="w-6 h-6 aspect-square border-0" />
 				<a @click="openItem(item.uuid)">{{ item.name }}</a>
-				<input v-if="context.editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(item.uuid, +($event.target as HTMLInputElement).value)" />
+				<input v-if="editable" type="number" :value="item.quantity" :min="0" class="text-center w-10" @change="loadoutQuantityChanged(item.uuid, +($event.target as HTMLInputElement).value)" />
 				<span v-else>({{ item.quantity }})</span>
 				<div class="w-full" />
-				<a v-if="context.editable" class="px-1" @click="actions.removeLoadoutItem(item.uuid)"><i class="fas fa-trash" /></a>
+				<a v-if="editable" class="px-1" @click="actions.removeLoadoutItem(item.uuid)"><i class="fas fa-trash" /></a>
 			</div>
 
 			<strong>Restriction</strong>

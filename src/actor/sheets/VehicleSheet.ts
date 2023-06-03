@@ -20,7 +20,7 @@ type VehicleSheetActions = {
 /**
  * Vue Context for Vehicle Sheets
  */
-export type VehicleSheetContext = IBaseSheetContext<VehicleDataModel, VehicleSheetActions> & {
+export type VehicleSheetContext = IBaseSheetContext<VehicleSheetActions> & {
 	/**
 	 * Vehicle's Special Abilities.
 	 */

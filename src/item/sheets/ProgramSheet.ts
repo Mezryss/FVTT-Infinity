@@ -11,7 +11,7 @@ import ProgramSheetView from '../views/ProgramSheetView.vue';
 /**
  * Vue context for Program sheets.
  */
-export type ProgramSheetContext = IBaseSheetContext<ProgramDataModel, ItemQualitiesActions>;
+export type ProgramSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Program sheet controller.
