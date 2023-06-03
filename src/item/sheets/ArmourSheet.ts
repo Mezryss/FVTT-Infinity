@@ -3,7 +3,6 @@ import { VueSheet } from '@/VueSheet';
 
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
-import { ItemQualitiesActions, addItemQuality, removeItemQuality, updateItemQuality } from '../ItemQualities';
 import ArmourDataModel, { ArmourLoadoutItem } from '../data/ArmourDataModel';
 import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import ArmourSheetViewVue from '../views/ArmourSheetView.vue';
@@ -16,7 +15,7 @@ export const ARMOUR_LOADOUT_ALLOWLIST = ['ammunition', 'augmentation', 'contagio
 /**
  * Vue sheet actions
  */
-type ArmourSheetActions = ItemQualitiesActions & {
+type ArmourSheetActions = {
 	/**
 	 * Update the Loadout item with the specified UUID.
 	 *
@@ -46,10 +45,6 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 	 * View Actions
 	 */
 	private actions: ArmourSheetActions = {
-		addItemQuality: addItemQuality.bind(this),
-		updateItemQuality: updateItemQuality.bind(this),
-		removeItemQuality: removeItemQuality.bind(this),
-
 		updateLoadoutItem: this.updateLoadoutItem.bind(this),
 		removeLoadoutItem: this.removeLoadoutItem.bind(this),
 	};
@@ -86,7 +81,7 @@ export default class ArmourSheet extends VueSheet(InfinityItemSheet<ArmourDataMo
 		const droppedUuid = droppedItem.uuid;
 
 		if (droppedItem.type === 'itemQuality') {
-			await this.actions.addItemQuality(droppedItem as InfinityItem<ItemQualityDataModel>);
+			await this.addItemQuality(droppedItem as InfinityItem<ItemQualityDataModel>);
 		} else {
 			const loadout = [...this.item.system.loadout];
 			const existingIndex = loadout.findIndex((i) => i.uuid === droppedUuid);

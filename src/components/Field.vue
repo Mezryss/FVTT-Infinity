@@ -1,3 +1,7 @@
+<!--
+	Provides a source of consistent styling for an input field.
+-->
+
 <script lang="ts" setup>
 withDefaults(
 	defineProps<{

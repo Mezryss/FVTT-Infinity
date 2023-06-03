@@ -46,6 +46,16 @@ export function useItemStore<DataModelType extends foundry.abstract.DataModel = 
 			visible.value = item?.visible ?? false;
 		}
 
+		async function openSheet() {
+			const item = await fromUuid(uuid!);
+			await item?.sheet?.render(true);
+		}
+
+		async function update(values: Record<string, any>) {
+			const item = await fromUuid(uuid!);
+			await item?.update(values);
+		}
+
 		if (!exists.value) {
 			setItem(fromUuidSync(uuid!) as InfinityItem<DataModelType>);
 		}
@@ -67,6 +77,9 @@ export function useItemStore<DataModelType extends foundry.abstract.DataModel = 
 			limited: readonly(limited),
 			visible: readonly(visible),
 			editable,
+
+			openSheet,
+			update,
 
 			setItem,
 		};

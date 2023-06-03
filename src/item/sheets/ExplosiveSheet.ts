@@ -1,43 +1,20 @@
-import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
 
 import InfinityItem from '../InfinityItem';
 import InfinityItemSheet, { DropData } from '../InfinityItemSheet';
-import { ItemQualitiesActions, addItemQuality, removeItemQuality, updateItemQuality } from '../ItemQualities';
 import ExplosiveDataModel from '../data/ExplosiveDataModel';
 import ItemQualityDataModel from '../data/ItemQualityDataModel';
 import ExplosiveSheetView from '../views/ExplosiveSheetView.vue';
-
-/**
- * Vue context for Explosive sheets.
- */
-export type ExplosiveSheetContext = IBaseSheetContext<ItemQualitiesActions>;
 
 /**
  * Explosive sheet controller.
  */
 export default class ExplosiveSheet extends VueSheet(InfinityItemSheet<ExplosiveDataModel>) {
 	/**
-	 * View Actions
-	 */
-	private actions: ItemQualitiesActions = {
-		addItemQuality: addItemQuality.bind(this),
-		removeItemQuality: removeItemQuality.bind(this),
-		updateItemQuality: updateItemQuality.bind(this),
-	};
-
-	/**
 	 * Vue Component
 	 */
 	override get vueComponent() {
 		return ExplosiveSheetView;
-	}
-
-	/**
-	 * Vue Context
-	 */
-	override async getVueContext(): Promise<ExplosiveSheetContext> {
-		return IBaseSheetContext.baseContext(this);
 	}
 
 	/**
@@ -51,6 +28,6 @@ export default class ExplosiveSheet extends VueSheet(InfinityItemSheet<Explosive
 		}
 
 		const droppedItem = (await (InfinityItem.implementation as any).fromDropData(data)) as InfinityItem<ItemQualityDataModel> | undefined;
-		await this.actions.addItemQuality(droppedItem);
+		await this.addItemQuality(droppedItem);
 	}
 }

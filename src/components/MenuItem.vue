@@ -1,3 +1,7 @@
+<!--
+	Provides styling for items within a ContextMenu
+-->
+
 <template>
 	<a class="flex flex-nowrap items-center gap-0.5 px-0.5">
 		<div class="min-w-[1.25em]">

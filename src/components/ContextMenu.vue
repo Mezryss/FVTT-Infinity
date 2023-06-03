@@ -1,3 +1,7 @@
+<!--
+	Wraps the default slot with a stylized context menu.
+-->
+
 <script lang="ts" setup>
 import { ref } from 'vue';
 

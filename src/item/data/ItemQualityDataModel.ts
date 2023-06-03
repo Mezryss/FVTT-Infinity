@@ -1,6 +1,16 @@
 import HasBasicItemData from './templates/HasBasicItemData';
 
 /**
+ * A simple reference to a data model that has Item Qualities.
+ */
+export type HasItemQualities = {
+	/**
+	 * Current selection of Item Qualities.
+	 */
+	qualities: ItemQualityReference[];
+};
+
+/**
  * A reference to an Item Quality instance.
  */
 export type ItemQualityReference = {

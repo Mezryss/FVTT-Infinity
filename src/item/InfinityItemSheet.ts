@@ -2,6 +2,7 @@ import { useDocumentStore } from '@/stores/documentStore';
 import { useItemStore } from '@/stores/itemStore';
 
 import InfinityItem from './InfinityItem';
+import ItemQualityDataModel, { HasItemQualities, ItemQualityReference } from './data/ItemQualityDataModel';
 
 /**
  * Simplified drop data structure.
@@ -34,10 +35,16 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 		};
 	}
 
+	/**
+	 * Convenience accessor for the Item UUID.
+	 */
 	get documentUuid() {
 		return this.item.uuid;
 	}
 
+	/**
+	 * Update Pinia stores.
+	 */
 	async updateStores() {
 		const uuid = this.item.uuid;
 
@@ -47,6 +54,41 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 
 		const itemStore = useItemStore(uuid);
 		itemStore.setItem(this.item);
+	}
+
+	/**
+	 * Processes and adds an Item Quality to the sheet.
+	 *
+	 * @param quality Item Quality to add to the sheet.
+	 */
+	protected async addItemQuality(quality?: InfinityItem<ItemQualityDataModel>) {
+		const qualities = (this.item.system as unknown as HasItemQualities).qualities;
+
+		if (qualities === undefined) {
+			return;
+		}
+
+		// Don't process undefined items or items that aren't Item Qualities.
+		if (!quality || quality.type !== 'itemQuality') {
+			return;
+		}
+
+		// Don't allow duplicate copies of the same Item Quality
+		if (qualities.find((q) => q.uuid === quality.uuid)) {
+			return;
+		}
+
+		await this.item.update({
+			'system.qualities': [
+				...qualities,
+				{
+					uuid: quality.uuid,
+					name: quality.name,
+					rank: quality.system.isRanked ? 1 : 0,
+					specialization: '',
+				},
+			] as ItemQualityReference[],
+		});
 	}
 
 	/**
@@ -71,14 +113,25 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 	 * Called when an ActiveEffect is dropped on the item sheet.
 	 */
 	protected async _onDropActiveEffect(_event: DragEvent, _data: DropData) {}
+
 	/**
 	 * Called when an Actor is dropped on the item sheet.
 	 */
 	protected async _onDropActor(_event: DragEvent, _data: DropData) {}
+
 	/**
 	 * Called when an Item is dropped on the item sheet.
 	 */
-	protected async _onDropItem(_event: DragEvent, _data: DropData) {}
+	protected async _onDropItem(_event: DragEvent, data: DropData) {
+		// Handle drag-and-drop support for Item Qualities.
+		if (!this.isEditable || !data.uuid) {
+			return;
+		}
+
+		const droppedItem = (await (InfinityItem.implementation as any).fromDropData(data)) as InfinityItem<ItemQualityDataModel> | undefined;
+		await this.addItemQuality(droppedItem);
+	}
+
 	/**
 	 * Called when a Folder is dropped on the item sheet.
 	 */

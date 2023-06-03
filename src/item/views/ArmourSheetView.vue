@@ -5,9 +5,9 @@ import { computed, inject } from 'vue';
 import { RootContext } from '@/VueSheet';
 import Field from '@/components/Field.vue';
 import GearSidebar from '@/components/GearSidebar.vue';
-import ItemQualitiesInput from '@/components/ItemQualitiesInput.vue';
 import ItemSheet from '@/components/ItemSheet.vue';
 import Localized from '@/components/Localized.vue';
+import ItemQualitiesInput from '@/components/itemQualities/ItemQualitiesInput.vue';
 import { useItemStore } from '@/stores/itemStore';
 
 import ArmourDataModel, { ArmourType } from '../data/ArmourDataModel';

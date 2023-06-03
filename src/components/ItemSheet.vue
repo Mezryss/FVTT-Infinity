@@ -63,7 +63,6 @@ const slots = useSlots();
 		</TitleBox>
 
 		<div class="flex flex-nowrap h-full w-full gap-2">
-			<!-- TODO: Make the sidebar responsive to container (window) width. -->
 			<div v-if="slots.sidebar" class="h-full w-48 flex-shrink-0 bg-sky-400 bg-opacity-20 rounded-md p-1">
 				<div class="flex flex-col flex-nowrap w-full h-full gap-0.5 px-1">
 					<slot name="sidebar" />

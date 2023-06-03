@@ -1,3 +1,7 @@
+<!--
+	Provides sidebar fields common to gear items.
+-->
+
 <script lang="ts" setup>
 import { ItemSize } from '@/item/data/templates/HasGearData';
 

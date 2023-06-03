@@ -94,6 +94,7 @@ export function VueSheet<BaseClass extends Constructor, ContextType extends { [k
 			// Initialize the vue app if necessary
 			if (!this.vueApp) {
 				this.vueApp = createApp(this.vueComponent);
+				StoreManager.initialized = true;
 				this.vueApp.use(StoreManager.instance);
 				this.vueApp.provide(RootContext, this.vueContext);
 				this.vueApp.provide(AppId, this.id);

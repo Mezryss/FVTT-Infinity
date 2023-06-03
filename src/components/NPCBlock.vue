@@ -1,3 +1,7 @@
+<!--
+	Reusable wrapper component for stat blocks in NPC sheets.
+-->
+
 <script lang="ts" setup>
 defineProps<{
 	label: string;
