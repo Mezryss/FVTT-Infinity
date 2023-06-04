@@ -9,7 +9,7 @@
 	"private": true,
 	"scripts": {
 		"build:data": "gulp",
-		"build": "vue-tsc --emitDeclarationOnly && yarn build:data && vite build",
+		"build": "vue-tsc && yarn build:data && vite build",
 		"dev": "concurrently \"gulp watch\" \"vite\"",
 		"watch:data": "gulp watch",
 		"lint:eslint": "eslint src --ext .vue,.js,.ts",

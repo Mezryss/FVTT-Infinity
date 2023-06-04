@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import ContextMenu from '@/components/ContextMenu.vue';
 import Editor from '@/components/Editor.vue';
 import Enriched from '@/components/Enriched.vue';
@@ -18,21 +17,20 @@ import TabBar from '@/components/tabs/TabBar.vue';
 import TabContent from '@/components/tabs/TabContent.vue';
 import TabLink from '@/components/tabs/TabLink.vue';
 import Attribute from '@/data/Attributes';
-import { WeaponType } from '@/item/data/WeaponDataModel';
+import InfinityItem from '@/item/InfinityItem';
+import AbilityDataModel from '@/item/data/AbilityDataModel';
+import WeaponDataModel, { WeaponType } from '@/item/data/WeaponDataModel';
 import { useActorStore } from '@/stores/actorStore';
 
 import AdversaryDataModel, { AdversaryType } from '../data/AdversaryDataModel';
-import { AdversarySheetContext } from '../sheets/AdversarySheet';
-
-const context = inject<AdversarySheetContext>(RootContext)!;
 
 const actorStore = useActorStore<AdversaryDataModel>();
-const { name, img, system: storeSystem, type } = storeToRefs(actorStore);
+const { name, img, system: storeSystem, type, items } = storeToRefs(actorStore);
 const system = computed(() => storeSystem.value!);
 
-const attacks = computed(() => context.attacks);
-const abilities = computed(() => context.abilities);
-const gear = computed(() => context.gear);
+const attacks = computed(() => items.value.filter(i => i.type === 'weapon') as InfinityItem<WeaponDataModel>[]);
+const abilities = computed(() => items.value.filter(i => i.type === 'ability') as InfinityItem<AbilityDataModel>[]);
+const gear = computed(() => items.value.filter(i => !['ability', 'itemQuality', 'talent', 'weapon'].includes(i.type)));
 
 const isRemote = computed(() => type.value === 'remote');
 

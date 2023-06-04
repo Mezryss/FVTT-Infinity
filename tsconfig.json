@@ -5,9 +5,9 @@
 		"moduleResolution": "Node",
 
 		"baseUrl": ".",
-		"emitDeclarationOnly": true,
-		"declaration": true,
-		"declarationDir": "lib",
+		"noEmit": true,
+		"declaration": false,
+		"disableSizeLimit": true,
 
 		"strict": true,
 

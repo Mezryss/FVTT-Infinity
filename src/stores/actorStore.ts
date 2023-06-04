@@ -3,6 +3,7 @@ import { computed, inject, readonly, ref } from 'vue';
 
 import { DocumentUuid } from '@/VueSheet';
 import InfinityActor from '@/actor/InfinityActor';
+import InfinityItem from '@/item/InfinityItem';
 
 export function useActorStore<DataModelType extends foundry.abstract.DataModel = foundry.abstract.DataModel>(uuid?: string) {
 	if (!uuid) {
@@ -19,6 +20,7 @@ export function useActorStore<DataModelType extends foundry.abstract.DataModel =
 		const img = ref('');
 		const type = ref('invalid');
 		const system = ref<DataModelType>();
+		const items = ref<InfinityItem[]>([]);
 
 		const isEmbedded = ref(false);
 		const isOwner = ref(false);
@@ -35,6 +37,8 @@ export function useActorStore<DataModelType extends foundry.abstract.DataModel =
 			img.value = actor?.img ?? '';
 			type.value = actor?.type ?? 'invalid';
 			system.value = actor?.system ?? undefined;
+
+			items.value = [...(actor?.items?.values?.() ?? [])] as InfinityItem[];
 
 			isEmbedded.value = actor?.isEmbedded ?? false;
 			isOwner.value = actor?.isOwner ?? false;
@@ -71,6 +75,7 @@ export function useActorStore<DataModelType extends foundry.abstract.DataModel =
 			img: readonly(img),
 			type: readonly(type),
 			system: readonly(system),
+			items: readonly(items),
 
 			isEmbedded: readonly(isEmbedded),
 			isOwner: readonly(isOwner),
