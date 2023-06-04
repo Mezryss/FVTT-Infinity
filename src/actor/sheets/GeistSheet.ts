@@ -10,8 +10,6 @@ import CharacterDataModel from '../data/CharacterDataModel';
 import GeistDataModel from '../data/GeistDataModel';
 import GeistSheetView from '../views/GeistSheetView.vue';
 
-type HarmCategory = 'breaches' | 'metanoia' | 'wounds';
-
 /**
  * Vue sheet actions
  */
@@ -44,21 +42,6 @@ type GeistSheetActions = {
 	 * Remove the specified trait from the Geist.
 	 */
 	removeTrait: (index: number) => Promise<void>;
-
-	/**
-	 * Adds a Harm Effect to the Geist.
-	 *
-	 * @param category What type of Harm Effect is being added
-	 */
-	addHarm: (category: HarmCategory) => Promise<void>;
-
-	/**
-	 * Removes a Harm Effect from the Geist.
-	 *
-	 * @param category What type of Harm Effect is being removed
-	 * @param index Index of the effect to remove
-	 */
-	removeHarm: (category: HarmCategory, index: number) => Promise<void>;
 
 	/**
 	 * Removes an Item from the Geist.
@@ -103,9 +86,6 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 
 		addTrait: this.addTrait.bind(this),
 		removeTrait: this.removeTrait.bind(this),
-
-		addHarm: this.addHarm.bind(this),
-		removeHarm: this.removeHarm.bind(this),
 
 		removeItem: this.removeItem.bind(this),
 	};
@@ -176,29 +156,6 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 
 		await this.actor.update({
 			'system.traits': traitsCopy,
-		});
-	}
-
-	async addHarm(category: HarmCategory) {
-		const harmEffects = this.actor.system.harms[category].effects;
-
-		await this.actor.update({
-			[`system.harms.${category}.effects`]: [...harmEffects, `New ${category.capitalize()}`],
-		});
-	}
-
-	async removeHarm(category: HarmCategory, index: number) {
-		const harmEffects = this.actor.system.harms[category].effects;
-
-		if (index >= harmEffects.length) {
-			return;
-		}
-
-		const effectsCopy = [...harmEffects];
-		effectsCopy.splice(index, 1);
-
-		await this.actor.update({
-			[`system.harms.${category}.effects`]: effectsCopy,
 		});
 	}
 

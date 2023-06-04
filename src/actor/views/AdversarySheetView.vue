@@ -28,9 +28,9 @@ const actorStore = useActorStore<AdversaryDataModel>();
 const { name, img, system: storeSystem, type, items } = storeToRefs(actorStore);
 const system = computed(() => storeSystem.value!);
 
-const attacks = computed(() => items.value.filter(i => i.type === 'weapon') as InfinityItem<WeaponDataModel>[]);
-const abilities = computed(() => items.value.filter(i => i.type === 'ability') as InfinityItem<AbilityDataModel>[]);
-const gear = computed(() => items.value.filter(i => !['ability', 'itemQuality', 'talent', 'weapon'].includes(i.type)));
+const attacks = computed(() => items.value.filter((i) => i.type === 'weapon') as InfinityItem<WeaponDataModel>[]);
+const abilities = computed(() => items.value.filter((i) => i.type === 'ability') as InfinityItem<AbilityDataModel>[]);
+const gear = computed(() => items.value.filter((i) => !['ability', 'itemQuality', 'talent', 'weapon'].includes(i.type)));
 
 const isRemote = computed(() => type.value === 'remote');
 
