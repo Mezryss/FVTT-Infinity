@@ -56,6 +56,11 @@ export function useItemStore<DataModelType extends foundry.abstract.DataModel = 
 			await item?.update(values);
 		}
 
+		async function deleteItem() {
+			const item = await fromUuid(uuid!);
+			await item?.delete();
+		}
+
 		if (!exists.value) {
 			setItem(fromUuidSync(uuid!) as InfinityItem<DataModelType>);
 		}
@@ -79,6 +84,7 @@ export function useItemStore<DataModelType extends foundry.abstract.DataModel = 
 			editable,
 
 			openSheet,
+			deleteItem,
 			update,
 
 			setItem,

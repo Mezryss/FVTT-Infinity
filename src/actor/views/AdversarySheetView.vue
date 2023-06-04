@@ -12,6 +12,7 @@ import Localized from '@/components/Localized.vue';
 import MenuItem from '@/components/MenuItem.vue';
 import NPCBlock from '@/components/NPCBlock.vue';
 import TitleBox from '@/components/TitleBox.vue';
+import NPCHarms from '@/components/actors/NPCHarms.vue';
 import SheetBody from '@/components/tabs/SheetBody.vue';
 import TabBar from '@/components/tabs/TabBar.vue';
 import TabContent from '@/components/tabs/TabContent.vue';
@@ -24,7 +25,6 @@ import AdversaryDataModel, { AdversaryType } from '../data/AdversaryDataModel';
 import { AdversarySheetContext } from '../sheets/AdversarySheet';
 
 const context = inject<AdversarySheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
 
 const actorStore = useActorStore<AdversaryDataModel>();
 const { name, img, system: storeSystem, type } = storeToRefs(actorStore);
@@ -38,7 +38,12 @@ const isRemote = computed(() => type.value === 'remote');
 
 async function openItem(uuid: string) {
 	const item = await fromUuid(uuid);
-	item?.sheet?.render(true);
+	await item?.sheet?.render(true);
+}
+
+async function deleteItem(uuid: string) {
+	const item = await fromUuid(uuid);
+	await item?.delete();
 }
 </script>
 
@@ -153,57 +158,7 @@ async function openItem(uuid: string) {
 							</div>
 						</NPCBlock>
 
-						<NPCBlock label="Harm Effects">
-							<div class="grid grid-cols-3 whitespace-nowrap w-full bg-sky-100">
-								<div class="flex flex-col flex-nowrap">
-									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
-										<strong>Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
-										<a @click="actions.addHarm('breaches')">
-											<i class="fas fa-plus" />
-										</a>
-									</div>
-
-									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.breaches.effects" :key="index">
-										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.breaches.effects.${index}`" />
-										<a @click="actions.removeHarm('breaches', index)">
-											<i class="fas fa-trash" />
-										</a>
-									</div>
-								</div>
-
-								<div class="flex flex-col flex-nowrap">
-									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
-										<strong>Metanoia ({{ system.harms.metanoia.value }}/{{ system.harms.metanoia.max }})</strong>
-										<a @click="actions.addHarm('metanoia')">
-											<i class="fas fa-plus" />
-										</a>
-									</div>
-
-									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.metanoia.effects" :key="index">
-										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.metanoia.effects.${index}`" />
-										<a @click="actions.removeHarm('metanoia', index)">
-											<i class="fas fa-trash" />
-										</a>
-									</div>
-								</div>
-
-								<div class="flex flex-col flex-nowrap">
-									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
-										<strong>{{ isRemote ? 'Faults' : 'Wounds' }} ({{ system.harms.wounds.value }}/{{ system.harms.wounds.max }})</strong>
-										<a @click="actions.addHarm('wounds')">
-											<i class="fas fa-plus" />
-										</a>
-									</div>
-
-									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.wounds.effects" :key="index">
-										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.wounds.effects.${index}`" />
-										<a @click="actions.removeHarm('wounds', index)">
-											<i class="fas fa-trash" />
-										</a>
-									</div>
-								</div>
-							</div>
-						</NPCBlock>
+						<NPCHarms />
 
 						<div class="flex flex-col bg-sky-600 bg-opacity-40 -my-2 p-2 rounded-br-3xl gap-0.5">
 							<span v-if="system.type === AdversaryType.Nemesis" class="font-orbitron text-lg font-bold uppercase flex gap-2 whitespace-nowrap">
@@ -223,7 +178,7 @@ async function openItem(uuid: string) {
 													Edit Item
 												</MenuItem>
 
-												<MenuItem @click="actions.removeItem(attack.uuid)">
+												<MenuItem @click="deleteItem(attack.uuid)">
 													<template #icon><i class="fas fa-trash" /></template>
 													Delete Item
 												</MenuItem>
@@ -256,7 +211,7 @@ async function openItem(uuid: string) {
 											Edit Item
 										</MenuItem>
 
-										<MenuItem @click="actions.removeItem(item.uuid)">
+										<MenuItem @click="deleteItem(item.uuid)">
 											<template #icon><i class="fas fa-trash" /></template>
 											Delete Item
 										</MenuItem>
@@ -278,7 +233,7 @@ async function openItem(uuid: string) {
 													Edit Item
 												</MenuItem>
 
-												<MenuItem @click="actions.removeItem(ability.uuid)">
+												<MenuItem @click="deleteItem(ability.uuid)">
 													<template #icon><i class="fas fa-trash" /></template>
 													Delete Item
 												</MenuItem>

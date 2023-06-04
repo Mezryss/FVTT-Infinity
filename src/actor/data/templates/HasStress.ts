@@ -1,6 +1,31 @@
 import { TemplateConstructor } from '@/dataModel/DataTemplates';
 
 /**
+ * Simplified reference to a data model that has Harms.
+ */
+export type HasHarmsData = {
+	/**
+	 * Harms
+	 */
+	harms: {
+		/**
+		 * Quantronic Harm
+		 */
+		breaches: HarmTrack;
+
+		/**
+		 * Mental Harm
+		 */
+		metanoia: HarmTrack;
+
+		/**
+		 * Physical Harm
+		 */
+		wounds: HarmTrack;
+	};
+};
+
+/**
  * (Refactor) Tracks current/max value for stress.
  */
 type StressTrack = {

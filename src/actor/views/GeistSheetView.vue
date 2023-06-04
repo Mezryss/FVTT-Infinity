@@ -11,6 +11,7 @@ import Localized from '@/components/Localized.vue';
 import MenuItem from '@/components/MenuItem.vue';
 import NPCBlock from '@/components/NPCBlock.vue';
 import TitleBox from '@/components/TitleBox.vue';
+import NPCHarms from '@/components/actors/NPCHarms.vue';
 import SheetBody from '@/components/tabs/SheetBody.vue';
 import TabBar from '@/components/tabs/TabBar.vue';
 import TabContent from '@/components/tabs/TabContent.vue';
@@ -143,41 +144,7 @@ async function addSkill() {
 							</div>
 						</NPCBlock>
 
-						<NPCBlock label="Harm Effects">
-							<div class="grid grid-cols-2 whitespace-nowrap w-full bg-sky-100 max-w-5xl">
-								<div class="flex flex-col flex-nowrap">
-									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
-										<strong>Breaches ({{ system.harms.breaches.value }}/{{ system.harms.breaches.max }})</strong>
-										<a @click="actions.addHarm('breaches')">
-											<i class="fas fa-plus" />
-										</a>
-									</div>
-
-									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.breaches.effects" :key="index">
-										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.breaches.effects.${index}`" />
-										<a @click="actions.removeHarm('breaches', index)">
-											<i class="fas fa-trash" />
-										</a>
-									</div>
-								</div>
-
-								<div class="flex flex-col flex-nowrap">
-									<div class="flex flex-nowrap justify-center gap-1 items-center w-full text-center font-orbitron text-sm font-semibold bg-sky-200 px-1">
-										<strong>Metanoia ({{ system.harms.metanoia.value }}/{{ system.harms.metanoia.max }})</strong>
-										<a @click="actions.addHarm('metanoia')">
-											<i class="fas fa-plus" />
-										</a>
-									</div>
-
-									<div class="flex flex-nowrap items-center w-full gap-1 p-0.5" v-for="(breach, index) in system.harms.metanoia.effects" :key="index">
-										<Field type="text" class="flex flex-nowrap items-center w-full" :value="breach" :name="`system.harms.metanoia.effects.${index}`" />
-										<a @click="actions.removeHarm('metanoia', index)">
-											<i class="fas fa-trash" />
-										</a>
-									</div>
-								</div>
-							</div>
-						</NPCBlock>
+						<NPCHarms hide-wounds />
 
 						<NPCBlock label="Skills">
 							<div class="grid grid-cols-12 gap-0.5 w-full whitespace-nowrap items-center max-w-5xl">

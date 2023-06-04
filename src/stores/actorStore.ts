@@ -44,6 +44,21 @@ export function useActorStore<DataModelType extends foundry.abstract.DataModel =
 			visible.value = actor?.visible ?? false;
 		}
 
+		async function openSheet() {
+			const actor = await fromUuid(uuid!);
+			await actor?.sheet?.render(true);
+		}
+
+		async function update(values: Record<string, any>) {
+			const actor = await fromUuid(uuid!);
+			await actor?.update(values);
+		}
+
+		async function deleteActor() {
+			const actor = await fromUuid(uuid!);
+			await actor?.delete();
+		}
+
 		if (!exists.value) {
 			setActor(fromUuidSync(uuid!) as InfinityActor<DataModelType>);
 		}
@@ -64,6 +79,10 @@ export function useActorStore<DataModelType extends foundry.abstract.DataModel =
 			limited: readonly(limited),
 			visible: readonly(visible),
 			editable,
+
+			openSheet,
+			deleteActor,
+			update,
 
 			setActor,
 		};
