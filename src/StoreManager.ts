@@ -27,6 +27,11 @@ function updateItemStore(item: Item, deleted = false) {
 
 	const itemStore = useItemStore(item.uuid);
 	itemStore.setItem(deleted ? null : (item as InfinityItem));
+
+	// Foundry won't fire an updateActor hook for create/delete/update events on embedded items.
+	if (item.parent instanceof Actor) {
+		updateActorStore(item.parent);
+	}
 }
 
 function updateActorStore(actor: Actor, deleted = false) {
