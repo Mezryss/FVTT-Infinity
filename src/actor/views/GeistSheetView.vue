@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed, inject } from 'vue';
+import { computed, toRaw } from 'vue';
 
-import { RootContext } from '@/VueSheet';
 import ContextMenu from '@/components/ContextMenu.vue';
 import Editor from '@/components/Editor.vue';
+import Enriched from '@/components/Enriched.vue';
 import Field from '@/components/Field.vue';
 import InfinitySheet from '@/components/InfinitySheet.vue';
 import Localized from '@/components/Localized.vue';
@@ -18,19 +18,18 @@ import TabContent from '@/components/tabs/TabContent.vue';
 import TabLink from '@/components/tabs/TabLink.vue';
 import Attribute from '@/data/Attributes';
 import Skill from '@/data/Skill';
+import InfinityItem from '@/item/InfinityItem';
+import TalentDataModel from '@/item/data/TalentDataModel';
 import { useActorStore } from '@/stores/actorStore';
 
 import InfinityActor from '../InfinityActor';
 import CharacterDataModel from '../data/CharacterDataModel';
 import GeistDataModel from '../data/GeistDataModel';
-import { GeistSheetContext } from '../sheets/GeistSheet';
-
-const context = inject<GeistSheetContext>(RootContext)!;
-const actions = computed(() => context.actions!);
 
 const actorStore = useActorStore<GeistDataModel>();
-const { name, img, system: storeSystem } = storeToRefs(actorStore);
+const { name, img, system: storeSystem, items } = storeToRefs(actorStore);
 const system = computed(() => storeSystem.value!);
+const talents = computed(() => items.value.filter((i) => i.type === 'talent') as InfinityItem<TalentDataModel>[]);
 
 const owningCharacter = computed(() => {
 	if (system.value.characterUuid) {
@@ -43,14 +42,32 @@ const owningCharacter = computed(() => {
 });
 
 async function addSkill() {
+	async function doAddSkill(skill: Skill) {
+		const skills = system.value.skills;
+		if (skills.find((s) => s.skill === skill)) {
+			return;
+		}
+
+		await actorStore.update({
+			'system.skills': [
+				...skills,
+				{
+					skill,
+					expertise: 0,
+					focus: 0,
+				},
+			].sort((a, b) => a.skill.localeCompare(b.skill)),
+		});
+	}
+
 	const skillDialog = new Dialog({
 		title: 'Add Geist Skill',
-		content: `
-		<form class="w-full">
-			<select class="w-full">
-				${Skill.all.map((s) => `<option value="${s}">${game.i18n.localize(`Infinity.Skill.${s}`)}</option>`)}
-			</select>
-		</form>
+		content: /*html*/ `
+			<form class="w-full mb-1">
+				<select class="w-full">
+					${Skill.all.map((s) => `<option value="${s}">${game.i18n.localize(`Infinity.Skill.${s}`)}</option>`)}
+				</select>
+			</form>
 		`,
 		buttons: {
 			cancel: {
@@ -60,13 +77,43 @@ async function addSkill() {
 			confirm: {
 				icon: '<i class="fas fa-plus"></i>',
 				label: 'Add',
-				callback: async (html: JQuery<HTMLElement>) => await actions.value.addSkill(html.find('select').val() as Skill),
+				callback: async (html: JQuery<HTMLElement>) => await doAddSkill(html.find('select').val() as Skill),
 			},
 		},
 		default: 'confirm',
 	});
 
 	await skillDialog.render(true);
+}
+
+async function removeSkill(skill: Skill) {
+	await actorStore.update({
+		'system.skills': system.value.skills.filter((s) => s.skill !== skill),
+	});
+}
+
+async function addTrait() {
+	await actorStore.update({
+		'system.traits': [
+			...system.value.traits,
+			'New Trait'
+		],
+	});
+}
+
+async function removeTrait(index: number) {
+	const traits = [...system.value.traits];
+	traits.splice(index, 1);
+
+	await actorStore.update({
+		'system.traits': traits,
+	});
+}
+
+async function removeOwner() {
+	await actorStore.update({
+		'system.characterUuid': '',
+	});
 }
 </script>
 
@@ -82,7 +129,7 @@ async function addSkill() {
 							Open {{ owningCharacter.name }}'s Sheet
 						</MenuItem>
 
-						<MenuItem @click="actions.removeOwner()">
+						<MenuItem @click="removeOwner">
 							<template #icon><i class="fas fa-trash" /></template>
 							Remove {{ owningCharacter.name }} As Owner
 						</MenuItem>
@@ -159,13 +206,15 @@ async function addSkill() {
 									<span class="col-span-3 h-full text-center font-roboto-flex font-semibold bg-sky-200 flex items-center px-1">
 										<ContextMenu orientation="left">
 											<template #menu-items>
-												<MenuItem @click="actions.removeSkill(skill.skill)">
+												<MenuItem @click="removeSkill(skill.skill)">
 													<template #icon><i class="fas fa-trash" /></template>
 													Delete <Localized :label="`Infinity.Skill.${skill.skill}`" />
 												</MenuItem>
 											</template>
 
-											<Localized :label="`Infinity.Skill.${skill.skill}`" />
+											<a>
+												<Localized :label="`Infinity.Skill.${skill.skill}`" />
+											</a>
 										</ContextMenu>
 									</span>
 									<input type="hidden" :name="`system.skills.${index}.skill`" :value="skill.skill" />
@@ -176,16 +225,53 @@ async function addSkill() {
 
 								<div class="col-span-12 flex flex-nowrap items-center gap-1 text-sm bg-sky-200 px-1">
 									<span class="w-full" />
-									<a @click="addSkill"> <i class="fas fa-plus" /> Add Skill </a>
+									<a @click="addSkill"> <i class="fas fa-plus" />Add Skill</a>
 								</div>
 							</div>
 						</NPCBlock>
 
-						<NPCBlock label="Traits"> </NPCBlock>
+						<NPCBlock label="Traits">
+							<div class="bg-sky-200 w-full grid grid-cols-12 items-center px-1">
+								<template v-for="(trait, index) in system.traits" :key="index">
+									<span class="text-center font-bold text-lg">{{ index + 1 }}</span>
+									<span class="flex flex-nowrap items-center col-span-5 gap-1">
+										<Field type="text" class="w-full bg-white rounded-none border-solid border-1 border-black" :value="trait" :name="`system.traits.${ index }`" />
+										<a @click="removeTrait(index)"><i class="fas fa-trash" /></a>
+									</span>
+								</template>
 
-						<NPCBlock label="Talents"> </NPCBlock>
+								<div class="col-span-12 flex flex-nowrap items-center gap-1 text-sm bg-sky-200 px-1 pt-0.5 whitespace-nowrap">
+									<span class="w-full" />
+									<a @click="addTrait"><i class="fas fa-plus" /> Add Trait</a>
+								</div>
+							</div>
+						</NPCBlock>
 
-						<NPCBlock label="Programs"> </NPCBlock>
+						<NPCBlock label="Talents">
+							<div v-for="talent in talents" :key="talent.uuid" class="w-full bg-sky-200 p-1 flex flex-nowrap items-center gap-1">
+								<img :src="talent.img" class="w-6 h-6" />
+								<ContextMenu orientation="left">
+									<template #menu-items>
+										<MenuItem @click="toRaw(talent).sheet?.render(true)">
+											<template #icon><i class="fas fa-edit" /></template>
+											Edit {{ talent.name }}
+										</MenuItem>
+
+										<MenuItem @click="toRaw(talent).delete()">
+											<template #icon><i class="fas fa-trash" /></template>
+											Delete {{ talent.name }}
+										</MenuItem>
+									</template>
+
+									<a class="font-bold flex items-center gap-0.5" @click="toRaw(talent).sheet?.render(true)">
+										<span>{{ talent.name }}</span>
+										<span v-if="talent.system.isRanked">{{ talent.system.rank.current }}</span>
+										<span> (<Localized :label="`Infinity.Skill.${talent.system.skill}`" />): </span>
+									</a>
+								</ContextMenu>
+								<Enriched :value="talent.system.description" />
+							</div>
+						</NPCBlock>
 					</div>
 				</TabContent>
 
@@ -196,39 +282,5 @@ async function addSkill() {
 				</TabContent>
 			</SheetBody>
 		</div>
-
-		<!--
-		<h3 class="flex flex-nowrap gap-1">
-			<span class="w-full">Skills</span>
-			<select v-model="newSkillSelect" class="text-xs">
-				<option v-for="skill in Skill.all" :key="skill" :value="skill">
-					<Localized :label="`Infinity.Skill.${skill}`" />
-				</option>
-			</select>
-			<a @click="actions.addSkill(newSkillSelect)">&plus;</a>
-		</h3>
-		<div class="flex flex-col flex-nowrap gap-1 whitespace-nowrap">
-			<div v-for="(skill, index) in system.skills" :key="skill.skill" class="flex flex-nowrap gap-1 bg-slate-400 bg-opacity-50 rounded-sm p-1 items-center">
-				<span class="w-full">
-					<Localized :label="`Infinity.Skill.${skill.skill}`" />
-				</span>
-				<input type="hidden" :name="`system.skills.${index}.skill`" :value="skill.skill" />
-				<input type="number" :min="0" class="w-14 text-center" :value="skill.expertise" :name="`system.skills.${index}.expertise`" />
-				<input type="number" :min="0" class="w-14 text-center" :value="skill.focus" :name="`system.skills.${index}.focus`" />
-				<a @click="actions.removeSkill(skill.skill)" class="text-xl -my-2">&times;</a>
-			</div>
-		</div>
-
-		<h3 class="flex flex-nowrap">
-			<span class="w-full">Traits</span>
-			<a @click="actions.addTrait">&plus;</a>
-		</h3>
-		<div class="flex flex-col flex-nowrap gap-1">
-			<div v-for="(trait, index) in system.traits" :key="index" class="flex flex-nowrap gap-1 items-center">
-				<input :value="trait" :name="`system.traits.${index}`" type="text" class="w-full" />
-				<a @click="actions.removeTrait(index)" class="text-xl -my-1">&times;</a>
-			</div>
-		</div>
-		-->
 	</InfinitySheet>
 </template>

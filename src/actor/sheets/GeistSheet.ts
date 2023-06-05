@@ -1,65 +1,10 @@
-import { IBaseSheetContext } from '@/IBaseSheetContext';
 import { VueSheet } from '@/VueSheet';
-import Skill from '@/data/Skill';
-import InfinityItem from '@/item/InfinityItem';
-import TalentDataModel from '@/item/data/TalentDataModel';
 
 import InfinityActor from '../InfinityActor';
 import InfinityActorSheet from '../InfinityActorSheet';
 import CharacterDataModel from '../data/CharacterDataModel';
 import GeistDataModel from '../data/GeistDataModel';
 import GeistSheetView from '../views/GeistSheetView.vue';
-
-/**
- * Vue sheet actions
- */
-type GeistSheetActions = {
-	/**
-	 * Remove the character marked as this geist's Owner.
-	 */
-	removeOwner: () => Promise<void>;
-
-	/**
-	 * Add the specified Skill to the Geist's skill list.
-	 *
-	 * @param skill Skill to add to the sheet.
-	 */
-	addSkill: (skill: Skill) => Promise<void>;
-
-	/**
-	 * Removes the specified skill from the Geist's skill list.
-	 *
-	 * @param skill Skill to be removed.
-	 */
-	removeSkill: (skill: Skill) => Promise<void>;
-
-	/**
-	 * Add a new Trait to the Geist.
-	 */
-	addTrait: () => Promise<void>;
-
-	/**
-	 * Remove the specified trait from the Geist.
-	 */
-	removeTrait: (index: number) => Promise<void>;
-
-	/**
-	 * Removes an Item from the Geist.
-	 *
-	 * @param uuid UUID of the item to remove.
-	 */
-	removeItem: (uuid: string) => Promise<void>;
-};
-
-/**
- * Vue Context for Geist Sheets
- */
-export type GeistSheetContext = IBaseSheetContext<GeistSheetActions> & {
-	/**
-	 * Talent items on the actor.
-	 */
-	talents: InfinityItem<TalentDataModel>[];
-};
 
 export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataModel>) {
 	static override get defaultOptions() {
@@ -76,91 +21,10 @@ export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataMod
 	}
 
 	/**
-	 * View action bindings
-	 */
-	private actions: GeistSheetActions = {
-		removeOwner: this.removeOwner.bind(this),
-
-		addSkill: this.addSkill.bind(this),
-		removeSkill: this.removeSkill.bind(this),
-
-		addTrait: this.addTrait.bind(this),
-		removeTrait: this.removeTrait.bind(this),
-
-		removeItem: this.removeItem.bind(this),
-	};
-
-	/**
 	 * Vue Component
 	 */
 	override get vueComponent() {
 		return GeistSheetView;
-	}
-
-	/**
-	 * Vue Context
-	 */
-	override async getVueContext(): Promise<GeistSheetContext> {
-		return {
-			...IBaseSheetContext.baseContext(this),
-
-			talents: this.actor.items.filter((i) => i.type === 'talent') as InfinityItem<TalentDataModel>[],
-		};
-	}
-
-	async removeOwner() {
-		await this.actor.update({
-			'system.characterUuid': '',
-		});
-	}
-
-	async addSkill(skill: Skill) {
-		const skills = this.actor.system.skills;
-		if (skills.find((s) => s.skill === skill)) {
-			return;
-		}
-
-		await this.actor.update({
-			'system.skills': [
-				...skills,
-				{
-					skill,
-					expertise: 0,
-					focus: 0,
-				},
-			].sort((a, b) => a.skill.localeCompare(b.skill)),
-		});
-	}
-
-	async removeSkill(skill: Skill) {
-		const skills = this.actor.system.skills;
-
-		await this.actor.update({
-			'system.skills': skills.filter((s) => s.skill !== skill),
-		});
-	}
-
-	async addTrait() {
-		await this.actor.update({
-			'system.traits': [...this.actor.system.traits, 'New Trait'],
-		});
-	}
-	async removeTrait(index: number) {
-		const traits = this.actor.system.traits;
-		if (index >= traits.length) {
-			return;
-		}
-
-		const traitsCopy = [...traits];
-		traitsCopy.splice(index, 1);
-
-		await this.actor.update({
-			'system.traits': traitsCopy,
-		});
-	}
-
-	async removeItem(uuid: string) {
-		await this.actor.items.find((i) => i.uuid === uuid)?.delete();
 	}
 
 	protected override async _onDropActor(event: any, data: DropCanvasData<'Actor', InfinityActor<GeistDataModel>>) {

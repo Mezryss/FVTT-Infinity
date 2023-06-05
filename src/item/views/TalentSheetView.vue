@@ -145,7 +145,8 @@ async function removePrerequisite(index: number) {
 				<input type="checkbox" :checked="system.isRanked" name="system.isRanked" />
 
 				<template v-if="system.isRanked">
-					<strong>Max Rank:</strong>
+					<strong v-if="isOwned">Rank:</strong>
+					<strong v-else>Max Rank:</strong>
 					<div class="w-full grid grid-cols-2 gap-1">
 						<Field v-if="isOwned" type="number" :value="system.rank.current" name="system.rank.current" placeholder="Current Rank" />
 						<Field
