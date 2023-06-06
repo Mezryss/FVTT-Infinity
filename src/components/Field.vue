@@ -60,7 +60,7 @@ const emit = defineEmits<{
 <template>
 	<input
 		v-if="!readonly && editable"
-		class="px-2 font-roboto-flex"
+		class="px-2 font-roboto-flex placeholder:opacity-50 placeholder:oblique"
 		:type="type"
 		:name="name"
 		:value="value"

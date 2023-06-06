@@ -7,19 +7,6 @@ import GeistDataModel from '../data/GeistDataModel';
 import GeistSheetView from '../views/GeistSheetView.vue';
 
 export default class GeistSheet extends VueSheet(InfinityActorSheet<GeistDataModel>) {
-	static override get defaultOptions() {
-		return {
-			...super.defaultOptions,
-			tabs: [
-				{
-					navSelector: '.sheet-tabs',
-					contentSelector: '.sheet-body',
-					initial: 'details',
-				},
-			],
-		};
-	}
-
 	/**
 	 * Vue Component
 	 */

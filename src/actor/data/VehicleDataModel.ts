@@ -5,7 +5,7 @@ export default abstract class VehicleDataModel extends HasStress(HasDescription(
 	/**
 	 * List of Types the vehicle has.
 	 */
-	abstract types: string[];
+	abstract types: string;
 
 	/**
 	 * Vehicle's Scale value.
@@ -55,16 +55,10 @@ export default abstract class VehicleDataModel extends HasStress(HasDescription(
 		return {
 			...super.defineSchema(),
 
-			types: new fields.ArrayField(
-				new fields.StringField({
-					initial: '',
-					nullable: false,
-				}),
-				{
-					initial: [],
-					nullable: false,
-				},
-			),
+			types: new fields.StringField({
+				initial: '',
+				nullable: false,
+			}),
 
 			scale: new fields.NumberField({
 				initial: 0,

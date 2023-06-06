@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+	.oblique {
+		font-style: oblique 10deg;
+	}
+}
+
 /**
  * Orbitron Font is available under Open Font License (see assets/fonts/Orbitron/OFL.txt).
  *

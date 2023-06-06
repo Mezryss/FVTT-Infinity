@@ -15,6 +15,13 @@ export default class InfinityActorSheet<ActorDataModelType extends foundry.abstr
 		return {
 			...super.defaultOptions,
 			classes: ['infinity', 'sheet', 'actor'],
+			tabs: [
+				{
+					navSelector: '.sheet-tabs',
+					contentSelector: '.sheet-body',
+					initial: 'details',
+				},
+			],
 		};
 	}
 

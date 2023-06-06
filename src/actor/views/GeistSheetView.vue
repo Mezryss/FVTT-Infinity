@@ -94,10 +94,7 @@ async function removeSkill(skill: Skill) {
 
 async function addTrait() {
 	await actorStore.update({
-		'system.traits': [
-			...system.value.traits,
-			'New Trait'
-		],
+		'system.traits': [...system.value.traits, 'New Trait'],
 	});
 }
 
@@ -235,7 +232,7 @@ async function removeOwner() {
 								<template v-for="(trait, index) in system.traits" :key="index">
 									<span class="text-center font-bold text-lg">{{ index + 1 }}</span>
 									<span class="flex flex-nowrap items-center col-span-5 gap-1">
-										<Field type="text" class="w-full bg-white rounded-none border-solid border-1 border-black" :value="trait" :name="`system.traits.${ index }`" />
+										<Field type="text" class="w-full bg-white rounded-none border-solid border-1 border-black" :value="trait" :name="`system.traits.${index}`" />
 										<a @click="removeTrait(index)"><i class="fas fa-trash" /></a>
 									</span>
 								</template>

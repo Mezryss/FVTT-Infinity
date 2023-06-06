@@ -162,7 +162,7 @@ Actor:
     templates:
       - hasDescription
       - hasStress
-    types: []
+    types: ''
     scale: 0
     speed: 0
     brawn:
