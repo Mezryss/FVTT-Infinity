@@ -11,6 +11,7 @@ export default {
 		extend: {
 			backgroundImage: {
 				'light-hexes': "url('assets/images/SheetBG.svg')",
+				'dark-hexes': "url('assets/images/DarkBG.svg')",
 			},
 			backgroundSize: {
 				'4k': '3840px 2160px',

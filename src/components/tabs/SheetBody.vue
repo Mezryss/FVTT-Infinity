@@ -6,7 +6,7 @@
 -->
 
 <template>
-	<section class="sheet-body w-full h-full">
+	<section class="sheet-body w-full h-full @container/body">
 		<slot />
 	</section>
 </template>
