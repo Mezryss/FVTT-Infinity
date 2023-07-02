@@ -47,6 +47,12 @@ Infinity:
       Personality: Per
       Willpower: Wil
 
+  ChatMessages:
+    SpendMomentum: Spending {amount} momentum!
+    StoreMomentum: Banking {amount} momentum!
+    SpendHeat: Spending {amount} heat!
+    StoreHeat: Banking {amount} heat!
+
   DamageType:
     Mental: Mental
     Physical: Physical
@@ -157,6 +163,10 @@ Infinity:
       Type:
         Melee: Melee
         Ranged: Ranged
+
+  Labels:
+    Momentum: Momentum
+    Heat: Heat
 
   Skill:
     Acrobatics: Acrobatics

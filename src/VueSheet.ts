@@ -138,7 +138,9 @@ export function VueSheet<BaseClass extends Constructor, ContextType extends { [k
 		override activateListeners(html: JQuery) {
 			this.deactivateListeners(html);
 
-			html.find('img[data-edit]').on('click', (this as any)._onEditImage.bind(this));
+			if ((this as any)._onEditImage) {
+				html.find('img[data-edit]').on('click', (this as any)._onEditImage.bind(this));
+			}
 
 			super.activateListeners(html);
 		}

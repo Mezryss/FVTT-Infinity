@@ -23,8 +23,10 @@ flags:
   hotReload:
     extensions:
       - json
+      - hbs
     paths:
       - lang
+      - templates
 socket: true
 url: https://github.com/Mezryss/FVTT-Infinity
 bugs: https://github.com/Mezryss/FVTT-Infinity/issues
