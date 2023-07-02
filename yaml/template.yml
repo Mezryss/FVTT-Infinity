@@ -134,7 +134,7 @@ Actor:
     background:
       age: ''
       gender: ''
-      languages: []
+      languages: ''
       lifeStyles: []
       fakeIds: []
       contacts: []
@@ -146,6 +146,7 @@ Actor:
       adolescentEvent: ''
       careers: []
       previousFactions: []
+      notes: ''
 
   geist:
     templates:

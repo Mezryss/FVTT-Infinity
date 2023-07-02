@@ -19,6 +19,12 @@ languages:
   - lang: en
     name: English
     path: lang/en.json
+flags:
+  hotReload:
+    extensions:
+      - json
+    paths:
+      - lang
 socket: true
 url: https://github.com/Mezryss/FVTT-Infinity
 bugs: https://github.com/Mezryss/FVTT-Infinity/issues

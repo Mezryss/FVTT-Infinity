@@ -186,7 +186,7 @@ async function save() {
 </script>
 
 <template>
-	<div class="w-full h-full editor prosemirror text-base font-roboto-flex" ref="rootDiv">
+	<div class="w-full h-full editor prosemirror text-base font-roboto-flex" ref="rootDiv" style="flex: 1">
 		<a v-if="button && editable && !editing" @click="activate" class="editor-edit"><i class="fas fa-edit"></i></a>
 		<div v-if="!editing" class="editor-content" v-html="enrichedContent"></div>
 		<div class="w-full h-full contents editor-content" v-show="editing" ref="editorContainer"></div>
@@ -200,6 +200,7 @@ async function save() {
 		margin: 0 0 1em;
 
 		.ProseMirror {
+			min-height: 10em;
 			height: 100%;
 			padding-left: 0.5em;
 			padding-right: 0.5em;

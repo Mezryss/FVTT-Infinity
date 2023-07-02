@@ -180,7 +180,7 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 		/**
 		 * Languages the character directly speaks and comprehends.
 		 */
-		languages: string[];
+		languages: string;
 
 		/**
 		 * A list of Fake IDs possessed by the character
@@ -195,27 +195,12 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 			 * Fake ID's rating value.
 			 */
 			rating: number;
-
-			/**
-			 * Useful description or notes about the ID.
-			 */
-			description: string;
 		}[];
 
 		/**
 		 * A list of Contacts the character has access to.
 		 */
-		contacts: {
-			/**
-			 * Who the contact is
-			 */
-			name: string;
-
-			/**
-			 * Any notes or descriptive text about the contact.
-			 */
-			notes: string;
-		}[];
+		contacts: string[];
 	};
 
 	/**
@@ -229,6 +214,7 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 		adolescentEvent: string;
 		careers: string[];
 		previousFactions: string[];
+		notes: string;
 	};
 
 	/**
@@ -925,16 +911,10 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 					nullable: false,
 				}),
 
-				languages: new fields.ArrayField(
-					new fields.StringField({
-						initial: '',
-						nullable: false,
-					}),
-					{
-						initial: [],
-						nullable: false,
-					},
-				),
+				languages: new fields.StringField({
+					initial: '',
+					nullable: false,
+				}),
 
 				fakeIds: new fields.ArrayField(
 					new fields.SchemaField({
@@ -948,11 +928,6 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 							integer: true,
 							nullable: false,
 						}),
-
-						description: new fields.HTMLField({
-							initial: '',
-							nullable: false,
-						}),
 					}),
 					{
 						initial: [],
@@ -961,16 +936,9 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 				),
 
 				contacts: new fields.ArrayField(
-					new fields.SchemaField({
-						name: new fields.StringField({
-							initial: '',
-							nullable: false,
-						}),
-
-						notes: new fields.HTMLField({
-							initial: '',
-							nullable: false,
-						}),
+					new fields.StringField({
+						initial: '',
+						nullable: false,
 					}),
 					{
 						initial: [],
@@ -1026,6 +994,11 @@ export default abstract class CharacterDataModel extends HasAttributes(foundry.a
 						nullable: false,
 					},
 				),
+
+				notes: new fields.HTMLField({
+					initial: '',
+					nullable: false,
+				}),
 			}),
 		};
 	}

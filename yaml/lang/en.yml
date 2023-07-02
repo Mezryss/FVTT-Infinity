@@ -58,6 +58,32 @@ Infinity:
         Trooper: Trooper
         Elite: Elite
         Nemesis: Nemesis
+    Character:
+      Background:
+        Background: Background
+        Faction: Faction
+        Heritage: Heritage
+        Homeworld: Homeworld
+        SocialStatus: Social Status
+        Age: Age
+        Languages: Languages
+        Pronouns: Pronouns
+      Lifepath:
+        Label: Lifepath Characteristics
+        FamilySocialStatus: Family Social Status
+        HomeEnvironment: Home Environment
+        YouthEvent: Youth Event
+        Education: Education
+        AdolescentEvent: Adolescent Event
+        Notes: Additional Lifepath Notes/Events
+      Careers: Careers
+      AddCareer: Add Career
+      PreviousFactions: Previous Factions
+      AddFaction: Add Faction
+      FakeIDs: Fake IDs
+      AddFakeID: Add Fake ID
+      Contacts: Contacts
+      AddContact: Add Contact
 
   Items:
     Size:
