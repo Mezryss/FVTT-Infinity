@@ -17,3 +17,4 @@ yarn-*.log
 
 # Misc Files
 .env
+.DS_Store
