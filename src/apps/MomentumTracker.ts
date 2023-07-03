@@ -1,4 +1,4 @@
-import { VueSheet } from "@/VueSheet";
+import { VueSheet } from '@/VueSheet';
 
 import MomentumTrackerView from './views/MomentumTracker.vue';
 
@@ -10,7 +10,9 @@ import MomentumTrackerView from './views/MomentumTracker.vue';
 export class MomentumTracker extends VueSheet(Application) {
 	static #instance: MomentumTracker = new MomentumTracker();
 
-	static get instance() { return this.#instance; }
+	static get instance() {
+		return this.#instance;
+	}
 
 	static override get defaultOptions() {
 		return {

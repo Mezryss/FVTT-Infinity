@@ -1,4 +1,4 @@
-import { AdjustMomentumPayloadData } from "./momentum";
+import { AdjustMomentumPayloadData } from './momentum';
 
 import './momentum';
 
@@ -22,7 +22,7 @@ export enum SocketOperation {
  */
 export type SocketPayload<T extends { [key: string]: unknown }> = {
 	operation: SocketOperation;
-	data: T|null;
+	data: T | null;
 };
 
 /**
@@ -35,7 +35,7 @@ export function emit(operation: SocketOperation.AdjustMomentum, data: AdjustMome
  *
  * @see {@link SocketOperation}
  */
-export function emit<T extends { [key: string]: unknown }>(operation: SocketOperation, data: T|null = null): void {
+export function emit<T extends { [key: string]: unknown }>(operation: SocketOperation, data: T | null = null): void {
 	const payload: SocketPayload<T> = {
 		operation,
 		data,
@@ -43,4 +43,3 @@ export function emit<T extends { [key: string]: unknown }>(operation: SocketOper
 
 	game.socket.emit(SOCKET_NAME, payload);
 }
-

@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import { computed, toRaw } from 'vue';
 
 import CharacterDataModel from '@/actor/data/CharacterDataModel';
 import Editor from '@/components/Editor.vue';
 import Field from '@/components/Field.vue';
+import LinkableTextField from '@/components/LinkableTextField.vue';
 import Localized from '@/components/Localized.vue';
 import { useActorStore } from '@/stores/actorStore';
 
@@ -92,24 +93,24 @@ async function removeContact(index: number) {
 				<label class="bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full font-semibold">
 					<Localized label="Infinity.Actors.Character.Background.Faction" />
 				</label>
-				<Field type="text" name="system.meta.faction" :value="system.meta.faction" class="border-none !bg-white rounded-none" />
+				<LinkableTextField name="system.meta.faction" :value="system.meta.faction" class="bg-white" input-classes="border-none !bg-white rounded-none" />
 
 				<label class="bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full font-semibold">
 					<Localized label="Infinity.Actors.Character.Background.Heritage" />
 				</label>
-				<Field type="text" name="system.meta.heritage" :value="system.meta.heritage" class="border-none !bg-white rounded-none" />
+				<LinkableTextField name="system.meta.heritage" :value="system.meta.heritage" class="bg-white" input-classes="border-none !bg-white rounded-none" />
 
 				<div class="col-span-4 h-[1px] bg-sky-300" />
 
 				<label class="bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full font-semibold">
 					<Localized label="Infinity.Actors.Character.Background.Homeworld" />
 				</label>
-				<Field type="text" name="system.meta.homeworld" :value="system.meta.homeworld" class="border-none !bg-white rounded-none" />
+				<LinkableTextField name="system.meta.homeworld" :value="system.meta.homeworld" class="bg-white" input-classes="border-none !bg-white rounded-none" />
 
 				<label class="bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full font-semibold">
 					<Localized label="Infinity.Actors.Character.Background.SocialStatus" />
 				</label>
-				<Field type="text" name="system.meta.socialStatus" :value="system.meta.socialStatus" class="border-none !bg-white rounded-none" />
+				<LinkableTextField name="system.meta.socialStatus" :value="system.meta.socialStatus" class="bg-white" input-classes="border-none !bg-white rounded-none" />
 
 				<div class="col-span-4 h-[1px] bg-sky-300" />
 
@@ -125,11 +126,11 @@ async function removeContact(index: number) {
 
 				<div class="col-span-4 h-[1px] bg-sky-300" />
 
-				<label class="col-span-4 bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full border-0 border-l-[1px] border-solid border-sky-300 text-sm font-semibold">
+				<label class="bg-sky-200 text-blue-950 font-orbitron py-0.5 px-1 h-full border-0 border-l-[1px] border-solid border-sky-300 font-semibold">
 					<Localized label="Infinity.Actors.Character.Background.Languages" />
 				</label>
 
-				<Field type="text" name="system.background.languages" :value="system.background.languages" class="col-span-4 border-0 border-l-[1px] border-solid border-sky-300 !bg-white rounded-none" />
+				<Field type="text" name="system.background.languages" :value="system.background.languages" class="col-span-3 border-0 border-l-[1px] border-solid border-sky-300 !bg-white rounded-none" />
 			</div>
 		</div>
 
@@ -139,11 +140,18 @@ async function removeContact(index: number) {
 					<Localized label="Infinity.Actors.Character.FakeIDs" />
 				</div>
 
-				<!-- TODO: Support dragging & dropping a Journal entry for a fake ID. -->
 				<div v-if="system.background.fakeIds.length > 0" class="flex flex-col items-center gap-1">
 					<div v-for="(fakeId, index) in system.background.fakeIds" :key="index" class="flex gap-1 w-full items-center px-1">
 						<span class="min-w-[30px] font-orbitron font-bold p-1 text-center">{{ index + 1 }}.</span>
-						<Field :name="`system.background.fakeIds.${index}.name`" :value="fakeId.name" class="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300" />
+						<LinkableTextField
+							name="system.background.fakeIds"
+							:value="fakeId.name"
+							input-classes="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300"
+							is-array
+							:array-index="index"
+							:array-value="[...toRaw(system.background.fakeIds)]"
+							array-key="name"
+						/>
 						<Field type="number" :name="`system.background.fakeIds.${index}.rating`" :value="fakeId.rating" class="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300 w-20 text-center" />
 						<a v-if="editable" @click="removeFakeId(index)" class="text-center min-w-[20px]">
 							<i class="fas fa-trash" />
@@ -164,11 +172,17 @@ async function removeContact(index: number) {
 					<Localized label="Infinity.Actors.Character.Contacts" />
 				</div>
 
-				<!-- TODO: Support dragging & dropping a Journal entry for a contact. -->
 				<div v-if="system.background.contacts.length > 0" class="flex flex-col items-center gap-1">
 					<div v-for="(contact, index) in system.background.contacts" :key="index" class="flex gap-1 w-full items-center px-1">
 						<span class="min-w-[30px] font-orbitron font-bold p-1 text-center">{{ index + 1 }}.</span>
-						<Field :name="`system.background.contacts.${index}`" :value="contact" class="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300" />
+						<LinkableTextField
+							name="system.background.contacts"
+							:value="contact"
+							input-classes="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300"
+							is-array
+							:array-index="index"
+							:array-value="[...toRaw(system.background.contacts)]"
+						/>
 						<a v-if="editable" @click="removeContact(index)" class="text-center min-w-[20px]">
 							<i class="fas fa-trash" />
 						</a>
@@ -234,7 +248,14 @@ async function removeContact(index: number) {
 				<div v-if="system.lifePath.careers.length > 0" class="flex flex-col items-center gap-1">
 					<div v-for="(career, index) in system.lifePath.careers" :key="index" class="flex gap-1 w-full items-center px-1">
 						<span class="min-w-[30px] font-orbitron font-bold p-1 text-center">{{ index + 1 }}.</span>
-						<Field :name="`system.lifePath.careers.${index}`" :value="career" class="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300" />
+						<LinkableTextField
+							name="system.lifePath.careers"
+							:value="career"
+							input-classes="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300"
+							is-array
+							:array-index="index"
+							:array-value="[...toRaw(system.lifePath.careers)]"
+						/>
 						<a v-if="editable" @click="removeCareer(index)" class="text-center min-w-[20px]">
 							<i class="fas fa-trash" />
 						</a>
@@ -257,7 +278,14 @@ async function removeContact(index: number) {
 				<div v-if="system.lifePath.previousFactions.length > 0" class="flex flex-col items-center gap-1">
 					<div v-for="(previousFaction, index) in system.lifePath.previousFactions" :key="index" class="flex gap-1 w-full items-center px-1">
 						<span class="min-w-[30px] font-orbitron font-bold p-1 text-center">{{ index + 1 }}.</span>
-						<Field :name="`system.lifePath.previousFactions.${index}`" :value="previousFaction" class="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300" />
+						<LinkableTextField
+							name="system.lifePath.previousFactions"
+							:value="previousFaction"
+							input-classes="rounded-none border-0 !bg-white !bg-opacity-0 border-b-[1px] border-sky-300"
+							is-array
+							:array-index="index"
+							:array-value="[...toRaw(system.lifePath.previousFactions)]"
+						/>
 						<a v-if="editable" @click="removeFaction(index)" class="text-center min-w-[20px]">
 							<i class="fas fa-trash" />
 						</a>

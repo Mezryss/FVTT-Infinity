@@ -6,12 +6,8 @@ import { SETTINGS_KEY_HEAT, SETTINGS_KEY_MOMENTUM } from '@/settings/momentumTra
 import { SocketOperation, emit as socketEmit } from '@/socket';
 
 export const useMomentumStore = defineStore('Momentum', () => {
-	const momentum = ref(
-		game.settings.get(SETTINGS_NAMESPACE, SETTINGS_KEY_MOMENTUM) as number
-	);
-	const heat = ref(
-		game.settings.get(SETTINGS_NAMESPACE, SETTINGS_KEY_HEAT) as number
-	);
+	const momentum = ref(game.settings.get(SETTINGS_NAMESPACE, SETTINGS_KEY_MOMENTUM) as number);
+	const heat = ref(game.settings.get(SETTINGS_NAMESPACE, SETTINGS_KEY_HEAT) as number);
 
 	/**
 	 * Handles modifying Momentum value.
@@ -29,7 +25,7 @@ export const useMomentumStore = defineStore('Momentum', () => {
 			// If an actor was specified, create an appropriate chat message!
 			if (sendChatMessage && amount > 0) {
 				const wasSpend = newValue <= momentum.value;
-				const chatTemplate = await renderTemplate('systems/infinity/templates/chat/momentum.hbs', { isGM: game.user.isGM, wasSpend, amount })
+				const chatTemplate = await renderTemplate('systems/infinity/templates/chat/momentum.hbs', { isGM: game.user.isGM, wasSpend, amount });
 				await ChatMessage.create({
 					user: game.userId,
 					speaker: {
@@ -62,13 +58,15 @@ export const useMomentumStore = defineStore('Momentum', () => {
 	 */
 	async function setHeat(newValue: number, updateSetting = true, sendChatMessage = true) {
 		if (updateSetting) {
-			if (!game.user.isGM) { return; }
+			if (!game.user.isGM) {
+				return;
+			}
 
 			const amount = Math.abs(newValue - heat.value);
 
 			if (sendChatMessage && amount > 0) {
 				const wasSpend = newValue <= heat.value;
-				const chatTemplate = await renderTemplate('systems/infinity/templates/chat/heat.hbs', { isGM: game.user.isGM, wasSpend, amount })
+				const chatTemplate = await renderTemplate('systems/infinity/templates/chat/heat.hbs', { isGM: game.user.isGM, wasSpend, amount });
 				await ChatMessage.create({
 					user: game.userId,
 					speaker: {

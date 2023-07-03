@@ -10,19 +10,15 @@ const { momentum, heat } = storeToRefs(momentumStore);
 
 const directEditMomentum = ref(false);
 const directEditHeat = ref(false);
-const directMomentumInput = ref<HTMLInputElement|null>(null);
-const directHeatInput = ref<HTMLInputElement|null>(null);
+const directMomentumInput = ref<HTMLInputElement | null>(null);
+const directHeatInput = ref<HTMLInputElement | null>(null);
 
 const isGM = game.user.isGM;
 
 async function modifyMomentum(amount: number = 1) {
 	directEditMomentum.value = false;
 
-	await momentumStore.setMomentum(
-		Math.max(0, Math.min(6, momentum.value + amount)),
-		true,
-		true,
-	);
+	await momentumStore.setMomentum(Math.max(0, Math.min(6, momentum.value + amount)), true, true);
 }
 
 async function modifyHeat(amount: number = 1) {
@@ -115,15 +111,9 @@ async function noopReturn(event: KeyboardEvent, saveHandler: (event: Event, send
 			</span>
 			<div class="grid grid-cols-5 gap-1 items-center w-full">
 				<a v-if="isGM" @click="modifyHeat(-1)" class="text-center text-xl font-bold text-white">-</a>
-				<input
-					v-if="isGM && directEditHeat"
-					type="number"
-					class="col-span-3 text-4xl font-bold w-full text-center text-white !bg-white bg-opacity-30"
-					@keydown.enter="noopReturn($event, heatChanged)"
-					:value="heat"
-					ref="directHeatInput"
-				/>
-				<span v-else
+				<input v-if="isGM && directEditHeat" type="number" class="col-span-3 text-4xl font-bold w-full text-center text-white !bg-white bg-opacity-30" @keydown.enter="noopReturn($event, heatChanged)" :value="heat" ref="directHeatInput" />
+				<span
+					v-else
 					:class="{
 						'col-span-3': isGM,
 						'col-span-5': !isGM,

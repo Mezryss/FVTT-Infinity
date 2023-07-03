@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import InfinityActor from './actor/InfinityActor';
 import InfinityItem from './item/InfinityItem';
 import { useActorStore } from './stores/actorStore';
+import { useDocumentStore } from './stores/documentStore';
 import { useItemStore } from './stores/itemStore';
 
 export namespace StoreManager {
@@ -25,6 +26,9 @@ function updateItemStore(item: Item, deleted = false) {
 		return;
 	}
 
+	const documentStore = useDocumentStore(item.uuid);
+	documentStore.setDocument(item);
+
 	const itemStore = useItemStore(item.uuid);
 	itemStore.setItem(deleted ? null : (item as InfinityItem));
 
@@ -38,6 +42,9 @@ function updateActorStore(actor: Actor, deleted = false) {
 	if (!StoreManager.initialized) {
 		return;
 	}
+
+	const documentStore = useDocumentStore(actor.uuid);
+	documentStore.setDocument(actor);
 
 	const actorStore = useActorStore(actor.uuid);
 	actorStore.setActor(deleted ? null : (actor as InfinityActor));

@@ -49,7 +49,7 @@ export default class InfinityItemSheet<DataModelType extends foundry.abstract.Da
 		const uuid = this.item.uuid;
 
 		const documentStore = useDocumentStore(uuid);
-		documentStore.document = this.item;
+		documentStore.setDocument(this.item);
 		documentStore.editable = this.isEditable;
 
 		const itemStore = useItemStore(uuid);

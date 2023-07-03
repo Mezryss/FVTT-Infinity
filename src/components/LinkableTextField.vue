@@ -3,33 +3,89 @@
 -->
 
 <script lang="ts" setup>
-import { computed, inject, ref, toRaw } from 'vue';
+import { computed, ref } from 'vue';
 
-import { RootContext } from '@/VueSheet';
+import { useDocumentStore } from '@/stores/documentStore';
 
-import Enriched from './Enriched.vue';
+import Field from './Field.vue';
 
-const props = defineProps<{
-	/**
-	 * Name of the field (e.g. system.source)
-	 */
-	name: string;
+const props = withDefaults(
+	defineProps<{
+		/**
+		 * Name of the field (e.g. system.source)
+		 */
+		name: string;
 
-	/**
-	 * Current value of the field
-	 */
-	value: string;
+		/**
+		 * Current value of the field
+		 */
+		value: string;
 
-	/**
-	 * CSS Classes for the <input> field.
-	 */
-	inputClasses?: string | Record<string, boolean>;
-}>();
+		/**
+		 * CSS Classes for the <input> field.
+		 */
+		inputClasses?: string | Record<string, boolean>;
+
+		/**
+		 * For using LinkableTextField with array-type items.
+		 */
+		isArray?: boolean;
+
+		/**
+		 * Index within the array that this field represents
+		 */
+		arrayIndex?: number;
+
+		/**
+		 * Value within an object at the array index that this field represents.
+		 */
+		arrayValue?: any[];
+
+		/**
+		 * Key within the array object (if any) to set.
+		 */
+		arrayKey?: string;
+	}>(),
+	{
+		isArray: false,
+		arrayIndex: 0,
+	},
+);
 
 /**
  * Test for Foundry's UUID enricher format to determine if we're currently linking a document.
  */
 const isLinked = computed(() => /^@UUID\[.*\]{.*}$/i.test(props.value));
+
+/**
+ * Computed property for the linked document name.
+ */
+const linkedDocumentName = computed(() => {
+	const uuidMatch = props.value.match(/^@UUID\[(?<uuid>.*)\]{.*}$/i);
+	const uuid = uuidMatch?.groups?.uuid;
+
+	if (!uuid) {
+		return undefined;
+	}
+
+	return isLinked.value ? fromUuidSync(uuid)?.name : undefined;
+});
+
+/**
+ * Computed property for the name of the target, when it's just a plaintext field.
+ */
+const targetName = computed(() => {
+	// Non-array names don't need any special processing
+	if (!props.isArray) {
+		return props.name;
+	}
+
+	if (props.arrayKey) {
+		return `${props.name}.${props.arrayIndex}.${props.arrayKey}`;
+	} else {
+		return `${props.name}.${props.arrayIndex}`;
+	}
+});
 
 /**
  * Current number of dragEnter events - dragLeave events that have triggered.
@@ -41,7 +97,19 @@ const dragCount = ref(0);
 /**
  * This component directly edits the injected document rather than relying on form submission to have Foundry update.
  */
-const context = inject<{ document: foundry.abstract.Document }>(RootContext)!;
+const documentStore = useDocumentStore();
+
+async function openLinkedSheet() {
+	const uuidMatch = props.value.match(/^@UUID\[(?<uuid>.*)\]{.*}$/i);
+	const uuid = uuidMatch?.groups?.uuid;
+
+	if (!uuid) {
+		return undefined;
+	}
+
+	const linkedDocument = await fromUuid(uuid);
+	await linkedDocument?.sheet?.render(true);
+}
 
 /**
  * Updates the injected Document with the new value.
@@ -49,9 +117,23 @@ const context = inject<{ document: foundry.abstract.Document }>(RootContext)!;
  * @param newValue New value to store.
  */
 async function updateValue(newValue = '') {
-	await toRaw(context.document).update({
-		[props.name]: newValue,
-	});
+	if (props.isArray) {
+		const valueCopy = [...(props.arrayValue ?? [])];
+
+		if (props.arrayKey) {
+			valueCopy[props.arrayIndex][props.arrayKey] = newValue;
+		} else {
+			valueCopy[props.arrayIndex] = newValue;
+		}
+
+		await documentStore.update({
+			[props.name]: valueCopy,
+		});
+	} else {
+		await documentStore.update({
+			[props.name]: newValue,
+		});
+	}
 }
 
 function dragEnter() {
@@ -75,7 +157,7 @@ async function drop(event: DragEvent) {
 
 	const draggedDocument = await fromUuid(dragSource.uuid);
 
-	updateValue(`@UUID[${dragSource.uuid}]{${draggedDocument?.name ?? 'Linked'}}`);
+	await updateValue(`@UUID[${dragSource.uuid}]{${draggedDocument?.name ?? 'Linked'}}`);
 
 	dragCount.value = 0;
 }
@@ -83,19 +165,20 @@ async function drop(event: DragEvent) {
 
 <template>
 	<span
-		class="flex items-center gap-1 w-full py-1 border-[1px] rounded-sm border-dashed border-transparent h-7"
+		class="flex items-center gap-1 w-full border-[1px] rounded-sm border-dashed border-transparent h-full"
 		:class="{
-			'border-sky-400 bg-sky-400 bg-opacity-10': dragCount > 0,
+			'border-sky-800 bg-sky-400 border-solid bg-opacity-50': dragCount > 0,
 		}"
 		@dragenter="dragEnter"
 		@dragleave="dragLeave"
 		@drop="drop"
 	>
 		<template v-if="isLinked">
-			<Enriched :value="value" />
-			<a @click="updateValue('')"><i class="fas fa-times" /></a>
+			<a @click="openLinkedSheet()" class="flex items-center gap-0.5 h-full pl-2 font-semibold">{{ linkedDocumentName ?? 'ERR: Invalid Document Link' }}</a>
+			<a @click="updateValue('')" class="flex items-center h-full"><i class="fas fa-times" /></a>
+			<input type="hidden" :name="targetName" :value="value" />
 		</template>
 
-		<input v-else type="text" :name="name" :value="value" class="w-full" :class="inputClasses" style="color: unset" />
+		<Field v-else type="text" :name="targetName" :value="value" class="w-full h-full" :class="inputClasses" style="color: unset" />
 	</span>
 </template>

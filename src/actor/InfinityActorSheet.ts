@@ -33,7 +33,7 @@ export default class InfinityActorSheet<ActorDataModelType extends foundry.abstr
 		const uuid = this.actor.uuid;
 
 		const documentStore = useDocumentStore(uuid);
-		documentStore.document = this.actor;
+		documentStore.setDocument(this.actor);
 		documentStore.editable = this.isEditable;
 
 		const actorStore = useActorStore(uuid);
