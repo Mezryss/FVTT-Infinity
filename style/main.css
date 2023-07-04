@@ -49,7 +49,9 @@
 /* Unify target font size */
 html {
 	font-size: 14px !important;
-	--font-size-14: 1rem !important;
+	--font-size-14: 14px !important;
+	font-family: 'Roboto Flex', sans-serif;
+	--font-primary: 'Roboto Flex', sans-serif !important;
 }
 
 body {
@@ -69,6 +71,30 @@ body {
 	font-style: oblique 0deg 10deg;
 }
 
+/**
+ * Orbitron Font is available under Open Font License (see assets/fonts/Orbitron/OFL.txt).
+ *
+ * This font is used frequently in the Infinity rulebooks for title blocks.
+ */
+@font-face {
+	font-family: 'Orbitron';
+	src: url('fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('opentype-variations');
+	font-weight: 400 900;
+	font-style: normal;
+}
+
+
+/**
+ * Infinity Icons font
+ */
+@font-face {
+	font-family: 'Infinity-Icons';
+	src: url('fonts/InfinityIcons/InfinityIcons.eot');
+	src: url('fonts/InfinityIcons/InfinityIcons.eot?#iefix') format('embedded-opentype'), url('fonts/InfinityIcons/InfinityIcons.woff') format('woff'), url('fonts/InfinityIcons/InfinityIcons.ttf') format('truetype'), url('fonts/InfinityIcons/InfinityIcons.svg#InfinityIcons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /** Minimum Sheet Sizes */
 .window-app.actor {
 	min-width: 600px;
@@ -86,17 +112,24 @@ body {
 	background: rgba(255, 255, 240, 0.8);
 }
 
-.infinity .window-content, .infinity .window-content > * {
-	flex: unset;
-	padding: unset;
-}
-
 .infinity .window-content {
 	height: 100%;
+	padding: 0;
+}
+
+.window-app.infinity.sheet .window-content {
+	background-image: url('images/SheetBG.svg');
+	background-size: 2160px 3840px;
 }
 
 .editor, .editor-content {
 	width: 100%;
 	height: 100%;
 	flex: 1;
+}
+
+.content-link {
+	background-color: #1e3a8a !important;
+	border-color: #1e40af;
+	color: #f0f9ff;
 }
