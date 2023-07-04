@@ -1,26 +1,25 @@
 /**
  * Build a shared font definition structure.
  *
- * @param path Path to the font file, including extension, within the assets/fonts/ folder.
- * @param style Font style
- * @param weight Font weights
+ * @param path {string} Path to the font file, including extension, within the assets/fonts/ folder.
+ * @param style {'normal'|'italic'} Font Style
+ * @param weight {string} Font weights
  */
-function buildDefinition(path: string, style: 'normal' | 'italic' = 'normal', weight: string = '400'): FontDefinition {
+function buildDefinition(path, style = 'normal', weight = '400') {
 	return {
-		urls: [`systems/infinity/assets/fonts/${path}`],
+		urls: [`systems/infinity/fonts/${path}`],
 		style,
 		weight,
 	};
 }
 
 /**
- * Registers all fonts that should be made available to the text editor.
+ * Register system fonts that should be available in the ProseMirror editor.
+ *
+ * This currently includes Orbitron and Roboto Flex. Icons used by the system should instead be applied with enrichers.
  */
-export function register() {
-	CONFIG.fontDefinitions['Infinity Icons'] = {
-		editor: true,
-		fonts: [buildDefinition('InfinityIcons/InfinityIcons.ttf', 'normal', '400')],
-	};
+export function registerFonts() {
+	console.debug('Registering fonts...');
 
 	CONFIG.fontDefinitions['Orbitron'] = {
 		editor: true,
