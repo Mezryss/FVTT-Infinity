@@ -8,18 +8,6 @@
 		border-bottom: inherit;
 	}
 
-	h1 {
-		@apply text-2xl;
-	}
-
-	h2 {
-		@apply text-xl;
-	}
-
-	h3 {
-		@apply text-lg;
-	}
-
 	button {
 		@apply flex;
 		@apply items-center;
@@ -33,6 +21,14 @@
 	input::placeholder {
 		@apply text-black;
 		@apply opacity-40;
+	}
+
+	#document-create select {
+		@apply px-1;
+	}
+
+	.porsemirror {
+		@apply prose;
 	}
 }
 
