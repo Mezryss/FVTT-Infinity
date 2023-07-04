@@ -1,10 +1,5 @@
 import { register as registerActors } from '@/actor';
 import { register as registerItems } from '@/item';
-import { register as registerSettings } from '@/settings';
-
-import './apps';
-import './socket';
-import './StoreManager';
 
 import './Infinity.css';
 
@@ -18,7 +13,6 @@ Hooks.once('init', async () => {
 	// System Documents
 	registerActors();
 	registerItems();
-	registerSettings();
 
 	console.debug('Infinity | Initialization Complete.');
 });
