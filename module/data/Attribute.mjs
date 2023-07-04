@@ -20,7 +20,7 @@ export const Attribute = {
 	 */
 	get all() {
 		return [Attribute.Agility, Attribute.Awareness, Attribute.Brawn, Attribute.Coordination, Attribute.Intelligence, Attribute.Personality, Attribute.Willpower];
-	}
+	},
 };
 
 /**
@@ -30,10 +30,10 @@ export const Attribute = {
  * @param {boolean=false} abbreviated
  * @returns {string}
  */
-export function localizeAttribute(attribute, {abbreviated} = { abbreviated: false }) {
+export function localizeAttribute(attribute, { abbreviated } = { abbreviated: false }) {
 	if (abbreviated) {
-		return game.i18n.localize(`Attributes.Abbreviations.${ attribute }`);
+		return game.i18n.localize(`Attributes.Abbreviations.${attribute}`);
 	}
 
-	return game.i18n.localize(`Attributes.${ attribute }`);
+	return game.i18n.localize(`Attributes.${attribute}`);
 }

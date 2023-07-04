@@ -27,8 +27,8 @@
 		@apply px-1;
 	}
 
-	.porsemirror {
-		@apply prose;
+	.sheet-tabs .active {
+		font-weight: bold;
 	}
 }
 

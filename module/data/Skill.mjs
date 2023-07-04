@@ -1,4 +1,4 @@
-import {Attribute} from './Attribute.mjs';
+import { Attribute } from './Attribute.mjs';
 
 /**
  * Enum representing all Character skills.
@@ -114,5 +114,5 @@ export const Skill = {
  * @returns {string}
  */
 export function localizeSkill(skill) {
-	return game.i18n.localize(`Skills.${ skill }`);
+	return game.i18n.localize(`Skills.${skill}`);
 }

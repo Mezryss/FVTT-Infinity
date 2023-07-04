@@ -1,0 +1,12 @@
+{{#> items/sheet-base sidebarPartial="sidebars/ability" }}
+	<div class="flex items-center gap-2">
+		<label class="flex items-center">
+			<strong>Ranked:</strong>
+			<input type="checkbox" name="system.isRanked" {{ checked system.isRanked }} />
+		</label>
+
+		{{#if (and system.isRanked isOwned)}}
+			{{> core/field type="number" name="system.rank" value=system.rank placeholder="Current Rank" class="!text-center" }}
+		{{/if}}
+	</div>
+{{/items/sheet-base}}

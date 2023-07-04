@@ -171,6 +171,7 @@ Items:
 Labels:
   Momentum: Momentum
   Heat: Heat
+  Source: Source
 
 Skill:
   Acrobatics: Acrobatics
@@ -197,3 +198,8 @@ Skill:
   Survival: Survival
   Tech: Tech
   Thievery: Thievery
+
+Tabs:
+  Description: Description
+  Detail: Details
+  Effects: Effects

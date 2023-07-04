@@ -1,0 +1,14 @@
+<span class="font-orbitron font-semibold">{{ localize "TYPES.Item.ability" }}</span>
+
+<span class="flex gap-1">
+	<strong>Ranked:</strong>
+
+	<span>{{#if system.isRanked}}Yes{{else}}No{{/if}}</span>
+</span>
+
+{{#if (and system.isRanked isOwned)}}
+	<span class="flex gap-1">
+		<strong>Rank:</strong>
+		<span>{{ system.rank }}</span>
+	</span>
+{{/if}}

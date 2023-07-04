@@ -1,15 +1,21 @@
+import { registerItems } from './item/InfinityItem.mjs';
+
 import { registerEnrichers } from './enrichers.mjs';
 import { registerFonts } from './fonts.mjs';
 import { registerHandlebars } from './handlebars.mjs';
 
-import {Attribute} from './data/Attribute.mjs';
-import {Skill} from './data/Skill.mjs';
+import { Attribute } from './data/Attribute.mjs';
+import { Skill } from './data/Skill.mjs';
 
-// Apps don't need to be manually registered, but some of them DO need to be direct-imported to trigger Hook registrations.
+// Some items need to be direct-imported for Hook registrations.
 import './apps/index.mjs';
+import './handlebars.mjs';
 
-Hooks.once('init', async () => {
-	console.group('Infinity | Initialization');
+Hooks.once('init', () => {
+	console.debug('Infinity | Initializing...');
+
+	// Document Registrations
+	registerItems();
 
 	// Misc. Registrations
 	registerEnrichers();
@@ -22,7 +28,7 @@ Hooks.once('init', async () => {
 		Skills: Skill,
 	};
 
-	console.groupEnd();
+	console.debug('Infinity | Initialization complete.');
 });
 
 // Add the prose class from Tailwind Typography to Journal text entries.
