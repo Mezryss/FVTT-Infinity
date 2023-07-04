@@ -1,4 +1,4 @@
-import {InfinityItem} from './InfinityItem.mjs';
+import { InfinityItem } from './InfinityItem.mjs';
 
 /**
  * Shared base class for all Infinity Item Sheets
@@ -62,9 +62,11 @@ export default class InfinityItemSheet extends ItemSheet {
 	async deleteQuality(event) {
 		const uuid = $(event.currentTarget).data('uuid');
 
-		const qualities = [...(/** @type Gear */this.system).qualities];
-		const index = qualities.findIndex(q => q.uuid === uuid);
-		if (index < 0) { return; }
+		const qualities = [.../** @type Gear */ this.system.qualities];
+		const index = qualities.findIndex((q) => q.uuid === uuid);
+		if (index < 0) {
+			return;
+		}
 
 		qualities.splice(index, 1);
 
@@ -131,13 +133,13 @@ export default class InfinityItemSheet extends ItemSheet {
 	 * @param {InfinityItem.<ItemQualityDataModel>} quality
 	 */
 	async addItemQuality(quality) {
-		const qualities = (/** @type Gear */this.system).qualities;
+		const qualities = /** @type Gear */ this.system.qualities;
 		if (!qualities || !quality || quality.type !== 'itemQuality') {
 			return;
 		}
 
 		// Disallow duplicates of the same item quality
-		if (qualities.find(q => q.uuid === quality.uuid)) {
+		if (qualities.find((q) => q.uuid === quality.uuid)) {
 			return;
 		}
 
@@ -148,7 +150,7 @@ export default class InfinityItemSheet extends ItemSheet {
 					uuid: quality.uuid,
 					rating: 1,
 					specialization: '',
-				}
+				},
 			],
 		});
 	}
