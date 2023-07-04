@@ -25,6 +25,6 @@ export function registerEnrichers() {
 
 				return container;
 			},
-		}
+		},
 	];
 }

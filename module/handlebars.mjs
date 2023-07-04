@@ -22,7 +22,7 @@ function monkeypatchEditor() {
 		const html = result.prop('outerHTML');
 
 		return new Handlebars.SafeString(html);
-	}
+	};
 
 	Handlebars.unregisterHelper('editor');
 	Handlebars.registerHelper('editor', HandlebarsHelpers.editor);
