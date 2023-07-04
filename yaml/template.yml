@@ -204,9 +204,7 @@ Item:
         max: 1
       faults: []
       qualities: []
-      restriction:
-        value: ''
-        concilium: false
+      restriction: ''
       cost: ''
       maintenance: ''
       tariff: '-'

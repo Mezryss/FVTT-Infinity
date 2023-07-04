@@ -1,0 +1,23 @@
+{{#> items/sheet-base sidebarPartial="sidebars/ammunition" }}
+	<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
+		<strong>Category:</strong>
+		<select name="system.category" class="col-span-4 px-2">
+			{{#select system.category}}
+				{{#each CONFIG.Infinity.AmmunitionCategory.all}}
+					<option value="{{ this }}">{{ localize (concat "Items.Ammunition.Category." this) }}</option>
+				{{/each}}
+			{{/select}}
+		</select>
+
+		<span class="oblique col-span-5">TODO: Port Item Qualities from Vue</span>
+
+		<strong>Restriction</strong>
+		{{> core/field type="text" name="system.restriction" value=system.restriction class="col-span-4" }}
+
+		<strong class="whitespace-nowrap">Reload Cost</strong>
+		{{> core/field type="text" name="system.cost" value=system.cost class="col-span-4 !font-infinity-icon" }}
+
+		<strong>Tariff</strong>
+		{{> core/field type="text" name="system.tariff" value=system.tariff class="col-span-4 !font-infinity-icon" }}
+	</div>
+{{/items/sheet-base}}

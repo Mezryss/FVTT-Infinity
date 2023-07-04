@@ -6,6 +6,7 @@ import { registerHandlebars } from './handlebars.mjs';
 
 import { Attribute } from './data/Attribute.mjs';
 import { Skill } from './data/Skill.mjs';
+import { AmmunitionCategory, ItemSize } from './data/Gear.mjs';
 
 // Some items need to be direct-imported for Hook registrations.
 import './apps/index.mjs';
@@ -26,6 +27,8 @@ Hooks.once('init', () => {
 	CONFIG.Infinity = {
 		Attributes: Attribute,
 		Skills: Skill,
+		ItemSize,
+		AmmunitionCategory,
 	};
 
 	console.debug('Infinity | Initialization complete.');

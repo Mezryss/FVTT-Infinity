@@ -16,7 +16,7 @@ module.exports = {
 			},
 			fontFamily: {
 				orbitron: ['Orbitron', 'sans-serif'],
-				'infinity-icon': ['Infinity-Icons', 'sans-serif'],
+				'infinity-icon': ['Infinity-Icons', '"Roboto Flex"', 'sans-serif'],
 				'roboto-flex': '"Roboto Flex", sans-serif',
 			},
 			minHeight: {

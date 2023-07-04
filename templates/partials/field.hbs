@@ -1,5 +1,5 @@
 {{#if (or readOnly (not editable))}}
 	<span class="font-roboto-flex">{{ value }}</span>
 {{ else }}
-	<input type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ placeholder }}" min="{{ min }}" max="{{ max }}" class="px-2 font-roboto-flex placeholder:opacity-50 placeholder:oblique {{class}}" />
+	<input type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ placeholder }}" min="{{ min }}" max="{{ max }}" class="!px-2 placeholder:opacity-50 placeholder:oblique {{class}}" />
 {{/if}}

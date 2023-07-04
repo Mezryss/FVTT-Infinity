@@ -1,5 +1,6 @@
 import AbilityDataModel from './data/AbilityDataModel.mjs';
 import InfinityItemSheet from './InfinityItemSheet.mjs';
+import AmmunitionDataModel from './data/AmmunitionDataModel.mjs';
 
 /**
  * Base class for system Items.
@@ -26,6 +27,7 @@ export function registerItems() {
  */
 function registerDataModels() {
 	CONFIG.Item.dataModels.ability = AbilityDataModel;
+	CONFIG.Item.dataModels.ammunition = AmmunitionDataModel;
 }
 
 /**
@@ -34,7 +36,7 @@ function registerDataModels() {
 function registerSheets() {
 	Items.unregisterSheet('core', ItemSheet);
 
-	registerSheet(InfinityItemSheet, 'ability');
+	registerSheet(InfinityItemSheet, 'ability', 'ammunition', 'augmentation', 'contagion', 'explosive', 'gear', 'itemQuality', 'program', 'weapon');
 }
 
 /**
@@ -58,6 +60,8 @@ function registerSheet(sheetClass, ...types) {
 async function registerPartials() {
 	await loadTemplates({
 		...itemSidebar('ability'),
+		...itemSidebar('ammunition'),
+		...itemSidebar('gear'),
 
 		...itemPartial('sheet-base'),
 	});

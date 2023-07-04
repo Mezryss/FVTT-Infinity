@@ -35,3 +35,26 @@ export const ItemSize = {
  * @property {string} name Name for the fault
  * @property {string} description User-entered descriptive text for the Fault.
  */
+
+/**
+ * Enum representing all Ammunition Categories.
+ *
+ * @readonly
+ * @enum {string}
+ */
+export const AmmunitionCategory = {
+	Standard: 'Standard',
+	Special: 'Special',
+	Heavy: 'Heavy',
+	Arrows: 'Arrows',
+	Shells: 'Shells',
+
+	/**
+	 * Convenience accessor for all Ammunition categories.
+	 *
+	 * @returns {AmmunitionCategory[]}
+	 */
+	get all() {
+		return [AmmunitionCategory.Standard, AmmunitionCategory.Special, AmmunitionCategory.Heavy, AmmunitionCategory.Arrows, AmmunitionCategory.Shells];
+	},
+};

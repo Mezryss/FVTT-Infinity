@@ -1,0 +1,31 @@
+{{#unless hideLabel}}
+<span class="font-orbitron font-semibold">{{ localize (concat "TYPES.Item." item.type) }}</span>
+{{/unless}}
+
+{{#if system.size}}
+	<span class="flex gap-1">
+		<strong>Size:</strong>
+		<span>{{ system.size }}</span>
+	</span>
+{{/if}}
+
+{{#if system.restriction}}
+	<span class="flex gap-1">
+		<strong>Restriction:</strong>
+		<span class="font-infinity-icon">{{ system.restriction }}</span>
+	</span>
+{{/if}}
+
+{{#if system.cost}}
+	<span class="flex gap-1">
+		<strong>Cost:</strong>
+		<span class="font-infinity-icon">{{ system.cost }}</span>
+	</span>
+{{/if}}
+
+{{#if system.tariff}}
+	<span class="flex gap-1">
+		<strong>Tariff:</strong>
+		<span>{{ system.tariff }}</span>
+	</span>
+{{/if}}

@@ -40,6 +40,7 @@ export default class InfinityItemSheet extends ItemSheet {
 			system: this.system,
 			enrichedDescription,
 			isOwned: this.item.isOwned,
+			CONFIG: CONFIG,
 		};
 	}
 }
