@@ -1,6 +1,9 @@
-import AbilityDataModel from './data/AbilityDataModel.mjs';
 import InfinityItemSheet from './InfinityItemSheet.mjs';
+
+import AbilityDataModel from './data/AbilityDataModel.mjs';
 import AmmunitionDataModel from './data/AmmunitionDataModel.mjs';
+import GearDataModel from './data/GearDataModel.mjs';
+import ItemQualityDataModel from './data/ItemQualityDataModel.mjs';
 
 /**
  * Base class for system Items.
@@ -31,6 +34,8 @@ export function registerItems() {
 function registerDataModels() {
 	CONFIG.Item.dataModels.ability = AbilityDataModel;
 	CONFIG.Item.dataModels.ammunition = AmmunitionDataModel;
+	CONFIG.Item.dataModels.gear = GearDataModel;
+	CONFIG.Item.dataModels.itemQuality = ItemQualityDataModel;
 }
 
 /**

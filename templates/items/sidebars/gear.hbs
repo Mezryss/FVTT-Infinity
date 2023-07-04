@@ -29,3 +29,10 @@
 		<span>{{ system.tariff }}</span>
 	</span>
 {{/if}}
+
+{{#if system.maintenance}}
+	<span class="flex gap-1">
+		<strong>Maintenance:</strong>
+		<span class="font-infinity-icon">{{ system.maintenance }}</span>
+	</span>
+{{/if}}

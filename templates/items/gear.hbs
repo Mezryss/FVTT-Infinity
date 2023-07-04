@@ -1,0 +1,17 @@
+{{#> items/sheet-base sidebarPartial="sidebars/gear" }}
+	<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
+		{{> items/item-qualities class="col-span-5" }}
+
+		<strong>Restriction</strong>
+		{{> core/field type="text" name="system.restriction" value=system.restriction class="col-span-4" }}
+
+		<strong class="whitespace-nowrap">Cost</strong>
+		{{> core/field type="text" name="system.cost" value=system.cost class="col-span-4 !font-infinity-icon" }}
+
+		<strong>Tariff</strong>
+		{{> core/field type="text" name="system.tariff" value=system.tariff class="col-span-4 !font-infinity-icon" }}
+
+		<strong>Maintenance</strong>
+		{{> core/field type="text" name="system.maintenance" value=system.maintenance class="col-span-4 !font-infinity-icon" }}
+	</div>
+{{/items/sheet-base}}

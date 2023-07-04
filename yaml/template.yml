@@ -270,7 +270,6 @@ Item:
     templates:
       - hasBasicItemData
       - hasGearData
-    type: 'Other'
 
   hackingDevice:
     templates:
