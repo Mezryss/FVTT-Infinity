@@ -30,6 +30,10 @@
 	.sheet-tabs .active {
 		font-weight: bold;
 	}
+
+	em {
+		@apply oblique;
+	}
 }
 
 @layer utilities {

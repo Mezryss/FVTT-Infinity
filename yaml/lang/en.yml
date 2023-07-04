@@ -163,6 +163,10 @@ Items:
       IC: IC
       Upgrade: UPGRADE
 
+  Qualities:
+    Label: Item Qualities
+    None: Drag & Drop an Item Quality to add it!
+
   Weapon:
     Type:
       Melee: Melee

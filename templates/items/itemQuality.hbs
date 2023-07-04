@@ -1,0 +1,18 @@
+{{#> items/sheet-base sidebarPartial="sidebars/itemQuality" }}
+	<div class="w-full grid grid-cols-2 @md:grid-cols-5 items-center gap-1">
+		<label class="flex items-center">
+			<strong>Ranked:</strong>
+			<input type="checkbox" name="system.isRanked" {{ checked system.isRanked }} />
+		</label>
+		<span class="col-span-3"></span>
+
+		<label class="flex items-center">
+			<strong>Specialized:</strong>
+			<input type="checkbox" name="system.isSpecialized" {{ checked system.isSpecialized }} />
+		</label>
+
+		{{#if system.isSpecialized}}
+			{{> core/field type="text" name="system.specializationPlaceholder" value=system.specializationPlaceholder placeholder="Specialization Placeholder" class="col-span-3" }}
+		{{/if}}
+	</div>
+{{/items/sheet-base}}

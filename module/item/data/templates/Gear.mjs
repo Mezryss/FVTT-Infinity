@@ -8,7 +8,7 @@ const fields = foundry.data.fields;
  * @typedef {object} ItemQualityReference
  * @property {string} uuid UUID to refer to the item with.
  * @property {number} rating Rating of this instance of the quality.
- * @property {number} specialization Specialization of this instance of the quality (e.g. Desert, Zero-G).
+ * @property {string} specialization Specialization of this instance of the quality (e.g. Desert, Zero-G).
  */
 
 /**

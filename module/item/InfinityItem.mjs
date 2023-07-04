@@ -4,6 +4,9 @@ import AmmunitionDataModel from './data/AmmunitionDataModel.mjs';
 
 /**
  * Base class for system Items.
+ *
+ * @template {foundry.abstract.TypeDataModel} SystemType
+ * @property {SystemType} system
  */
 export class InfinityItem extends Item {}
 
@@ -61,9 +64,11 @@ async function registerPartials() {
 	await loadTemplates({
 		...itemSidebar('ability'),
 		...itemSidebar('ammunition'),
+		...itemSidebar('itemQuality'),
 		...itemSidebar('gear'),
 
 		...itemPartial('sheet-base'),
+		...itemPartial('item-qualities'),
 	});
 }
 
