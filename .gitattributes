@@ -1,5 +1,5 @@
 * text=auto eol=lf
-*.db text
+*.db binary
 *.ttf binary
 *.eot binary
 *.woff binary

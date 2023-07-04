@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	/* Unset header styling added by Foundry */
+	h1, h2, h3 {
+		border-bottom: inherit;
+	}
+
+	h1 {
+		@apply text-2xl;
+	}
+
+	h2 {
+		@apply text-xl;
+	}
+
+	h3 {
+		@apply text-lg;
+	}
+
+	button {
+		@apply flex;
+		@apply items-center;
+		@apply whitespace-nowrap;
+		@apply p-1;
+		@apply justify-center;
+		@apply text-black;
+		background-color: rgba(255, 255, 240, 0.8);
+	}
+
+	input::placeholder {
+		@apply text-black;
+		@apply opacity-40;
+	}
+}
+
+@layer utilities {
+	.oblique {
+		font-style: oblique 10deg;
+	}
+
+	.bg-none {
+		background: none;
+	}
+}
+
+/* Unify target font size */
+html {
+	font-size: 14px !important;
+	--font-size-14: 1rem !important;
+}
+
+body {
+	--font-primary: 'Roboto Flex', sans-serif;
+}
+
+/* Fonts */
+/**
+ * Roboto Flex is available under Open Font License (see assets/fonts/RobotoFlex/OFL.txt).
+ */
+@font-face {
+	font-family: 'Roboto Flex';
+	src: url('fonts/RobotoFlex/RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf') format('opentype-variations');
+	font-optical-sizing: auto;
+	font-weight: 100 1000;
+	font-stretch: 25% 151%;
+	font-style: oblique 0deg 10deg;
+}
+
+/** Minimum Sheet Sizes */
+.window-app.actor {
+	min-width: 600px;
+	min-height: 400px;
+}
+
+.window-app.item {
+	min-width: 400px;
+	min-height: 300px;
+}
+
+/* Foundry Overrides */
+.action-buttons button {
+	/* Restore action button background set in Foundry (this gets removed by Tailwind preflight) */
+	background: rgba(255, 255, 240, 0.8);
+}
+
+.infinity .window-content, .infinity .window-content > * {
+	flex: unset;
+	padding: unset;
+}
+
+.infinity .window-content {
+	height: 100%;
+}
+
+.editor, .editor-content {
+	width: 100%;
+	height: 100%;
+	flex: 1;
+}

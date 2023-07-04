@@ -1,6 +1,6 @@
 # FVTT Infinity
 
-An implementation of [Modiphius](https://www.modiphius.net/)'s Infinity 2D20 roleplaying game.
+An unofficial implementation of [Modiphius](https://www.modiphius.net/)'s Infinity 2D20 roleplaying game.
 
 ## Contributing
 
@@ -14,7 +14,7 @@ All pull requests and forks must adhere to the following:
 
 ## License
 
-Code for this system is licensed under the [MIT License](https://mit-license.org/), see [LICENSE](LICENSE).
+Code for this system is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/), see [LICENSE](LICENSE).
 
 ### Further Licenses
 
@@ -33,16 +33,6 @@ Some components of this project are used under alternative licensing terms. Each
 >
 > 1. Contributors should not make use of FontAwesome Pro icons in the code they contribute to the project (because FontAwesome licenses are based on individual seats) unless they have a seat on a FontAwesome Pro license.
 > 2. If you fork this project, you are responsible for either removing all uses of FontAwesome Pro icons, or purchasing an appropriate license.
-
-#### Foundry Type Data
-
-> Foundry type data was initially pulled from the [Pathfinder 2E System](https://github.com/foundryvtt/pf2e), and has been modified in multiple places to suit the needs of this project.
->
-> **License:** [Apache 2.0](types/foundry/LICENSE)
-
-#### Vue 3
-
-> **License:** [MIT](https://github.com/vuejs/core/blob/main/LICENSE)
 
 ## Copyright Disclaimer
 

@@ -1,10 +1,13 @@
 # Build Artifacts
-/dist
-/lib
-/public/lang
-/public/system.json
-/public/template.json
-/genesys-*.zip
+/infinity-*.zip
+
+/Infinity.css
+/lang
+/system.json
+/template.json
+
+# Dev Tools
+/foundry
 
 # Node
 /node_modules

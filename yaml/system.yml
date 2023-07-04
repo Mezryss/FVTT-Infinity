@@ -1,7 +1,7 @@
 id: infinity
 title: Infinity
 description: Unofficial implementation of Modiphius's Infinity 2D20 System.
-version: 1.0
+version: 1.0.0
 compatibility:
   minimum: 11
   verified: 11
@@ -10,9 +10,9 @@ templateVersion: 1
 authors:
   - name: Mezryss
 scripts:
-  - scripts/container-query-polyfill/container-query-polyfill.modern.js
+  - external/container-query-polyfill/container-query-polyfill.modern.js
 esmodules:
-  - Infinity.js
+  - module/Infinity.mjs
 styles:
   - Infinity.css
 languages:
@@ -22,11 +22,13 @@ languages:
 flags:
   hotReload:
     extensions:
-      - json
+      - css
       - hbs
+      - json
     paths:
       - lang
       - templates
+      - ./Infinity.css
 socket: true
 url: https://github.com/Mezryss/FVTT-Infinity
 bugs: https://github.com/Mezryss/FVTT-Infinity/issues
