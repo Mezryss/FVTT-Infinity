@@ -2,6 +2,9 @@ import { registerEnrichers } from './enrichers.mjs';
 import { registerFonts } from './fonts.mjs';
 import { registerHandlebars } from './handlebars.mjs';
 
+import {Attribute} from './data/Attribute.mjs';
+import {Skill} from './data/Skill.mjs';
+
 // Apps don't need to be manually registered, but some of them DO need to be direct-imported to trigger Hook registrations.
 import './apps/index.mjs';
 
@@ -14,7 +17,10 @@ Hooks.once('init', async () => {
 	registerHandlebars();
 
 	// Register classes that should be available for macros, modules, etc.
-	CONFIG.Infinity = {};
+	CONFIG.Infinity = {
+		Attributes: Attribute,
+		Skills: Skill,
+	};
 
 	console.groupEnd();
 });
