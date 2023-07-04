@@ -25,175 +25,175 @@ TYPES:
     talent: Talent
 
 # System Strings
-Infinity:
-  System:
-    Name: Infinity
+Attributes:
+  Agility: Agility
+  Awareness: Awareness
+  Brawn: Brawn
+  Coordination: Coordination
+  Intelligence: Intelligence
+  Personality: Personality
+  Willpower: Willpower
 
-  Attributes:
-    Agility: Agility
-    Awareness: Awareness
-    Brawn: Brawn
-    Coordination: Coordination
-    Intelligence: Intelligence
-    Personality: Personality
-    Willpower: Willpower
+  Abbreviations:
+    Agility: Agi
+    Awareness: Awa
+    Brawn: Brw
+    Coordination: Coo
+    Intelligence: Int
+    Personality: Per
+    Willpower: Wil
 
-    Abbreviations:
-      Agility: Agi
-      Awareness: Awa
-      Brawn: Brw
-      Coordination: Coo
-      Intelligence: Int
-      Personality: Per
-      Willpower: Wil
+ChatMessages:
+  SpendMomentum: Spending {amount} momentum!
+  StoreMomentum: Banking {amount} momentum!
+  SpendHeat: Spending {amount} heat!
+  StoreHeat: Banking {amount} heat!
 
-  ChatMessages:
-    SpendMomentum: Spending {amount} momentum!
-    StoreMomentum: Banking {amount} momentum!
-    SpendHeat: Spending {amount} heat!
-    StoreHeat: Banking {amount} heat!
+Notifications:
+  NotEnoughMomentum: Cannot spend Momentum while the pool is empty! Perhaps you should generate Threat instead?
+  NotEnoughHeat: Cannot spend Heat while the pool is empty!
 
-  DamageType:
-    Mental: Mental
-    Physical: Physical
-    Quantronic: Quantronic
+DamageType:
+  Mental: Mental
+  Physical: Physical
+  Quantronic: Quantronic
 
-  Actors:
-    Adversary:
-      Category:
-        Trooper: Trooper
-        Elite: Elite
-        Nemesis: Nemesis
-    Character:
-      Background:
-        Background: Background
-        Faction: Faction
-        Heritage: Heritage
-        Homeworld: Homeworld
-        SocialStatus: Social Status
-        Age: Age
-        Languages: Languages
-        Pronouns: Pronouns
-      Lifepath:
-        Label: Lifepath Characteristics
-        FamilySocialStatus: Family Social Status
-        HomeEnvironment: Home Environment
-        YouthEvent: Youth Event
-        Education: Education
-        AdolescentEvent: Adolescent Event
-        Notes: Additional Lifepath Notes/Events
-      Careers: Careers
-      AddCareer: Add Career
-      PreviousFactions: Previous Factions
-      AddFaction: Add Faction
-      FakeIDs: Fake IDs
-      AddFakeID: Add Fake ID
-      Contacts: Contacts
-      AddContact: Add Contact
-      TalentsSkillLabel: '{skill} Talents'
-      TalentRank: 'Rank {current}/{max}'
-      NoTalents: No talents currently set! Drag talents from the Items sidebar to add them to the character!
-      TalentCount: '{talents} Talents, {ranks} Ranks'
+Actors:
+  Adversary:
+    Category:
+      Trooper: Trooper
+      Elite: Elite
+      Nemesis: Nemesis
+  Character:
+    Background:
+      Background: Background
+      Faction: Faction
+      Heritage: Heritage
+      Homeworld: Homeworld
+      SocialStatus: Social Status
+      Age: Age
+      Languages: Languages
+      Pronouns: Pronouns
+    Lifepath:
+      Label: Lifepath Characteristics
+      FamilySocialStatus: Family Social Status
+      HomeEnvironment: Home Environment
+      YouthEvent: Youth Event
+      Education: Education
+      AdolescentEvent: Adolescent Event
+      Notes: Additional Lifepath Notes/Events
+    Careers: Careers
+    AddCareer: Add Career
+    PreviousFactions: Previous Factions
+    AddFaction: Add Faction
+    FakeIDs: Fake IDs
+    AddFakeID: Add Fake ID
+    Contacts: Contacts
+    AddContact: Add Contact
+    TalentsSkillLabel: '{skill} Talents'
+    TalentRank: 'Rank {current}/{max}'
+    NoTalents: No talents currently set! Drag talents from the Items sidebar to add them to the character!
+    TalentCount: '{talents} Talents, {ranks} Ranks'
 
-  Items:
-    Size:
-      Insignificant: Insignificant
-      OneHanded: One-Handed
-      TwoHanded: Two-Handed
-      Unbalanced: Unbalanced
-      Unwieldy: Unwieldy
-      Mounted: Mounted
-      Massive: Massive
-      Facility: Facility
+Items:
+  Size:
+    Insignificant: Insignificant
+    OneHanded: One-Handed
+    TwoHanded: Two-Handed
+    Unbalanced: Unbalanced
+    Unwieldy: Unwieldy
+    Mounted: Mounted
+    Massive: Massive
+    Facility: Facility
 
-    Ammunition:
-      Category:
-        Standard: Standard
-        Special: Special
-        Heavy: Heavy
-        Arrows: Arrows
-        Shells: Shells
+  Ammunition:
+    Category:
+      Standard: Standard
+      Special: Special
+      Heavy: Heavy
+      Arrows: Arrows
+      Shells: Shells
 
-    Armour:
-      Type:
-        Civilian: Civilian
-        Combat: Combat
-        Internal: Internal
-        Powered: Powered
-        Symbiont: Symbiont
+  Armour:
+    Type:
+      Civilian: Civilian
+      Combat: Combat
+      Internal: Internal
+      Powered: Powered
+      Symbiont: Symbiont
 
-    Contagion:
-      Category:
-        Disease: Disease
-        Drug: Drug
-        Poison: Poison
-        Other: Other
-      Term:
-        Round: Round
-        Minute: Minute
-        Hour: Hour
-        Day: Day
-        Week: Week
-        Month: Month
-      Type:
-        Instant: Instant
-        Complex: Complex
-        Progressive: Progressive
-        Chronic: Chronic
+  Contagion:
+    Category:
+      Disease: Disease
+      Drug: Drug
+      Poison: Poison
+      Other: Other
+    Term:
+      Round: Round
+      Minute: Minute
+      Hour: Hour
+      Day: Day
+      Week: Week
+      Month: Month
+    Type:
+      Instant: Instant
+      Complex: Complex
+      Progressive: Progressive
+      Chronic: Chronic
 
-    Explosive:
-      Category:
-        Charge: Charge
-        Grenade: Grenade
-        Mine: Mine
+  Explosive:
+    Category:
+      Charge: Charge
+      Grenade: Grenade
+      Mine: Mine
 
-    Gear:
-      Type:
-        Other: Other
-        Resource: Resource
-        Tool: Tool
+  Gear:
+    Type:
+      Other: Other
+      Resource: Resource
+      Tool: Tool
 
-    Program:
-      Type:
-        # Note: These are intentionally all-caps to match styling in Core Rulebook.
-        Sword: SWORD
-        Claw: CLAW
-        Shield: SHIELD
-        Gadget: GADGET
-        IC: IC
-        Upgrade: UPGRADE
+  Program:
+    Type:
+      # Note: These are intentionally all-caps to match styling in Core Rulebook.
+      Sword: SWORD
+      Claw: CLAW
+      Shield: SHIELD
+      Gadget: GADGET
+      IC: IC
+      Upgrade: UPGRADE
 
-    Weapon:
-      Type:
-        Melee: Melee
-        Ranged: Ranged
+  Weapon:
+    Type:
+      Melee: Melee
+      Ranged: Ranged
 
-  Labels:
-    Momentum: Momentum
-    Heat: Heat
+Labels:
+  Momentum: Momentum
+  Heat: Heat
 
-  Skill:
-    Acrobatics: Acrobatics
-    Analysis: Analysis
-    AnimalHandling: Animal Handling
-    Athletics: Athletics
-    Ballistics: Ballistics
-    CloseCombat: Close Combat
-    Command: Command
-    Discipline: Discipline
-    Education: Education
-    Extraplanetary: Extraplanetary
-    Hacking: Hacking
-    Lifestyle: Lifestyle
-    Medicine: Medicine
-    Observation: Observation
-    Persuade: Persuade
-    Pilot: Pilot
-    Psychology: Psychology
-    Resistance: Resistance
-    Science: Science
-    Spacecraft: Spacecraft
-    Stealth: Stealth
-    Survival: Survival
-    Tech: Tech
-    Thievery: Thievery
+Skill:
+  Acrobatics: Acrobatics
+  Analysis: Analysis
+  AnimalHandling: Animal Handling
+  Athletics: Athletics
+  Ballistics: Ballistics
+  CloseCombat: Close Combat
+  Command: Command
+  Discipline: Discipline
+  Education: Education
+  Extraplanetary: Extraplanetary
+  Hacking: Hacking
+  Lifestyle: Lifestyle
+  Medicine: Medicine
+  Observation: Observation
+  Persuade: Persuade
+  Pilot: Pilot
+  Psychology: Psychology
+  Resistance: Resistance
+  Science: Science
+  Spacecraft: Spacecraft
+  Stealth: Stealth
+  Survival: Survival
+  Tech: Tech
+  Thievery: Thievery

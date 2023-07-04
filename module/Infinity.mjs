@@ -2,6 +2,9 @@ import { registerEnrichers } from './enrichers.mjs';
 import { registerFonts } from './fonts.mjs';
 import { registerHandlebars } from './handlebars.mjs';
 
+// Apps don't need to be manually registered, but some of them DO need to be direct-imported to trigger Hook registrations.
+import './apps/index.mjs';
+
 Hooks.once('init', async () => {
 	console.group('Infinity | Initialization');
 

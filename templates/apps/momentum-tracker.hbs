@@ -1,0 +1,46 @@
+<div class="flex flex-col gap-4 absolute -bottom-24 right-96 w-64 h-80">
+	<div class="flex flex-col gap-1 items-center bg-blue-300 rounded-lg w-full p-2">
+		<span class="text-2xl font-semibold uppercase">
+			{{ localize "Labels.Momentum" }}
+		</span>
+
+		<div class="grid grid-cols-5 gap-1 items-center w-full">
+			<a class="text-center text-xl font-bold" data-action="decrease" data-type="momentum">-</a>
+			{{#if directEditMomentum}}
+				<input
+					type="number"
+					class="col-span-3 !text-4xl !font-bold !w-full !text-center !border-none !bg-white !bg-opacity-30"
+					value="{{ momentum }}"
+					data-type="momentum"
+				/>
+			{{else}}
+				<span class="col-span-3 text-4xl font-bold w-full text-center" data-action="toggle-edit" data-type="momentum">{{ momentum }}</span>
+			{{/if}}
+			<a class="text-center text-xl font-bold" data-action="increase" data-type="momentum">+</a>
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-1 items-center bg-red-800 rounded-lg w-full p-2">
+		<span class="text-2xl text-white font-semibold uppercase">
+			{{ localize "Labels.Heat" }}
+		</span>
+		<div class="grid grid-cols-5 gap-1 items-center w-full">
+			{{#if isGM}}
+				<a class="text-center text-xl font-bold text-white" data-action="decrease" data-type="heat">-</a>
+			{{/if}}
+			{{#if (and isGM directEditHeat)}}
+				<input
+					type="number"
+					class="col-span-3 !text-4xl !font-bold !w-full !text-center !text-white !bg-white !bg-opacity-30"
+					value="{{ heat }}"
+					data-type="heat"
+				/>
+			{{else}}
+				<span class="text-4xl text-white font-bold w-full text-center {{#if isGM}}col-span-3{{else}}col-span-5{{/if}}" data-action="toggle-edit" data-type="heat">{{ heat }}</span>
+			{{/if}}
+			{{#if isGM}}
+				<a class="text-center text-xl font-bold text-white" data-action="increase" data-type="heat">+</a>
+			{{/if}}
+		</div>
+	</div>
+</div>
