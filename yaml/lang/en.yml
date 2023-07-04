@@ -90,6 +90,10 @@ Infinity:
       AddFakeID: Add Fake ID
       Contacts: Contacts
       AddContact: Add Contact
+      TalentsSkillLabel: '{skill} Talents'
+      TalentRank: 'Rank {current}/{max}'
+      NoTalents: No talents currently set! Drag talents from the Items sidebar to add them to the character!
+      TalentCount: '{talents} Talents, {ranks} Ranks'
 
   Items:
     Size:

@@ -12,6 +12,7 @@ import { useActorStore } from '@/stores/actorStore';
 import CharacterDataModel from '../data/CharacterDataModel';
 
 import CharacterBackgroundView from './character/CharacterBackgroundView.vue';
+import CharacterTalentsView from './character/CharacterTalentsView.vue';
 
 const actorStore = useActorStore<CharacterDataModel>();
 const { name, img } = storeToRefs(actorStore);
@@ -39,7 +40,7 @@ const { name, img } = storeToRefs(actorStore);
 			<SheetBody>
 				<TabContent tab="skills">Skills</TabContent>
 				<TabContent tab="combat">Combat</TabContent>
-				<TabContent tab="talents">Talents</TabContent>
+				<TabContent tab="talents"><CharacterTalentsView /></TabContent>
 				<TabContent tab="equipment">Equipment</TabContent>
 				<TabContent tab="background"><CharacterBackgroundView /></TabContent>
 			</SheetBody>
