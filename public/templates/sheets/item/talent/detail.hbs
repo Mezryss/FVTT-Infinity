@@ -30,7 +30,9 @@
 			<span class="spacer"></span>
 			<a data-action="openDocument" data-uuid="{{prereqTalent.uuid}}">{{prereqTalent.name}}</a>
 			<span class="spacer"></span>
+			{{#if editable}}
 			<a data-action="removeTalent"><i class="fas fa-fw fa-trash"></i></a>
+			{{/if}}
 		</div>
 	</label>
 	{{else}}

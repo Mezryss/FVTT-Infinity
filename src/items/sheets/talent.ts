@@ -33,12 +33,18 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 		},
 	};
 
+	/**
+	 * Type Label - "<Skill> Talent"
+	 */
 	override get typeLabel() {
 		return game.i18n.format(`Infinity.Sheets.Item.Label.Talent`, {
 			skill: localizeSkill(this.item.system.skill),
 		});
 	}
 
+	/**
+	 * Add a DragDrop handler to support dropping other talents on this sheet as a prerequisite.
+	 */
 	override async _onRender(
 		context: any,
 		options: foundry.applications.types.ApplicationRenderOptions,
@@ -83,7 +89,9 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 	 * Event Handler when the user chooses to remove the prerequisite talent.
 	 */
 	static async #removeTalent(this: InfinityItemSheet) {
-		console.log('Removing Talent');
+		if (!this.isEditable) {
+			return;
+		}
 
 		await this.item.update({
 			'system.prerequisiteTalentUuid': null,
@@ -94,6 +102,10 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 	 * Event handler when the item sheet is the target of a document drop.
 	 */
 	async #onDrop(event: DragEvent) {
+		if (!this.isEditable) {
+			return;
+		}
+
 		let dropData: {
 			type: string;
 			uuid: string;
