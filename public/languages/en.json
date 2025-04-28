@@ -4,6 +4,9 @@
 			"Rolls": {
 				"WithEffects": "{total} + {effects} Effect{plural}"
 			}
+		},
+		"Tabs": {
+			"description": "Description"
 		}
 	},
 	"TYPES": {
