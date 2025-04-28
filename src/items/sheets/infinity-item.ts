@@ -23,7 +23,7 @@ export class InfinityItemSheet<
 		actions: {
 			openDocument: InfinityItemSheet.#openDocument,
 		},
-		classes: ['item-window'],
+		classes: ['infinity', 'item-window'],
 		form: {
 			submitOnChange: true,
 		},
@@ -33,7 +33,7 @@ export class InfinityItemSheet<
 		window: {
 			icon: 'far fa-image-portrait',
 			resizable: true,
-			contentClasses: ['infinity', 'item-sheet'],
+			contentClasses: ['item-sheet'],
 		},
 	};
 

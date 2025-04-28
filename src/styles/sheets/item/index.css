@@ -1,0 +1,39 @@
+.item-sheet {
+	header {
+		--size: 4rem;
+		display: grid;
+		grid-template-columns: var(--size) 1fr;
+		grid-template-rows: 1rem 1fr;
+
+		row-gap: 0.25rem;
+
+		height: var(--size);
+		padding: 0.25rem;
+
+		img {
+			grid-column: 1 / span 1;
+			grid-row: 1 / span -1;
+			height: calc(var(--size) - 0.5rem);
+
+			border: 1px solid var(--col-infinity-blue);
+			border-radius: 0.25rem;
+		}
+
+		.type, input {
+			font-family: var(--font-orbitron);
+		}
+
+		.type {
+			grid-column: 2 / span 1;
+			grid-row: 1 / span 1;
+			font-size: 0.75rem;
+		}
+
+		input {
+			grid-column: 2 / span 1;
+			grid-row: 2 / span 1;
+			font-size: 1.5rem;
+			height: 100%;
+		}
+	}
+}

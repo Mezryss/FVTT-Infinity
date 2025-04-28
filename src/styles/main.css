@@ -4,3 +4,6 @@
 @import './fonts.css';
 @import './icons.css';
 @import './journal.css';
+
+@import './elements/index.css';
+@import './sheets/index.css';

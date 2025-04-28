@@ -1,1 +1,9 @@
-<div>Item Description</div>
+<section class="tab{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	{{#if editable}}
+		<prose-mirror name="system.description" value="{{system.description}}" toggled="true">
+			{{{enrichedDescription}}}
+		</prose-mirror>
+	{{else}}
+		{{{enrichedDescription}}}
+	{{/if}}
+</section>

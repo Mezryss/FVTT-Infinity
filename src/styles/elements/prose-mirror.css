@@ -1,0 +1,15 @@
+/**
+ * Prose Mirror should only have a minimum height when active; its text content should simply fit to its content.
+ */
+prose-mirror {
+	min-height: unset;
+	height: 100%;
+
+	&.active {
+		min-height: 250px;
+	}
+
+	.editor-content {
+		padding: 0.5rem;
+	}
+}
