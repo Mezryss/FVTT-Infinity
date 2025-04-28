@@ -1,5 +1,8 @@
-import { ApplicationRenderContext } from "@client/applications/_types.mjs";
-import type { HandlebarsRenderOptions, HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+import { ApplicationRenderContext } from '@client/applications/_types.mjs';
+import type {
+	HandlebarsRenderOptions,
+	HandlebarsTemplatePart,
+} from '@client/applications/api/handlebars-application.mjs';
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -27,20 +30,26 @@ declare class HandlebarsApp {
 	/**
 	 * Allow subclasses to dynamically configure render parts.
 	 */
-	protected _configureRenderParts(options: HandlebarsRenderOptions): Record<string, HandlebarsTemplatePart>;
+	protected _configureRenderParts(
+		options: HandlebarsRenderOptions,
+	): Record<string, HandlebarsTemplatePart>;
 
 	/**
 	 * Prepare context that is specific to only a single rendered part.
-     *
-     * It is recommended to augment or mutate the shared context so that downstream methods like _onRender have
-     * visibility into the data that was used for rendering. It is acceptable to return a different context object
-     * rather than mutating the shared context at the expense of this transparency.
+	 *
+	 * It is recommended to augment or mutate the shared context so that downstream methods like _onRender have
+	 * visibility into the data that was used for rendering. It is acceptable to return a different context object
+	 * rather than mutating the shared context at the expense of this transparency.
 	 *
 	 * @param partId The part being rendered
 	 * @param context Shared context provided by _prepareContext
 	 * @param options Options which configure application rendering behavior
 	 */
-	protected _preparePartContext(partId: string, context: ApplicationRenderContext, options: HandlebarsRenderOptions): Promise<ApplicationRenderContext>;
+	protected _preparePartContext(
+		partId: string,
+		context: ApplicationRenderContext,
+		options: HandlebarsRenderOptions,
+	): Promise<ApplicationRenderContext>;
 }
 
 /**
@@ -48,7 +57,8 @@ declare class HandlebarsApp {
  */
 export function HandlebarsMixin<
 	SheetType extends foundry.applications.api.DocumentSheetV2,
-	BaseType extends foundry.types.Constructor<SheetType>
+	BaseType extends foundry.types.Constructor<SheetType>,
 >(base: BaseType) {
-	return (class extends HandlebarsApplicationMixin(base) {}) as BaseType & foundry.types.Constructor<HandlebarsApp>;
+	return class extends HandlebarsApplicationMixin(base) {} as BaseType &
+		foundry.types.Constructor<HandlebarsApp>;
 }

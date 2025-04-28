@@ -1,4 +1,4 @@
-import { AbilityItemSheet } from "./ability";
+import { AbilityItemSheet } from './ability';
 
 /**
  * Register Item Sheets

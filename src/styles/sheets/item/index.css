@@ -19,7 +19,8 @@
 			border-radius: 0.25rem;
 		}
 
-		.type, input {
+		.type,
+		input {
 			font-family: var(--font-orbitron);
 		}
 

@@ -27,7 +27,8 @@ export class InfinityItemSheet<
 		form: {
 			submitOnChange: true,
 		},
-		position: <any>{  // Need <any> typing due to lack of Partiality in Foundry JSDocs (& width typed as number instead of number|'auto').
+		position: <any>{
+			// Need <any> typing due to lack of Partiality in Foundry JSDocs (& width typed as number instead of number|'auto').
 			height: 400,
 		},
 		window: {
@@ -45,7 +46,9 @@ export class InfinityItemSheet<
 
 	override async _prepareContext(options: foundry.applications.types.ApplicationRenderOptions) {
 		const baseContext = await super._prepareContext(options);
-		const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system.description);
+		const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+			this.item.system.description,
+		);
 
 		return {
 			...baseContext,
@@ -67,7 +70,11 @@ export class InfinityItemSheet<
 	/**
 	 * Injects information about the current tab for the given part.
 	 */
-	protected override async _preparePartContext(partId: string, context: foundry.applications.types.ApplicationRenderContext, options: HandlebarsRenderOptions): Promise<foundry.applications.types.ApplicationRenderContext> {
+	protected override async _preparePartContext(
+		partId: string,
+		context: foundry.applications.types.ApplicationRenderContext,
+		options: HandlebarsRenderOptions,
+	): Promise<foundry.applications.types.ApplicationRenderContext> {
 		const partContext = await super._preparePartContext(partId, context, options);
 		if (!partContext.tabs) {
 			return partContext;
