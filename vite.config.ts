@@ -24,7 +24,7 @@ const OUT_DIR = 'dist';
 /**
  * HMR Helper borrowed from the Pathfinder 2E folks.
  *
- * See LICENSES/pf2e-apache.md
+ * See licenses/pf2e-apache.md
  */
 function HMRHelper(): PluginOption {
 	return {
