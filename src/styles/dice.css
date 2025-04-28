@@ -5,3 +5,24 @@
 .max {
 	filter: sepia(0.5) hue-rotate(180deg);
 }
+
+.dice-tooltip .part-header {
+	font-family: var(--font-orbitron);
+}
+
+.inline-roll {
+	background: var(--col-infinity-light-blue);
+	border-color: var(--col-infinity-blue);
+}
+
+.inline-roll .dice-tooltip {
+	background: linear-gradient(
+		50deg,
+		var(--col-infinity-red) 0%,
+		var(--col-infinity-dark-blue) 38%,
+		var(--col-infinity-blue) 100%
+	);
+
+	border: 1px solid var(--col-infinity-blue);
+	color: var(--color-light-1);
+}

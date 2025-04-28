@@ -32,7 +32,7 @@
 		margin-bottom: unset;
 	}
 
-	.dice-formula, .dice-total, .dice-tooltip .part-header {
+	.dice-formula, .dice-total {
 		font-family: var(--font-orbitron);
 	}
 }
