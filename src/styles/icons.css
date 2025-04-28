@@ -6,7 +6,7 @@
 	justify-content: center;
 
 	font-family: var(--font-orbitron);
-	font-weight: var(--fw-semibold);
+	font-weight: var(--fw-semi-bold);
 
 	background: white;
 	color: var(--col-infinity-dark-blue);
@@ -16,8 +16,5 @@
 	aspect-ratio: 1;
 	width: var(--size);
 	height: var(--size);
-
 	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
 }

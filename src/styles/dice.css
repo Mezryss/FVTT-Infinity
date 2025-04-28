@@ -1,0 +1,7 @@
+.combat-die-zero {
+	opacity: 0.25;
+}
+
+.max {
+	filter: sepia(0.5) hue-rotate(180deg);
+}
