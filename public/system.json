@@ -9,8 +9,23 @@
 		"maximum": ""
 	},
 	"documentTypes": {
-		"Actor": {},
-		"Item": {}
+		"Actor": {
+			"player": {},
+			"adversary": {
+				"htmlFields": ["description"]
+			},
+			"remote": {
+				"htmlFields": ["description"]
+			},
+			"geist": {
+				"htmlFields": ["description"]
+			}
+		},
+		"Item": {
+			"talent": {
+				"htmlFields": ["description"]
+			}
+		}
 	},
 	"authors": [
 		{

@@ -1,1 +1,13 @@
-{}
+{
+	"TYPES": {
+		"Actor": {
+			"adversary": "Adversary",
+			"geist": "Geist",
+			"player": "Player Character",
+			"remote": "Remote"
+		},
+		"Item": {
+			"talent": "Talent"
+		}
+	}
+}
