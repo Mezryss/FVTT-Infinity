@@ -78,9 +78,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
-			'@data': fileURLToPath(new URL('./src/data', import.meta.url)),
-			'@models': fileURLToPath(new URL('./src/models', import.meta.url)),
-			'@sheets': fileURLToPath(new URL('./src/sheets', import.meta.url)),
+			'@styles': fileURLToPath(new URL('./styles', import.meta.url)),
 		},
 	},
 	server: {

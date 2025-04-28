@@ -56,7 +56,7 @@ declare class HandlebarsApp {
  * Wrapper type for the HandlebarsApplicationMixin providing stronger typing information.
  */
 export function HandlebarsMixin<
-	SheetType extends foundry.applications.api.DocumentSheetV2,
+	SheetType extends foundry.applications.api.ApplicationV2,
 	BaseType extends foundry.types.Constructor<SheetType>,
 >(base: BaseType) {
 	return class extends HandlebarsApplicationMixin(base) {} as BaseType &

@@ -53,6 +53,7 @@
 			"path": "languages/en.json"
 		}
 	],
+	"socket": true,
 	"packs": [],
 	"packFolders": [],
 	"primaryTokenAttribute": "",

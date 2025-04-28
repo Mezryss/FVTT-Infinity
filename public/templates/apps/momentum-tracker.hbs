@@ -1,0 +1,48 @@
+{{! Momentum Tracker }}
+<div class='tracker-container'>
+	<div class='momentum-tracker'>
+		<div class='name'>{{localize 'Infinity.Apps.Momentum.Momentum'}}</div>
+		<div class='controls'>
+			<a data-action='decreasePool' data-pool='momentum'>
+				<i class='fas fa-fw fa-minus'></i>
+			</a>
+
+			<div class='spacer'></div>
+			<input type='number' name='momentum' value='{{momentum}}' />
+			<div class='spacer'></div>
+
+			<a data-action='increasePool' data-pool='momentum'>
+				<i class='fas fa-fw fa-plus'></i>
+			</a>
+		</div>
+	</div>
+</div>
+
+{{! Heat Tracker }}
+{{#if renderHeatTracker}}
+	<div class='tracker-container'>
+		<div class='heat-tracker'>
+			<div class='name'>{{localize 'Infinity.Apps.Momentum.Heat'}}</div>
+			<div class='controls'>
+				{{! Only GMs are allowed to increase/decreate Heat }}
+				{{#if isGM}}
+					<a data-action='decreasePool' data-pool='heat'>
+						<i class='fas fa-fw fa-minus'></i>
+					</a>
+				{{/if}}
+
+				<div class='spacer'></div>
+				<input type='number' name='heat' value='{{heat}}' {{disabled (not isGM)}} />
+				<div class='spacer'></div>
+
+				{{! Only GMs are allowed to increase/decreate Heat }}
+				{{#if isGM}}
+					<a data-action='increasePool' data-pool='heat'>
+						<i class='fas fa-fw fa-plus'></i>
+					</a>
+				{{/if}}
+
+			</div>
+		</div>
+	</div>
+{{/if}}

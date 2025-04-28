@@ -22,6 +22,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
+			"@styles/*": ["./styles/*"],
 			"@common/*": ["./foundry/common/*"],
 			"@client/*": ["./foundry/client/*"]
 		},

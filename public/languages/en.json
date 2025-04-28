@@ -1,5 +1,11 @@
 {
 	"Infinity": {
+		"Apps": {
+			"Momentum": {
+				"Heat": "GM Heat",
+				"Momentum": "Party Momentum"
+			}
+		},
 		"Attributes": {
 			"agility": "Agility",
 			"awareness": "Awareness",
@@ -12,6 +18,24 @@
 		"Chat": {
 			"Rolls": {
 				"WithEffects": "{total} + {effects} Effect{plural}"
+			}
+		},
+		"Settings": {
+			"Heat": {
+				"Name": "Heat",
+				"Hint": "Amount of banked Heat available to the GM to spend."
+			},
+			"Momentum": {
+				"Name": "Party Momentum",
+				"Hint": "Amount of banked Momentum available to the party to spend."
+			},
+			"MaxMomentum": {
+				"Name": "Max Party Momentum",
+				"Hint": "How much Momentum is the party allowed to bank?"
+			},
+			"ShowHeatToPlayers": {
+				"Name": "Show Heat To Players",
+				"Hint": "Should the GM's current Heat tracker be showed to players?"
 			}
 		},
 		"Sheets": {
