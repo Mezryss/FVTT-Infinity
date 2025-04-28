@@ -1,0 +1,23 @@
+.icon-combat-die {
+	--size: 1.25rem;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	font-family: var(--font-orbitron);
+	font-weight: var(--fw-semibold);
+
+	background: white;
+	color: var(--col-infinity-dark-blue);
+	border: 1px solid var(--col-infinity-dark-blue);
+
+	border-radius: 50%;
+	aspect-ratio: 1;
+	width: var(--size);
+	height: var(--size);
+
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
