@@ -1,4 +1,5 @@
 import { AbilityItemSheet } from './ability';
+import { TalentItemSheet } from './talent';
 
 /**
  * Register Item Sheets
@@ -11,6 +12,11 @@ export function register() {
 
 	Items.registerSheet('infinity', AbilityItemSheet, {
 		types: ['ability'],
+		makeDefault: true,
+	});
+
+	Items.registerSheet('infinity', TalentItemSheet, {
+		types: ['talent'],
 		makeDefault: true,
 	});
 }

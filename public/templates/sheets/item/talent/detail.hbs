@@ -1,0 +1,43 @@
+<section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	<label>
+		<span>{{localize "Infinity.Sheets.Talent.AssociatedSkill"}}</span>
+		<select name="system.skill" {{disabled (not editable)}}>
+			{{selectOptions LABELED_SKILLS selected=system.skill localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	{{#if isOwned}}
+		<label>
+			<span>{{localize "Infinity.Sheets.Talent.Rank"}}</span>
+			<input name="system.ranks" min="1" type="number" value="{{system.ranks}}" {{disabled (not editable)}} />
+		</label>
+	{{/if}}
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Talent.MaximumRanks"}}</span>
+		<input name="system.maximumRanks" min="1" type="number" value="{{system.maximumRanks}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Talent.PrerequisiteSkillRanks"}}</span>
+		<input name="system.prerequisiteSkillRanks" min="0" type="number" value="{{system.prerequisiteSkillRanks}}" {{disabled (not editable)}} />
+	</label>
+
+	{{#if prereqTalent}}
+	<label style="align-items: center">
+		<span>{{localize "Infinity.Sheets.Talent.PrerequisiteTalent"}}</span>
+		<div class="talent-control">
+			<span class="spacer"></span>
+			<a data-action="openDocument" data-uuid="{{prereqTalent.uuid}}">{{prereqTalent.name}}</a>
+			<span class="spacer"></span>
+			<a data-action="removeTalent"><i class="fas fa-fw fa-trash"></i></a>
+		</div>
+	</label>
+	{{else}}
+	<div data-drop-target="talent">
+		<em>
+			{{localize "Infinity.Sheets.Talent.DragTalent"}}
+		</em>
+	</div>
+	{{/if}}
+</section>

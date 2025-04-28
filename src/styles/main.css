@@ -6,3 +6,11 @@
 @import './journal.css';
 @import './elements/index.css';
 @import './sheets/index.css';
+
+.content-link {
+	font-family: var(--font-orbitron);
+}
+
+.spacer {
+	flex-grow: 1;
+}

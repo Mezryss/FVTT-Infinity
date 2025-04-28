@@ -1,12 +1,68 @@
 {
 	"Infinity": {
+		"Attributes": {
+			"agility": "Agility",
+			"awareness": "Awareness",
+			"brawn": "Brawn",
+			"coordination": "Coordination",
+			"intelligence": "Intelligence",
+			"personality": "Personality",
+			"willpower": "Willpower"
+		},
 		"Chat": {
 			"Rolls": {
 				"WithEffects": "{total} + {effects} Effect{plural}"
 			}
 		},
+		"Sheets": {
+			"Item": {
+				"Label": {
+					"Talent": "{skill} Talent"
+				}
+			},
+			"Talent": {
+				"AssociatedSkill": "Associated Skill:",
+				"DragTalent": "Drag & drop another talent onto this sheet to set a prerequisite for this talent!",
+				"Expertise": "{skill} Expertise {rank}",
+				"MaximumRanks": "Maximum Ranks:",
+				"Prerequisite": "Prerequisite:",
+				"PrerequisiteSkillRanks": "Pre. Skill Ranks:",
+				"PrerequisiteTalent": "Prerequisite Talent:",
+				"Rank": "Rank:",
+				"Ranks": "Ranks:",
+				"SameTalentNotification": "You cannot set a talent as a prerequisite of itself!",
+				"TalentsOnlyNotification": "Only another Talent item can be dropped on a Talent's item sheet as a prerequisite!"
+			}
+		},
+		"Skills": {
+			"acrobatics": "Acrobatics",
+			"analysis": "Analysis",
+			"animalHandling": "Animal Handling",
+			"athletics": "Athletics",
+			"ballistics": "Ballistics",
+			"closeCombat": "Close Combat",
+			"command": "Command",
+			"discipline": "Discipline",
+			"education": "Education",
+			"extraplanetary": "Extraplanetary",
+			"hacking": "Hacking",
+			"lifestyle": "Lifestyle",
+			"medicine": "Medicine",
+			"observation": "Observation",
+			"persuade": "Persuade",
+			"pilot": "Pilot",
+			"psychology": "Psychology",
+			"resistance": "Resistance",
+			"science": "Science",
+			"spacecraft": "Spacecraft",
+			"stealth": "Stealth",
+			"survival": "Survival",
+			"tech": "Tech",
+			"thievery": "Thievery"
+		},
 		"Tabs": {
 			"description": "Description",
+			"detail": "Detail",
 			"effects": "Active Effects"
 		}
 	},

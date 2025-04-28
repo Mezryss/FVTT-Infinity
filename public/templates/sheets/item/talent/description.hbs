@@ -1,0 +1,33 @@
+<section class="tab{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	{{#if showMaximumRanks}}
+		{{#if isOwned}}
+		<div style="font-family: var(--font-orbitron); padding: 0.25rem 0.5rem; padding-bottom: 0;">
+			<span style="font-weight: var(--fw-extra-bold);">{{localize "Infinity.Sheets.Talent.Ranks"}}</span> {{system.ranks}}/{{system.maximumRanks}}
+		</div>
+		{{else}}
+		<div style="font-family: var(--font-orbitron); padding: 0.25rem 0.5rem; padding-bottom: 0;">
+			<span style="font-weight: var(--fw-extra-bold);">{{localize "Infinity.Sheets.Talent.MaximumRanks"}}</span> {{system.maximumRanks}}
+		</div>
+		{{/if}}
+	{{/if}}
+
+	{{#if showPrerequisite}}
+		<div style="font-family: var(--font-orbitron); padding: 0.25rem 0.5rem">
+			<span style="font-weight: var(--fw-extra-bold);">{{localize "Infinity.Sheets.Talent.Prerequisite"}}</span>
+			{{#if prereqTalent}}
+				<a class="prereq-talent" data-action="openDocument" data-uuid="{{prereqTalent.uuid}}">{{prereqTalent.name}}</a>
+			{{/if}}
+			{{#if (gt system.prerequisiteSkillRanks 0)}}
+			<span>{{localize "Infinity.Sheets.Talent.Expertise" skill=localizedSkillName rank=system.prerequisiteSkillRanks }}</span>
+			{{/if}}
+		</div>
+	{{/if}}
+
+	{{#if editable}}
+		<prose-mirror name="system.description" value="{{system.description}}" toggled="true">
+			{{{enrichedDescription}}}
+		</prose-mirror>
+	{{else}}
+		{{{enrichedDescription}}}
+	{{/if}}
+</section>

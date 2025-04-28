@@ -1,0 +1,8 @@
+.item-sheet.talent {
+	.prereq-talent {
+		&:not(:last-child)::after {
+			display: inline;
+			content: ', ';
+		}
+	}
+}

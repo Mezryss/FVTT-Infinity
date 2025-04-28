@@ -1,0 +1,40 @@
+.item-sheet section[data-tab='detail'] {
+	&.active {
+		display: flex;
+	}
+
+	flex-flow: column nowrap;
+	padding: 0.5rem;
+	gap: 0.5rem;
+
+	label {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: baseline;
+		font-family: var(--font-orbitron);
+
+		span {
+			flex-grow: 1;
+			font-weight: var(--fw-bold);
+			overflow-x: hidden;
+		}
+
+		input,
+		select,
+		.talent-control {
+			width: 14rem;
+			text-align: center;
+		}
+	}
+
+	.talent-control {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+	}
+
+	div[data-drop-target='talent'] {
+		width: 100%;
+		text-align: center;
+	}
+}

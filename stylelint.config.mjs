@@ -5,5 +5,6 @@ export default {
 	rules: {
 		'import-notation': null,
 		'declaration-empty-line-before': null,
+		'no-descending-specificity': null,
 	},
 };

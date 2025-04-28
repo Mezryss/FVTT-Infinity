@@ -44,6 +44,16 @@ export class InfinityItemSheet<
 	// @ts-expect-error Overriding the item accessor from ItemSheetV2 to get a Generic item appropriately.
 	readonly item!: InfinityItem<DataModelType>;
 
+	/**
+	 * The label applied on an Item sheet above the name of the item itself, indicating details about what type of item it is.
+	 */
+	get typeLabel(): string {
+		return game.i18n.localize(`TYPES.Item.${this.item.type}`);
+	}
+
+	/**
+	 * Inserts base context information shared by all item sheets.
+	 */
 	override async _prepareContext(options: foundry.applications.types.ApplicationRenderOptions) {
 		const baseContext = await super._prepareContext(options);
 		const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
@@ -54,13 +64,17 @@ export class InfinityItemSheet<
 			...baseContext,
 
 			// Ownership
-			owner: this.document.isOwner,
+			isOwner: this.document.isOwner,
 			limited: this.document.limited,
+			isOwned: this.item.isOwned,
 
 			// Item Data
 			item: this.item,
 			system: this.item.system,
 			flags: this.item.flags,
+
+			// Item Type Label
+			typeLabel: this.typeLabel,
 
 			// Specially-processed data
 			enrichedDescription,
