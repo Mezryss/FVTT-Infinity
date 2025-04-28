@@ -34,9 +34,6 @@
 			"host": {
 				"htmlFields": ["description"]
 			},
-			"lifestyle": {
-				"htmlFields": ["description"]
-			},
 			"talent": {
 				"htmlFields": ["description"]
 			}
