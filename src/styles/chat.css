@@ -1,0 +1,38 @@
+.chat-message {
+	background: var(--col-infinity-light-blue);
+	border: 1px solid var(--col-infinity-dark-blue);
+
+	.message-header {
+		border-bottom: 1px solid var(--col-infinity-dark-blue);
+		margin-bottom: 0.25rem;
+	}
+
+	.message-sender {
+		font-family: var(--font-orbitron);
+		font-weight: var(--fw-semibold);
+	}
+}
+
+.chat-message:has(.dice-roll) {
+	background: linear-gradient(
+		50deg,
+		var(--col-infinity-red) 0%,
+		var(--col-infinity-dark-blue) 38%,
+		var(--col-infinity-blue) 100%
+	);
+
+	border: 1px solid var(--col-infinity-blue);
+
+	&, .message-header {
+		color: var(--color-light-1);
+	}
+
+	.message-header {
+		border-bottom: unset;
+		margin-bottom: unset;
+	}
+
+	.dice-formula, .dice-total, .dice-tooltip .part-header {
+		font-family: var(--font-orbitron);
+	}
+}
