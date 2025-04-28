@@ -2,6 +2,32 @@
 
 Unofficial implementation of the Infinity RPG by Modiphius for FoundryVTT
 
+## Setup
+
+Before we actualy get into the process of building, a few steps need to happen. First (obviously), install dependencies with Yarn:
+
+```sh
+yarn
+```
+
+This project uses Yarn berry (though we do not use zero-installs).
+
+### Foundry Typings
+
+This project makes use of the JSDocs (with some minor patchwork where required) within Foundry's existing codebase. Create a symlink named "foundry" to Foundry's JS files in the project's root directory. (Finding out the path for these files is your own responsibility; for Node.js releases of Foundry this is the root of the extracted folder. Look for the "client" and "common" folders to know you're linking the right folder.)
+
+```sh
+ln -s /path/to/foundry foundry
+```
+
+### System Symlink
+
+After building (see below) and creating the `dist/` folder, symlink it into your Foundry data folder's "systems/" folder as "infinity".
+
+```sh
+ln -s /path/to/source/dist /Path/to/systems/infinity
+```
+
 ## Building
 FVTT-Infinity is set up as a fairly straightforward Vite project using Yarn as a package manager.
 
@@ -36,6 +62,14 @@ All pull requests and forks must adhere to the following:
 - All contributions to this project, unless otherwise noted through licenses as mentioned above, fall under the project's MIT License.
 - AI-generated code contributions are not permitted under any circumstances.
 - Contributors who act in a bad faith, hateful, or otherwise harmful manner will be blocked from making future contributions. This includes notable behavior outside this system and its community.
+
+### On Automation
+
+PRs to the main copy of this project seeking to automate gameplay features are unlikely to be accepted. If you wish to add automation, please start a separate Module instead or fork the codebase.
+
+This is requested for a couple of reasons:
+- I (Mezryss) simply don't care for gameplay automation. I enjoy the act of engaging in a game's mechanics when I run it, and I'm not interested in automating those elements of play away.
+- Automation inherently makes a codebase more complex.
 
 ## LICENSE
 This codebase is licensed under the [**MIT License**](LICENSE).
