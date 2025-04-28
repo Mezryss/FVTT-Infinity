@@ -14,14 +14,29 @@
 			"adversary": {
 				"htmlFields": ["description"]
 			},
+			"geist": {
+				"htmlFields": ["description"]
+			},
 			"remote": {
 				"htmlFields": ["description"]
 			},
-			"geist": {
+			"vehicle": {
 				"htmlFields": ["description"]
 			}
 		},
 		"Item": {
+			"ability": {
+				"htmlFields": ["description"]
+			},
+			"gear": {
+				"htmlFields": ["description"]
+			},
+			"host": {
+				"htmlFields": ["description"]
+			},
+			"lifestyle": {
+				"htmlFields": ["description"]
+			},
 			"talent": {
 				"htmlFields": ["description"]
 			}

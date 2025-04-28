@@ -4,9 +4,14 @@
 			"adversary": "Adversary",
 			"geist": "Geist",
 			"player": "Player Character",
-			"remote": "Remote"
+			"remote": "Remote",
+			"vehicle": "Vehicle"
 		},
 		"Item": {
+			"ability": "Ability",
+			"gear": "Gear",
+			"host": "Host",
+			"lifestyle": "Lifestyle",
 			"talent": "Talent"
 		}
 	}
