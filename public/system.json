@@ -1,0 +1,43 @@
+{
+	"id": "infinity",
+	"title": "Infinity (Unofficial)",
+	"description": "Unofficial implementation of Infinity 2D20",
+	"version": "1.0.0",
+	"compatibility": {
+		"minimum": "13.340",
+		"verified": "13.340",
+		"maximum": ""
+	},
+	"documentTypes": {
+		"Actor": {},
+		"Item": {}
+	},
+	"authors": [
+		{
+			"name": "Mezryss"
+		}
+	],
+	"esmodules": ["main.js"],
+	"styles": ["main.css"],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "languages/en.json"
+		}
+	],
+	"packs": [],
+	"packFolders": [],
+	"primaryTokenAttribute": "",
+	"secondaryTokenAttribute": "",
+	"grid": {
+		"units": "ft",
+		"distance": 5
+	},
+	"flags": {
+		"hotReload": {
+			"extensions": ["css", "hbs", "json"],
+			"paths": ["templates", "languages", "styles"]
+		}
+	}
+}
