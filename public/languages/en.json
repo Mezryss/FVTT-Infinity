@@ -1,4 +1,11 @@
 {
+	"Infinity": {
+		"Chat": {
+			"Rolls": {
+				"WithEffects": "{total} + {effects} Effect{plural}"
+			}
+		}
+	},
 	"TYPES": {
 		"Actor": {
 			"adversary": "Adversary",

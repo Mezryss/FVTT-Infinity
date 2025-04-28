@@ -5,7 +5,11 @@
  * @param style Font style
  * @param weight Font weights
  */
-function buildDefinition(path: string, style: 'normal' | 'italic' = 'normal', weight: string = '400'): CONFIG.FontDefinition {
+function buildDefinition(
+	path: string,
+	style: 'normal' | 'italic' = 'normal',
+	weight: string = '400',
+): CONFIG.FontDefinition {
 	return {
 		urls: [`systems/infinity/fonts/${path}`],
 		style,

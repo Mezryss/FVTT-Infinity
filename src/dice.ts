@@ -133,3 +133,50 @@ export function register() {
 	CONFIG.Dice.terms[CombatDie.DENOMINATION] = CombatDie;
 	CONFIG.Dice.types.push(CombatDie);
 }
+
+/**
+ * Intercept rendered chat messages to inject number of Effects into output for Combat Dice rolls.
+ */
+Hooks.on(
+	'renderChatMessageHTML',
+	(
+		message: foundry.documents.ChatMessage,
+		element: HTMLElement,
+		_data: foundry.documents.types.ChatMessageData,
+	) => {
+		const rolls = message.rolls as foundry.dice.Roll[];
+		let hasCombatDice = false;
+
+		// Calculate the number of Effects rolled on any combat dice in the roll.
+		const effects = rolls.reduce((total, roll) => {
+			let effectsInRoll = 0;
+
+			roll.terms.forEach((term) => {
+				if (term instanceof CombatDie) {
+					hasCombatDice = true;
+					effectsInRoll += (<CombatDie>term).rolledEffects ?? 0;
+				}
+			});
+
+			return total + effectsInRoll;
+		}, 0);
+
+		// Nothing to do if no Combat Dice terms were found, or if no Effects were even rolled.
+		if (!hasCombatDice) {
+			return;
+		}
+
+		// Inject the number of Effects into the message.
+		const total = element.querySelector<HTMLHeadingElement>('.dice-total');
+		if (!total) {
+			return;
+		}
+
+		const value = total.innerText;
+		total.innerText = game.i18n.format('Infinity.Chat.Rolls.WithEffects', {
+			total: value,
+			effects,
+			plural: effects !== 1 ? 's' : '',
+		});
+	},
+);
