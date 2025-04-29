@@ -29,24 +29,29 @@ ln -s /path/to/source/dist /Path/to/systems/infinity
 ```
 
 ## Building
+
 FVTT-Infinity is set up as a fairly straightforward Vite project using Yarn as a package manager.
 
 ### Build
+
 ```sh
 yarn build
 ```
 
 ### Lint (Oxlint + Stylelint)
+
 ```sh
 yarn lint
 ```
 
 ### Format (Prettier)
+
 ```sh
 yarn format
 ```
 
 ### Dev Server (Vite)
+
 ```sh
 yarn dev
 ```
@@ -68,10 +73,12 @@ All pull requests and forks must adhere to the following:
 PRs to the main copy of this project seeking to automate gameplay features are unlikely to be accepted. If you wish to add automation, please start a separate Module instead or fork the codebase.
 
 This is requested for a couple of reasons:
+
 - I (Mezryss) simply don't care for gameplay automation. I enjoy the act of engaging in a game's mechanics when I run it, and I'm not interested in automating those elements of play away.
 - Automation inherently makes a codebase more complex.
 
 ## LICENSE
+
 This codebase is licensed under the [**MIT License**](LICENSE).
 
 #### foundryvtt/pf2e

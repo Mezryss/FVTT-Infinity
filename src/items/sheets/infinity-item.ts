@@ -84,7 +84,7 @@ export class InfinityItemSheet<
 	/**
 	 * Injects information about the current tab for the given part.
 	 */
-	protected override async _preparePartContext(
+	override async _preparePartContext(
 		partId: string,
 		context: foundry.applications.types.ApplicationRenderContext,
 		options: HandlebarsRenderOptions,

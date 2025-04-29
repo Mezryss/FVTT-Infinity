@@ -1,4 +1,4 @@
-import '../foundry/client/global.d.mts';
+import '@client/global.d.mts';
 
 declare global {
 	const Hooks = foundry.helpers.Hooks;

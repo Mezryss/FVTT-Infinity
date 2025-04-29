@@ -30,9 +30,7 @@ declare class HandlebarsApp {
 	/**
 	 * Allow subclasses to dynamically configure render parts.
 	 */
-	protected _configureRenderParts(
-		options: HandlebarsRenderOptions,
-	): Record<string, HandlebarsTemplatePart>;
+	_configureRenderParts(options: HandlebarsRenderOptions): Record<string, HandlebarsTemplatePart>;
 
 	/**
 	 * Prepare context that is specific to only a single rendered part.
@@ -45,7 +43,7 @@ declare class HandlebarsApp {
 	 * @param context Shared context provided by _prepareContext
 	 * @param options Options which configure application rendering behavior
 	 */
-	protected _preparePartContext(
+	_preparePartContext(
 		partId: string,
 		context: ApplicationRenderContext,
 		options: HandlebarsRenderOptions,

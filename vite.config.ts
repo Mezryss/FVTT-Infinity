@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import dts from 'vite-plugin-dts';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, type PluginOption } from 'vite';
 
@@ -20,6 +21,7 @@ const VITE_HOST = +process.env.VITE_SERVER_PORT! || 30001;
 
 /* BUILD SETTINGS */
 const OUT_DIR = 'dist';
+const IS_PRODUCTION = process.env.NODE_ENVIRONMENT === 'production';
 
 /**
  * HMR Helper borrowed from the Pathfinder 2E folks.
@@ -74,7 +76,18 @@ export default defineConfig({
 			},
 		},
 	},
-	plugins: [visualizer(), HMRHelper()],
+	plugins: [
+		visualizer(),
+		HMRHelper(),
+		...(IS_PRODUCTION
+			? [
+					// Production-Only Plugins
+					dts(),
+				]
+			: [
+					// Dev-Only Plugins
+				]),
+	],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
