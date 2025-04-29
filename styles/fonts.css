@@ -48,3 +48,25 @@
 .font-orbitron {
 	font-family: var(--font-orbitron);
 }
+
+/* Foundry Font Adjustments */
+body {
+	--font-h1: var(--font-orbitron);
+	--font-h2: var(--font-orbitron);
+	--font-h3: var(--font-orbitron);
+	--font-h4: var(--font-orbitron);
+	--font-h5: var(--font-orbitron);
+	--font-h6: var(--font-orbitron);
+	--font-h1-size: var(--font-size-40);
+    --font-h2-size: var(--font-size-28);
+    --font-h3-size: var(--font-size-24);
+    --font-h4-size: var(--font-size-20);
+    --font-h5-size: var(--font-size-18);
+    --font-h6-size: var(--font-size-14);
+}
+
+#pause figcaption {
+	font-family: var(--font-orbitron);
+	font-weight: var(--fw-extra-bold);
+	letter-spacing: 1.5em;
+}
