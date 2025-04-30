@@ -28,6 +28,14 @@ After building (see below) and creating the `dist/` folder, symlink it into your
 ln -s /path/to/source/dist /Path/to/systems/infinity
 ```
 
+To avoid messing up your Foundry files after symlinking, I recommend adding the following to `.vscode/settings.json`:
+
+```json
+"files.readonlyInclude": {
+	"foundry/**/*": true,
+}
+```
+
 ## Building
 
 FVTT-Infinity is set up as a fairly straightforward Vite project using Yarn as a package manager.

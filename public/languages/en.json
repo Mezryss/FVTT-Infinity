@@ -17,7 +17,15 @@
 		},
 		"Chat": {
 			"Rolls": {
-				"WithEffects": "{total} + {effects} Effect{plural}"
+				"WithComplications": {
+					"Plural": "{total} + {complications} Complications",
+					"Singular": "{total} + {complications} Complication"
+				},
+				"WithEffects": {
+					"Plural": "{total} + {effects} Effects",
+					"Singular": "{total} + {effects} Effect"
+				},
+				"InvalidFocusModifier": "The Focus dice modifier (foc, foc<=#) must be applied after a count successes modifier (cs<5) or it will be overwritten!"
 			}
 		},
 		"Settings": {

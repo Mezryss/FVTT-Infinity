@@ -127,11 +127,101 @@ export class CombatDie extends DiceTerm {
 }
 
 /**
+ * Handler for Complication Range modifier for dice rolls.
+ *
+ * 2d20comp			Rolls of 20 count as a Complication.
+ * 2d20comp>18		Rolls of 19–20 count as a Complication
+ * 2d20comp>=18		Rolls of 18–20 count as a Complication
+ */
+function diceComplications(this: foundry.dice.terms.Die, modifier: string) {
+	const regexp = /(?:comp)([<>=]+)?([0-9]+)?/i;
+	const match = modifier.match(regexp);
+	if (!match) {
+		return false;
+	}
+
+	// Yes ESLint, I know that targetStr isn't mutated. 😒
+	// eslint-disable-next-line
+	let [comparison, targetStr] = match.slice(1);
+	comparison = comparison || '=';
+	let target = +targetStr;
+
+	if (isNaN(target)) {
+		target = 1;
+	}
+
+	// Cycle through results and add to (or modify!) their success value.
+	for (const result of this.results) {
+		const complication = DiceTerm.compareResult(result.result, comparison, target);
+
+		Object.assign(result, { complication });
+	}
+}
+
+/**
+ * Handler for a Focus Range modifier for dice rolls. Requires a countSuccess modifier to have already been applied.
+ *
+ * 2d20foc		Rolls of 1 count as an extra success.
+ * 2d20foc<5	Rolls of 1–4 count as an extra success.
+ * 2d20foc<=5	Rolls of 1–5 count as an extra success.
+ *
+ * Core of this method is copied from Foundry's existing countSuccess modifier.
+ */
+function diceFocus(this: foundry.dice.terms.Die, modifier: string) {
+	const regexp = /(?:foc)([<>=]+)?([0-9]+)?/i;
+	const match = modifier.match(regexp);
+	if (!match) {
+		return false;
+	}
+
+	// Yes ESLint, I know that targetStr isn't mutated. 😒
+	// eslint-disable-next-line
+	let [comparison, targetStr] = match.slice(1);
+	comparison = comparison || '=';
+	let target = +targetStr;
+
+	if (isNaN(target)) {
+		target = 1;
+	}
+
+	// Cycle through results and add to (or modify!) their success value.
+	for (const result of this.results) {
+		if (DiceTerm.compareResult(result.result, comparison, target)) {
+			if (result.count === undefined) {
+				ui.notifications.warn(
+					game.i18n.localize('Infinity.Chat.Rolls.InvalidFocusModifier'),
+				);
+				result.success = true;
+				delete result.failure;
+
+				// Practically speaking, it should never happen that focus is higher than the combined Target Number, but...
+				result.count = 2;
+			} else {
+				// Just in case somehow we got a count already, but it was treated as a failure..
+				result.count = 2;
+				result.success = true;
+				delete result.failure;
+			}
+		} else if (result.count === undefined) {
+			ui.notifications.warn(game.i18n.localize('Infinity.Chat.Rolls.InvalidFocusModifier'));
+			result.failure = true;
+			delete result.success;
+			result.count = 0;
+		}
+	}
+}
+
+/**
  * Register all custom dice settings.
  */
 export function register() {
 	CONFIG.Dice.terms[CombatDie.DENOMINATION] = CombatDie;
 	CONFIG.Dice.types.push(CombatDie);
+
+	Object.assign(Die.MODIFIERS, {
+		comp: diceComplications,
+		foc: diceFocus,
+	});
 }
 
 /**
@@ -146,37 +236,56 @@ Hooks.on(
 	) => {
 		const rolls = message.rolls as foundry.dice.Roll[];
 		let hasCombatDice = false;
+		let effects = 0;
 
-		// Calculate the number of Effects rolled on any combat dice in the roll.
-		const effects = rolls.reduce((total, roll) => {
-			let effectsInRoll = 0;
+		let complications = 0;
 
+		// Loop over every roll & its terms to find Complications & Effects.
+		for (const roll of rolls) {
 			roll.terms.forEach((term) => {
 				if (term instanceof CombatDie) {
 					hasCombatDice = true;
-					effectsInRoll += (<CombatDie>term).rolledEffects ?? 0;
+					effects += (<CombatDie>term).rolledEffects ?? 0;
+				}
+
+				if (term instanceof DiceTerm) {
+					complications += term.results.reduce((total, term) => {
+						if ((term as any).complication) {
+							return total + 1;
+						} else {
+							return total;
+						}
+					}, 0);
 				}
 			});
-
-			return total + effectsInRoll;
-		}, 0);
-
-		// Nothing to do if no Combat Dice terms were found, or if no Effects were even rolled.
-		if (!hasCombatDice) {
-			return;
 		}
 
-		// Inject the number of Effects into the message.
 		const total = element.querySelector<HTMLHeadingElement>('.dice-total');
 		if (!total) {
 			return;
 		}
+		const rollTotal = total.innerText;
 
-		const value = total.innerText;
-		total.innerText = game.i18n.format('Infinity.Chat.Rolls.WithEffects', {
-			total: value,
-			effects,
-			plural: effects !== 1 ? 's' : '',
-		});
+		// Inject Effects count for combat dice
+		if (hasCombatDice) {
+			const plurality = effects !== 1 ? 'Plural' : 'Singular';
+
+			total.innerText = game.i18n.format(`Infinity.Chat.Rolls.WithEffects.${plurality}`, {
+				total: rollTotal,
+				effects,
+			});
+		}
+
+		if (complications) {
+			const plurality = complications !== 1 ? 'Plural' : 'Singular';
+
+			total.innerText = game.i18n.format(
+				`Infinity.Chat.Rolls.WithComplications.${plurality}`,
+				{
+					total: rollTotal,
+					complications,
+				},
+			);
+		}
 	},
 );
