@@ -127,86 +127,63 @@ export class CombatDie extends DiceTerm {
 }
 
 /**
- * Handler for Complication Range modifier for dice rolls.
+ * Custom Modifier for Infinity rolls. Combines success count, focus, and complications into a single modifier.
  *
- * 2d20comp			Rolls of 20 count as a Complication.
- * 2d20comp>18		Rolls of 19–20 count as a Complication
- * 2d20comp>=18		Rolls of 18–20 count as a Complication
+ * Xd20inf:tTN:fFoc:cComp
+ * 	- TN = Target Number (roll <= for Success)
+ *  - Foc = Focus (roll <= for +1 Success)
+ *  - Comp = Complication (roll >= for +1 Complication)
  */
-function diceComplications(this: foundry.dice.terms.Die, modifier: string) {
-	const regexp = /(?:comp)([<>=]+)?([0-9]+)?/i;
+function infinityModifier(this: foundry.dice.terms.Die, modifier: string) {
+	const regexp = /(?:inf)\.(?<target_number>\d+)(\.(?<focus>\d+))?(\.(?<complication>\d+))?/i;
 	const match = modifier.match(regexp);
-	if (!match) {
+	if (!match?.groups) {
 		return false;
 	}
 
-	// Yes ESLint, I know that targetStr isn't mutated. 😒
-	// eslint-disable-next-line
-	let [comparison, targetStr] = match.slice(1);
-	comparison = comparison || '=';
-	let target = +targetStr;
+	// Capture the various number thresholds
+	let target_number = +match.groups['target_number'];
+	let focus = +match.groups['focus'];
+	let complication = +match.groups['complication'];
 
-	if (isNaN(target)) {
-		target = 1;
+	// Set default values for unspecified thresholds.
+	if (isNaN(target_number)) {
+		target_number = 1;
+	}
+	if (isNaN(focus)) {
+		focus = 1;
+	}
+	if (isNaN(complication)) {
+		complication = 20;
 	}
 
-	// Cycle through results and add to (or modify!) their success value.
+	// Cycle through the results and process their values.
 	for (const result of this.results) {
-		const complication = DiceTerm.compareResult(result.result, comparison, target);
+		const roll = result.result;
 
-		Object.assign(result, { complication });
-	}
-}
-
-/**
- * Handler for a Focus Range modifier for dice rolls. Requires a countSuccess modifier to have already been applied.
- *
- * 2d20foc		Rolls of 1 count as an extra success.
- * 2d20foc<5	Rolls of 1–4 count as an extra success.
- * 2d20foc<=5	Rolls of 1–5 count as an extra success.
- *
- * Core of this method is copied from Foundry's existing countSuccess modifier.
- */
-function diceFocus(this: foundry.dice.terms.Die, modifier: string) {
-	const regexp = /(?:foc)([<>=]+)?([0-9]+)?/i;
-	const match = modifier.match(regexp);
-	if (!match) {
-		return false;
-	}
-
-	// Yes ESLint, I know that targetStr isn't mutated. 😒
-	// eslint-disable-next-line
-	let [comparison, targetStr] = match.slice(1);
-	comparison = comparison || '=';
-	let target = +targetStr;
-
-	if (isNaN(target)) {
-		target = 1;
-	}
-
-	// Cycle through results and add to (or modify!) their success value.
-	for (const result of this.results) {
-		if (DiceTerm.compareResult(result.result, comparison, target)) {
-			if (result.count === undefined) {
-				ui.notifications.warn(
-					game.i18n.localize('Infinity.Chat.Rolls.InvalidFocusModifier'),
-				);
-				result.success = true;
-				delete result.failure;
-
-				// Practically speaking, it should never happen that focus is higher than the combined Target Number, but...
-				result.count = 2;
-			} else {
-				// Just in case somehow we got a count already, but it was treated as a failure..
-				result.count = 2;
-				result.success = true;
-				delete result.failure;
-			}
-		} else if (result.count === undefined) {
-			ui.notifications.warn(game.i18n.localize('Infinity.Chat.Rolls.InvalidFocusModifier'));
-			result.failure = true;
-			delete result.success;
+		// If the result is less than the Focus value, it's 2 Successes.
+		if (roll <= focus) {
+			result.success = true;
+			delete result.failure;
+			result.count = 2;
+		} else if (roll <= target_number) {
+			result.success = true;
+			delete result.failure;
+			result.count = 1;
+		} else {
 			result.count = 0;
+		}
+
+		// Even if it's a success, Complications count!
+		if (roll >= complication) {
+			// In the unlikely event that a result is both successful and a complication, values are high enough that we mainly want to flag which ones were complications (because the others are also likely successes).
+			// More likely than not somebody's trying to be goofy.
+			delete result.success;
+
+			Object.assign(result, {
+				complication: true,
+				failure: true,
+			});
 		}
 	}
 }
@@ -219,8 +196,7 @@ export function register() {
 	CONFIG.Dice.types.push(CombatDie);
 
 	Object.assign(Die.MODIFIERS, {
-		comp: diceComplications,
-		foc: diceFocus,
+		inf: infinityModifier,
 	});
 }
 
