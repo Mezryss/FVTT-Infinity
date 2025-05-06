@@ -1,4 +1,4 @@
-import { ALL_GEAR_TYPES } from '@/data/gear';
+import { ALL_GEAR_TYPES, type GearType } from '@/data/gear';
 
 import { InfinityItemDataModel } from './infinity-item';
 
@@ -11,7 +11,7 @@ export class GearDataModel extends InfinityItemDataModel {
 	/**
 	 * Type of gear for this item.
 	 */
-	type!: string;
+	type!: GearType;
 
 	/**
 	 * Usually a number between 0–5 representing difficulty of acquiring an item.

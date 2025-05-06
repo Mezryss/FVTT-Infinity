@@ -28,6 +28,11 @@
 				"InvalidFocusModifier": "The Focus dice modifier (foc, foc<=#) must be applied after a count successes modifier (cs<5) or it will be overwritten!"
 			}
 		},
+		"QualityTypes": {
+			"general": "General",
+			"armour": "Armour",
+			"attack": "Attack"
+		},
 		"Settings": {
 			"Heat": {
 				"Name": "Heat",
@@ -51,6 +56,17 @@
 				"Label": {
 					"Talent": "{skill} Talent"
 				}
+			},
+			"Quality": {
+				"Abbreviation": {
+					"Label": "Abbreviation",
+					"Hint": "If an Abbreviation is set, the Quality will be displayed in items with its abbreviation (e.g. 'Comms') instead of full name ('Comms Equipment')."
+				},
+				"Ranked": {
+					"Label": "Ranked?",
+					"Hint": "Does this quality have a Rank (for example, Concealed 3 is ranked but Disposable is not)."
+				},
+				"Type": "Quality Type"
 			},
 			"Talent": {
 				"AssociatedSkill": "Associated Skill:",
@@ -110,6 +126,7 @@
 			"ability": "Ability",
 			"gear": "Gear",
 			"host": "Host",
+			"quality": "Quality",
 			"talent": "Talent"
 		}
 	}
