@@ -1,0 +1,42 @@
+.item-qualities-list {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 0.5em;
+}
+
+.item-sheet .item-quality {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	font-family: var(--font-orbitron);
+	gap: 0.5em;
+
+	width: fit-content;
+
+	border: 1px solid var(--col-infinity-dark-blue);
+	overflow: hidden;
+	background: var(--col-infinity-dark-blue);
+	border-radius: 0.5em;
+	color: var(--color-text-light);
+	padding-left: 0.25em;
+	height: var(--input-height);
+
+	span {
+		font-weight: var(--fw-bold);
+	}
+
+	&.invalid {
+		background-color: var(--col-infinity-red);
+	}
+
+	&:not(:has(input[type='number'])) {
+		padding-right: 0.5em;
+	}
+
+	input[type='number'] {
+		text-align: center;
+		width: 3em;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}

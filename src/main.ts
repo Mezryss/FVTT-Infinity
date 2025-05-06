@@ -20,5 +20,13 @@ Hooks.once('init', () => {
 
 	registerItems();
 
+	registerPartials();
+
 	console.log('Infinity | Init Complete');
 });
+
+async function registerPartials() {
+	await foundry.applications.handlebars.loadTemplates({
+		gearQualities: 'systems/infinity/templates/sheets/item/gear/qualities-list.hbs',
+	});
+}

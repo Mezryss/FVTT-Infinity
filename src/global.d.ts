@@ -12,4 +12,14 @@ declare global {
 			invalid?: boolean;
 		},
 	): Promise<DocumentType | null>;
+
+	function fromUuidSync<
+		DocumentType extends foundry.abstract.Document = foundry.abstract.Document,
+	>(
+		uuid: string,
+		options?: {
+			relative?: foundry.abstract.Document;
+			invalid?: boolean;
+		},
+	): DocumentType | null;
 }

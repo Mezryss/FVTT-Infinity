@@ -7,4 +7,8 @@ prose-mirror {
 	.editor-content {
 		padding: 0.5rem;
 	}
+
+	.editor-container .editor-content {
+		padding-top: 0;
+	}
 }

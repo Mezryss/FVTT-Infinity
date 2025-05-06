@@ -54,8 +54,8 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 		if (this.isEditable) {
 			new foundry.applications.ux.DragDrop({
 				dropSelector: '.window-content',
+				// Another instance of Foundry JSDocs not using Partials causing TS issues.
 				callbacks: <any>{
-					// Another instance of Foundry JSDocs not using Partials causing TS issues.
 					drop: this.#onDrop.bind(this),
 				},
 			}).bind(this.element);

@@ -40,6 +40,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-oxlint", "npm:0.16.7"],\
           ["fvtt-types", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#https://github.com/League-of-Foundry-Developers/foundry-vtt-types.git#commit=3c30d340f19136e50a37e275103e03285f989e58"],\
           ["globals", "npm:16.0.0"],\
+          ["handlebars", "npm:4.7.8"],\
           ["jiti", "npm:2.4.2"],\
           ["oxlint", "npm:0.16.7"],\
           ["prettier", "npm:3.5.3"],\
@@ -6701,6 +6702,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-oxlint", "npm:0.16.7"],\
           ["fvtt-types", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#https://github.com/League-of-Foundry-Developers/foundry-vtt-types.git#commit=3c30d340f19136e50a37e275103e03285f989e58"],\
           ["globals", "npm:16.0.0"],\
+          ["handlebars", "npm:4.7.8"],\
           ["jiti", "npm:2.4.2"],\
           ["oxlint", "npm:0.16.7"],\
           ["prettier", "npm:3.5.3"],\

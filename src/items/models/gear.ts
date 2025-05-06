@@ -1,13 +1,19 @@
 import { ALL_GEAR_TYPES, type GearType } from '@/data/gear';
 
 import { InfinityItemDataModel } from './infinity-item';
+import { AmmunitionData } from './gear/ammunition';
 
-const { StringField } = foundry.data.fields;
+const { EmbeddedDataField, StringField } = foundry.data.fields;
 
 /**
  * Data model for Gear that characters can possess.
  */
 export class GearDataModel extends InfinityItemDataModel {
+	/**
+	 * Ammunition-specific gear data.
+	 */
+	ammunition!: AmmunitionData;
+
 	/**
 	 * Type of gear for this item.
 	 */
@@ -28,7 +34,7 @@ export class GearDataModel extends InfinityItemDataModel {
 	/**
 	 * Possible Tariffs applied to the item's cost.
 	 */
-	tariffs!: string;
+	tariff!: string;
 
 	/**
 	 * Maintenance cost of the item.
@@ -41,6 +47,12 @@ export class GearDataModel extends InfinityItemDataModel {
 		return {
 			...baseSchema,
 
+			/** Specific Item type Data **/
+			ammunition: new EmbeddedDataField(AmmunitionData as any, {
+				nullable: false,
+			}),
+
+			/** General Gear Fields **/
 			type: new StringField({
 				choices: ALL_GEAR_TYPES,
 				initial: ALL_GEAR_TYPES[0],
@@ -49,25 +61,25 @@ export class GearDataModel extends InfinityItemDataModel {
 			}),
 
 			restriction: new StringField({
-				initial: '',
+				initial: '—',
 				nullable: false,
 				trim: true,
 			}),
 
 			cost: new StringField({
-				initial: '',
+				initial: '—',
 				nullable: false,
 				trim: true,
 			}),
 
-			tariffs: new StringField({
-				initial: '',
+			tariff: new StringField({
+				initial: '—',
 				nullable: false,
 				trim: true,
 			}),
 
 			maintenance: new StringField({
-				initial: '',
+				initial: '—',
 				nullable: false,
 				trim: true,
 			}),

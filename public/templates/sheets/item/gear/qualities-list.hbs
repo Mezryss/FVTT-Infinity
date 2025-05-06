@@ -1,0 +1,19 @@
+<div class="item-qualities-list">
+	{{#each qualities}}
+		{{#if valid}}
+		<div class="item-quality" data-tooltip="{{{tooltip}}}">
+			<a data-action="removeQuality" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+			<span>{{label}}</span>
+			<input type="hidden" name="system.ammunition.addsQualities.{{@index}}.uuid" value="{{uuid}}" />
+			<input type="{{#if ranked}}number{{else}}hidden{{/if}}" name="system.ammunition.addsQualities.{{@index}}.rank" value="{{rank}}" />
+		</div>
+		{{else}}
+		<div class="item-quality invalid">
+			<a data-action="removeQuality" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+			<span>{{localize "Infinity.Sheets.Gear.InvalidQuality"}}</span>
+		</div>
+		{{/if}}
+	{{else}}
+	<em style="text-align: center">{{localize "Infinity.Sheets.Gear.DragQuality"}}</em>
+	{{/each}}
+</div>

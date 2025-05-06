@@ -5332,6 +5332,7 @@ __metadata:
     eslint-plugin-oxlint: "npm:^0.16.6"
     fvtt-types: "github:League-of-Foundry-Developers/foundry-vtt-types#v13-main"
     globals: "npm:^16.0.0"
+    handlebars: "npm:^4.7.8"
     jiti: "npm:^2.4.2"
     oxlint: "npm:^0.16.6"
     prettier: "npm:^3.5.3"

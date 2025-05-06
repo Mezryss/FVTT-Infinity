@@ -1,5 +1,12 @@
 {
 	"Infinity": {
+		"AmmunitionCategories": {
+			"arrow": "Arrows",
+			"heavy": "Heavy",
+			"shell": "Shells",
+			"special": "Special",
+			"standard": "Standard"
+		},
 		"Apps": {
 			"Momentum": {
 				"Heat": "GM Heat",
@@ -28,6 +35,18 @@
 				"InvalidFocusModifier": "The Focus dice modifier (foc, foc<=#) must be applied after a count successes modifier (cs<5) or it will be overwritten!"
 			}
 		},
+		"GearTypes": {
+			"ammunition": "Ammunition",
+			"armour": "Armour",
+			"augmentation": "Augmentation",
+			"contagion": "Contagion",
+			"explosiveDevice": "Explosive Device",
+			"hackingDevice": "Hacking Device",
+			"resource": "Resource",
+			"tool": "Tool",
+			"weapon": "Weapon",
+			"other": "Other Item"
+		},
 		"QualityTypes": {
 			"general": "General",
 			"armour": "Armour",
@@ -52,6 +71,32 @@
 			}
 		},
 		"Sheets": {
+			"Gear": {
+				"Ammunition": {
+					"AddsQualities": {
+						"Label": "Qualities Added to Weapon",
+						"Hint": "When used in a weapon, this ammunition adds these qualities to the weapon's own list of qualities."
+					},
+					"Category": "Category"
+				},
+				"DragQuality": "Drag & Drop a Quality item from the item browser to add it to this item!",
+				"InvalidQuality": "Invalid Quality",
+				"QualityAlreadyAddedNotification": "This item already has the {name} quality!",
+				"QualitiesOnlyNotification": "Only a Quality can be dropped on an Item Sheet!",
+				"ReloadCost": {
+					"Label": "Reload Cost",
+					"Hint": "Cost of a clip of this ammunition."
+				},
+				"Restriction": {
+					"Label": "Restriction",
+					"Hint": "How rare or hard-to-acquire the gear is."
+				},
+				"Tariff": {
+					"Label": "Tariff",
+					"Hint": "Each Effect rolled on the cost adds the numerical portion of the Tariff to its cost."
+				},
+				"Type": "Gear Type"
+			},
 			"Item": {
 				"Label": {
 					"Talent": "{skill} Talent"
