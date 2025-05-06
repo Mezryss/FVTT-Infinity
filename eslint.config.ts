@@ -25,6 +25,13 @@ export default tseslint.config(
 	{
 		name: 'app/adjusted-rules',
 		rules: {
+			'sort-imports': [
+				'error',
+				{
+					memberSyntaxSortOrder: ['all', 'multiple', 'single', 'none'],
+					allowSeparatedGroups: true,
+				},
+			],
 			'@typescript-eslint/no-explicit-any': 'off',
 		},
 	},

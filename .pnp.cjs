@@ -50,7 +50,7 @@ const RAW_RUNTIME_STATE =
           ["testsheet", "workspace:."],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:8.31.0"],\
-          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.3"],\
+          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.5"],\
           ["vite-plugin-dts", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:4.5.3"]\
         ],\
         "linkType": "SOFT"\
@@ -6712,7 +6712,7 @@ const RAW_RUNTIME_STATE =
           ["testsheet", "workspace:."],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:8.31.0"],\
-          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.3"],\
+          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.5"],\
           ["vite-plugin-dts", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:4.5.3"]\
         ],\
         "linkType": "SOFT"\
@@ -6921,15 +6921,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["vite", [\
-      ["npm:6.3.3", {\
-        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/vite-npm-6.3.3-3e26e16e98-10c0.zip/node_modules/vite/",\
+      ["npm:6.3.5", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/vite-npm-6.3.5-244c1b4d55-10c0.zip/node_modules/vite/",\
         "packageDependencies": [\
-          ["vite", "npm:6.3.3"]\
+          ["vite", "npm:6.3.5"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.3", {\
-        "packageLocation": "./.yarn/__virtual__/vite-virtual-9a70a8fc2f/5/Users/mina/.yarn/berry/cache/vite-npm-6.3.3-3e26e16e98-10c0.zip/node_modules/vite/",\
+      ["virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.5", {\
+        "packageLocation": "./.yarn/__virtual__/vite-virtual-122f012c9d/5/Users/mina/.yarn/berry/cache/vite-npm-6.3.5-244c1b4d55-10c0.zip/node_modules/vite/",\
         "packageDependencies": [\
           ["@types/jiti", null],\
           ["@types/less", null],\
@@ -6958,7 +6958,7 @@ const RAW_RUNTIME_STATE =
           ["terser", null],\
           ["tinyglobby", "npm:0.2.13"],\
           ["tsx", null],\
-          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.3"],\
+          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.5"],\
           ["yaml", null]\
         ],\
         "packagePeers": [\
@@ -7010,7 +7010,7 @@ const RAW_RUNTIME_STATE =
           ["local-pkg", "npm:1.1.1"],\
           ["magic-string", "npm:0.30.17"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
-          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.3"],\
+          ["vite", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:6.3.5"],\
           ["vite-plugin-dts", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:4.5.3"]\
         ],\
         "packagePeers": [\
