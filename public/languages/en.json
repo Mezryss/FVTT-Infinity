@@ -98,8 +98,16 @@
 					},
 					"Type": "Armour Type"
 				},
+				"Cost": {
+					"Label": "Cost",
+					"Hint": "Cost of the item as a dice string."
+				},
 				"DragQuality": "Drag & Drop a Quality item from the item browser to add it to this item!",
 				"InvalidQuality": "Invalid Quality",
+				"Maintenance": {
+					"Label": "Maintenance",
+					"Hint": "Maintenance cost of the item as a dice string."
+				},
 				"Qualities": {
 					"Label": "Qualities",
 					"Hint": "Qualities applied to the item."
