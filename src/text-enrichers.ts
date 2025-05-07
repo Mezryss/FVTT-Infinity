@@ -13,7 +13,7 @@ export function register() {
 			},
 		},
 		{
-			pattern: /\[RANKS\]/gi,
+			pattern: /@X/gi,
 			async enricher(_match, options: { rank?: number }) {
 				console.log('Options', options);
 				let rankText = 'X';
