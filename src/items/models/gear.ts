@@ -2,6 +2,7 @@ import { ALL_GEAR_TYPES, type GearType } from '@/data/gear';
 
 import { InfinityItemDataModel } from './infinity-item';
 import { AmmunitionData } from './gear/ammunition';
+import { ArmourData } from './gear/armour';
 
 const { EmbeddedDataField, StringField } = foundry.data.fields;
 
@@ -13,6 +14,11 @@ export class GearDataModel extends InfinityItemDataModel {
 	 * Ammunition-specific gear data.
 	 */
 	ammunition!: AmmunitionData;
+
+	/**
+	 * Armour-specific gear data.
+	 */
+	armour!: ArmourData;
 
 	/**
 	 * Type of gear for this item.
@@ -49,6 +55,10 @@ export class GearDataModel extends InfinityItemDataModel {
 
 			/** Specific Item type Data **/
 			ammunition: new EmbeddedDataField(AmmunitionData as any, {
+				nullable: false,
+			}),
+
+			armour: new EmbeddedDataField(ArmourData as any, {
 				nullable: false,
 			}),
 

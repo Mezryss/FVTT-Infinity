@@ -7,6 +7,12 @@
 			"special": "Special",
 			"standard": "Standard"
 		},
+		"ArmourTypes": {
+			"civilian": "Civilian Armour",
+			"combat": "Combat Armour",
+			"internal": "Internal Armour",
+			"powered": "Powered Armour"
+		},
 		"Apps": {
 			"Momentum": {
 				"Heat": "GM Heat",
@@ -79,8 +85,25 @@
 					},
 					"Category": "Category"
 				},
+				"Armour": {
+					"BTS": {
+						"Label": "BTS",
+						"Hint": "Bio-Technological Shield"
+					},
+					"Soak": {
+						"Arms": "Soak (Arms)",
+						"Head": "Soak (Head)",
+						"Legs": "Soak (Legs)",
+						"Torso": "Soak (Torso)"
+					},
+					"Type": "Armour Type"
+				},
 				"DragQuality": "Drag & Drop a Quality item from the item browser to add it to this item!",
 				"InvalidQuality": "Invalid Quality",
+				"Qualities": {
+					"Label": "Qualities",
+					"Hint": "Qualities applied to the item."
+				},
 				"QualityAlreadyAddedNotification": "This item already has the {name} quality!",
 				"QualitiesOnlyNotification": "Only a Quality can be dropped on an Item Sheet!",
 				"ReloadCost": {

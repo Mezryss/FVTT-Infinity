@@ -1,6 +1,11 @@
 import type { HandlebarsRenderOptions } from '@client/applications/api/handlebars-application.mjs';
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
-import { GearType, LABELED_AMMUNITION_CATEGORIES, LABELED_GEAR_TYPES } from '@/data/gear';
+import {
+	GearType,
+	LABELED_AMMUNITION_CATEGORIES,
+	LABELED_ARMOUR_TYPES,
+	LABELED_GEAR_TYPES,
+} from '@/data/gear';
 import type { GearDataModel } from '@/items/models/gear';
 import { InfinityItemSheet, type SheetTabs } from './infinity-item';
 import type { InfinityItem } from '../infinity-item';
@@ -8,6 +13,36 @@ import type { QualityDataModel } from '../models/quality';
 import { GearQuality } from '../models/gear/quality';
 
 type QualityItem = InfinityItem<QualityDataModel>;
+
+/**
+ * Utility method to fetch details about a Quality entry from the quality's actual item.
+ */
+async function fetchQuality(quality: GearQuality) {
+	const qual = await fromUuid<QualityItem>(quality.uuid);
+	if (!qual) {
+		return {
+			uuid: quality.uuid,
+			valid: false,
+		};
+	}
+
+	const rank = qual.system.ranked ? quality.rank : 0;
+
+	const description = await foundry.applications.ux.TextEditor.enrichHTML(
+		qual.system.description,
+		<any>{ rank },
+	);
+
+	return {
+		uuid: quality.uuid,
+		// Label is what should actually be displayed on sheets - prefer the Abbreviation when possible.
+		label: qual.system.abbreviation.trim() || qual.name,
+		ranked: qual.system.ranked,
+		rank,
+		tooltip: description,
+		valid: true,
+	};
+}
 
 /**
  * Item Sheet for Gear.
@@ -50,6 +85,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualitiesPath = 'system.ammunition.addsQualities';
 				qualities = this.item.system.ammunition.addsQualities;
 				break;
+
+			case GearType.Armour:
+				qualitiesPath = 'system.armour.qualities';
+				qualities = this.item.system.armour.qualities;
+				break;
 		}
 
 		return [qualitiesPath, qualities];
@@ -85,16 +125,26 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	override async _prepareContext(options: foundry.applications.types.ApplicationRenderOptions) {
 		const baseContext = await super._prepareContext(options);
 
+		const [qualitiesPath, _] = this.getQualitiesForItemType();
+		console.log('Qualities Path', qualitiesPath);
+
 		return {
 			...baseContext,
 
 			ammunition: await this.prepareAmmunitionContext(),
+			armour: await this.prepareArmourContext(),
+
+			qualitiesPath,
 
 			LABELED_AMMUNITION_CATEGORIES,
+			LABELED_ARMOUR_TYPES,
 			LABELED_GEAR_TYPES,
 		};
 	}
 
+	/**
+	 * Prepares Context data for Ammunition-type gear.
+	 */
 	async prepareAmmunitionContext() {
 		if (this.item.system.type !== GearType.Ammunition) {
 			return null;
@@ -102,32 +152,24 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 
 		// Ammunition Qualities
 		const qualities = await Promise.all(
-			this.item.system.ammunition.addsQualities.map(async (quality) => {
-				const qual = await fromUuid<QualityItem>(quality.uuid);
-				if (!qual) {
-					return {
-						uuid: quality.uuid,
-						valid: false,
-					};
-				}
-
-				const rank = qual.system.ranked ? quality.rank : 0;
-
-				const description = await foundry.applications.ux.TextEditor.enrichHTML(
-					qual.system.description,
-					<any>{ rank },
-				);
-
-				return {
-					uuid: quality.uuid,
-					label: qual.system.abbreviation.trim() || qual.name,
-					ranked: qual.system.ranked,
-					rank,
-					tooltip: description,
-					valid: true,
-				};
-			}),
+			this.item.system.ammunition.addsQualities.map(fetchQuality),
 		);
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares Context data for Armour-type gear.
+	 */
+	async prepareArmourContext() {
+		if (this.item.system.type !== GearType.Armour) {
+			return null;
+		}
+
+		// Armour Qualities
+		const qualities = await Promise.all(this.item.system.armour.qualities.map(fetchQuality));
 
 		return {
 			qualities,

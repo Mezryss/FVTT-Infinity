@@ -129,3 +129,42 @@ export const LABELED_AMMUNITION_CATEGORIES =
 	ALL_AMMUNITION_CATEGORIES.map(labeledAmmunitionCategory);
 
 //#endregion Ammunition
+
+//#region Armour
+
+/**
+ * Armour Types. CRB, p.342
+ */
+export enum ArmourType {
+	Civilian = 'civilian',
+	Combat = 'combat',
+	Internal = 'internal',
+	Powered = 'powered',
+}
+
+/**
+ * List of all Armour Types.
+ */
+export const ALL_ARMOUR_TYPES: ArmourType[] = [
+	ArmourType.Civilian,
+	ArmourType.Combat,
+	ArmourType.Internal,
+	ArmourType.Powered,
+];
+
+/**
+ * Construct labeled armour type data for Handlebars.
+ */
+function labeledArmourType(type: ArmourType) {
+	return {
+		key: type,
+		label: `Infinity.ArmourTypes.${type}`,
+	};
+}
+
+/**
+ * Labeled armour types, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_ARMOUR_TYPES = ALL_ARMOUR_TYPES.map(labeledArmourType);
+
+//#endregion
