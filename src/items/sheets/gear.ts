@@ -1,9 +1,12 @@
 import type { HandlebarsRenderOptions } from '@client/applications/api/handlebars-application.mjs';
+
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
 import {
 	GearType,
 	LABELED_AMMUNITION_CATEGORIES,
 	LABELED_ARMOUR_TYPES,
+	LABELED_AUGMENTATION_CATEGORIES,
+	LABELED_AUGMENTATION_TYPES,
 	LABELED_GEAR_TYPES,
 } from '@/data/gear';
 import type { GearDataModel } from '@/items/models/gear';
@@ -90,6 +93,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualitiesPath = 'system.armour.qualities';
 				qualities = this.item.system.armour.qualities;
 				break;
+
+			case GearType.Augmentation:
+				qualitiesPath = 'system.augmentation.qualities';
+				qualities = this.item.system.augmentation.qualities;
+				break;
 		}
 
 		return [qualitiesPath, qualities];
@@ -133,11 +141,14 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 
 			ammunition: await this.prepareAmmunitionContext(),
 			armour: await this.prepareArmourContext(),
+			augmentation: await this.prepareAugmentationContext(),
 
 			qualitiesPath,
 
 			LABELED_AMMUNITION_CATEGORIES,
 			LABELED_ARMOUR_TYPES,
+			LABELED_AUGMENTATION_CATEGORIES,
+			LABELED_AUGMENTATION_TYPES,
 			LABELED_GEAR_TYPES,
 		};
 	}
@@ -170,6 +181,24 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 
 		// Armour Qualities
 		const qualities = await Promise.all(this.item.system.armour.qualities.map(fetchQuality));
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Augmentation-type gear.
+	 */
+	async prepareAugmentationContext() {
+		if (this.item.system.type !== GearType.Augmentation) {
+			return null;
+		}
+
+		// Augmentation Qualities
+		const qualities = await Promise.all(
+			this.item.system.augmentation.qualities.map(fetchQuality),
+		);
 
 		return {
 			qualities,

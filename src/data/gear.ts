@@ -168,3 +168,77 @@ function labeledArmourType(type: ArmourType) {
 export const LABELED_ARMOUR_TYPES = ALL_ARMOUR_TYPES.map(labeledArmourType);
 
 //#endregion
+
+//#region Augmentation
+
+/**
+ * Augmentation Types. CRB, p.344
+ */
+export enum AugmentationType {
+	Implant = 'implant',
+	LargeImplant = 'largeImplant',
+	Replacement = 'replacement',
+	FullBody = 'fullBody',
+}
+
+/**
+ * Augmentation Categories. CRB, p.344
+ */
+export enum AugmentationCategory {
+	Cybernetics = 'cybernetics',
+	Biografting = 'biografting',
+	Silk = 'silk',
+}
+
+/**
+ * List of all Augmentation Types.
+ */
+export const ALL_AUGMENTATION_TYPES: AugmentationType[] = [
+	AugmentationType.Implant,
+	AugmentationType.LargeImplant,
+	AugmentationType.Replacement,
+	AugmentationType.FullBody,
+];
+
+/**
+ * List of all Augmentation Categories.
+ */
+export const ALL_AUGMENTATION_CATEGORIES: AugmentationCategory[] = [
+	AugmentationCategory.Cybernetics,
+	AugmentationCategory.Biografting,
+	AugmentationCategory.Silk,
+];
+
+/**
+ * Construct labeled augmentation type data for Handlebars.
+ */
+function labeledAugmentationType(type: AugmentationType) {
+	return {
+		key: type,
+		label: `Infinity.AugmentationTypes.${type}`,
+	};
+}
+
+/**
+ * Construct labeled augmentation category data for Handlebars.
+ */
+function labeledAugmentationCategory(category: AugmentationCategory) {
+	return {
+		key: category,
+		label: `Infinity.AugmentationCategories.${category}`,
+	};
+}
+
+/**
+ * Labeled augmentation types, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_AUGMENTATION_TYPES = ALL_AUGMENTATION_TYPES.map(labeledAugmentationType);
+
+/**
+ * Labeled augmentation categories, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_AUGMENTATION_CATEGORIES = ALL_AUGMENTATION_CATEGORIES.map(
+	labeledAugmentationCategory,
+);
+
+//#endregion

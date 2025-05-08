@@ -13,6 +13,17 @@
 			"internal": "Internal Armour",
 			"powered": "Powered Armour"
 		},
+		"AugmentationCategories": {
+			"cybernetics": "Cybernetics",
+			"biografting": "Biografting",
+			"silk": "Silk Augmentations"
+		},
+		"AugmentationTypes": {
+			"implant": "Implant",
+			"largeImplant": "Large Implant",
+			"replacement": "Replacement",
+			"fullBody": "Full-Body"
+		},
 		"Apps": {
 			"Momentum": {
 				"Heat": "GM Heat",
@@ -97,6 +108,16 @@
 						"Torso": "Soak (Torso)"
 					},
 					"Type": "Armour Type"
+				},
+				"Augmentation": {
+					"Category": {
+						"Label": "Aug. Category",
+						"Hint": "Augmentation Category"
+					},
+					"Type": {
+						"Label": "Aug. Type",
+						"Hint": "Augmentation Type"
+					}
 				},
 				"Cost": {
 					"Label": "Cost",
