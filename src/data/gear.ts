@@ -58,6 +58,19 @@ export enum GearType {
 }
 
 /**
+ * Item Sizes. CRB, p.332
+ */
+export enum ItemSize {
+	OneHanded = 'oneHanded',
+	TwoHanded = 'twoHanded',
+	Unbalanced = 'unbalanced',
+	Unwieldy = 'unwieldy',
+	Mounted = 'mounted',
+	Massive = 'massive',
+	Facility = 'facility',
+}
+
+/**
  * List of all Gear Types.
  */
 export const ALL_GEAR_TYPES: GearType[] = [
@@ -74,6 +87,19 @@ export const ALL_GEAR_TYPES: GearType[] = [
 ];
 
 /**
+ * List of all Item Sizes.
+ */
+export const ALL_ITEM_SIZES: ItemSize[] = [
+	ItemSize.OneHanded,
+	ItemSize.TwoHanded,
+	ItemSize.Unbalanced,
+	ItemSize.Unwieldy,
+	ItemSize.Mounted,
+	ItemSize.Massive,
+	ItemSize.Facility,
+];
+
+/**
  * Construct labeled gear type data for Handlebars.
  */
 function labeledGear(type: GearType) {
@@ -84,9 +110,24 @@ function labeledGear(type: GearType) {
 }
 
 /**
+ * Construct labeled item size data for Handlebars.
+ */
+function labeledItemSize(size: ItemSize) {
+	return {
+		key: size,
+		label: `Infinity.ItemSizes.${size}`,
+	};
+}
+
+/**
  * Labeled gear types, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map(labeledGear);
+
+/**
+ * Labeled item sizes, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_ITEM_SIZES = ALL_ITEM_SIZES.map(labeledItemSize);
 
 //#endregion General Gear
 
@@ -171,7 +212,7 @@ export const LABELED_ARMOUR_TYPES = ALL_ARMOUR_TYPES.map(labeledArmourType);
 
 //#endregion
 
-//#region Augmentation
+//#region Augmentations
 
 /**
  * Augmentation Types. CRB, p.344
@@ -242,5 +283,42 @@ export const LABELED_AUGMENTATION_TYPES = ALL_AUGMENTATION_TYPES.map(labeledAugm
 export const LABELED_AUGMENTATION_CATEGORIES = ALL_AUGMENTATION_CATEGORIES.map(
 	labeledAugmentationCategory,
 );
+
+//#endregion
+
+//#region Explosive Devices
+
+/**
+ * Explosive Categories. CRB, p.349
+ */
+export enum ExplosiveCategory {
+	Charges = 'charges',
+	Grenades = 'grenades',
+	Mines = 'mines',
+}
+
+/**
+ * List of all Explosive Categories.
+ */
+export const ALL_EXPLOSIVE_CATEGORIES: ExplosiveCategory[] = [
+	ExplosiveCategory.Charges,
+	ExplosiveCategory.Grenades,
+	ExplosiveCategory.Mines,
+];
+
+/**
+ * Construct labeled explosive category data for Handlebars.
+ */
+function labeledExplosiveCategory(category: ExplosiveCategory) {
+	return {
+		key: category,
+		label: `Infinity.ExplosiveCategories.${category}`,
+	};
+}
+
+/**
+ * Labeled explosive categories, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_EXPLOSIVE_CATEGORIES = ALL_EXPLOSIVE_CATEGORIES.map(labeledExplosiveCategory);
 
 //#endregion

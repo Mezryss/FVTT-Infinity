@@ -52,6 +52,11 @@
 				"InvalidFocusModifier": "The Focus dice modifier (foc, foc<=#) must be applied after a count successes modifier (cs<5) or it will be overwritten!"
 			}
 		},
+		"ExplosiveCategories": {
+			"charges": "Charge",
+			"grenades": "Grenade",
+			"mines": "Mine"
+		},
 		"GearTypes": {
 			"ammunition": "Ammunition",
 			"armour": "Armour",
@@ -63,6 +68,15 @@
 			"tool": "Tool",
 			"weapon": "Weapon",
 			"other": "Other Item"
+		},
+		"ItemSizes": {
+			"oneHanded": "One-Handed",
+			"twoHanded": "Two-Handed",
+			"unbalanced": "Unbalanced",
+			"unwieldy": "Unwieldy",
+			"mounted": "Mounted",
+			"massive": "Massive",
+			"facility": "Facility"
 		},
 		"QualityTypes": {
 			"general": "General",
@@ -127,7 +141,14 @@
 					"Label": "Cost (Per 3)",
 					"Hint": "Cost to obtain 3 of the item."
 				},
+				"Damage": {
+					"Label": "Damage",
+					"Hint": "Damage dealt by the weapon. Use XdN for Combat Dice (for example, 3dN for 3 Combat Dice)."
+				},
 				"DragQuality": "Drag & Drop a Quality item from the item browser to add it to this item!",
+				"ExplosiveDevice": {
+					"Category": "Category"
+				},
 				"InvalidQuality": "Invalid Quality",
 				"Maintenance": {
 					"Label": "Maintenance",
@@ -147,6 +168,7 @@
 					"Label": "Restriction",
 					"Hint": "How rare or hard-to-acquire the gear is."
 				},
+				"Size": "Size",
 				"Tariff": {
 					"Label": "Tariff",
 					"Hint": "Each Effect rolled on the cost adds the numerical portion of the Tariff to its cost."

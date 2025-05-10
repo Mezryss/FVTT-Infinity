@@ -6,5 +6,43 @@
 		</select>
 	</label>
 
-	Explosive Device
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.ExplosiveDevice.Category"}}</span>
+		<select name="system.explosiveDevice.category" {{disabled (not editable)}}>
+			{{selectOptions LABELED_EXPLOSIVE_CATEGORIES selected=system.explosiveDevice.category localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Damage.Hint"}}">{{localize "Infinity.Sheets.Gear.Damage.Label"}}</span>
+		<input type="text" name="system.explosiveDevice.damage" value="{{system.explosiveDevice.damage}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Size"}}</span>
+		<select name="system.explosiveDevice.size" {{disabled (not editable)}}>
+			{{selectOptions LABELED_ITEM_SIZES selected=system.explosiveDevice.size localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	{{> gearQualities qualities=explosiveDevice.qualities qualitiesPath=qualitiesPath}}
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
 </section>

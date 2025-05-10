@@ -8,6 +8,7 @@ import { InfinityItemDataModel } from './infinity-item';
 import { DrugData } from './gear/drug';
 import { ToolData } from './gear/tool';
 import { OtherData } from './gear/other';
+import { ExplosiveDeviceData } from './gear/explosiveDevice';
 
 const { EmbeddedDataField, StringField } = foundry.data.fields;
 
@@ -34,6 +35,11 @@ export class GearDataModel extends InfinityItemDataModel {
 	 * Drug-specific gear data.
 	 */
 	drug!: DrugData;
+
+	/**
+	 * Explosive Device-specific gear data.
+	 */
+	explosiveDevice!: ExplosiveDeviceData;
 
 	/**
 	 * Tool-specific gear data.
@@ -92,6 +98,10 @@ export class GearDataModel extends InfinityItemDataModel {
 			}),
 
 			drug: new EmbeddedDataField(DrugData as any, {
+				nullable: false,
+			}),
+
+			explosiveDevice: new EmbeddedDataField(ExplosiveDeviceData as any, {
 				nullable: false,
 			}),
 

@@ -7,13 +7,16 @@ import {
 	LABELED_ARMOUR_TYPES,
 	LABELED_AUGMENTATION_CATEGORIES,
 	LABELED_AUGMENTATION_TYPES,
+	LABELED_EXPLOSIVE_CATEGORIES,
 	LABELED_GEAR_TYPES,
+	LABELED_ITEM_SIZES,
 } from '@/data/gear';
 import type { GearDataModel } from '@/items/models/gear';
+import { GearQuality } from '@/items/models/gear/quality';
+import type { QualityDataModel } from '@/items/models/quality';
+
 import { InfinityItemSheet, type SheetTabs } from './infinity-item';
 import type { InfinityItem } from '../infinity-item';
-import type { QualityDataModel } from '../models/quality';
-import { GearQuality } from '../models/gear/quality';
 
 type QualityItem = InfinityItem<QualityDataModel>;
 
@@ -104,6 +107,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualities = this.item.system.drug.qualities;
 				break;
 
+			case GearType.ExplosiveDevice:
+				qualitiesPath = 'system.explosiveDevice.qualities';
+				qualities = this.item.system.explosiveDevice.qualities;
+				break;
+
 			case GearType.Tool:
 				qualitiesPath = 'system.tool.qualities';
 				qualities = this.item.system.tool.qualities;
@@ -157,6 +165,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			armour: await this.prepareArmourContext(),
 			augmentation: await this.prepareAugmentationContext(),
 			drug: await this.prepareDrugContext(),
+			explosiveDevice: await this.prepareExplosiveDeviceContext(),
 			tool: await this.prepareToolContext(),
 			other: await this.prepareOtherContext(),
 
@@ -166,7 +175,9 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			LABELED_ARMOUR_TYPES,
 			LABELED_AUGMENTATION_CATEGORIES,
 			LABELED_AUGMENTATION_TYPES,
+			LABELED_EXPLOSIVE_CATEGORIES,
 			LABELED_GEAR_TYPES,
+			LABELED_ITEM_SIZES,
 		};
 	}
 
@@ -212,6 +223,19 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	 */
 	async prepareDrugContext() {
 		const qualities = await Promise.all(this.item.system.drug.qualities.map(fetchQuality));
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Explosive Device-type gear.
+	 */
+	async prepareExplosiveDeviceContext() {
+		const qualities = await Promise.all(
+			this.item.system.explosiveDevice.qualities.map(fetchQuality),
+		);
 
 		return {
 			qualities,
