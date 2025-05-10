@@ -15,7 +15,6 @@ export function register() {
 		{
 			pattern: /@X/gi,
 			async enricher(_match, options: { rank?: number }) {
-				console.log('Options', options);
 				let rankText = 'X';
 
 				if (options.rank !== undefined) {

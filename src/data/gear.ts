@@ -61,6 +61,7 @@ export enum GearType {
  * Item Sizes. CRB, p.332
  */
 export enum ItemSize {
+	Negligible = 'negligible',
 	OneHanded = 'oneHanded',
 	TwoHanded = 'twoHanded',
 	Unbalanced = 'unbalanced',
@@ -90,6 +91,7 @@ export const ALL_GEAR_TYPES: GearType[] = [
  * List of all Item Sizes.
  */
 export const ALL_ITEM_SIZES: ItemSize[] = [
+	ItemSize.Negligible,
 	ItemSize.OneHanded,
 	ItemSize.TwoHanded,
 	ItemSize.Unbalanced,
@@ -320,5 +322,37 @@ function labeledExplosiveCategory(category: ExplosiveCategory) {
  * Labeled explosive categories, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_EXPLOSIVE_CATEGORIES = ALL_EXPLOSIVE_CATEGORIES.map(labeledExplosiveCategory);
+
+//#endregion
+
+//#region Weapons
+
+/**
+ * Weapons. CRB, p.358
+ */
+export enum WeaponType {
+	Melee = 'melee',
+	Ranged = 'ranged',
+}
+
+/**
+ * List of all Weapon Types.
+ */
+export const ALL_WEAPON_TYPES: WeaponType[] = [WeaponType.Melee, WeaponType.Ranged];
+
+/**
+ * Construct labeled weapon type data for Handlebars.
+ */
+function labeledWeaponType(type: WeaponType) {
+	return {
+		key: type,
+		label: `Infinity.WeaponTypes.${type}`,
+	};
+}
+
+/**
+ * Labeled Weapon Types, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_WEAPON_TYPES = ALL_WEAPON_TYPES.map(labeledWeaponType);
 
 //#endregion

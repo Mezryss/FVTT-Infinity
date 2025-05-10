@@ -70,6 +70,7 @@
 			"other": "Other Item"
 		},
 		"ItemSizes": {
+			"negligible": "—",
 			"oneHanded": "One-Handed",
 			"twoHanded": "Two-Handed",
 			"unbalanced": "Unbalanced",
@@ -173,7 +174,13 @@
 					"Label": "Tariff",
 					"Hint": "Each Effect rolled on the cost adds the numerical portion of the Tariff to its cost."
 				},
-				"Type": "Gear Type"
+				"Type": "Gear Type",
+				"Weapon": {
+					"Ammo": "Ammo",
+					"Burst": "Burst",
+					"Range": "Range",
+					"Type": "Type"
+				}
 			},
 			"Item": {
 				"Label": {
@@ -235,6 +242,10 @@
 			"description": "Description",
 			"detail": "Detail",
 			"effects": "Active Effects"
+		},
+		"WeaponTypes": {
+			"melee": "Melee Weapon",
+			"ranged": "Ranged Weapon"
 		}
 	},
 	"TYPES": {

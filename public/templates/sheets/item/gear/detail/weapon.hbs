@@ -6,5 +6,64 @@
 		</select>
 	</label>
 
-	Weapon
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Weapon.Type"}}</span>
+		<select name="system.weapon.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_WEAPON_TYPES selected=system.weapon.type localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	{{#if weapon.showRangedFields}}
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Weapon.Range"}}</span>
+		<input type="text" name="system.weapon.range" value="{{system.weapon.range}}" {{disabled (not editable)}} />
+	</label>
+	{{/if}}
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Damage.Hint"}}">{{localize "Infinity.Sheets.Gear.Damage.Label"}}</span>
+		<input type="text" name="system.weapon.damage" value="{{system.weapon.damage}}" {{disabled (not editable)}} />
+	</label>
+
+	{{#if weapon.showRangedFields}}
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Weapon.Burst"}}</span>
+		<input type="text" name="system.weapon.burst" value="{{system.weapon.burst}}" {{disabled (not editable)}} />
+	</label>
+	{{/if}}
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Size"}}</span>
+		<select name="system.weapon.size" {{disabled (not editable)}}>
+			{{selectOptions LABELED_ITEM_SIZES selected=system.weapon.size localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	{{#if weapon.showRangedFields}}
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Weapon.Ammo"}}</span>
+		<input type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" {{disabled (not editable)}} />
+	</label>
+	{{/if}}
+
+	<hr style="height: 1px; margin: 0;" />
+
+	{{> gearQualities qualities=weapon.qualities qualitiesPath=qualitiesPath}}
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
 </section>

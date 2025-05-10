@@ -10,6 +10,8 @@ import {
 	LABELED_EXPLOSIVE_CATEGORIES,
 	LABELED_GEAR_TYPES,
 	LABELED_ITEM_SIZES,
+	LABELED_WEAPON_TYPES,
+	WeaponType,
 } from '@/data/gear';
 import type { GearDataModel } from '@/items/models/gear';
 import { GearQuality } from '@/items/models/gear/quality';
@@ -117,6 +119,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualities = this.item.system.tool.qualities;
 				break;
 
+			case GearType.Weapon:
+				qualitiesPath = 'system.weapon.qualities';
+				qualities = this.item.system.weapon.qualities;
+				break;
+
 			case GearType.Other:
 				qualitiesPath = 'system.other.qualities';
 				qualities = this.item.system.other.qualities;
@@ -167,6 +174,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			drug: await this.prepareDrugContext(),
 			explosiveDevice: await this.prepareExplosiveDeviceContext(),
 			tool: await this.prepareToolContext(),
+			weapon: await this.prepareWeaponContext(),
 			other: await this.prepareOtherContext(),
 
 			qualitiesPath,
@@ -178,6 +186,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			LABELED_EXPLOSIVE_CATEGORIES,
 			LABELED_GEAR_TYPES,
 			LABELED_ITEM_SIZES,
+			LABELED_WEAPON_TYPES,
 		};
 	}
 
@@ -249,6 +258,18 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 		const qualities = await Promise.all(this.item.system.tool.qualities.map(fetchQuality));
 
 		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Weapon-type gear.
+	 */
+	async prepareWeaponContext() {
+		const qualities = await Promise.all(this.item.system.weapon.qualities.map(fetchQuality));
+
+		return {
+			showRangedFields: this.item.system.weapon.type === WeaponType.Ranged,
 			qualities,
 		};
 	}
