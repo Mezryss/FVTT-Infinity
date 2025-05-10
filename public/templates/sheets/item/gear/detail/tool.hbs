@@ -6,5 +6,27 @@
 		</select>
 	</label>
 
-	Tool
+	{{> gearQualities qualities=tool.qualities qualitiesPath=qualitiesPath}}
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Maintenance.Hint"}}">{{localize "Infinity.Sheets.Gear.Maintenance.Label"}}</span>
+		<input type="text" name="system.maintenance" value="{{system.maintenance}}" {{disabled (not editable)}} />
+	</label>
 </section>

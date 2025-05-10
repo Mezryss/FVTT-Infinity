@@ -103,6 +103,16 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualitiesPath = 'system.drug.qualities';
 				qualities = this.item.system.drug.qualities;
 				break;
+
+			case GearType.Tool:
+				qualitiesPath = 'system.tool.qualities';
+				qualities = this.item.system.tool.qualities;
+				break;
+
+			case GearType.Other:
+				qualitiesPath = 'system.other.qualities';
+				qualities = this.item.system.other.qualities;
+				break;
 		}
 
 		return [qualitiesPath, qualities];
@@ -147,6 +157,8 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			armour: await this.prepareArmourContext(),
 			augmentation: await this.prepareAugmentationContext(),
 			drug: await this.prepareDrugContext(),
+			tool: await this.prepareToolContext(),
+			other: await this.prepareOtherContext(),
 
 			qualitiesPath,
 
@@ -200,6 +212,28 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	 */
 	async prepareDrugContext() {
 		const qualities = await Promise.all(this.item.system.drug.qualities.map(fetchQuality));
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Tool-type gear.
+	 */
+	async prepareToolContext() {
+		const qualities = await Promise.all(this.item.system.tool.qualities.map(fetchQuality));
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Other Items-type gear.
+	 */
+	async prepareOtherContext() {
+		const qualities = await Promise.all(this.item.system.other.qualities.map(fetchQuality));
 
 		return {
 			qualities,
