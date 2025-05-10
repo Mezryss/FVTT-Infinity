@@ -250,6 +250,17 @@
 					"Type": "Type"
 				}
 			},
+			"Host": {
+				"SpecialAbilities": "Special Abilities",
+				"DragAndDrop": "Drag Special Ability items onto this sheet to add them as a Special Ability provided by this LHost!",
+				"Invalid": "Invalid Ability",
+				"OnlyAbilities": "Only Special Ability items may be dropped on a Host item sheet!",
+				"AbilityAlreadyAdded": "This host already has {name}!",
+				"LifePointCost": {
+					"Label": "Life Point Cost",
+					"Hint": "If taken during Character Creation, this LHost requires spending this many Life Points."
+				}
+			},
 			"Item": {
 				"Label": {
 					"Talent": "{skill} Talent"

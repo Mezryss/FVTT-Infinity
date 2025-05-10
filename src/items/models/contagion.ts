@@ -48,7 +48,11 @@ export class ContagionDataModel extends InfinityItemDataModel {
 	damage!: string;
 
 	static defineSchema() {
+		const baseSchema = super.defineSchema();
+
 		return {
+			...baseSchema,
+
 			type: new StringField({
 				choices: ALL_CONTAGION_TYPES,
 				initial: ContagionType.Instant,

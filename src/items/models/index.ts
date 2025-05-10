@@ -1,6 +1,7 @@
 import { AbilityDataModel } from './ability';
 import { ContagionDataModel } from './contagion';
 import { GearDataModel } from './gear';
+import { HostDataModel } from './host';
 import { QualityDataModel } from './quality';
 import { TalentDataModel } from './talent';
 
@@ -12,6 +13,7 @@ export function register() {
 		ability: AbilityDataModel,
 		contagion: ContagionDataModel,
 		gear: GearDataModel,
+		host: HostDataModel,
 		quality: QualityDataModel,
 		talent: TalentDataModel,
 	});

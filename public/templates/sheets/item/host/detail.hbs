@@ -1,0 +1,85 @@
+<section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Host.LifePointCost.Hint"}}">{{localize "Infinity.Sheets.Host.LifePointCost.Label"}}</span>
+		<input type="number" min="0" name="system.lifePointCost" value="{{system.lifePointCost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Maintenance.Hint"}}">{{localize "Infinity.Sheets.Gear.Maintenance.Label"}}</span>
+		<input type="text" name="system.maintenance" value="{{system.maintenance}}" {{disabled (not editable)}} />
+	</label>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span>{{localize "Infinity.Attributes.agility"}}</span>
+		<input type="number" name="system.attributeModifiers.agility" value="{{system.attributeModifiers.agility}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.awareness"}}</span>
+		<input type="number" name="system.attributeModifiers.awareness" value="{{system.attributeModifiers.awareness}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.brawn"}}</span>
+		<input type="number" name="system.attributeModifiers.brawn" value="{{system.attributeModifiers.brawn}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.coordination"}}</span>
+		<input type="number" name="system.attributeModifiers.coordination" value="{{system.attributeModifiers.coordination}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.intelligence"}}</span>
+		<input type="number" name="system.attributeModifiers.intelligence" value="{{system.attributeModifiers.intelligence}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.personality"}}</span>
+		<input type="number" name="system.attributeModifiers.personality" value="{{system.attributeModifiers.personality}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Attributes.willpower"}}</span>
+		<input type="number" name="system.attributeModifiers.willpower" value="{{system.attributeModifiers.willpower}}" {{disabled (not editable)}} />
+	</label>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<h5 style="margin: 0;" data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.PreinstalledPrograms.Hint"}}">{{localize "Infinity.Sheets.Host.SpecialAbilities"}}</h5>
+
+	<div class="item-qualities-list">
+		{{#each specialAbilities}}
+			{{#if valid}}
+			<div class="item-quality" data-tooltip="{{{tooltip}}}">
+				<a data-action="removeAbility" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+				<span>{{label}}</span>
+			</div>
+			{{else}}
+			<div class="item-quality invalid">
+				<a data-action="removeAbility" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+				<span>{{localize "Infinity.Sheets.Host.Invalid"}}</span>
+			</div>
+			{{/if}}
+		{{else}}
+		<em style="text-align: center">{{localize "Infinity.Sheets.Host.DragAndDrop"}}</em>
+		{{/each}}
+	</div>
+</section>
