@@ -6,5 +6,67 @@
 		</select>
 	</label>
 
-	Hacking Device
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.CLAW.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.CLAW.Label"}}</span>
+		<input type="number" name="system.hackingDevice.claw" value="{{system.hackingDevice.claw}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.SWORD.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.SWORD.Label"}}</span>
+		<input type="number" name="system.hackingDevice.sword" value="{{system.hackingDevice.sword}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.SHIELD.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.SHIELD.Label"}}</span>
+		<input type="number" name="system.hackingDevice.shield" value="{{system.hackingDevice.shield}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.GADGET.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.GADGET.Label"}}</span>
+		<input type="number" name="system.hackingDevice.gadget" value="{{system.hackingDevice.gadget}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.IC.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.IC.Label"}}</span>
+		<input type="number" name="system.hackingDevice.ic" value="{{system.hackingDevice.ic}}" {{disabled (not editable)}} />
+	</label>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<h5 style="margin: 0;" data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.PreinstalledPrograms.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.PreinstalledPrograms.Label"}}</h5>
+
+	<div class="item-qualities-list">
+		{{#each hackingDevice.preinstalledPrograms}}
+			{{#if valid}}
+			<div class="item-quality" data-tooltip="{{{tooltip}}}">
+				<a data-action="removeProgram" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+				<span>{{label}}</span>
+			</div>
+			{{else}}
+			<div class="item-quality invalid">
+				<a data-action="removeProgram" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
+				<span>{{localize "Infinity.Sheets.Gear.HackingDevice.InvalidProgram"}}</span>
+			</div>
+			{{/if}}
+		{{else}}
+		<em style="text-align: center">{{localize "Infinity.Sheets.Gear.HackingDevice.DragProgram"}}</em>
+		{{/each}}
+	</div>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
 </section>

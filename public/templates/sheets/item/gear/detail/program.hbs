@@ -1,0 +1,46 @@
+<section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Type"}}</span>
+		<select name="system.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_GEAR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Program.Type"}}</span>
+		<select name="system.program.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_PROGRAM_TYPES selected=system.program.type localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Gear.Program.Rating"}}</span>
+		<input type="text" name="system.program.rating" value="{{system.program.rating}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Damage.Hint"}}">{{localize "Infinity.Sheets.Gear.Damage.Label"}}</span>
+		<input type="text" name="system.program.damage" value="{{system.program.damage}}" {{disabled (not editable)}} />
+	</label>
+
+	<hr style="height: 1px; margin: 0;" />
+
+	{{> gearQualities qualities=program.qualities qualitiesPath=qualitiesPath}}
+
+	<hr style="height: 1px; margin: 0;" />
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Cost.Hint"}}">{{localize "Infinity.Sheets.Gear.Cost.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Tariff.Hint"}}">{{localize "Infinity.Sheets.Gear.Tariff.Label"}}</span>
+		<input type="text" name="system.tariff" value="{{system.tariff}}" {{disabled (not editable)}} />
+	</label>
+</section>

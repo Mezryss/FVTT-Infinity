@@ -10,6 +10,7 @@ import {
 	LABELED_EXPLOSIVE_CATEGORIES,
 	LABELED_GEAR_TYPES,
 	LABELED_ITEM_SIZES,
+	LABELED_PROGRAM_TYPES,
 	LABELED_WEAPON_TYPES,
 	WeaponType,
 } from '@/data/gear';
@@ -20,6 +21,7 @@ import type { QualityDataModel } from '@/items/models/quality';
 import { InfinityItemSheet, type SheetTabs } from './infinity-item';
 import type { InfinityItem } from '../infinity-item';
 
+type GearItem = InfinityItem<GearDataModel>;
 type QualityItem = InfinityItem<QualityDataModel>;
 
 /**
@@ -58,6 +60,7 @@ async function fetchQuality(quality: GearQuality) {
 export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	static override DEFAULT_OPTIONS = <any>{
 		actions: {
+			removeProgram: GearItemSheet.#removeProgram,
 			removeQuality: GearItemSheet.#removeQuality,
 		},
 		window: {
@@ -112,6 +115,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			case GearType.ExplosiveDevice:
 				qualitiesPath = 'system.explosiveDevice.qualities';
 				qualities = this.item.system.explosiveDevice.qualities;
+				break;
+
+			case GearType.Program:
+				qualitiesPath = 'system.program.qualities';
+				qualities = this.item.system.program.qualities;
 				break;
 
 			case GearType.Tool:
@@ -173,6 +181,8 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			augmentation: await this.prepareAugmentationContext(),
 			drug: await this.prepareDrugContext(),
 			explosiveDevice: await this.prepareExplosiveDeviceContext(),
+			hackingDevice: await this.prepareHackingDeviceContext(),
+			program: await this.prepareProgramContext(),
 			tool: await this.prepareToolContext(),
 			weapon: await this.prepareWeaponContext(),
 			other: await this.prepareOtherContext(),
@@ -186,6 +196,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			LABELED_EXPLOSIVE_CATEGORIES,
 			LABELED_GEAR_TYPES,
 			LABELED_ITEM_SIZES,
+			LABELED_PROGRAM_TYPES,
 			LABELED_WEAPON_TYPES,
 		};
 	}
@@ -245,6 +256,49 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 		const qualities = await Promise.all(
 			this.item.system.explosiveDevice.qualities.map(fetchQuality),
 		);
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Hacking Device-type gear.
+	 */
+	async prepareHackingDeviceContext() {
+		const preinstalledPrograms = await Promise.all(
+			this.item.system.hackingDevice.preinstalledPrograms.map(async (uuid) => {
+				const item = await fromUuid<GearItem>(uuid);
+				if (!item || item.system.type !== GearType.Program) {
+					return {
+						uuid,
+						valid: false,
+					};
+				}
+
+				const description = await foundry.applications.ux.TextEditor.enrichHTML(
+					item.system.description,
+				);
+
+				return {
+					uuid,
+					label: item.name,
+					tooltip: description,
+					valid: true,
+				};
+			}),
+		);
+
+		return {
+			preinstalledPrograms,
+		};
+	}
+
+	/**
+	 * Prepares context for Program-type gear.
+	 */
+	async prepareProgramContext() {
+		const qualities = await Promise.all(this.item.system.program.qualities.map(fetchQuality));
 
 		return {
 			qualities,
@@ -316,14 +370,65 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 		}
 
 		// Fetch the dropped item to validate it's an Item Quality.
-		const item = await fromUuid<QualityItem>(dropData.uuid);
-		if (!item || item.type !== 'quality') {
+		const item = await fromUuid<GearItem | QualityItem>(dropData.uuid);
+		if (!item || !['quality', 'gear'].includes(item.type)) {
 			ui.notifications.error(
 				game.i18n.localize('Infinity.Sheets.Gear.QualitiesOnlyNotification'),
 			);
 			return;
 		}
 
+		switch (item.type) {
+			case 'gear':
+				await this.#onDropGear(item as GearItem);
+				break;
+
+			case 'quality':
+				await this.#onDropQuality(item as QualityItem);
+				break;
+		}
+	}
+
+	/**
+	 * Handles the dropping of a Gear item on an existing item sheet.
+	 *
+	 * Currently, only Programs are allowed to be dropped, and only onto sheets for Hacking Devices.
+	 */
+	async #onDropGear(item: GearItem) {
+		if (
+			item.system.type !== GearType.Program ||
+			this.item.system.type !== GearType.HackingDevice
+		) {
+			ui.notifications.error(
+				game.i18n.localize('Infinity.Sheets.Gear.QualitiesOnlyNotification'),
+			);
+			return;
+		}
+
+		// Don't allow the same program to be added multiple times.
+		const programs = this.item.system.hackingDevice.preinstalledPrograms;
+		if (programs.includes(item.uuid)) {
+			ui.notifications.error(
+				game.i18n.format(
+					'Infinity.Sheets.Gear.HackingDevice.ProgramAlreadyAddedNotification',
+					{
+						name: item.name,
+					},
+				),
+			);
+			return;
+		}
+
+		// Add the program to the list of preinstalled programs.
+		await this.item.update({
+			'system.hackingDevice.preinstalledPrograms': [...programs, item.uuid],
+		});
+	}
+
+	/**
+	 * Handles the dropping of a Quality item on an existing item sheet.
+	 */
+	async #onDropQuality(item: QualityItem) {
 		// Capture the list of existing Qualities depending on the item type.
 		const [qualitiesPath, qualities] = this.getQualitiesForItemType();
 		if (qualitiesPath === null || qualities === null) {
@@ -385,6 +490,35 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 
 		await this.item.update({
 			[qualitiesPath]: newQualities,
+		});
+	}
+
+	/**
+	 * Event Handler: `data-action="removeProgram"`
+	 * Requires `data-uuid="..."` data property.
+	 *
+	 * Removes the Preinstalled Program with the specified UUID from the sheet.
+	 */
+	static async #removeProgram(this: GearItemSheet, _event: Event, target: HTMLElement) {
+		if (!this.isEditable) {
+			return;
+		}
+
+		const uuid = target.dataset['uuid'];
+		if (!uuid) {
+			return Promise.reject('Invalid data-uuid property.');
+		}
+
+		const newPrograms = [...this.item.system.hackingDevice.preinstalledPrograms];
+		const index = newPrograms.findIndex((id) => id === uuid);
+		if (index < 0) {
+			return;
+		}
+
+		newPrograms.splice(index, 1);
+
+		await this.item.update({
+			'system.hackingDevice.preinstalledPrograms': newPrograms,
 		});
 	}
 }

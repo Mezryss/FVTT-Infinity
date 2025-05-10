@@ -64,6 +64,7 @@
 			"drug": "Drug/Poison",
 			"explosiveDevice": "Explosive Device",
 			"hackingDevice": "Hacking Device",
+			"program": "Program",
 			"resource": "Resource",
 			"tool": "Tool",
 			"weapon": "Weapon",
@@ -78,6 +79,14 @@
 			"mounted": "Mounted",
 			"massive": "Massive",
 			"facility": "Facility"
+		},
+		"ProgramTypes": {
+			"claw": "CLAW",
+			"gadget": "GADGET",
+			"ic": "IC",
+			"shield": "SHIELD",
+			"sword": "SWORD",
+			"upgrade": "UPGRADE"
 		},
 		"QualityTypes": {
 			"general": "General",
@@ -150,10 +159,43 @@
 				"ExplosiveDevice": {
 					"Category": "Category"
 				},
+				"HackingDevice": {
+					"CLAW": {
+						"Label": "CLAW",
+						"Hint": "Control Programs (CLAW) Rating"
+					},
+					"DragProgram": "Drag & Drop a Program gear item from the item browser to add it to this hacking device as a pre-installed program! These programs will be copied over when the Hacking Device is added to a character or NPC sheet.",
+					"GADGET": {
+						"Label": "GADGET",
+						"Hint": "Utility Programs (GADGET) Rating"
+					},
+					"IC": {
+						"Label": "IC",
+						"Hint": "Intrusion Countermeasures (IC) Rating"
+					},
+					"InvalidProgram": "Invalid Program",
+					"PreinstalledPrograms": {
+						"Label": "Preinstalled Programs",
+						"Hint": "These programs (usually UPGRADEs) come pre-installed on this Hacking Device"
+					},
+					"ProgramAlreadyAddedNotification": "The {name} software is already installed on this Hacking Device!",
+					"SHIELD": {
+						"Label": "SHIELD",
+						"Hint": "Defensive Programs (SHIELD) Rating"
+					},
+					"SWORD": {
+						"Label": "SWORD",
+						"Hint": "Attack Programs (SWORD) Rating"
+					}
+				},
 				"InvalidQuality": "Invalid Quality",
 				"Maintenance": {
 					"Label": "Maintenance",
 					"Hint": "Maintenance cost of the item as a dice string."
+				},
+				"Program": {
+					"Rating": "Rating",
+					"Type": "Type"
 				},
 				"Qualities": {
 					"Label": "Qualities",

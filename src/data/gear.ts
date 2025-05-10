@@ -37,6 +37,11 @@ export enum GearType {
 	HackingDevice = 'hackingDevice',
 
 	/**
+	 * Hacking Devices. CRB, p.352
+	 */
+	Program = 'program',
+
+	/**
 	 * Resources. CRB, p.355
 	 */
 	Resource = 'resource',
@@ -81,6 +86,7 @@ export const ALL_GEAR_TYPES: GearType[] = [
 	GearType.Drug,
 	GearType.ExplosiveDevice,
 	GearType.HackingDevice,
+	GearType.Program,
 	GearType.Resource,
 	GearType.Tool,
 	GearType.Weapon,
@@ -322,6 +328,49 @@ function labeledExplosiveCategory(category: ExplosiveCategory) {
  * Labeled explosive categories, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_EXPLOSIVE_CATEGORIES = ALL_EXPLOSIVE_CATEGORIES.map(labeledExplosiveCategory);
+
+//#endregion
+
+//#region Hacking Devices
+
+/**
+ * Program Types. CRB, p.352
+ */
+export enum ProgramType {
+	SWORD = 'sword',
+	CLAW = 'claw',
+	SHIELD = 'shield',
+	GADGET = 'gadget',
+	IC = 'ic',
+	UPGRADE = 'upgrade',
+}
+
+/**
+ * A list of all Program Types.
+ */
+export const ALL_PROGRAM_TYPES: ProgramType[] = [
+	ProgramType.CLAW,
+	ProgramType.GADGET,
+	ProgramType.IC,
+	ProgramType.SHIELD,
+	ProgramType.SWORD,
+	ProgramType.UPGRADE,
+];
+
+/**
+ * Construct labeled program type data for Handlebars.
+ */
+function labeledProgramType(type: ProgramType) {
+	return {
+		key: type,
+		label: `Infinity.ProgramTypes.${type}`,
+	};
+}
+
+/**
+ * Labeled program types, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_PROGRAM_TYPES = ALL_PROGRAM_TYPES.map(labeledProgramType);
 
 //#endregion
 

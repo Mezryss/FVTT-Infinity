@@ -10,6 +10,8 @@ import { ToolData } from './gear/tool';
 import { OtherData } from './gear/other';
 import { ExplosiveDeviceData } from './gear/explosiveDevice';
 import { WeaponData } from './gear/weapon';
+import { HackingDeviceData } from './gear/hackingDevice';
+import { ProgramData } from './gear/program';
 
 const { EmbeddedDataField, StringField } = foundry.data.fields;
 
@@ -41,6 +43,16 @@ export class GearDataModel extends InfinityItemDataModel {
 	 * Explosive Device-specific gear data.
 	 */
 	explosiveDevice!: ExplosiveDeviceData;
+
+	/**
+	 * Hacking Device-specific gear data.
+	 */
+	hackingDevice!: HackingDeviceData;
+
+	/**
+	 * Program-specific gear data.
+	 */
+	program!: ProgramData;
 
 	/**
 	 * Tool-specific gear data.
@@ -108,6 +120,14 @@ export class GearDataModel extends InfinityItemDataModel {
 			}),
 
 			explosiveDevice: new EmbeddedDataField(ExplosiveDeviceData as any, {
+				nullable: false,
+			}),
+
+			hackingDevice: new EmbeddedDataField(HackingDeviceData as any, {
+				nullable: false,
+			}),
+
+			program: new EmbeddedDataField(ProgramData as any, {
 				nullable: false,
 			}),
 
