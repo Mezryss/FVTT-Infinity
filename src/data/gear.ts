@@ -20,9 +20,11 @@ export enum GearType {
 	Augmentation = 'augmentation',
 
 	/**
-	 * Contagions. CRB, p.347
+	 * Drugs. CRB, p.348
+	 *
+	 * Covers Drugs & Poisons. These fall under "Contagions", but those will use a different Item type.
 	 */
-	Contagion = 'contagion',
+	Drug = 'drug',
 
 	/**
 	 * Explosive Devices. CRB, p.349
@@ -62,7 +64,7 @@ export const ALL_GEAR_TYPES: GearType[] = [
 	GearType.Ammunition,
 	GearType.Armour,
 	GearType.Augmentation,
-	GearType.Contagion,
+	GearType.Drug,
 	GearType.ExplosiveDevice,
 	GearType.HackingDevice,
 	GearType.Resource,

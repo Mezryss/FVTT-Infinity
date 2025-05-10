@@ -98,6 +98,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 				qualitiesPath = 'system.augmentation.qualities';
 				qualities = this.item.system.augmentation.qualities;
 				break;
+
+			case GearType.Drug:
+				qualitiesPath = 'system.drug.qualities';
+				qualities = this.item.system.drug.qualities;
+				break;
 		}
 
 		return [qualitiesPath, qualities];
@@ -134,7 +139,6 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 		const baseContext = await super._prepareContext(options);
 
 		const [qualitiesPath, _] = this.getQualitiesForItemType();
-		console.log('Qualities Path', qualitiesPath);
 
 		return {
 			...baseContext,
@@ -142,6 +146,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 			ammunition: await this.prepareAmmunitionContext(),
 			armour: await this.prepareArmourContext(),
 			augmentation: await this.prepareAugmentationContext(),
+			drug: await this.prepareDrugContext(),
 
 			qualitiesPath,
 
@@ -157,11 +162,6 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	 * Prepares Context data for Ammunition-type gear.
 	 */
 	async prepareAmmunitionContext() {
-		if (this.item.system.type !== GearType.Ammunition) {
-			return null;
-		}
-
-		// Ammunition Qualities
 		const qualities = await Promise.all(
 			this.item.system.ammunition.addsQualities.map(fetchQuality),
 		);
@@ -175,11 +175,6 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	 * Prepares Context data for Armour-type gear.
 	 */
 	async prepareArmourContext() {
-		if (this.item.system.type !== GearType.Armour) {
-			return null;
-		}
-
-		// Armour Qualities
 		const qualities = await Promise.all(this.item.system.armour.qualities.map(fetchQuality));
 
 		return {
@@ -191,14 +186,20 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 	 * Prepares context for Augmentation-type gear.
 	 */
 	async prepareAugmentationContext() {
-		if (this.item.system.type !== GearType.Augmentation) {
-			return null;
-		}
-
-		// Augmentation Qualities
 		const qualities = await Promise.all(
 			this.item.system.augmentation.qualities.map(fetchQuality),
 		);
+
+		return {
+			qualities,
+		};
+	}
+
+	/**
+	 * Prepares context for Drug-type gear.
+	 */
+	async prepareDrugContext() {
+		const qualities = await Promise.all(this.item.system.drug.qualities.map(fetchQuality));
 
 		return {
 			qualities,
