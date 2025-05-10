@@ -1,0 +1,38 @@
+<section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Contagion.Vector.Hint"}}">{{localize "Infinity.Sheets.Contagion.Vector.Label"}}</span>
+		<input type="text" name="system.vector" value="{{system.vector}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Contagion.Type"}}</span>
+		<select name="system.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_CONTAGION_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
+		</select>
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Contagion.Difficulty"}}</span>
+		<input type="number" min="0" name="system.difficulty" value="{{system.difficulty}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span>{{localize "Infinity.Sheets.Contagion.Momentum"}}</span>
+		<input type="number" min="1" name="system.requiredMomentum" value="{{system.requiredMomentum}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Contagion.Chronic.Hint"}}">{{localize "Infinity.Sheets.Contagion.Chronic.Label"}}</span>
+		<input type="checkbox" name="system.chronic" {{checked system.chronic}} {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Contagion.Term.Hint"}}">{{localize "Infinity.Sheets.Contagion.Term.Label"}}</span>
+		<input type="text" name="system.term" value="{{system.term}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Contagion.Damage.Hint"}}">{{localize "Infinity.Sheets.Contagion.Damage.Label"}}</span>
+		<input type="text" name="system.damage" value="{{system.damage}}" {{disabled (not editable)}} />
+	</label>
+</section>

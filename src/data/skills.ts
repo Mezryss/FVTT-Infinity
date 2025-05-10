@@ -1,4 +1,5 @@
 import { Attribute } from './attributes';
+import { labeledEnum } from './utility';
 
 /**
  * Skills. CRB, p.29
@@ -124,16 +125,6 @@ export const ALL_SKILLS: Skill[] = [
 ];
 
 /**
- * Utility to construct a skill label.
- */
-function labeled(skill: Skill) {
-	return {
-		key: skill,
-		label: `Infinity.Skills.${skill}`,
-	};
-}
-
-/**
  * Labeled skills, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_SKILLS = ALL_SKILLS.map(labeled);
+export const LABELED_SKILLS = ALL_SKILLS.map((s) => labeledEnum('Skills', s));

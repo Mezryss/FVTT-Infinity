@@ -1,3 +1,5 @@
+import { labeledEnum } from './utility';
+
 //#region General Gear
 
 /**
@@ -108,34 +110,14 @@ export const ALL_ITEM_SIZES: ItemSize[] = [
 ];
 
 /**
- * Construct labeled gear type data for Handlebars.
- */
-function labeledGear(type: GearType) {
-	return {
-		key: type,
-		label: `Infinity.GearTypes.${type}`,
-	};
-}
-
-/**
- * Construct labeled item size data for Handlebars.
- */
-function labeledItemSize(size: ItemSize) {
-	return {
-		key: size,
-		label: `Infinity.ItemSizes.${size}`,
-	};
-}
-
-/**
  * Labeled gear types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map(labeledGear);
+export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map((g) => labeledEnum('GearTypes', g));
 
 /**
  * Labeled item sizes, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_ITEM_SIZES = ALL_ITEM_SIZES.map(labeledItemSize);
+export const LABELED_ITEM_SIZES = ALL_ITEM_SIZES.map((s) => labeledEnum('ItemSizes', s));
 
 //#endregion General Gear
 
@@ -164,20 +146,11 @@ export const ALL_AMMUNITION_CATEGORIES: AmmunitionCategory[] = [
 ];
 
 /**
- * Construct labeled ammunition category data for Handlebars.
- */
-function labeledAmmunitionCategory(category: AmmunitionCategory) {
-	return {
-		key: category,
-		label: `Infinity.AmmunitionCategories.${category}`,
-	};
-}
-
-/**
  * Labeled ammunition categories, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_AMMUNITION_CATEGORIES =
-	ALL_AMMUNITION_CATEGORIES.map(labeledAmmunitionCategory);
+export const LABELED_AMMUNITION_CATEGORIES = ALL_AMMUNITION_CATEGORIES.map((c) =>
+	labeledEnum('AmmunitionCategories', c),
+);
 
 //#endregion Ammunition
 
@@ -204,19 +177,9 @@ export const ALL_ARMOUR_TYPES: ArmourType[] = [
 ];
 
 /**
- * Construct labeled armour type data for Handlebars.
- */
-function labeledArmourType(type: ArmourType) {
-	return {
-		key: type,
-		label: `Infinity.ArmourTypes.${type}`,
-	};
-}
-
-/**
  * Labeled armour types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_ARMOUR_TYPES = ALL_ARMOUR_TYPES.map(labeledArmourType);
+export const LABELED_ARMOUR_TYPES = ALL_ARMOUR_TYPES.map((t) => labeledEnum('ArmourTypes', t));
 
 //#endregion
 
@@ -261,35 +224,17 @@ export const ALL_AUGMENTATION_CATEGORIES: AugmentationCategory[] = [
 ];
 
 /**
- * Construct labeled augmentation type data for Handlebars.
- */
-function labeledAugmentationType(type: AugmentationType) {
-	return {
-		key: type,
-		label: `Infinity.AugmentationTypes.${type}`,
-	};
-}
-
-/**
- * Construct labeled augmentation category data for Handlebars.
- */
-function labeledAugmentationCategory(category: AugmentationCategory) {
-	return {
-		key: category,
-		label: `Infinity.AugmentationCategories.${category}`,
-	};
-}
-
-/**
  * Labeled augmentation types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_AUGMENTATION_TYPES = ALL_AUGMENTATION_TYPES.map(labeledAugmentationType);
+export const LABELED_AUGMENTATION_TYPES = ALL_AUGMENTATION_TYPES.map((t) =>
+	labeledEnum('AugmentationTypes', t),
+);
 
 /**
  * Labeled augmentation categories, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_AUGMENTATION_CATEGORIES = ALL_AUGMENTATION_CATEGORIES.map(
-	labeledAugmentationCategory,
+export const LABELED_AUGMENTATION_CATEGORIES = ALL_AUGMENTATION_CATEGORIES.map((c) =>
+	labeledEnum('AugmentationCategories', c),
 );
 
 //#endregion
@@ -315,19 +260,11 @@ export const ALL_EXPLOSIVE_CATEGORIES: ExplosiveCategory[] = [
 ];
 
 /**
- * Construct labeled explosive category data for Handlebars.
- */
-function labeledExplosiveCategory(category: ExplosiveCategory) {
-	return {
-		key: category,
-		label: `Infinity.ExplosiveCategories.${category}`,
-	};
-}
-
-/**
  * Labeled explosive categories, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_EXPLOSIVE_CATEGORIES = ALL_EXPLOSIVE_CATEGORIES.map(labeledExplosiveCategory);
+export const LABELED_EXPLOSIVE_CATEGORIES = ALL_EXPLOSIVE_CATEGORIES.map((c) =>
+	labeledEnum('ExplosiveCategories', c),
+);
 
 //#endregion
 
@@ -358,19 +295,9 @@ export const ALL_PROGRAM_TYPES: ProgramType[] = [
 ];
 
 /**
- * Construct labeled program type data for Handlebars.
- */
-function labeledProgramType(type: ProgramType) {
-	return {
-		key: type,
-		label: `Infinity.ProgramTypes.${type}`,
-	};
-}
-
-/**
  * Labeled program types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_PROGRAM_TYPES = ALL_PROGRAM_TYPES.map(labeledProgramType);
+export const LABELED_PROGRAM_TYPES = ALL_PROGRAM_TYPES.map((t) => labeledEnum('ProgramTypes', t));
 
 //#endregion
 
@@ -390,18 +317,8 @@ export enum WeaponType {
 export const ALL_WEAPON_TYPES: WeaponType[] = [WeaponType.Melee, WeaponType.Ranged];
 
 /**
- * Construct labeled weapon type data for Handlebars.
- */
-function labeledWeaponType(type: WeaponType) {
-	return {
-		key: type,
-		label: `Infinity.WeaponTypes.${type}`,
-	};
-}
-
-/**
  * Labeled Weapon Types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_WEAPON_TYPES = ALL_WEAPON_TYPES.map(labeledWeaponType);
+export const LABELED_WEAPON_TYPES = ALL_WEAPON_TYPES.map((t) => labeledEnum('WeaponTypes', t));
 
 //#endregion

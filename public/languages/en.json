@@ -52,6 +52,11 @@
 				"InvalidFocusModifier": "The Focus dice modifier (foc, foc<=#) must be applied after a count successes modifier (cs<5) or it will be overwritten!"
 			}
 		},
+		"ContagionTypes": {
+			"instant": "Instant",
+			"complex": "Complex",
+			"progressive": "Progressive"
+		},
 		"ExplosiveCategories": {
 			"charges": "Charge",
 			"grenades": "Grenade",
@@ -112,6 +117,27 @@
 			}
 		},
 		"Sheets": {
+			"Contagion": {
+				"Type": "Type",
+				"Difficulty": "Difficulty",
+				"Momentum": "Momentum",
+				"Damage": {
+					"Label": "Damage",
+					"Hint": "Damage dealt on a failed contagion test."
+				},
+				"Chronic": {
+					"Label": "Chronic?",
+					"Hint": "Chronic contagions remain around (and dormant) after being cured, unless the GM spends heat to reactivate them."
+				},
+				"Term": {
+					"Label": "Term",
+					"Hint": "How often a check must be made against the contagion."
+				},
+				"Vector": {
+					"Label": "Vector",
+					"Hint": "Method the contagion is delivered/contracted."
+				}
+			},
 			"Gear": {
 				"Ammunition": {
 					"AddsQualities": {
@@ -300,6 +326,7 @@
 		},
 		"Item": {
 			"ability": "Ability",
+			"contagion": "Contagion",
 			"gear": "Gear",
 			"host": "Host",
 			"quality": "Quality",

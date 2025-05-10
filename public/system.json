@@ -28,6 +28,9 @@
 			"ability": {
 				"htmlFields": ["description"]
 			},
+			"contagion": {
+				"htmlFields": ["description"]
+			},
 			"gear": {
 				"htmlFields": ["description"]
 			},

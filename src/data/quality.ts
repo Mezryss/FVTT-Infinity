@@ -1,3 +1,5 @@
+import { labeledEnum } from './utility';
+
 /**
  * Item Qualities. CRB, pp.333–338
  */
@@ -28,16 +30,6 @@ export const ALL_QUALITY_TYPES: QualityType[] = [
 ];
 
 /**
- * Utility to construct a quality type label.
- */
-function labeled(type: QualityType) {
-	return {
-		key: type,
-		label: `Infinity.QualityTypes.${type}`,
-	};
-}
-
-/**
  * Labeled quality types, ready for passing to selectOptions helper in Handlebars.
  */
-export const LABELED_QUALITY_TYPES = ALL_QUALITY_TYPES.map(labeled);
+export const LABELED_QUALITY_TYPES = ALL_QUALITY_TYPES.map((t) => labeledEnum('QualityTypes', t));
