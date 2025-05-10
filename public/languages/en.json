@@ -123,6 +123,10 @@
 					"Label": "Cost",
 					"Hint": "Cost of the item as a dice string."
 				},
+				"CostPer3": {
+					"Label": "Cost (Per 3)",
+					"Hint": "Cost to obtain 3 of the item."
+				},
 				"DragQuality": "Drag & Drop a Quality item from the item browser to add it to this item!",
 				"InvalidQuality": "Invalid Quality",
 				"Maintenance": {

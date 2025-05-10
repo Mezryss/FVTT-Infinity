@@ -6,5 +6,13 @@
 		</select>
 	</label>
 
-	Resource
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Restriction.Hint"}}">{{localize "Infinity.Sheets.Gear.Restriction.Label"}}</span>
+		<input type="text" name="system.restriction" value="{{system.restriction}}" {{disabled (not editable)}} />
+	</label>
+
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.CostPer3.Hint"}}">{{localize "Infinity.Sheets.Gear.CostPer3.Label"}}</span>
+		<input type="text" name="system.cost" value="{{system.cost}}" {{disabled (not editable)}} />
+	</label>
 </section>
