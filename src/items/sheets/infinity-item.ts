@@ -1,13 +1,14 @@
-import type { ApplicationTabsConfiguration } from '@client/applications/_types.mjs';
 import { HandlebarsRenderOptions } from '@client/applications/api/handlebars-application.mjs';
 
-import { HandlebarsMixin, type HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
+import {
+	HandlebarsMixin,
+	type HandlebarsParts,
+	type SheetTabs,
+} from '@/apps/sheets/handlebars-mixin';
 import { InfinityItem } from '@/items/infinity-item';
 import type { InfinityItemDataModel } from '@/items/models/infinity-item';
 
 const { ItemSheetV2 } = foundry.applications.sheets;
-
-export type SheetTabs = Record<string, ApplicationTabsConfiguration>;
 
 /**
  * Base class for all Infinity item sheets.

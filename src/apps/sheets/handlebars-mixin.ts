@@ -1,4 +1,7 @@
-import { ApplicationRenderContext } from '@client/applications/_types.mjs';
+import {
+	ApplicationRenderContext,
+	type ApplicationTabsConfiguration,
+} from '@client/applications/_types.mjs';
 import type {
 	HandlebarsRenderOptions,
 	HandlebarsTemplatePart,
@@ -60,3 +63,8 @@ export function HandlebarsMixin<
 	return class extends HandlebarsApplicationMixin(base) {} as BaseType &
 		foundry.types.Constructor<HandlebarsApp>;
 }
+
+/**
+ * Gap-filler typing for tabs on a sheet.
+ */
+export type SheetTabs = Record<string, ApplicationTabsConfiguration>;

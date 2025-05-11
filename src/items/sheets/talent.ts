@@ -1,8 +1,10 @@
 import { TalentDataModel } from '@/items/models/talent';
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
 import { LABELED_SKILLS, localizeSkill } from '@/data/skills';
 import { InfinityItem } from '../infinity-item';
+import { ItemType } from '..';
 
 /**
  * Item Sheet for Talents.
@@ -130,7 +132,7 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 
 		// Fetch the dropped item to validate it's a talent.
 		const item = await fromUuid<InfinityItem<TalentDataModel>>(dropData.uuid);
-		if (!item || item.type !== 'talent') {
+		if (!item || item.type !== ItemType.Talent) {
 			ui.notifications.error(
 				game.i18n.localize('Infinity.Sheets.Talent.TalentsOnlyNotification'),
 			);

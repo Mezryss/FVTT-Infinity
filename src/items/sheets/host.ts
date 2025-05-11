@@ -1,8 +1,10 @@
 import { AbilityDataModel } from '@/items/models/ability';
 import { HostDataModel } from '@/items/models/host';
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
-import type { InfinityItem } from '../infinity-item';
+import { type InfinityItem } from '../infinity-item';
+import { ItemType } from '..';
 
 type AbilityItem = InfinityItem<AbilityDataModel>;
 
@@ -119,7 +121,7 @@ export class HostItemSheet extends InfinityItemSheet<HostDataModel> {
 
 		// Fetch the dropped item to validate it's an Item Quality.
 		const item = await fromUuid<AbilityItem>(dropData.uuid);
-		if (!item || item.type !== 'ability') {
+		if (!item || item.type !== ItemType.Ability) {
 			ui.notifications.error(game.i18n.localize('Infinity.Sheets.Host.OnlyAbilities'));
 			return;
 		}

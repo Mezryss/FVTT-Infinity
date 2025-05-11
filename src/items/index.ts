@@ -11,3 +11,15 @@ export function register() {
 	registerModels();
 	registerSheets();
 }
+
+/**
+ * Item Types. Keep in sync with public/system.json
+ */
+export enum ItemType {
+	Ability = 'ability',
+	Contagion = 'contagion',
+	Gear = 'gear',
+	Host = 'host',
+	Quality = 'quality',
+	Talent = 'talent',
+}

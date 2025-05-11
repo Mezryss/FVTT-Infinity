@@ -1,3 +1,4 @@
+import type { ItemType } from '.';
 import type { InfinityItemDataModel } from './models/infinity-item';
 import type { InfinityItemSheet } from './sheets/infinity-item';
 
@@ -37,5 +38,5 @@ export class InfinityItem<
 	/**
 	 * Item type.
 	 */
-	readonly type!: string;
+	readonly type!: ItemType;
 }

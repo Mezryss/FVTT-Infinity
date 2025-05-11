@@ -1,6 +1,7 @@
 import { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
 import { QualityDataModel } from '@/items/models/quality';
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import { LABELED_QUALITY_TYPES } from '@/data/quality';
 
 /**

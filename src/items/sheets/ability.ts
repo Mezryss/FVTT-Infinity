@@ -1,5 +1,6 @@
 import type { AbilityDataModel } from '@/items/models/ability';
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
 
 /**

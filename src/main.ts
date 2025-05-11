@@ -1,3 +1,4 @@
+import { register as registerActors } from '@/actors';
 import { register as registerDice } from '@/dice';
 import { register as registerFonts } from '@/fonts';
 import { register as registerItems } from '@/items';
@@ -18,6 +19,7 @@ Hooks.once('init', () => {
 	registerSockets();
 	registerTextEnrichers();
 
+	registerActors();
 	registerItems();
 
 	registerPartials();

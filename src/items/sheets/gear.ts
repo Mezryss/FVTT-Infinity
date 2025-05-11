@@ -18,8 +18,10 @@ import type { GearDataModel } from '@/items/models/gear';
 import { GearQuality } from '@/items/models/gear/quality';
 import type { QualityDataModel } from '@/items/models/quality';
 
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import type { InfinityItem } from '../infinity-item';
+import { ItemType } from '..';
 
 type GearItem = InfinityItem<GearDataModel>;
 type QualityItem = InfinityItem<QualityDataModel>;
@@ -371,7 +373,7 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 
 		// Fetch the dropped item to validate it's an Item Quality.
 		const item = await fromUuid<GearItem | QualityItem>(dropData.uuid);
-		if (!item || !['quality', 'gear'].includes(item.type)) {
+		if (!item || ![ItemType.Quality, ItemType.Gear].includes(item.type)) {
 			ui.notifications.error(
 				game.i18n.localize('Infinity.Sheets.Gear.QualitiesOnlyNotification'),
 			);
@@ -379,11 +381,11 @@ export class GearItemSheet extends InfinityItemSheet<GearDataModel> {
 		}
 
 		switch (item.type) {
-			case 'gear':
+			case ItemType.Gear:
 				await this.#onDropGear(item as GearItem);
 				break;
 
-			case 'quality':
+			case ItemType.Quality:
 				await this.#onDropQuality(item as QualityItem);
 				break;
 		}

@@ -1,5 +1,6 @@
 import { ContagionDataModel } from '@/items/models/contagion';
-import { InfinityItemSheet, type SheetTabs } from './infinity-item';
+import { InfinityItemSheet } from './infinity-item';
+import { type SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import type { HandlebarsParts } from '@/apps/sheets/handlebars-mixin';
 import { LABELED_CONTAGION_TYPES } from '@/data/contagion';
 
