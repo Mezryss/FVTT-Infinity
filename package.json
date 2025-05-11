@@ -37,5 +37,8 @@
 		"vite": "^6.3.5",
 		"vite-plugin-dts": "^4.5.3"
 	},
-	"packageManager": "yarn@4.9.1"
+	"packageManager": "yarn@4.9.1",
+	"dependencies": {
+		"lit": "^3.3.0"
+	}
 }

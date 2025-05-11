@@ -1,0 +1,142 @@
+.actor-sheet.player {
+	container: sheet / size;
+}
+
+.actor-sheet.player header {
+	--col-black: black;
+	--col-dark: #1c3156;
+	--col-white: white;
+	--col-light-blue: #70c4db;
+	--clip-size: 1.5rem;
+
+	display: grid;
+	grid-template-columns: 1fr;
+
+	.img-container {
+		padding: 1px;
+		padding-right: 0;
+		display: none;
+		background: var(--col-light-blue);
+
+		&,
+		img {
+			clip-path: polygon(0 var(--clip-size), var(--clip-size) 0, 100% 0, 100% 100%, 0 100%);
+		}
+	}
+
+	.infinity-points-container {
+		grid-column: 1 / span 1;
+
+		background: var(--col-light-blue);
+		padding: 1px;
+		padding-top: 0;
+
+		display: flex;
+		flex-flow: row nowrap;
+		gap: 1px;
+
+		& > *:first-child {
+			flex-grow: 1;
+		}
+
+		& > * {
+			flex-shrink: 0;
+		}
+
+		.box {
+			display: flex;
+			flex-flow: column nowrap;
+
+			input {
+				font-family: var(--font-orbitron);
+				font-weight: var(--fw-semi-bold);
+				border-radius: 0;
+				background: var(--col-white);
+				border: none;
+				text-align: center;
+				color: var(--col-black);
+				width: 8rem;
+			}
+		}
+
+		.label {
+			padding: 0.5rem;
+			text-transform: uppercase;
+			background: var(--col-dark);
+			font-family: var(--font-orbitron);
+			text-align: center;
+		}
+	}
+
+	.labeled-input {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: stretch;
+
+		font-family: var(--font-orbitron);
+		border: 1px solid var(--col-light-blue);
+
+		span {
+			flex-shrink: 0;
+			width: 8rem;
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			justify-content: center;
+			background: var(--col-dark);
+			text-transform: uppercase;
+			color: white;
+			font-weight: var(--fw-semi-bold);
+		}
+
+		input {
+			border-radius: 0;
+			border: none;
+			background: white;
+			border-left: 2px solid var(--col-light-blue);
+			color: black;
+			min-height: 100%;
+
+			&::placeholder {
+				color: rgb(0 0 0 / 20%);
+				font-style: italic;
+			}
+		}
+	}
+}
+
+@container sheet (min-width: 550px) {
+	.actor-sheet.player header {
+		grid-template-columns: 70px 1fr 1fr;
+		padding: 0.25em;
+
+		.img-container {
+			display: block;
+			grid-row: 1 / span 2;
+			grid-column: 1 / span 1;
+		}
+
+		.infinity-points-container {
+			grid-column: 1 / span all;
+			clip-path: polygon(
+				0 0,
+				100% 0,
+				100% calc(100% - var(--clip-size)),
+				calc(100% - var(--clip-size)) 100%,
+				0 100%
+			);
+		}
+
+		label[data-part='name'] {
+			grid-column: 2 / span 2;
+		}
+
+		label[data-part='faction'] {
+			grid-column: 2 / span 1;
+		}
+
+		label[data-part='heritage'] {
+			grid-column: 3 / span 1;
+		}
+	}
+}

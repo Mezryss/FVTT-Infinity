@@ -85,6 +85,9 @@
 			"massive": "Massive",
 			"facility": "Facility"
 		},
+		"Labels": {
+			"Name": "Name"
+		},
 		"ProgramTypes": {
 			"claw": "CLAW",
 			"gadget": "GADGET",
@@ -266,6 +269,12 @@
 					"Talent": "{skill} Talent"
 				}
 			},
+			"Player": {
+				"Faction": "Faction",
+				"Heritage": "Heritage",
+				"InfinityPoints": "Infinity Points",
+				"Refresh": "Refresh"
+			},
 			"Quality": {
 				"Abbreviation": {
 					"Label": "Abbreviation",
@@ -318,9 +327,14 @@
 			"thievery": "Thievery"
 		},
 		"Tabs": {
+			"background": "Background",
+			"combat": "Combat",
 			"description": "Description",
 			"detail": "Detail",
-			"effects": "Active Effects"
+			"effects": "Active Effects",
+			"equipment": "Equipment",
+			"skills": "Skills",
+			"talents": "Talents"
 		},
 		"WeaponTypes": {
 			"melee": "Melee Weapon",

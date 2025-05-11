@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:16.0.0"],\
           ["handlebars", "npm:4.7.8"],\
           ["jiti", "npm:2.4.2"],\
+          ["lit", "npm:3.3.0"],\
           ["oxlint", "npm:0.16.7"],\
           ["prettier", "npm:3.5.3"],\
           ["rollup-plugin-visualizer", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:5.14.0"],\
@@ -874,6 +875,25 @@ const RAW_RUNTIME_STATE =
           ["@lezer/common", "npm:1.2.3"],\
           ["@lezer/highlight", "npm:1.2.1"],\
           ["@lezer/markdown", "npm:1.4.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@lit-labs/ssr-dom-shim", [\
+      ["npm:1.3.0", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/@lit-labs-ssr-dom-shim-npm-1.3.0-6bfa115c08-10c0.zip/node_modules/@lit-labs/ssr-dom-shim/",\
+        "packageDependencies": [\
+          ["@lit-labs/ssr-dom-shim", "npm:1.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@lit/reactive-element", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/@lit-reactive-element-npm-2.1.0-77512b732b-10c0.zip/node_modules/@lit/reactive-element/",\
+        "packageDependencies": [\
+          ["@lit-labs/ssr-dom-shim", "npm:1.3.0"],\
+          ["@lit/reactive-element", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2450,6 +2470,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../Users/mina/.yarn/berry/cache/@types-triple-beam-npm-1.3.5-0f1b823630-10c0.zip/node_modules/@types/triple-beam/",\
         "packageDependencies": [\
           ["@types/triple-beam", "npm:1.3.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/trusted-types", [\
+      ["npm:2.0.7", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/@types-trusted-types-npm-2.0.7-a07fc44f59-10c0.zip/node_modules/@types/trusted-types/",\
+        "packageDependencies": [\
+          ["@types/trusted-types", "npm:2.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4931,6 +4960,40 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["lit", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/lit-npm-3.3.0-f32a5f05cc-10c0.zip/node_modules/lit/",\
+        "packageDependencies": [\
+          ["@lit/reactive-element", "npm:2.1.0"],\
+          ["lit", "npm:3.3.0"],\
+          ["lit-element", "npm:4.2.0"],\
+          ["lit-html", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lit-element", [\
+      ["npm:4.2.0", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/lit-element-npm-4.2.0-4e5f939f4c-10c0.zip/node_modules/lit-element/",\
+        "packageDependencies": [\
+          ["@lit-labs/ssr-dom-shim", "npm:1.3.0"],\
+          ["@lit/reactive-element", "npm:2.1.0"],\
+          ["lit-element", "npm:4.2.0"],\
+          ["lit-html", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lit-html", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "../../../../Users/mina/.yarn/berry/cache/lit-html-npm-3.3.0-c8e56e93b3-10c0.zip/node_modules/lit-html/",\
+        "packageDependencies": [\
+          ["@types/trusted-types", "npm:2.0.7"],\
+          ["lit-html", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["local-pkg", [\
       ["npm:1.1.1", {\
         "packageLocation": "../../../../Users/mina/.yarn/berry/cache/local-pkg-npm-1.1.1-ae4e3dc95d-10c0.zip/node_modules/local-pkg/",\
@@ -6704,6 +6767,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:16.0.0"],\
           ["handlebars", "npm:4.7.8"],\
           ["jiti", "npm:2.4.2"],\
+          ["lit", "npm:3.3.0"],\
           ["oxlint", "npm:0.16.7"],\
           ["prettier", "npm:3.5.3"],\
           ["rollup-plugin-visualizer", "virtual:fa6fd785e8a1479a24e6ecbe0961574bacd75709047af7113aac87d6e29a9133fcc24c9e87acc57ca4e599feb6b091654c3ebec89257c1caef56233386832866#npm:5.14.0"],\

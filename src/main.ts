@@ -7,6 +7,7 @@ import { register as registerSockets } from '@/socket';
 import { register as registerTextEnrichers } from '@/text-enrichers';
 
 import '@/apps';
+import '@/elements';
 
 import '@styles/main.css';
 
