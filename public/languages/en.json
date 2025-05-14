@@ -270,6 +270,7 @@
 				}
 			},
 			"Player": {
+				"AttributesAndSkills": "Attributes & Skills",
 				"Faction": "Faction",
 				"Heritage": "Heritage",
 				"InfinityPoints": "Infinity Points",

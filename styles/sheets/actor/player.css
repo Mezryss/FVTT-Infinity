@@ -1,14 +1,16 @@
 .actor-sheet.player {
 	container: sheet / size;
-}
 
-.actor-sheet.player header {
 	--col-black: black;
 	--col-dark: #1c3156;
 	--col-white: white;
 	--col-light-blue: #70c4db;
 	--clip-size: 1.5rem;
+	--col-secondary: #B9E1EF;
+	--col-tertiary: #EBF7FB;
+}
 
+.actor-sheet.player header {
 	display: grid;
 	grid-template-columns: 1fr;
 
@@ -105,6 +107,154 @@
 	}
 }
 
+.actor-sheet.player .section-header {
+	display: block;
+	padding: 1px;
+	background: var(--col-light-blue);
+	font-size: var(--font-size-20);
+	clip-path: polygon(
+		0 0,
+		calc(100% - var(--clip-size)) 0,
+		100% var(--clip-size),
+		100% 100%,
+		0 100%
+	);
+	margin: 0.5rem 0.5rem 0.25rem 0.5rem;
+
+	h2 {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: start;
+		background: black;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0.5rem;
+		color: var(--col-infinity-orange);
+		text-transform: uppercase;
+		font-size: 1em;
+		clip-path: polygon(
+			0 0,
+			calc(100% - var(--clip-size)) 0,
+			100% var(--clip-size),
+			100% 100%,
+			0 100%
+		);
+	}
+}
+
+.actor-sheet.player .attributes-list {
+	margin: 0 0.5rem 0.5rem 0.5rem;
+	columns: 1;
+	column-fill: balance;
+	column-gap: 0.5rem;
+
+	input {
+		text-align: center;
+	}
+
+	.attribute-block {
+		break-inside: avoid;
+		white-space: nowrap;
+
+		display: grid;
+		grid-template-columns: 1fr auto repeat(3, 3rem);
+		align-items: center;
+		margin-bottom: 0.5em;
+
+		border: 1px solid var(--col-light-blue);
+
+		input {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0;
+			border-radius: 0;
+			border: none;
+			text-align: center;
+			font-size: 1.25em;
+		}
+
+		input, .skill-name, .target-number {
+			display: flex;
+			background: var(--col-tertiary);
+			color: black;
+			font-family: var(--font-orbitron);
+			width: 100%;
+			height: 100%;
+
+			&:not(.attribute-value) {
+				border: 1px solid var(--col-light-blue);
+				border-bottom: none;
+			}
+		}
+
+		.skill-name, .target-number {
+			padding: 0.25em;
+		}
+
+		.target-number {
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			font-weight: var(--fw-black);
+			font-size: 1.25em;
+
+			span, i {
+				position: absolute;
+				transition: opacity ease-in-out 0.25s;
+			}
+
+			span {
+				opacity: 100%;
+			}
+
+			i {
+				opacity: 0%;
+			}
+
+			&:hover {
+				span { opacity: 0%; }
+				i { opacity: 100%; }
+			}
+		}
+
+		h4, h5 {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			text-transform: uppercase;
+			justify-content: center;
+		}
+
+		h5 {
+			font-size: 0.8rem;
+			margin: 0;
+			padding: 0.25rem;
+			background: var(--col-secondary);
+			width: 100%;
+			color: var(--col-dark);
+		}
+
+		h4 {
+			grid-column: 1 / span 3;
+			margin: 0;
+			background: var(--col-dark);
+			color: white;
+			height: 100%;
+			width: 100%;
+			padding: 0.25rem;
+			border-right: 1px solid var(--col-light-blue);
+			border-bottom: 1px solid var(--col-light-blue);
+		}
+
+		.attribute-value {
+			grid-column: 4 / span 2;
+		}
+	}
+}
+
 @container sheet (min-width: 550px) {
 	.actor-sheet.player header {
 		grid-template-columns: 70px 1fr 1fr;
@@ -138,5 +288,17 @@
 		label[data-part='heritage'] {
 			grid-column: 3 / span 1;
 		}
+	}
+}
+
+@container sheet (min-width: 800px) {
+	.actor-sheet.player .attributes-list {
+		columns: 2;
+	}
+}
+
+@container sheet (min-width: 1200px) {
+	.actor-sheet.player .attributes-list {
+		columns: 3;
 	}
 }

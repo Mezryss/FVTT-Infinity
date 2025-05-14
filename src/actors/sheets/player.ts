@@ -1,6 +1,8 @@
 import { HandlebarsParts, SheetTabs } from '@/apps/sheets/handlebars-mixin';
 import { PlayerCharacterDataModel } from '../models/player';
 import { InfinityActorSheet } from './infinity-actor-sheet';
+import { ALL_ATTRIBUTES } from '@/data/attributes';
+import { SKILLS_BY_ATTRIBUTE } from '@/data/skills';
 
 /**
  * Actor Sheet for Player Characters.
@@ -35,4 +37,37 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 			labelPrefix: 'Infinity.Tabs',
 		},
 	};
+
+	override async _prepareContext(options: foundry.applications.types.ApplicationRenderOptions) {
+		const baseContext = await super._prepareContext(options);
+
+		/**
+		 * Consolidate Attribute & Skills Data.
+		 */
+		const attributes = ALL_ATTRIBUTES.map(attrib => {
+			const attribValue = this.actor.system.attributes[attrib];
+
+			return {
+				name: game.i18n.localize(`Infinity.Attributes.${attrib}`),
+				field: `system.attributes.${attrib}`,
+				value: attribValue,
+				skills: SKILLS_BY_ATTRIBUTE[attrib].map(skill => {
+					return {
+						name: game.i18n.localize(`Infinity.Skills.${skill}`),
+						field: `system.skills.${skill}.`,
+						signature: this.actor.system.skills[skill].signature,
+						exp: this.actor.system.skills[skill].expertise,
+						foc: this.actor.system.skills[skill].focus,
+						tn: attribValue + this.actor.system.skills[skill].expertise,
+					};
+				}),
+			};
+		});
+
+		return {
+			...baseContext,
+
+			attributes,
+		};
+	}
 }
