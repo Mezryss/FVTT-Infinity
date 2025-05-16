@@ -12,7 +12,7 @@ export default tseslint.config(
 
 	{
 		name: 'app/files-to-ignore',
-		ignores: ['node_modules', '.yarn', '.pnp.cjs', '.pnp.loader.mjs', 'types', '**/*.hbs'],
+		ignores: ['node_modules', 'types', '**/*.hbs'],
 	},
 
 	{

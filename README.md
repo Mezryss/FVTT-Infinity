@@ -4,13 +4,11 @@ Unofficial implementation of the Infinity RPG by Modiphius for FoundryVTT
 
 ## Setup
 
-Before we actualy get into the process of building, a few steps need to happen. First (obviously), install dependencies with Yarn:
+Before we actualy get into the process of building, a few steps need to happen. First (obviously), install dependencies with [PNPM](https://pnpm.io/):
 
 ```sh
-yarn
+pnpm install
 ```
-
-This project uses Yarn berry (though we do not use zero-installs).
 
 ### Foundry Typings
 
@@ -38,30 +36,30 @@ To avoid messing up your Foundry files after symlinking, I recommend adding the 
 
 ## Building
 
-FVTT-Infinity is set up as a fairly straightforward Vite project using Yarn as a package manager.
+FVTT-Infinity is set up as a fairly straightforward Vite project using PNPM as a package manager.
 
 ### Build
 
 ```sh
-yarn build
+pnpm run build
 ```
 
 ### Lint (Oxlint + Stylelint)
 
 ```sh
-yarn lint
+pnpm run lint
 ```
 
 ### Format (Prettier)
 
 ```sh
-yarn format
+pnpm run format
 ```
 
 ### Dev Server (Vite)
 
 ```sh
-yarn dev
+pnpm run dev
 ```
 
 The dev server by default will assume Foundry is running on port `:30000`, and the Vite server will be on port `:30001`. You can edit the dev server details with the `VITE_PROXY_HOST`, `VITE_PROXY_PORT`, and `VITE_SERVER_PORT` environment variables.
