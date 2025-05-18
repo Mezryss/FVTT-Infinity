@@ -25,13 +25,15 @@ export class InfinityActorSheet<
 	static override DEFAULT_OPTIONS = <any>{
 		actions: {
 			openDocument: InfinityActorSheet.#openDocument,
+			deleteDocument: InfinityActorSheet.#deleteDocument,
 		},
 		classes: ['infinity', 'actor-window'],
 		form: {
 			submitOnChange: true,
 		},
 		position: {
-			height: 400,
+			width: 600,
+			height: 500,
 		},
 		window: {
 			resizable: true,
@@ -44,21 +46,6 @@ export class InfinityActorSheet<
 	 */
 	// @ts-expect-error Overriding the actor accessor from ActorSheetV2 to get a Generic item appropriately.
 	readonly actor!: InfinityActor<DataModelType>;
-
-	/**
-	 * Event Handler: `data-action="openDocument"`
-	 * Requires `data-uuid="..."` data property.
-	 *
-	 * Attempts to open a sheet for the document with the specified UUID.
-	 */
-	static async #openDocument(this: InfinityActorSheet, _event: Event, target: HTMLElement) {
-		const uuid = target.dataset['uuid'];
-		if (!uuid) {
-			return Promise.reject('Invalid data-uuid property.');
-		}
-
-		(await fromUuid<InfinityItem>(uuid))?.sheet?.render(true);
-	}
 
 	/**
 	 * Inserts base context information shared by all item sheets.
@@ -103,5 +90,38 @@ export class InfinityActorSheet<
 		Object.assign(partContext, newContext);
 
 		return partContext;
+	}
+
+	/**
+	 * Event Handler: `data-action="deleteDocument"`
+	 * Requires `data-uuid="..."` data property.
+	 *
+	 * Attempts to delete the given item owned by the actor.
+	 */
+	static async #deleteDocument(this: InfinityActorSheet, _event: Event, target: HTMLElement) {
+		const uuid = target.dataset['uuid'];
+		if (!uuid) {
+			return Promise.reject('Invalid data-uuid property.');
+		}
+
+		const matchingItem = this.actor.items.find((i) => i.uuid === uuid);
+		if (matchingItem) {
+			await matchingItem.delete();
+		}
+	}
+
+	/**
+	 * Event Handler: `data-action="openDocument"`
+	 * Requires `data-uuid="..."` data property.
+	 *
+	 * Attempts to open a sheet for the document with the specified UUID.
+	 */
+	static async #openDocument(this: InfinityActorSheet, _event: Event, target: HTMLElement) {
+		const uuid = target.dataset['uuid'];
+		if (!uuid) {
+			return Promise.reject('Invalid data-uuid property.');
+		}
+
+		(await fromUuid<InfinityItem>(uuid))?.sheet?.render(true);
 	}
 }

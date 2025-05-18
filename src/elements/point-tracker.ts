@@ -2,7 +2,7 @@ import { LitElement, css, html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 @customElement('point-tracker')
-export default class PointTracker extends LitElement {
+export class PointTrackerElement extends LitElement {
 	static formAssociated = true;
 
 	@property({ type: String, reflect: true })
@@ -116,5 +116,11 @@ export default class PointTracker extends LitElement {
 	#mouseLeave(event: MouseEvent) {
 		const target = event.target as HTMLElement;
 		target.classList.remove('hover');
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'point-tracker': PointTrackerElement;
 	}
 }

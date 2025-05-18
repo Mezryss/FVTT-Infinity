@@ -67,6 +67,15 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 	override async _prepareContext(options: foundry.applications.types.ApplicationRenderOptions) {
 		const baseContext = await super._prepareContext(options);
 
+		// Override enriched description to grab the talent's rank, but only if owned.
+		let { enrichedDescription } = baseContext;
+		if (this.item.isOwned) {
+			enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+				this.item.system.description,
+				<any>{ rank: this.item.system.ranks },
+			);
+		}
+
 		// Fetch information about the prerequisite talent.
 		let prereqTalent: InfinityItem<TalentDataModel> | null = null;
 		if (this.item.system.prerequisiteTalentUuid) {
@@ -77,6 +86,8 @@ export class TalentItemSheet extends InfinityItemSheet<TalentDataModel> {
 
 		return {
 			...baseContext,
+
+			enrichedDescription,
 
 			localizedSkillName: localizeSkill(this.item.system.skill),
 			prereqTalent,

@@ -6,8 +6,14 @@
 	--col-white: white;
 	--col-light-blue: #70c4db;
 	--clip-size: 1.5rem;
-	--col-secondary: #B9E1EF;
-	--col-tertiary: #EBF7FB;
+	--col-secondary: #b9e1ef;
+	--col-tertiary: #ebf7fb;
+}
+
+.actor-sheet.player {
+	section[data-tab='talents'] {
+		padding: 0.5em;
+	}
 }
 
 .actor-sheet.player header {
@@ -176,7 +182,9 @@
 			font-size: 1.25em;
 		}
 
-		input, .skill-name, .target-number {
+		input,
+		.skill-name,
+		.target-number {
 			display: flex;
 			background: var(--col-tertiary);
 			color: black;
@@ -190,7 +198,8 @@
 			}
 		}
 
-		.skill-name, .target-number {
+		.skill-name,
+		.target-number {
 			padding: 0.25em;
 		}
 
@@ -201,7 +210,8 @@
 			font-weight: var(--fw-black);
 			font-size: 1.25em;
 
-			span, i {
+			span,
+			i {
 				position: absolute;
 				transition: opacity ease-in-out 0.25s;
 			}
@@ -215,12 +225,17 @@
 			}
 
 			&:hover {
-				span { opacity: 0%; }
-				i { opacity: 100%; }
+				span {
+					opacity: 0%;
+				}
+				i {
+					opacity: 100%;
+				}
 			}
 		}
 
-		h4, h5 {
+		h4,
+		h5 {
 			display: flex;
 			flex-flow: row nowrap;
 			align-items: center;
@@ -253,6 +268,17 @@
 			grid-column: 4 / span 2;
 		}
 	}
+}
+
+.actor-sheet.player .skill-talents {
+	break-inside: avoid;
+	margin-bottom: 0.5em;
+}
+
+.actor-sheet.player .talents-list {
+	columns: 1;
+	column-fill: balance;
+	column-gap: 0.5rem;
 }
 
 @container sheet (min-width: 550px) {
@@ -292,13 +318,15 @@
 }
 
 @container sheet (min-width: 800px) {
-	.actor-sheet.player .attributes-list {
+	.actor-sheet.player .attributes-list,
+	.actor-sheet.player .talents-list {
 		columns: 2;
 	}
 }
 
 @container sheet (min-width: 1200px) {
-	.actor-sheet.player .attributes-list {
+	.actor-sheet.player .attributes-list,
+	.actor-sheet.player .talents-list {
 		columns: 3;
 	}
 }

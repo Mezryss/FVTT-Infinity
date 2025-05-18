@@ -274,7 +274,10 @@
 				"Faction": "Faction",
 				"Heritage": "Heritage",
 				"InfinityPoints": "Infinity Points",
-				"Refresh": "Refresh"
+				"Refresh": "Refresh",
+				"DragTalents": "Drop a Talent item on this character sheet to add it as a Talent!",
+				"TalentsForSkill": "{skill} Talents",
+				"SpecialAbilities": "Special Abilities"
 			},
 			"Quality": {
 				"Abbreviation": {

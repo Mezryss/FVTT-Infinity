@@ -38,9 +38,14 @@ export class InfinityActor<
 	readonly type!: ActorType;
 
 	/**
+	 * Items owned by the Actor.
+	 */
+	readonly items!: InfinityItem[];
+
+	/**
 	 * Provide a more strongly-typed ItemTypes accessor.
 	 */
-	override get itemTypes(): Record<keyof ItemType, InfinityItem[]> {
-		return super.itemTypes as any;
+	override get itemTypes(): Record<ItemType, InfinityItem[]> {
+		return super.itemTypes as Record<ItemType, InfinityItem[]>;
 	}
 }
