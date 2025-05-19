@@ -215,6 +215,31 @@ export class PlayerCharacterDataModel extends InfinityActorDataModel {
 	 */
 	skills!: CharacterSkillsDataModel;
 
+	/**
+	 * Character's Homeworld.
+	 */
+	homeworld!: string;
+
+	/**
+	 * Character's Social Status.
+	 */
+	socialStatus!: string;
+
+	/**
+	 * Character's Age.
+	 */
+	age!: string;
+
+	/**
+	 * Languages Spoken.
+	 */
+	languages!: string;
+
+	/**
+	 * Background Information.
+	 */
+	background!: string;
+
 	static defineSchema() {
 		const baseSchema = super.defineSchema();
 
@@ -248,6 +273,36 @@ export class PlayerCharacterDataModel extends InfinityActorDataModel {
 
 			skills: new EmbeddedDataField(CharacterSkillsDataModel as any, {
 				nullable: false,
+			}),
+
+			homeworld: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			socialStatus: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			age: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			languages: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			background: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
 			}),
 		};
 	}

@@ -34,9 +34,19 @@ export enum GearType {
 	ExplosiveDevice = 'explosiveDevice',
 
 	/**
+	 * Fake IDs. CRB, p.368
+	 */
+	FakeID = 'fakeID',
+
+	/**
 	 * Hacking Devices. CRB, p.352
 	 */
 	HackingDevice = 'hackingDevice',
+
+	/**
+	 * Lifestyles. CRB, p.387
+	 */
+	Lifestyle = 'lifestyle',
 
 	/**
 	 * Hacking Devices. CRB, p.352
@@ -87,7 +97,9 @@ export const ALL_GEAR_TYPES: GearType[] = [
 	GearType.Augmentation,
 	GearType.Drug,
 	GearType.ExplosiveDevice,
+	GearType.FakeID,
 	GearType.HackingDevice,
+	GearType.Lifestyle,
 	GearType.Program,
 	GearType.Resource,
 	GearType.Tool,
@@ -320,5 +332,40 @@ export const ALL_WEAPON_TYPES: WeaponType[] = [WeaponType.Melee, WeaponType.Rang
  * Labeled Weapon Types, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_WEAPON_TYPES = ALL_WEAPON_TYPES.map((t) => labeledEnum('WeaponTypes', t));
+
+//#endregion
+
+//#region Lifestyles
+
+/**
+ * Social Classes. CRB, p.387
+ */
+export enum LifestyleRating {
+	Underclass = 'underclass',
+	Demogrant = 'demogrant',
+	Middle = 'middle',
+	Upper = 'upper',
+	Elite = 'elite',
+	HyperElite = 'hyperElite',
+}
+
+/**
+ * List of all Lifestyle Ratings.
+ */
+export const ALL_LIFESTYLE_RATINGS: LifestyleRating[] = [
+	LifestyleRating.Underclass,
+	LifestyleRating.Demogrant,
+	LifestyleRating.Middle,
+	LifestyleRating.Upper,
+	LifestyleRating.Elite,
+	LifestyleRating.HyperElite,
+];
+
+/**
+ * Labeled Lifestyle Ratings, ready for passing to selectOptions helper in Handlebars.
+ */
+export const LABELED_LIFESTYLE_RATINGS = ALL_LIFESTYLE_RATINGS.map((t) =>
+	labeledEnum('LifestyleRating', t),
+);
 
 //#endregion

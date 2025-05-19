@@ -68,7 +68,9 @@
 			"augmentation": "Augmentation",
 			"drug": "Drug/Poison",
 			"explosiveDevice": "Explosive Device",
+			"fakeID": "Fake ID",
 			"hackingDevice": "Hacking Device",
+			"lifestyle": "Lifestyle",
 			"program": "Program",
 			"resource": "Resource",
 			"tool": "Tool",
@@ -87,6 +89,14 @@
 		},
 		"Labels": {
 			"Name": "Name"
+		},
+		"LifestyleRating": {
+			"underclass": "Underclass",
+			"demogrant": "Demogrant",
+			"middle": "Middle",
+			"upper": "Upper",
+			"elite": "Elite",
+			"hyperElite": "Hyper-Elite"
 		},
 		"ProgramTypes": {
 			"claw": "CLAW",
@@ -188,6 +198,12 @@
 				"ExplosiveDevice": {
 					"Category": "Category"
 				},
+				"FakeID": {
+					"Rating": {
+						"Hint": "Bonus Momentum given to disguise-based Stealth tests using the ID. Also used as the difficulty of an Analysis, Thievery, or Hacking test to identify the ID as fake.",
+						"Label": "Rating"
+					}
+				},
 				"HackingDevice": {
 					"CLAW": {
 						"Label": "CLAW",
@@ -218,6 +234,9 @@
 					}
 				},
 				"InvalidQuality": "Invalid Quality",
+				"Lifestyle": {
+					"Rating": "Rating"
+				},
 				"Maintenance": {
 					"Label": "Maintenance",
 					"Hint": "Maintenance cost of the item as a dice string."
@@ -277,7 +296,17 @@
 				"Refresh": "Refresh",
 				"DragTalents": "Drop a Talent item on this character sheet to add it as a Talent!",
 				"TalentsForSkill": "{skill} Talents",
-				"SpecialAbilities": "Special Abilities"
+				"SpecialAbilities": "Special Abilities",
+				"Background": "Background",
+				"Homeworld": "Homeworld",
+				"SocialStatus": "Social Status",
+				"Age": "Age",
+				"Languages": "Languages",
+				"AdditionalInformation": "Additional Information",
+				"FakeIDs": "Fake IDs",
+				"DragFakeIDs": "Drag & Drop Fake ID Gear Items onto the character sheet to add them to this list!",
+				"Lifestyles": "Lifestyles",
+				"DragLifestyles": "Drag & Drop Lifestyle Gear Items onto the character sheet to add them to this list!"
 			},
 			"Quality": {
 				"Abbreviation": {

@@ -6,6 +6,8 @@ import { SKILLS_BY_ATTRIBUTE } from '@/data/skills';
 import { TalentDataModel } from '@/items/models/talent.ts';
 import { TalentDisclosureElement, type ToggleCollapseEvent } from '@/elements/talent-disclosure.ts';
 import { AbilityDataModel } from '@/items/models/ability.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
+import { GearType } from '@/data/gear.ts';
 
 /**
  * Actor Sheet for Player Characters.
@@ -25,7 +27,7 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 		equipment: { template: 'systems/infinity/templates/sheets/actor/player/equipment.hbs' },
 		skills: { template: 'systems/infinity/templates/sheets/actor/player/skills.hbs' },
 		talents: { template: 'systems/infinity/templates/sheets/actor/player/talents.hbs' },
-		effects: { template: 'systems/infinity/templates/sheets/actor/effects.hbs' }
+		effects: { template: 'systems/infinity/templates/sheets/actor/effects.hbs' },
 	};
 
 	static TABS: SheetTabs = {
@@ -81,6 +83,7 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 
 			abilities: await this.prepareAbilities(),
 			attributes: this.prepareAttributesAndSkills(),
+			background: await this.prepareBackground(),
 			talents: await this.prepareTalents(),
 		};
 	}
@@ -108,6 +111,28 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 				}),
 			};
 		});
+	}
+
+	/**
+	 * Prepared structured data for Background information.
+	 */
+	async prepareBackground() {
+		const enriched = await foundry.applications.ux.TextEditor.enrichHTML(
+			this.actor.system.background,
+		);
+
+		const fakeIDs = this.actor.itemTypes.gear.filter(
+			(g) => (g.system as GearDataModel).type === GearType.FakeID,
+		);
+		const lifestyles = this.actor.itemTypes.gear.filter(
+			(g) => (g.system as GearDataModel).type === GearType.Lifestyle,
+		);
+
+		return {
+			enriched,
+			fakeIDs,
+			lifestyles,
+		};
 	}
 
 	/**

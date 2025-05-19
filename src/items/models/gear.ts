@@ -6,12 +6,14 @@ import { AugmentationData } from './gear/augmentation';
 
 import { InfinityItemDataModel } from './infinity-item';
 import { DrugData } from './gear/drug';
+import { FakeIDData } from './gear/fakeIDs.ts';
 import { ToolData } from './gear/tool';
 import { OtherData } from './gear/other';
 import { ExplosiveDeviceData } from './gear/explosiveDevice';
 import { WeaponData } from './gear/weapon';
 import { HackingDeviceData } from './gear/hackingDevice';
 import { ProgramData } from './gear/program';
+import { LifestyleData } from '@/items/models/gear/lifestyle.ts';
 
 const { EmbeddedDataField, StringField } = foundry.data.fields;
 
@@ -45,9 +47,19 @@ export class GearDataModel extends InfinityItemDataModel {
 	explosiveDevice!: ExplosiveDeviceData;
 
 	/**
+	 * Fake ID-specific gear data.
+	 */
+	fakeID!: FakeIDData;
+
+	/**
 	 * Hacking Device-specific gear data.
 	 */
 	hackingDevice!: HackingDeviceData;
+
+	/**
+	 * Lifestyle-specific gear data.
+	 */
+	lifestyle!: LifestyleData;
 
 	/**
 	 * Program-specific gear data.
@@ -125,6 +137,14 @@ export class GearDataModel extends InfinityItemDataModel {
 
 			hackingDevice: new EmbeddedDataField(HackingDeviceData as any, {
 				nullable: false,
+			}),
+
+			fakeID: new EmbeddedDataField(FakeIDData as any, {
+				nullable: true,
+			}),
+
+			lifestyle: new EmbeddedDataField(LifestyleData as any, {
+				nullable: true,
 			}),
 
 			program: new EmbeddedDataField(ProgramData as any, {

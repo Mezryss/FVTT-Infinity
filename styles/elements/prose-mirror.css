@@ -2,13 +2,34 @@
  * Prose Mirror should only have a minimum height when active; its text content should simply fit to its content.
  */
 prose-mirror {
-	flex-grow: 1;
+	min-height: unset;
 
+	button.toggle,
 	.editor-content {
-		padding: 0.5rem;
+		position: unset;
 	}
 
-	.editor-container .editor-content {
-		padding-top: 0;
+	button.toggle {
+		width: 100%;
+		order: 10;
+	}
+
+	.editor-container {
+		order: 1;
+	}
+
+	&.active {
+		height: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+
+		.editor-container {
+			flex-grow: 1;
+			min-height: 100px;
+
+			.editor-content {
+				height: 100%;
+			}
+		}
 	}
 }

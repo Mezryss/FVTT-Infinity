@@ -1,3 +1,84 @@
 <section class="tab{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
-	Background Details
+	<div class="section-header">
+		<h2>{{localize "Infinity.Sheets.Player.Background"}}</h2>
+	</div>
+	<div class="background-grid">
+		<label class="homeworld" style="border-right: 1px solid var(--col-light-blue);">
+			<span>{{localize "Infinity.Sheets.Player.Homeworld"}}</span>
+			<input type="text" name="system.homeworld" value="{{system.homeworld}}" />
+		</label>
+
+		<label class="social-status">
+			<span>{{localize "Infinity.Sheets.Player.SocialStatus"}}</span>
+			<input type="text" name="system.socialStatus" value="{{system.socialStatus}}" />
+		</label>
+
+		<label class="age" style="border-right: 1px solid var(--col-light-blue);">
+			<span>{{localize "Infinity.Sheets.Player.Age"}}</span>
+			<input type="text" name="system.age" value="{{system.age}}" />
+		</label>
+
+		<label class="languages">
+			<span>{{localize "Infinity.Sheets.Player.Languages"}}</span>
+			<input type="text" name="system.languages" value="{{system.languages}}" />
+		</label>
+	</div>
+
+	<div class="section-header">
+		<h2>{{localize "Infinity.Sheets.Player.Lifestyles"}}</h2>
+	</div>
+	<div class="lifestyles">
+		{{#each background.lifestyles}}
+			{{#if @root.editable}}
+				<span class="actions">
+					<a data-action="deleteDocument" data-uuid="{{uuid}}"><i class="fas fa-fw fa-trash"></i></a>
+				</span>
+			{{/if}}
+			<div class="name">
+				<a data-action="openDocument" data-uuid="{{uuid}}">
+					{{name}}
+				</a>
+			</div>
+			<span class="rating">{{localize (concat "Infinity.LifestyleRating." system.lifestyle.rating)}}</span>
+			<span class="maintenance">{{system.maintenance}}</span>
+		{{else}}
+			<span class="explanation">{{localize "Infinity.Sheets.Player.DragLifestyles"}}</span>
+		{{/each}}
+	</div>
+
+	<div class="section-header">
+		<h2>{{localize "Infinity.Sheets.Player.FakeIDs"}}</h2>
+	</div>
+	<div class="fake-ids">
+		{{#each background.fakeIDs}}
+			{{#if @root.editable}}
+			<span class="actions">
+				<a data-action="deleteDocument" data-uuid="{{uuid}}"><i class="fas fa-fw fa-trash"></i></a>
+			</span>
+			{{/if}}
+			<div class="name">
+				<a data-action="openDocument" data-uuid="{{uuid}}">
+					{{name}}
+				</a>
+			</div>
+			<span class="rating" data-tooltip="{{localize "Infinity.Sheets.Gear.FakeID.Rating.Hint"}}">{{system.fakeID.rating}}</span>
+		{{else}}
+			<span class="explanation">{{localize "Infinity.Sheets.Player.DragFakeIDs"}}</span>
+		{{/each}}
+	</div>
+
+	<div class="section-header">
+		<h2>{{localize "Infinity.Sheets.Player.AdditionalInformation"}}</h2>
+	</div>
+	<div class="background-box">
+		{{#if editable}}
+			<prose-mirror name="system.background" value="{{system.background}}" toggled="true">
+				{{{background.enriched}}}
+			</prose-mirror>
+		{{else}}
+			<div style="padding: 0 0.5em">
+				{{{background.enriched}}}
+			</div>
+		{{/if}}
+	</div>
 </section>
