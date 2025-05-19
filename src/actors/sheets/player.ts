@@ -25,6 +25,7 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 		equipment: { template: 'systems/infinity/templates/sheets/actor/player/equipment.hbs' },
 		skills: { template: 'systems/infinity/templates/sheets/actor/player/skills.hbs' },
 		talents: { template: 'systems/infinity/templates/sheets/actor/player/talents.hbs' },
+		effects: { template: 'systems/infinity/templates/sheets/actor/effects.hbs' }
 	};
 
 	static TABS: SheetTabs = {
@@ -35,6 +36,7 @@ export class PlayerCharacterActorSheet extends InfinityActorSheet<PlayerCharacte
 				{ id: 'talents' },
 				{ id: 'equipment' },
 				{ id: 'background' },
+				{ id: 'effects' },
 			],
 			initial: 'skills',
 			labelPrefix: 'Infinity.Tabs',
