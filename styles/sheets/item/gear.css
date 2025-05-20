@@ -4,7 +4,8 @@
 	gap: 0.5em;
 }
 
-.item-sheet .item-quality {
+.item-sheet .item-quality,
+.actor-sheet .item-quality {
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;

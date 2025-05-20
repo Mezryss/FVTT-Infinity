@@ -5,6 +5,9 @@ import { customElement, property } from 'lit/decorators.js';
 export class PointTrackerElement extends LitElement {
 	static formAssociated = true;
 
+	@property({ type: Boolean, reflect: true })
+	disabled?: boolean = false;
+
 	@property({ type: String, reflect: true })
 	name?: string = '';
 
@@ -89,6 +92,10 @@ export class PointTrackerElement extends LitElement {
 	}
 
 	#click(event: PointerEvent) {
+		if (this.disabled) {
+			return;
+		}
+
 		const target = event.target as HTMLElement;
 		const value = +(target.dataset['value'] ?? '');
 
@@ -109,11 +116,19 @@ export class PointTrackerElement extends LitElement {
 	}
 
 	#mouseEnter(event: MouseEvent) {
+		if (this.disabled) {
+			return;
+		}
+
 		const target = event.target as HTMLElement;
 		target.classList.add('hover');
 	}
 
 	#mouseLeave(event: MouseEvent) {
+		if (this.disabled) {
+			return;
+		}
+
 		const target = event.target as HTMLElement;
 		target.classList.remove('hover');
 	}

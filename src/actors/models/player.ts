@@ -240,6 +240,26 @@ export class PlayerCharacterDataModel extends InfinityActorDataModel {
 	 */
 	background!: string;
 
+	/**
+	 * Assets
+	 */
+	assets!: string;
+
+	/**
+	 * Earnings
+	 */
+	earnings!: string;
+
+	/**
+	 * Cashflow
+	 */
+	cashflow!: string;
+
+	/**
+	 * Shortfalls
+	 */
+	shortfalls!: string;
+
 	static defineSchema() {
 		const baseSchema = super.defineSchema();
 
@@ -300,6 +320,30 @@ export class PlayerCharacterDataModel extends InfinityActorDataModel {
 			}),
 
 			background: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			assets: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			earnings: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			cashflow: new StringField({
+				initial: '',
+				nullable: false,
+				trim: true,
+			}),
+
+			shortfalls: new StringField({
 				initial: '',
 				nullable: false,
 				trim: true,

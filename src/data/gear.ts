@@ -89,6 +89,15 @@ export enum ItemSize {
 }
 
 /**
+ * Equipped State.
+ */
+export enum EquipState {
+	Equipped = 'equipped',
+	Carried = 'carried',
+	Dropped = 'dropped',
+}
+
+/**
  * List of all Gear Types.
  */
 export const ALL_GEAR_TYPES: GearType[] = [
@@ -122,6 +131,15 @@ export const ALL_ITEM_SIZES: ItemSize[] = [
 ];
 
 /**
+ * List of all Equip States.
+ */
+export const ALL_EQUIP_STATES: EquipState[] = [
+	EquipState.Equipped,
+	EquipState.Carried,
+	EquipState.Dropped,
+];
+
+/**
  * Labeled gear types, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map((g) => labeledEnum('GearTypes', g));
@@ -130,6 +148,15 @@ export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map((g) => labeledEnum('GearTyp
  * Labeled item sizes, ready for passing to selectOptions helper in Handlebars.
  */
 export const LABELED_ITEM_SIZES = ALL_ITEM_SIZES.map((s) => labeledEnum('ItemSizes', s));
+
+/**
+ * Sort order based on equipped state.
+ */
+export const EQUIP_STATE_SORT_VALUE: Record<EquipState, number> = {
+	[EquipState.Equipped]: -1,
+	[EquipState.Carried]: 0,
+	[EquipState.Dropped]: 1,
+};
 
 //#endregion General Gear
 

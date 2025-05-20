@@ -1,1 +1,7 @@
 @import './player.css';
+
+.actor-sheet .item-quality {
+	color: white !important;
+	font-size: 0.8rem;
+	padding: 2px !important;
+}

@@ -1,4 +1,4 @@
-import { ALL_GEAR_TYPES, type GearType } from '@/data/gear';
+import { ALL_EQUIP_STATES, ALL_GEAR_TYPES, EquipState, type GearType } from '@/data/gear';
 
 import { AmmunitionData } from './gear/ammunition';
 import { ArmourData } from './gear/armour';
@@ -15,7 +15,7 @@ import { HackingDeviceData } from './gear/hackingDevice';
 import { ProgramData } from './gear/program';
 import { LifestyleData } from '@/items/models/gear/lifestyle.ts';
 
-const { EmbeddedDataField, StringField } = foundry.data.fields;
+const { EmbeddedDataField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Data model for Gear that characters can possess.
@@ -108,6 +108,16 @@ export class GearDataModel extends InfinityItemDataModel {
 	 */
 	maintenance!: string;
 
+	/**
+	 * How many of this item the player has in their inventory.
+	 */
+	quantity!: number;
+
+	/**
+	 * Whether the equipment is Held, Carried, or Dropped.
+	 */
+	state!: EquipState;
+
 	static override defineSchema() {
 		const baseSchema = super.defineSchema();
 
@@ -191,6 +201,19 @@ export class GearDataModel extends InfinityItemDataModel {
 
 			maintenance: new StringField({
 				initial: '—',
+				nullable: false,
+				trim: true,
+			}),
+
+			quantity: new NumberField({
+				initial: 1,
+				integer: true,
+				nullable: false,
+			}),
+
+			state: new StringField({
+				initial: EquipState.Carried,
+				choices: ALL_EQUIP_STATES,
 				nullable: false,
 				trim: true,
 			}),
