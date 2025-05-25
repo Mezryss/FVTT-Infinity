@@ -25,7 +25,7 @@
 			0 50%
 		);
 
-		font-family: var(--font-orbitron);
+		font-family: var(--font-orbitron), sans-serif;
 		font-weight: var(--fw-extra-bold);
 		font-size: 2rem;
 
@@ -34,25 +34,6 @@
 		-webkit-text-stroke: var(--col-infinity-blue) 1px;
 		text-transform: uppercase;
 	}
-}
-
-.journal-entry-content {
-	background: var(--col-infinity-light-blue);
-	color: var(--color-dark-2);
-}
-
-.journal-page-content {
-	--color-scheme: light;
-	--color-text-emphatic: var(--color-dark-1);
-	--color-text-primary: var(--color-dark-2);
-	--color-text-secondary: var(--color-dark-3);
-	--color-text-subtle: var(--color-dark-5);
-	--color-text-selection: var(--color-light-1);
-	--color-text-selection-bg: var(--color-dark-6);
-	--content-link-background: #ddd;
-	--content-link-border-color: var(--color-dark-4);
-	--content-link-icon-color: var(--color-dark-6);
-	--content-link-text-color: var(--color-dark-2);
 }
 
 .journal-page-content,
@@ -64,7 +45,7 @@
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-orbitron);
+		font-family: var(--font-orbitron), sans-serif;
 		text-transform: uppercase;
 		margin-top: 0;
 	}
@@ -77,7 +58,7 @@
 		border-bottom: none;
 		padding: 0 0.25em;
 		z-index: 0;
-		color: white;
+		color: var(--col-white);
 
 		&::after {
 			z-index: -1;
@@ -147,16 +128,16 @@
 
 			&::after {
 				display: none;
-				-webkit-text-stroke: 0;
+				-webkit-text-stroke: 0 transparent;
 			}
 		}
 	}
 
 	table {
-		--clip-size: 1rem;
+		--clip-size: 0.8rem;
+		color: var(--col-black);
 
-		background: rgb(214 237 246);
-		color: var(--color-text-primary);
+		background: var(--col-white);
 		clip-path: polygon(
 			0 0,
 			calc(100% - var(--clip-size)) 0,

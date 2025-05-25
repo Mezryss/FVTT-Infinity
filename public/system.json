@@ -28,19 +28,55 @@
 			"ability": {
 				"htmlFields": ["description"]
 			},
+			"ammunition": {
+				"htmlFields": ["description"]
+			},
+			"armour": {
+				"htmlFields": ["description"]
+			},
+			"augmentation": {
+				"htmlFields": ["description"]
+			},
 			"contagion": {
 				"htmlFields": ["description"]
 			},
-			"gear": {
+			"drug": {
+				"htmlFields": ["description"]
+			},
+			"explosiveDevice": {
+				"htmlFields": ["description"]
+			},
+			"fakeID": {
+				"htmlFields": ["description"]
+			},
+			"hackingDevice": {
 				"htmlFields": ["description"]
 			},
 			"host": {
 				"htmlFields": ["description"]
 			},
+			"lifestyle": {
+				"htmlFields": ["description"]
+			},
+			"other": {
+				"htmlFields": ["description"]
+			},
+			"program": {
+				"htmlFields": ["description"]
+			},
 			"quality": {
 				"htmlFields": ["description"]
 			},
+			"resource": {
+				"htmlFields": ["description"]
+			},
 			"talent": {
+				"htmlFields": ["description"]
+			},
+			"tool": {
+				"htmlFields": ["description"]
+			},
+			"weapon": {
 				"htmlFields": ["description"]
 			}
 		}

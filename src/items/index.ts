@@ -17,9 +17,22 @@ export function register() {
  */
 export enum ItemType {
 	Ability = 'ability',
+	Ammunition = 'ammunition',
+	Armour = 'armour',
+	Augmentation = 'augmentation',
 	Contagion = 'contagion',
+	Drug = 'drug',
+	ExplosiveDevice = 'explosiveDevice',
+	FakeID = 'fakeID',
 	Gear = 'gear',
+	HackingDevice = 'hackingDevice',
 	Host = 'host',
+	Lifestyle = 'lifestyle',
+	Other = 'other',
+	Program = 'program',
 	Quality = 'quality',
+	Resource = 'resource',
 	Talent = 'talent',
+	Tool = 'tool',
+	Weapon = 'weapon',
 }

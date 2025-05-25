@@ -62,21 +62,6 @@
 			"grenades": "Grenade",
 			"mines": "Mine"
 		},
-		"GearTypes": {
-			"ammunition": "Ammunition",
-			"armour": "Armour",
-			"augmentation": "Augmentation",
-			"drug": "Drug/Poison",
-			"explosiveDevice": "Explosive Device",
-			"fakeID": "Fake ID",
-			"hackingDevice": "Hacking Device",
-			"lifestyle": "Lifestyle",
-			"program": "Program",
-			"resource": "Resource",
-			"tool": "Tool",
-			"weapon": "Weapon",
-			"other": "Other Item"
-		},
 		"ItemSizes": {
 			"negligible": "—",
 			"oneHanded": "One-Handed",
@@ -413,11 +398,23 @@
 		},
 		"Item": {
 			"ability": "Ability",
+			"ammunition": "Ammunition",
+			"armour":  "Armour",
+			"augmentation": "Augmentation",
 			"contagion": "Contagion",
-			"gear": "Gear",
+			"drug": "Drug",
+			"explosiveDevice": "Explosive Device",
+			"fakeID": "Fake ID",
+			"hackingDevice": "Hacking Device",
 			"host": "Host",
+			"lifestyle": "Lifestyle",
+			"other": "Other Item",
+			"program": "Program",
 			"quality": "Quality",
-			"talent": "Talent"
+			"resource": "Resource",
+			"talent": "Talent",
+			"tool": "Tool",
+			"weapon": "Weapon"
 		}
 	}
 }

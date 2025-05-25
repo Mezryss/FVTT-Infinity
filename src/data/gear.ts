@@ -3,78 +3,6 @@ import { labeledEnum } from './utility';
 //#region General Gear
 
 /**
- * Gear. CRB, pp.328–397
- */
-export enum GearType {
-	/**
-	 * Ammunition. CRB, p.339
-	 */
-	Ammunition = 'ammunition',
-
-	/**
-	 * Armour. CRB, p.341
-	 */
-	Armour = 'armour',
-
-	/**
-	 * Augmentations. CRB, p.344
-	 */
-	Augmentation = 'augmentation',
-
-	/**
-	 * Drugs. CRB, p.348
-	 *
-	 * Covers Drugs & Poisons. These fall under "Contagions", but those will use a different Item type.
-	 */
-	Drug = 'drug',
-
-	/**
-	 * Explosive Devices. CRB, p.349
-	 */
-	ExplosiveDevice = 'explosiveDevice',
-
-	/**
-	 * Fake IDs. CRB, p.368
-	 */
-	FakeID = 'fakeID',
-
-	/**
-	 * Hacking Devices. CRB, p.352
-	 */
-	HackingDevice = 'hackingDevice',
-
-	/**
-	 * Lifestyles. CRB, p.387
-	 */
-	Lifestyle = 'lifestyle',
-
-	/**
-	 * Hacking Devices. CRB, p.352
-	 */
-	Program = 'program',
-
-	/**
-	 * Resources. CRB, p.355
-	 */
-	Resource = 'resource',
-
-	/**
-	 * Tools. CRB, p.357
-	 */
-	Tool = 'tool',
-
-	/**
-	 * Weapons. CRB, p.358
-	 */
-	Weapon = 'weapon',
-
-	/**
-	 * Other Items. CRB, p.360
-	 */
-	Other = 'other',
-}
-
-/**
  * Item Sizes. CRB, p.332
  */
 export enum ItemSize {
@@ -98,25 +26,6 @@ export enum EquipState {
 }
 
 /**
- * List of all Gear Types.
- */
-export const ALL_GEAR_TYPES: GearType[] = [
-	GearType.Ammunition,
-	GearType.Armour,
-	GearType.Augmentation,
-	GearType.Drug,
-	GearType.ExplosiveDevice,
-	GearType.FakeID,
-	GearType.HackingDevice,
-	GearType.Lifestyle,
-	GearType.Program,
-	GearType.Resource,
-	GearType.Tool,
-	GearType.Weapon,
-	GearType.Other,
-];
-
-/**
  * List of all Item Sizes.
  */
 export const ALL_ITEM_SIZES: ItemSize[] = [
@@ -138,11 +47,6 @@ export const ALL_EQUIP_STATES: EquipState[] = [
 	EquipState.Carried,
 	EquipState.Dropped,
 ];
-
-/**
- * Labeled gear types, ready for passing to selectOptions helper in Handlebars.
- */
-export const LABELED_GEAR_TYPES = ALL_GEAR_TYPES.map((g) => labeledEnum('GearTypes', g));
 
 /**
  * Labeled item sizes, ready for passing to selectOptions helper in Handlebars.

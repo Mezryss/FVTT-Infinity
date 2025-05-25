@@ -1,6 +1,5 @@
 import { AbilityItemSheet } from './ability';
 import { ContagionItemSheet } from './contagion';
-import { GearItemSheet } from './gear';
 import { HostItemSheet } from './host';
 import { QualityItemSheet } from './quality';
 import { TalentItemSheet } from './talent';
@@ -21,11 +20,6 @@ export function register() {
 
 	Items.registerSheet('infinity', ContagionItemSheet, {
 		types: ['contagion'],
-		makeDefault: true,
-	});
-
-	Items.registerSheet('infinity', GearItemSheet, {
-		types: ['gear'],
 		makeDefault: true,
 	});
 
