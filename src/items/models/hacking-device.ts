@@ -1,10 +1,8 @@
-const { DataModel } = foundry.abstract;
+import { GearDataModel } from '@/items/models/gear.ts';
+
 const { ArrayField, DocumentUUIDField, NumberField } = foundry.data.fields;
 
-/**
- * Hacking Devices. CRB, p.352
- */
-export class HackingDeviceData extends DataModel {
+export class HackingDeviceDataModel extends GearDataModel {
 	/**
 	 * Attack Programs rating.
 	 */
@@ -39,6 +37,8 @@ export class HackingDeviceData extends DataModel {
 
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			sword: new NumberField({
 				initial: 0,
 				integer: true,

@@ -1,13 +1,14 @@
-import { ALL_EXPLOSIVE_CATEGORIES, ALL_ITEM_SIZES, ExplosiveCategory, ItemSize } from '@/data/gear';
-import { GearQuality } from './quality';
+import {
+	ALL_EXPLOSIVE_CATEGORIES,
+	ALL_ITEM_SIZES,
+	ExplosiveCategory,
+	ItemSize,
+} from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
-const { ArrayField, EmbeddedDataField, StringField } = foundry.data.fields;
+const { StringField } = foundry.data.fields;
 
-/**
- * Explosive Devices. CRB, p.349
- */
-export class ExplosiveDeviceData extends DataModel {
+export class ExplosiveDeviceDataModel extends GearDataModel {
 	/**
 	 * Explosive Device Category
 	 */
@@ -23,13 +24,10 @@ export class ExplosiveDeviceData extends DataModel {
 	 */
 	size!: ItemSize;
 
-	/**
-	 * Weapon qualities for the explosive.
-	 */
-	qualities!: GearQuality[];
-
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			category: new StringField({
 				choices: ALL_EXPLOSIVE_CATEGORIES,
 				initial: ExplosiveCategory.Charges,
@@ -48,11 +46,6 @@ export class ExplosiveDeviceData extends DataModel {
 				initial: ItemSize.OneHanded,
 				nullable: false,
 				trim: true,
-			}),
-
-			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
-				initial: [],
-				nullable: false,
 			}),
 		};
 	}

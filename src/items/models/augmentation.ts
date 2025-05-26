@@ -3,16 +3,15 @@ import {
 	ALL_AUGMENTATION_TYPES,
 	AugmentationCategory,
 	AugmentationType,
-} from '@/data/gear';
-import { GearQuality } from './quality';
+} from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
-const { ArrayField, EmbeddedDataField, StringField } = foundry.data.fields;
+const { StringField } = foundry.data.fields;
 
 /**
- * Augmentations. CRB, p.344
+ * Augmentations that can be applied to a character's LHost
  */
-export class AugmentationData extends DataModel {
+export class AugmentationDataModel extends GearDataModel {
 	/**
 	 * Augmentation Type
 	 */
@@ -28,13 +27,10 @@ export class AugmentationData extends DataModel {
 	 */
 	location!: string;
 
-	/**
-	 * Augmentation Qualities
-	 */
-	qualities!: GearQuality[];
-
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			type: new StringField({
 				choices: ALL_AUGMENTATION_TYPES,
 				initial: AugmentationType.Implant,
@@ -53,11 +49,6 @@ export class AugmentationData extends DataModel {
 				initial: '',
 				nullable: false,
 				trim: true,
-			}),
-
-			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
-				initial: [],
-				nullable: false,
 			}),
 		};
 	}

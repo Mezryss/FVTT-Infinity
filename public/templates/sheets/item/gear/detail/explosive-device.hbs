@@ -1,33 +1,26 @@
 <section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
 	<label>
-		<span>{{localize "Infinity.Sheets.Gear.Type"}}</span>
-		<select name="system.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_GEAR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
-		</select>
-	</label>
-
-	<label>
 		<span>{{localize "Infinity.Sheets.Gear.ExplosiveDevice.Category"}}</span>
-		<select name="system.explosiveDevice.category" {{disabled (not editable)}}>
-			{{selectOptions LABELED_EXPLOSIVE_CATEGORIES selected=system.explosiveDevice.category localize=true valueAttr="key" labelAttr="label"}}
+		<select name="system.category" {{disabled (not editable)}}>
+			{{selectOptions LABELED_EXPLOSIVE_CATEGORIES selected=system.category localize=true valueAttr="key" labelAttr="label"}}
 		</select>
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Damage.Hint"}}">{{localize "Infinity.Sheets.Gear.Damage.Label"}}</span>
-		<input type="text" name="system.explosiveDevice.damage" value="{{system.explosiveDevice.damage}}" {{disabled (not editable)}} />
+		<input type="text" name="system.damage" value="{{system.damage}}" {{disabled (not editable)}} />
 	</label>
 
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Size"}}</span>
-		<select name="system.explosiveDevice.size" {{disabled (not editable)}}>
-			{{selectOptions LABELED_ITEM_SIZES selected=system.explosiveDevice.size localize=true valueAttr="key" labelAttr="label"}}
+		<select name="system.size" {{disabled (not editable)}}>
+			{{selectOptions LABELED_ITEM_SIZES selected=system.size localize=true valueAttr="key" labelAttr="label"}}
 		</select>
 	</label>
 
 	<hr style="height: 1px; margin: 0;" />
 
-	{{> gearQualities qualities=explosiveDevice.qualities qualitiesPath=qualitiesPath}}
+	{{> gearQualities }}
 
 	<hr style="height: 1px; margin: 0;" />
 

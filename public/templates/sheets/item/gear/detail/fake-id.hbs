@@ -1,0 +1,8 @@
+<section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	<label>
+		<span data-tooltip="{{localize "Infinity.Sheets.Gear.FakeID.Rating.Hint"}}">{{localize "Infinity.Sheets.Gear.FakeID.Rating.Label"}}</span>
+		<input type="number" min="0" name="system.rating" value="{{system.rating}}" {{disabled (not editable)}} />
+	</label>
+
+	{{> gearQualities }}
+</section>

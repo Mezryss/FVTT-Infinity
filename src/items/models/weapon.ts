@@ -1,13 +1,9 @@
-import { ALL_ITEM_SIZES, ALL_WEAPON_TYPES, ItemSize, WeaponType } from '@/data/gear';
-import { GearQuality } from './quality';
+import { ALL_ITEM_SIZES, ALL_WEAPON_TYPES, ItemSize, WeaponType } from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
-const { ArrayField, EmbeddedDataField, StringField } = foundry.data.fields;
+const { StringField } = foundry.data.fields;
 
-/**
- * Weapons. CRB, p.358
- */
-export class WeaponData extends DataModel {
+export class WeaponDataModel extends GearDataModel {
 	/**
 	 * Melee vs. Ranged weapon
 	 */
@@ -48,13 +44,10 @@ export class WeaponData extends DataModel {
 	 */
 	ammo!: string;
 
-	/**
-	 * Weapon Qualities
-	 */
-	qualities!: GearQuality[];
-
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			type: new StringField({
 				choices: ALL_WEAPON_TYPES,
 				initial: WeaponType.Melee,
@@ -91,11 +84,6 @@ export class WeaponData extends DataModel {
 				initial: 'Standard',
 				nullable: false,
 				trim: true,
-			}),
-
-			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
-				initial: [],
-				nullable: false,
 			}),
 		};
 	}

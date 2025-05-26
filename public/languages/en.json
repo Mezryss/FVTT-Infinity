@@ -399,7 +399,7 @@
 		"Item": {
 			"ability": "Ability",
 			"ammunition": "Ammunition",
-			"armour":  "Armour",
+			"armour": "Armour",
 			"augmentation": "Augmentation",
 			"contagion": "Contagion",
 			"drug": "Drug",

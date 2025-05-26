@@ -1,7 +1,9 @@
-import {ALL_EQUIP_STATES, EquipState} from '@/data/gear.ts';
-import {InfinityItemDataModel} from '@/items/models/infinity-item.ts';
+import { ALL_EQUIP_STATES, EquipState } from '@/data/gear.ts';
+import { InfinityItemDataModel } from '@/items/models/infinity-item.ts';
 
-const { NumberField, StringField } = foundry.data.fields;
+const { DataModel } = foundry.abstract;
+const { ArrayField, DocumentUUIDField, EmbeddedDataField, NumberField, StringField } =
+	foundry.data.fields;
 
 /**
  * Data model for Gear that characters can possess.
@@ -35,9 +37,14 @@ export class GearDataModel extends InfinityItemDataModel {
 	quantity!: number;
 
 	/**
-	 * Whether the equipment is Held, Carried, or Dropped.
+	 * Whether the equipment is Held, Carried, or Dropped by the owning Actor (mainly a Player Character).
 	 */
 	state!: EquipState;
+
+	/**
+	 * A list of Quality data applicable to the item, stored as an Item UUID + a current rank. Not all item types will have Qualities.
+	 */
+	qualities!: GearQuality[];
 
 	static override defineSchema() {
 		const baseSchema = super.defineSchema();
@@ -80,6 +87,41 @@ export class GearDataModel extends InfinityItemDataModel {
 				choices: ALL_EQUIP_STATES,
 				nullable: false,
 				trim: true,
+			}),
+
+			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
+				initial: [],
+				nullable: false,
+			}),
+		};
+	}
+}
+
+/**
+ * Quality information added to a piece of Gear.
+ */
+export class GearQuality extends DataModel {
+	/**
+	 * UUID of the Quality item.
+	 */
+	uuid!: string;
+
+	/**
+	 * If the underlying Quality is Ranked, what rank is it applied at?
+	 */
+	rank!: number;
+
+	static defineSchema() {
+		return {
+			uuid: new DocumentUUIDField({
+				nullable: false,
+			}),
+
+			rank: new NumberField({
+				initial: 1,
+				integer: true,
+				min: 0,
+				nullable: false,
 			}),
 		};
 	}

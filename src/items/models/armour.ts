@@ -1,9 +1,7 @@
-import { ALL_ARMOUR_TYPES, ArmourType } from '@/data/gear';
-import { GearQuality } from './quality';
+import { ALL_ARMOUR_TYPES, ArmourType } from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
-const { ArrayField, EmbeddedDataField, NumberField, SchemaField, StringField } =
-	foundry.data.fields;
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 function makeIntegerField() {
 	return new NumberField({
@@ -15,11 +13,11 @@ function makeIntegerField() {
 }
 
 /**
- * Armour. CRB, p.341
+ * Armour that can be worn by a character, applying soak and defensive benefits.
  */
-export class ArmourData extends DataModel {
+export class ArmourDataModel extends GearDataModel {
 	/**
-	 * Armour Type.
+	 * Armour Type, mostly just used for classification purposes.
 	 */
 	type!: ArmourType;
 
@@ -38,13 +36,10 @@ export class ArmourData extends DataModel {
 	 */
 	bts!: number;
 
-	/**
-	 * Armour Qualities
-	 */
-	qualities!: GearQuality[];
-
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			type: new StringField({
 				choices: ALL_ARMOUR_TYPES,
 				initial: ArmourType.Civilian,
@@ -60,11 +55,6 @@ export class ArmourData extends DataModel {
 			}),
 
 			bts: makeIntegerField(),
-
-			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
-				initial: [],
-				nullable: false,
-			}),
 		};
 	}
 }

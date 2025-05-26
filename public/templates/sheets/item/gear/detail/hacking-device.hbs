@@ -1,34 +1,27 @@
 <section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
 	<label>
-		<span>{{localize "Infinity.Sheets.Gear.Type"}}</span>
-		<select name="system.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_GEAR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
-		</select>
-	</label>
-
-	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.CLAW.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.CLAW.Label"}}</span>
-		<input type="number" name="system.hackingDevice.claw" value="{{system.hackingDevice.claw}}" {{disabled (not editable)}} />
+		<input type="number" name="system.claw" value="{{system.claw}}" {{disabled (not editable)}} />
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.SWORD.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.SWORD.Label"}}</span>
-		<input type="number" name="system.hackingDevice.sword" value="{{system.hackingDevice.sword}}" {{disabled (not editable)}} />
+		<input type="number" name="system.sword" value="{{system.sword}}" {{disabled (not editable)}} />
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.SHIELD.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.SHIELD.Label"}}</span>
-		<input type="number" name="system.hackingDevice.shield" value="{{system.hackingDevice.shield}}" {{disabled (not editable)}} />
+		<input type="number" name="system.shield" value="{{system.shield}}" {{disabled (not editable)}} />
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.GADGET.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.GADGET.Label"}}</span>
-		<input type="number" name="system.hackingDevice.gadget" value="{{system.hackingDevice.gadget}}" {{disabled (not editable)}} />
+		<input type="number" name="system.gadget" value="{{system.gadget}}" {{disabled (not editable)}} />
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.IC.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.IC.Label"}}</span>
-		<input type="number" name="system.hackingDevice.ic" value="{{system.hackingDevice.ic}}" {{disabled (not editable)}} />
+		<input type="number" name="system.ic" value="{{system.ic}}" {{disabled (not editable)}} />
 	</label>
 
 	<hr style="height: 1px; margin: 0;" />
@@ -36,7 +29,7 @@
 	<h5 style="margin: 0;" data-tooltip="{{localize "Infinity.Sheets.Gear.HackingDevice.PreinstalledPrograms.Hint"}}">{{localize "Infinity.Sheets.Gear.HackingDevice.PreinstalledPrograms.Label"}}</h5>
 
 	<div class="item-qualities-list">
-		{{#each hackingDevice.preinstalledPrograms}}
+		{{#each preinstalledPrograms}}
 			{{#if valid}}
 			<div class="item-quality" data-tooltip="{{{tooltip}}}">
 				<a data-action="removeProgram" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>

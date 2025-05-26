@@ -4,8 +4,8 @@
 		<div class="item-quality" data-tooltip="{{{tooltip}}}">
 			<a data-action="removeQuality" data-uuid="{{uuid}}"><i class="fa fa-fw fa-trash"></i></a>
 			<span>{{label}}</span>
-			<input type="hidden" name="{{@root.qualitiesPath}}.{{@index}}.uuid" value="{{uuid}}" />
-			<input type="{{#if ranked}}number{{else}}hidden{{/if}}" name="{{@root.qualitiesPath}}.{{@index}}.rank" value="{{rank}}" />
+			<input type="hidden" name="system.qualities.{{@index}}.uuid" value="{{uuid}}" />
+			<input type="{{#if ranked}}number{{else}}hidden{{/if}}" name="system.qualities.{{@index}}.rank" value="{{rank}}" />
 		</div>
 		{{else}}
 		<div class="item-quality invalid">

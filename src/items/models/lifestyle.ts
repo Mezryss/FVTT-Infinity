@@ -1,12 +1,9 @@
 import { ALL_LIFESTYLE_RATINGS, LifestyleRating } from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
 const { StringField } = foundry.data.fields;
 
-/**
- * Lifestyles. CRB, p.387
- */
-export class LifestyleData extends DataModel {
+export class LifestyleDataModel extends GearDataModel {
 	/**
 	 * Lifestyle Rating.
 	 */
@@ -14,6 +11,8 @@ export class LifestyleData extends DataModel {
 
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			rating: new StringField({
 				choices: ALL_LIFESTYLE_RATINGS,
 				initial: LifestyleRating.Demogrant,

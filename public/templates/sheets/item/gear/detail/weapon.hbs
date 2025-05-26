@@ -1,54 +1,47 @@
 <section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
 	<label>
-		<span>{{localize "Infinity.Sheets.Gear.Type"}}</span>
-		<select name="system.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_GEAR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
-		</select>
-	</label>
-
-	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Weapon.Type"}}</span>
-		<select name="system.weapon.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_WEAPON_TYPES selected=system.weapon.type localize=true valueAttr="key" labelAttr="label"}}
+		<select name="system.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_WEAPON_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
 		</select>
 	</label>
 
-	{{#if weapon.showRangedFields}}
+	{{#if showRangedFields}}
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Weapon.Range"}}</span>
-		<input type="text" name="system.weapon.range" value="{{system.weapon.range}}" {{disabled (not editable)}} />
+		<input type="text" name="system.range" value="{{system.range}}" {{disabled (not editable)}} />
 	</label>
 	{{/if}}
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Damage.Hint"}}">{{localize "Infinity.Sheets.Gear.Damage.Label"}}</span>
-		<input type="text" name="system.weapon.damage" value="{{system.weapon.damage}}" {{disabled (not editable)}} />
+		<input type="text" name="system.damage" value="{{system.damage}}" {{disabled (not editable)}} />
 	</label>
 
-	{{#if weapon.showRangedFields}}
+	{{#if showRangedFields}}
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Weapon.Burst"}}</span>
-		<input type="text" name="system.weapon.burst" value="{{system.weapon.burst}}" {{disabled (not editable)}} />
+		<input type="text" name="system.burst" value="{{system.burst}}" {{disabled (not editable)}} />
 	</label>
 	{{/if}}
 
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Size"}}</span>
-		<select name="system.weapon.size" {{disabled (not editable)}}>
-			{{selectOptions LABELED_ITEM_SIZES selected=system.weapon.size localize=true valueAttr="key" labelAttr="label"}}
+		<select name="system.size" {{disabled (not editable)}}>
+			{{selectOptions LABELED_ITEM_SIZES selected=system.size localize=true valueAttr="key" labelAttr="label"}}
 		</select>
 	</label>
 
-	{{#if weapon.showRangedFields}}
+	{{#if showRangedFields}}
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Weapon.Ammo"}}</span>
-		<input type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" {{disabled (not editable)}} />
+		<input type="text" name="system.ammo" value="{{system.ammo}}" {{disabled (not editable)}} />
 	</label>
 	{{/if}}
 
 	<hr style="height: 1px; margin: 0;" />
 
-	{{> gearQualities qualities=weapon.qualities qualitiesPath=qualitiesPath}}
+	{{> gearQualities }}
 
 	<hr style="height: 1px; margin: 0;" />
 

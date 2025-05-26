@@ -1,13 +1,9 @@
-import { ALL_PROGRAM_TYPES, ProgramType } from '@/data/gear';
-import { GearQuality } from './quality';
+import { ALL_PROGRAM_TYPES, ProgramType } from '@/data/gear.ts';
+import { GearDataModel } from '@/items/models/gear.ts';
 
-const { DataModel } = foundry.abstract;
-const { ArrayField, EmbeddedDataField, StringField } = foundry.data.fields;
+const { StringField } = foundry.data.fields;
 
-/**
- * Programs. CRB, p.353
- */
-export class ProgramData extends DataModel {
+export class ProgramDataModel extends GearDataModel {
 	/**
 	 * Program Type
 	 */
@@ -23,13 +19,10 @@ export class ProgramData extends DataModel {
 	 */
 	damage!: string;
 
-	/**
-	 * Program Qualities
-	 */
-	qualities!: GearQuality[];
-
 	static defineSchema() {
 		return {
+			...super.defineSchema(),
+
 			type: new StringField({
 				choices: ALL_PROGRAM_TYPES,
 				initial: ProgramType.SWORD,
@@ -47,11 +40,6 @@ export class ProgramData extends DataModel {
 				initial: '—',
 				nullable: false,
 				trim: true,
-			}),
-
-			qualities: new ArrayField(new EmbeddedDataField(GearQuality as any), {
-				initial: [],
-				nullable: false,
 			}),
 		};
 	}

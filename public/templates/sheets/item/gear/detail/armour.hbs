@@ -1,47 +1,40 @@
 <section class="tab{{#if tab.active}} active flexcol{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
 	<label>
-		<span>{{localize "Infinity.Sheets.Gear.Type"}}</span>
-		<select name="system.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_GEAR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
-		</select>
-	</label>
-
-	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Armour.Type"}}</span>
-		<select name="system.armour.type" {{disabled (not editable)}}>
-			{{selectOptions LABELED_ARMOUR_TYPES selected=system.armour.type localize=true valueAttr="key" labelAttr="label"}}
+		<select name="system.type" {{disabled (not editable)}}>
+			{{selectOptions LABELED_ARMOUR_TYPES selected=system.type localize=true valueAttr="key" labelAttr="label"}}
 		</select>
 	</label>
 
 	{{!-- TODO: In UI Cleanup Pass, these should be a row of 4 number fields. --}}
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Armour.Soak.Head"}}</span>
-		<input type="number" min="0" name="system.armour.soak.head" value="{{system.armour.soak.head}}" />
+		<input type="number" min="0" name="system.soak.head" value="{{system.soak.head}}" />
 	</label>
 
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Armour.Soak.Torso"}}</span>
-		<input type="number" min="0" name="system.armour.soak.torso" value="{{system.armour.soak.torso}}" />
+		<input type="number" min="0" name="system.soak.torso" value="{{system.soak.torso}}" />
 	</label>
 
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Armour.Soak.Arms"}}</span>
-		<input type="number" min="0" name="system.armour.soak.arms" value="{{system.armour.soak.arms}}" />
+		<input type="number" min="0" name="system.soak.arms" value="{{system.soak.arms}}" />
 	</label>
 
 	<label>
 		<span>{{localize "Infinity.Sheets.Gear.Armour.Soak.Legs"}}</span>
-		<input type="number" min="0" name="system.armour.soak.legs" value="{{system.armour.soak.legs}}" />
+		<input type="number" min="0" name="system.soak.legs" value="{{system.soak.legs}}" />
 	</label>
 
 	<label>
 		<span data-tooltip="{{localize "Infinity.Sheets.Gear.Armour.BTS.Hint"}}">{{localize "Infinity.Sheets.Gear.Armour.BTS.Label"}}</span>
-		<input type="number" min="0" name="system.armour.bts" value="{{system.armour.bts}}" />
+		<input type="number" min="0" name="system.bts" value="{{system.bts}}" />
 	</label>
 
 	<hr style="height: 1px; margin: 0;" />
 
-	{{> gearQualities qualities=armour.qualities qualitiesPath=qualitiesPath}}
+	{{> gearQualities }}
 
 	<hr style="height: 1px; margin: 0;" />
 
